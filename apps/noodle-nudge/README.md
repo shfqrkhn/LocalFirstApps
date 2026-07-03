@@ -12,7 +12,7 @@ Noodle Nudge is a browser-based reflection tool for prompts, assessments, journa
 
 ## Screenshot
 
-![Noodle Nudge reflection app](./docs/images/screenshot.jpeg)
+![Noodle Nudge reflection app](./images/screenshot.jpeg)
 
 ## Why This Exists
 
@@ -48,15 +48,18 @@ Noodle Nudge is a stable personal-growth app. It is intentionally not part of th
 
 ```text
 .
-├── docs/index.html
-├── docs/icons/
-├── scripts/
+├── index.html
+├── icons/
+├── images/
+├── JSON/
+├── manifest.json
+├── service-worker.js
 └── README.md
 ```
 
 ## Deployment
 
-GitHub Pages serves the `docs/` app.
+Host this app folder under the LocalFirstApps GitHub Pages site or another static host.
 
 ## Maintenance
 

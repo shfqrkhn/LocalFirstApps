@@ -20,13 +20,9 @@ const Modal = {
             // Null checks for modal elements
             if (!this.el || !this.title || !this.body || !this.actions) {
                 Logger.error('Modal elements not found in DOM');
-                // Fallback to native alert/confirm
-                if (opts.type === 'confirm') {
-                    resolve(confirm(opts.text || opts.title || 'Confirm?'));
-                } else {
-                    alert(opts.text || opts.title || 'Notice');
-                    resolve(true);
-                }
+                const message = opts.text || opts.title || 'Notice';
+                ScreenReader?.announce?.(message, opts.type === 'confirm' ? 'assertive' : 'polite');
+                resolve(opts.type === 'confirm' ? false : true);
                 return;
             }
 

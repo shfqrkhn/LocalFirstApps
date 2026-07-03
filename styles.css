@@ -126,6 +126,12 @@ footer {
   border-top: 1px solid var(--line);
 }
 
+footer a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
 @media (max-width: 640px) {
   .topbar {
     align-items: flex-start;

@@ -112,6 +112,26 @@ function announce(message) {
   elements.status.textContent = message;
 }
 
+let pendingActionKey = "";
+let pendingActionTimer = null;
+
+function requireSecondClick(key, message) {
+  if (pendingActionKey !== key) {
+    pendingActionKey = key;
+    announce(message);
+    if (pendingActionTimer) clearTimeout(pendingActionTimer);
+    pendingActionTimer = setTimeout(() => {
+      pendingActionKey = "";
+      announce("");
+    }, 5000);
+    return false;
+  }
+
+  pendingActionKey = "";
+  if (pendingActionTimer) clearTimeout(pendingActionTimer);
+  return true;
+}
+
 function setRcOutput(text) {
   elements.rcCheckOutput.textContent = text;
 }
@@ -1201,10 +1221,7 @@ async function savePackHook(event) {
 }
 
 async function newWorkspace() {
-  const name = window.prompt("Workspace name", "New Workspace");
-  if (!name) {
-    return;
-  }
+  const name = "New Workspace";
 
   const ws = {
     id: uid("ws"),
@@ -1236,7 +1253,7 @@ async function newWorkspace() {
   appState.selectedWorkspaceId = ws.id;
   appState.selectedCaseId = caseFile.id;
   await refreshSelectorsAndCase();
-  announce("Workspace created.");
+  announce("Workspace created. Edit its details in the workspace form.");
 }
 
 async function newCase() {
@@ -1244,10 +1261,7 @@ async function newCase() {
     return;
   }
 
-  const title = window.prompt("Case title", "New Case File");
-  if (!title) {
-    return;
-  }
+  const title = "New Case File";
 
   const caseFile = {
     id: uid("case"),
@@ -1435,8 +1449,7 @@ async function commitImport() {
 }
 
 async function resetLocalData() {
-  const accepted = window.confirm("Reset all local data? This cannot be undone.");
-  if (!accepted) {
+  if (!requireSecondClick("reset-local-data", "Click reset again to export a backup and wipe all local data.")) {
     return;
   }
 
@@ -1449,12 +1462,6 @@ async function resetLocalData() {
     );
   } catch {
     announce("Could not generate pre-reset backup. Reset cancelled.");
-    return;
-  }
-
-  const confirmed = window.confirm("Backup downloaded. Continue and wipe local data?");
-  if (!confirmed) {
-    announce("Reset cancelled after backup export.");
     return;
   }
 

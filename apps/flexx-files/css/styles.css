@@ -270,7 +270,7 @@ summary:active { transform: scale(0.98); opacity: 0.8; }
 }
 .timer-dock.active { transform: translateX(-50%) translateY(0); }
 .timer-display { font-size: 1.5rem; font-weight: 900; color: var(--accent); font-variant-numeric: tabular-nums; }
-.timer-skip { color: var(--text-secondary); font-size: var(--font-sm); letter-spacing: 1px; cursor: pointer; transition: all 0.2s ease; }
+.timer-skip { display: inline-flex; min-height: 32px; align-items: center; color: var(--text-secondary); font-size: var(--font-sm); letter-spacing: 1px; cursor: pointer; transition: all 0.2s ease; }
 .timer-skip:active { transform: scale(0.95); color: var(--accent); }
 
 /* === NAVIGATION === */

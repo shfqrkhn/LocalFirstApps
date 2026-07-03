@@ -393,6 +393,35 @@
   `;
   document.head.appendChild(styleEl);
 
+  let pendingDestructiveAction = '';
+  let pendingDestructiveTimer = null;
+
+  function setInlineStatus(el, message, error = false) {
+    if (!el) return;
+    el.textContent = message;
+    el.style.color = error ? C.error : C.muted;
+  }
+
+  function requireSecondClick(key, button, statusEl, message, action) {
+    if (pendingDestructiveAction !== key) {
+      pendingDestructiveAction = key;
+      if (pendingDestructiveTimer) clearTimeout(pendingDestructiveTimer);
+      const originalText = button?.textContent;
+      if (button) button.textContent = 'Click again to confirm';
+      setInlineStatus(statusEl, message, true);
+      pendingDestructiveTimer = setTimeout(() => {
+        pendingDestructiveAction = '';
+        if (button && originalText) button.textContent = originalText;
+        setInlineStatus(statusEl, '');
+      }, 5000);
+      return;
+    }
+
+    pendingDestructiveAction = '';
+    if (pendingDestructiveTimer) clearTimeout(pendingDestructiveTimer);
+    action();
+  }
+
   // ── Panel DOM ─────────────────────────────────────────────────────────────
 
   function buildPanel() {
@@ -629,8 +658,16 @@
       const model       = customModel || selModel.value;
       const endpoint    = inpEndpointUrl.value.trim();
 
-      if (!apiKey) { alert('Please enter an API key.'); return; }
-      if (!model)  { alert('Please select or enter a model ID.'); return; }
+      if (!apiKey) {
+        setInlineStatus(modelStatus, 'Please enter an API key.', true);
+        inpKey.focus();
+        return;
+      }
+      if (!model) {
+        setInlineStatus(modelStatus, 'Please select or enter a model ID.', true);
+        selModel.focus();
+        return;
+      }
 
       saveConfig({
         provider,
@@ -645,10 +682,11 @@
       loadContextAndGreet();
     });
 
-    document.getElementById('byoai-btn-clear').addEventListener('click', () => {
-      if (!confirm('Clear your saved API key and settings?')) return;
+    document.getElementById('byoai-btn-clear').addEventListener('click', (event) => {
+      requireSecondClick('clear-settings', event.currentTarget, modelStatus, 'Click again to clear your saved API key and settings.', () => {
       localStorage.removeItem(CONFIG_KEY);
       renderSettings();
+      });
     });
   }
 
@@ -1016,12 +1054,13 @@
       state.history = [];
       loadContextAndGreet();
     });
-    document.getElementById('byoai-btn-clear-chat').addEventListener('click', () => {
-      if (!confirm('Clear this chat history?')) return;
+    document.getElementById('byoai-btn-clear-chat').addEventListener('click', (event) => {
+      const inputEl = document.getElementById('byoai-input');
+      requireSecondClick('clear-chat', event.currentTarget, null, 'Click again to clear this chat history.', () => {
       state.history = state.history.filter(m => m.role === 'system');
       renderChat();
-      const inputEl = document.getElementById('byoai-input');
       inputEl?.focus();
+      });
     });
   }
 

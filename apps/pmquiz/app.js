@@ -84,6 +84,8 @@ class QuizManager {
         this.isQuizActive = false;
         this.currentChoiceButtons = [];
         this.currentQuestionHeading = null;
+        this.pendingActionKey = '';
+        this.pendingActionTimer = null;
 
         // Initialize worker for background processing
         this.worker = new Worker('json-worker.js');
@@ -392,14 +394,13 @@ class QuizManager {
         }
     }
 
-    /**
-     * Handles the reset button click with confirmation dialog.
-     * @param {Event} event - The click event.
-     */
     _handleResetRequest(event) {
-        if (confirm("Reset quiz and load new questions?")) {
-            this.resetQuiz();
-        }
+        this._requireSecondClick(
+            'reset-during-quiz',
+            'Click reset again to load a new quiz.',
+            event.currentTarget,
+            () => this.resetQuiz()
+        );
     }
 
     /**
@@ -541,6 +542,40 @@ class QuizManager {
         if (this.dom.loadError) {
             this.dom.loadError.textContent = message;
         }
+    }
+
+    _getActionStatusTarget() {
+        return this.isQuizActive ? this.dom.questionProgressText : this.dom.loadError;
+    }
+
+    _requireSecondClick(key, message, button, action) {
+        if (this.pendingActionKey !== key) {
+            this.pendingActionKey = key;
+            const statusTarget = this._getActionStatusTarget();
+            const originalStatus = statusTarget ? statusTarget.textContent : '';
+            if (statusTarget) {
+                statusTarget.textContent = message;
+            }
+            const originalText = button ? button.textContent : '';
+            if (button) {
+                button.textContent = 'Click again to confirm';
+            }
+            if (this.pendingActionTimer) clearTimeout(this.pendingActionTimer);
+            this.pendingActionTimer = setTimeout(() => {
+                this.pendingActionKey = '';
+                if (statusTarget) {
+                    statusTarget.textContent = originalStatus;
+                }
+                if (button && originalText) {
+                    button.textContent = originalText;
+                }
+            }, 5000);
+            return;
+        }
+
+        this.pendingActionKey = '';
+        if (this.pendingActionTimer) clearTimeout(this.pendingActionTimer);
+        action();
     }
 
     /**
@@ -1098,19 +1133,25 @@ em.textContent = `Explanation: ${originalQuestion.explanation}`;
     /**
      * Confirms and then resets the quiz (used by end-of-quiz buttons).
      */
-    confirmAndResetQuiz() {
-        if (window.confirm("Are you sure you want to start a new quiz? Your current results will be lost.")) {
-            this.resetQuiz();
-        }
+    confirmAndResetQuiz(event) {
+        this._requireSecondClick(
+            'reset-finished-quiz',
+            'Click new quiz again to discard current results.',
+            event?.currentTarget,
+            () => this.resetQuiz()
+        );
     }
 
     /**
-     * Confirms and ends the quiz early.
+     * Ends the quiz early after explicit in-page confirmation.
      */
-    confirmAndEndQuiz() {
-        if (window.confirm("Are you sure you want to finish the quiz now? Unanswered questions will not be scored.")) {
-            this.endQuiz();
-        }
+    confirmAndEndQuiz(event) {
+        this._requireSecondClick(
+            'finish-quiz',
+            'Click finish again to score the quiz now.',
+            event?.currentTarget,
+            () => this.endQuiz()
+        );
     }
 
     /**

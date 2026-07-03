@@ -4,9 +4,9 @@
 
 Offline-first managerial judgment and operational analysis workspace.
 
-- **Status:** Active flagship
+- **Status:** Stable companion utility
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/ledgersuite](https://shfqrkhn.github.io/LocalFirstApps/apps/ledgersuite/)
-- **Portfolio Role:** Operator decision-workspace flagship.
+- **Portfolio Role:** Operator decision-workspace utility.
 
 LedgerSuite helps leaders and operators draft decision memos, track evidence, weigh assumptions, and prepare accountable action plans in a private browser workspace.
 
@@ -43,7 +43,7 @@ Important operational decisions often live in scattered notes, chats, and spread
 
 ## Relationship To Other Projects
 
-LedgerSuite is the primary operator/management flagship. `CommonGround` remains a specialized facilitation companion for conflict-resolution and team-conversation workflows.
+LedgerSuite is the operator/management utility in LocalFirstApps. `CommonGround` remains a specialized facilitation companion for conflict-resolution and team-conversation workflows.
 
 ## Repository Layout
 

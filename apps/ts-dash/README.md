@@ -49,7 +49,6 @@ TS-Dash remains a stable utility. Financial solvency planning belongs in `nFIRE`
 ```text
 .
 ├── index.html
-├── TS-Dash/
 ├── assets/
 ├── manifest.webmanifest
 ├── sw.js
