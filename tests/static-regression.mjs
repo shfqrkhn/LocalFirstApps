@@ -15,6 +15,7 @@ const oldRepoPattern = /https:\/\/shfqrkhn\.github\.io\/(TS-Dash|PMQuiz|Noodle-N
 const oldAbsolutePathPattern = /\/(TS-Dash|PMQuiz|Noodle-Nudge|LedgerSuite|Flexx-Files|CommonGround)\//;
 const secretPattern = /(sk-[A-Za-z0-9_-]{20,}|AIza[0-9A-Za-z_-]{20,}|gh[pousr]_[A-Za-z0-9_]{20,}|xox[baprs]-[A-Za-z0-9-]{20,})/;
 const popupPattern = /\b(alert|confirm|prompt)\s*\(/;
+const appProviderPattern = /\b(BYOAI|API key|OAuth|OpenAI|Gemini|generativelanguage|chat\/completions)\b/i;
 const forbiddenNames = new Set(["CLAUDE.md", "CODEBASE.md"]);
 
 function assert(condition, message) {
@@ -107,7 +108,10 @@ for (const [slug, label, screenshot] of apps) {
   assert(appIndex.includes("../../suite-shell.js"), `${label} must use shared suite shell JS.`);
   assert(appIndex.includes('class="lfa-suite-home"'), `${label} must expose a LocalFirstApps return link.`);
   assert(appIndex.includes('class="lfa-file-notice"'), `${label} must explain local file mode.`);
+  assert(!appProviderPattern.test(`${appReadme}\n${appIndex}`), `${label} must not expose OAuth/API-key/provider app behavior.`);
 }
+
+assert(!existsSync(join(root, "apps", "commonground", "byoai.js")), "CommonGround must not bundle the retired BYOAI provider overlay.");
 
 const flexxPackage = JSON.parse(readFileSync(join(root, "apps", "flexx-files", "package.json"), "utf8"));
 const flexxLock = JSON.parse(readFileSync(join(root, "apps", "flexx-files", "package-lock.json"), "utf8"));
@@ -123,6 +127,9 @@ for (const file of walk(root)) {
   assert(!oldAbsolutePathPattern.test(text), `Old absolute app path found in ${relative(root, file)}`);
   assert(!secretPattern.test(text), `Secret-like token found in ${relative(root, file)}`);
   assert(!popupPattern.test(text), `JS popup API found in ${relative(root, file)}`);
+  if (relative(root, file).startsWith(`apps${"/"}`) || relative(root, file).startsWith(`apps${"\\"}`)) {
+    assert(!appProviderPattern.test(text), `OAuth/API-key/provider behavior found in ${relative(root, file)}`);
+  }
   if (/\.html$/i.test(file)) assertLocalHtmlRefs(file, text);
   if (/\.(webmanifest|json)$/i.test(file) && /manifest/i.test(file)) assertManifestRefs(file);
 }
