@@ -36,6 +36,7 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - `docs/future-app-intake.md`: required intake contract for new modules.
 - `tests/static-regression.mjs`: canonical app list and static guardrails.
 - `tests/*.spec.mjs`: visual, local-file, and live smoke checks.
+- Private planning references may exist in the local GH workspace docs bundle; do not publish or copy them by default.
 
 ## Required Checks
 
@@ -52,5 +53,5 @@ Also run a secret scan and link/media check before committing or pushing.
 
 - This local repo was ahead of origin before this handoff pass. Verify `git rev-list --left-right --count HEAD...origin/main` before pushing.
 - Use `docs/future-app-intake.md` before adding any new module.
+- Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.
 - Future userscripts belong in a separate userscripts repo by default, not LocalFirstApps.
-
