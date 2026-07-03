@@ -8,6 +8,8 @@ A focused suite of small, privacy-first browser apps that run as static local-fi
 - **Latest Release:** [GitHub latest release](https://github.com/shfqrkhn/LocalFirstApps/releases/latest)
 - **License:** MIT
 - **Runtime model:** static files, browser storage, no server-side processing
+- **Maintainer handoff:** [`docs/AI_MAINTAINER_HANDOFF.md`](./docs/AI_MAINTAINER_HANDOFF.md)
+- **Future app intake:** [`docs/future-app-intake.md`](./docs/future-app-intake.md)
 
 ## Screenshot
 
@@ -59,6 +61,8 @@ npm run test:all
 The tests check the suite shell, migrated app entry points, local-file launch, live Pages routes, responsive layout, stale old URLs, redirect-sensitive paths, media links, and unwanted non-product files.
 
 Release archives omit source-only test and package-management files so downloaded copies stay focused on running the apps.
+
+Before adding a new module under `apps/<slug>/`, apply the intake contract in [`docs/future-app-intake.md`](./docs/future-app-intake.md).
 
 ## Migration
 
