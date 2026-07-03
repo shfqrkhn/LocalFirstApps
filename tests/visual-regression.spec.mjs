@@ -89,6 +89,8 @@ for (const [name, path] of pages) {
       await page.setViewportSize(viewport);
       await page.goto(`${baseUrl}${path}`, { waitUntil: "domcontentloaded" });
       await expect(page.locator("body")).toBeVisible();
+      await expect(page.locator(".lfa-file-notice")).toBeHidden();
+      if (path) await expect(page.locator(".lfa-suite-home")).toBeVisible();
 
       let audit;
       await expect

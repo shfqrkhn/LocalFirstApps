@@ -37,7 +37,11 @@ The apps are static browser apps. Data stays in the browser unless a specific ap
 
 Download the repo, extract it, and open `index.html` in a browser. Individual apps live under `apps/<app>/`.
 
-Some PWA/service-worker features require serving the folder over `http://localhost` or GitHub Pages because browsers restrict service workers from `file://`.
+The launcher works from `file://`. Some individual apps use browser modules, workers, or local `fetch`, so full app and PWA behavior requires serving the folder over `http://localhost` or GitHub Pages because browsers restrict those APIs from `file://`.
+
+```bash
+python -m http.server 8080
+```
 
 ## Development
 

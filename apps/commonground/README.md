@@ -39,6 +39,7 @@ Conflict-resolution and team-conversation work is high-context and easy to lose 
 
 - No account or backend is required for normal use.
 - Data is stored locally in the browser.
+- The optional BYOAI facilitator sends only user-approved context to the configured AI provider; API keys are browser-stored and should be treated as sensitive local data.
 - Sensitive facilitation data should be exported and stored according to the user's own security rules.
 - The app does not replace professional, legal, medical, or safety escalation judgment.
 

@@ -46,6 +46,24 @@ function assertLocalHtmlRefs(file, text) {
   }
 }
 
+function assertManifestRefs(file) {
+  const manifest = JSON.parse(readFileSync(file, "utf8"));
+  const dir = dirname(file);
+  const refs = [];
+  for (const icon of manifest.icons || []) refs.push(icon.src);
+  for (const screenshot of manifest.screenshots || []) refs.push(screenshot.src);
+  for (const shortcut of manifest.shortcuts || []) {
+    for (const icon of shortcut.icons || []) refs.push(icon.src);
+  }
+  for (const ref of refs.filter(Boolean)) {
+    if (/^(https?:|data:|blob:)/i.test(ref)) continue;
+    const target = ref.split(/[?#]/)[0];
+    const full = resolve(dir, decodeURIComponent(target));
+    assert(full.startsWith(root), `Manifest reference escapes repo root in ${relative(root, file)}: ${ref}`);
+    assert(existsSync(full), `Broken manifest reference in ${relative(root, file)}: ${ref}`);
+  }
+}
+
 const index = readFileSync(join(root, "index.html"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
 
@@ -55,6 +73,7 @@ assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep spons
 for (const [slug, label, screenshot] of apps) {
   const appDir = join(root, "apps", slug);
   const appReadme = readFileSync(join(appDir, "README.md"), "utf8");
+  const appIndex = readFileSync(join(appDir, "index.html"), "utf8");
   assert(statSync(appDir).isDirectory(), `${label} app folder missing.`);
   assert(statSync(join(appDir, "index.html")).isFile(), `${label} index.html missing.`);
   assert(statSync(join(appDir, "README.md")).isFile(), `${label} README.md missing.`);
@@ -65,6 +84,10 @@ for (const [slug, label, screenshot] of apps) {
   assert(appReadme.includes(`LocalFirstApps/apps/${slug}`), `${label} README must keep canonical LocalFirstApps live URL.`);
   const readmeScreenshotPath = screenshot.startsWith("./") ? screenshot : `./${screenshot}`;
   assert(appReadme.includes(`](${readmeScreenshotPath})`), `${label} README must point at existing screenshot path.`);
+  assert(appIndex.includes("../../suite-shell.css"), `${label} must use shared suite shell CSS.`);
+  assert(appIndex.includes("../../suite-shell.js"), `${label} must use shared suite shell JS.`);
+  assert(appIndex.includes('class="lfa-suite-home"'), `${label} must expose a LocalFirstApps return link.`);
+  assert(appIndex.includes('class="lfa-file-notice"'), `${label} must explain local file mode.`);
 }
 
 for (const file of walk(root)) {
@@ -77,6 +100,7 @@ for (const file of walk(root)) {
   assert(!secretPattern.test(text), `Secret-like token found in ${relative(root, file)}`);
   assert(!popupPattern.test(text), `JS popup API found in ${relative(root, file)}`);
   if (/\.html$/i.test(file)) assertLocalHtmlRefs(file, text);
+  if (/\.(webmanifest|json)$/i.test(file) && /manifest/i.test(file)) assertManifestRefs(file);
 }
 
 console.log(`Static regression passed for ${apps.length} apps.`);
