@@ -5,8 +5,13 @@
 A focused suite of small, privacy-first browser apps that run as static local-first tools.
 
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps](https://shfqrkhn.github.io/LocalFirstApps/)
+- **Latest Release:** [GitHub latest release](https://github.com/shfqrkhn/LocalFirstApps/releases/latest)
 - **License:** MIT
 - **Runtime model:** static files, browser storage, no server-side processing
+
+## Screenshot
+
+![LocalFirstApps suite launcher](./screenshot.png)
 
 ## Apps
 
@@ -35,7 +40,7 @@ The apps are static browser apps. Data stays in the browser unless a specific ap
 
 ## Local Use
 
-Download the repo, extract it, and open `index.html` in a browser. Individual apps live under `apps/<app>/`.
+Download the latest release zip or the repo, extract it, and open `index.html` in a browser. Individual apps live under `apps/<app>/`.
 
 The launcher works from `file://`. Some individual apps use browser modules, workers, or local `fetch`, so full app and PWA behavior requires serving the folder over `http://localhost` or GitHub Pages because browsers restrict those APIs from `file://`.
 
@@ -46,10 +51,10 @@ python -m http.server 8080
 ## Development
 
 ```bash
-npm test
+npm run test:all
 ```
 
-The test checks the suite shell, migrated app entry points, stale old URLs, redirect-sensitive paths, and unwanted non-product files.
+The tests check the suite shell, migrated app entry points, local-file launch, live Pages routes, responsive layout, stale old URLs, redirect-sensitive paths, media links, and unwanted non-product files.
 
 ## Migration
 

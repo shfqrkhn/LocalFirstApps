@@ -69,6 +69,11 @@ const readme = readFileSync(join(root, "README.md"), "utf8");
 
 assert(readme.includes("github.com/sponsors/shfqrkhn"), "README must keep sponsor CTA.");
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
+assert(readme.includes("[GitHub latest release](https://github.com/shfqrkhn/LocalFirstApps/releases/latest)"), "README must link the latest release.");
+assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "README must include the suite launcher screenshot.");
+assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
+assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
+assert(readme.includes("npm run test:all"), "README must document the full test gate.");
 
 for (const [slug, label, screenshot] of apps) {
   const appDir = join(root, "apps", slug);
