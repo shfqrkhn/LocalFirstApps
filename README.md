@@ -50,11 +50,15 @@ python -m http.server 8080
 
 ## Development
 
+From a git checkout:
+
 ```bash
 npm run test:all
 ```
 
 The tests check the suite shell, migrated app entry points, local-file launch, live Pages routes, responsive layout, stale old URLs, redirect-sensitive paths, media links, and unwanted non-product files.
+
+Release archives omit source-only test and package-management files so downloaded copies stay focused on running the apps.
 
 ## Migration
 

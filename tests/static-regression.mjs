@@ -66,6 +66,7 @@ function assertManifestRefs(file) {
 
 const index = readFileSync(join(root, "index.html"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
+const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
 
 assert(readme.includes("github.com/sponsors/shfqrkhn"), "README must keep sponsor CTA.");
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
@@ -74,8 +75,19 @@ assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "R
 assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(readme.includes("npm run test:all"), "README must document the full test gate.");
+assert(readme.includes("Release archives omit source-only test and package-management files"), "README must explain runtime-focused release archives.");
 assert(readme.includes("The original standalone repo surfaces have been retired."), "README must document retired standalone repo surfaces accurately.");
 assert(!readme.includes("retained only as redirects/archives"), "README must not claim deleted standalone repos are retained.");
+for (const exportIgnored of [
+  "tests export-ignore",
+  "package.json export-ignore",
+  "package-lock.json export-ignore",
+  "apps/flexx-files/tests export-ignore",
+  "apps/flexx-files/package.json export-ignore",
+  "apps/flexx-files/package-lock.json export-ignore"
+]) {
+  assert(exportAttrs.includes(exportIgnored), `Release/source archives must exclude non-runtime file: ${exportIgnored}`);
+}
 
 for (const [slug, label, screenshot] of apps) {
   const appDir = join(root, "apps", slug);
@@ -96,6 +108,11 @@ for (const [slug, label, screenshot] of apps) {
   assert(appIndex.includes('class="lfa-suite-home"'), `${label} must expose a LocalFirstApps return link.`);
   assert(appIndex.includes('class="lfa-file-notice"'), `${label} must explain local file mode.`);
 }
+
+const flexxPackage = JSON.parse(readFileSync(join(root, "apps", "flexx-files", "package.json"), "utf8"));
+const flexxLock = JSON.parse(readFileSync(join(root, "apps", "flexx-files", "package-lock.json"), "utf8"));
+assert(flexxLock.version === flexxPackage.version, "Flexx Files package-lock version must match package version.");
+assert(flexxLock.packages?.[""]?.version === flexxPackage.version, "Flexx Files package-lock root version must match package version.");
 
 for (const file of walk(root)) {
   const name = file.split(/[\\/]/).pop();
