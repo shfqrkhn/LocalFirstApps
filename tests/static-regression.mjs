@@ -74,6 +74,8 @@ assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "R
 assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(readme.includes("npm run test:all"), "README must document the full test gate.");
+assert(readme.includes("The original standalone repo surfaces have been retired."), "README must document retired standalone repo surfaces accurately.");
+assert(!readme.includes("retained only as redirects/archives"), "README must not claim deleted standalone repos are retained.");
 
 for (const [slug, label, screenshot] of apps) {
   const appDir = join(root, "apps", slug);

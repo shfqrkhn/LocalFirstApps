@@ -58,4 +58,4 @@ The tests check the suite shell, migrated app entry points, local-file launch, l
 
 ## Migration
 
-The original standalone repos are retained only as redirects/archives so old links keep working while new development moves here.
+The original standalone repo surfaces have been retired. Canonical links, screenshots, releases, and future development now live in this consolidated suite.
