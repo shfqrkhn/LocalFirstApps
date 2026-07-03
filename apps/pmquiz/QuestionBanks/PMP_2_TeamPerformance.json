@@ -1,0 +1,2813 @@
+{
+    "topic": "Team Performance Domain Quiz",
+    "questions": [
+        {
+            "questionText": "What is one key purpose of the Daily Standup meeting in an Agile/Scrum team?",
+            "choices": [
+                "To communicate the status of their work",
+                "To uncover problems or impediments",
+                "To track the progress of the sprint/iteration",
+                "To re-plan the sprint backlog"
+            ],
+            "correctAnswer": 1,
+            "explanation": "The primary reason why Agile/Scrum teams meet daily is to uncover problems. During the Daily Standup, team members discuss what they did yesterday, what they will do today, and if there is anything blocking their progress. If the standup is not held, impediments may remain undiscovered, negatively impacting delivery.",
+            "time": 75
+        },
+        {
+            "questionText": "When a project team is geographically distributed, what is a primary area of focus for the project manager?",
+            "choices": [
+                "Choosing a tried-and-tested Agile framework like Scrum",
+                "Focusing on cultural awareness within the team",
+                "Ensuring only T-shaped skilled team members are included",
+                "Reducing the team size to simplify communication"
+            ],
+            "correctAnswer": 1,
+            "explanation": "For a geographically distributed team, the project manager should first focus on cultural awareness. Cultural differences can influence decision-making, work speed, and can cause conflict and stress, especially when team members are spread across the globe.",
+            "time": 75
+        },
+        {
+            "questionText": "Who is primarily responsible for deciding which tasks will be done by whom within an Agile development team?",
+            "choices": [
+                "The project manager",
+                "The product manager",
+                "The team members",
+                "Senior leadership"
+            ],
+            "correctAnswer": 2,
+            "explanation": "One of the key characteristics of an Agile project team is that the team members decide which task will be done by whom.",
+            "time": 75
+        },
+        {
+            "questionText": "What specific project management skill is considered a significant factor in project success, particularly when dealing with team members, stakeholders, and resolving conflicts?",
+            "choices": [
+                "Negotiation skills",
+                "Artificial intelligence application",
+                "Team bonding activities",
+                "Emotional intelligence"
+            ],
+            "correctAnswer": 3,
+            "explanation": "Applying emotional intelligence when dealing with the project team and project stakeholders is a significant factor in determining a project's success or failure. It helps promote team performance and is useful for resolving conflicts.",
+            "time": 75
+        },
+        {
+            "questionText": "What is NOT true about Agile frameworks?",
+            "choices": [
+                "Agile frameworks are suited for knowledge work with uncertainty.",
+                "Agile teams can blend multiple flavors of Agile methodologies.",
+                "Agile frameworks are customized for the team.",
+                "Agile teams tailor frameworks to their needs."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Agile frameworks are not pre-customized for a specific team. Instead, the team tailors the chosen Agile framework to suit their project needs and may practice their own blend of Agile methodologies.",
+            "time": 75
+        },
+        {
+            "questionText": "In a Scrum team, who is responsible for writing the acceptance criteria for user stories?",
+            "choices": [
+                "The Scrum Master",
+                "The development team",
+                "The Product Owner",
+                "The project sponsor"
+            ],
+            "correctAnswer": 2,
+            "explanation": "In Scrum, the Product Owner is responsible for developing user stories, and clear acceptance criteria are a part of a well-written user story. Acceptance criteria define the boundaries and provide details on functionality.",
+            "time": 75
+        },
+        {
+            "questionText": "When dealing with a complex issue, what form of communication is generally considered most suitable for a project team?",
+            "choices": [
+                "Sending texts using Google Chat",
+                "Sending texts using Slack",
+                "Remote pairing",
+                "Face to face communication"
+            ],
+            "correctAnswer": 3,
+            "explanation": "For complex issues, 'richness' in communication, which enables rapid exchange of broad information, is needed. Face-to-face communication is an example of such rich communication and is the best choice for resolving complex issues.",
+            "time": 75
+        },
+        {
+            "questionText": "In a situation where a project team is experiencing chaos and lacks clarity, what leadership style is often recommended to initially create clarity?",
+            "choices": [
+                "Democratic",
+                "Directive",
+                "Participative",
+                "Laissez-faire"
+            ],
+            "correctAnswer": 1,
+            "explanation": "In moments of chaos, a directive leadership style can help create clarity and momentum, which is needed in such situations.",
+            "time": 75
+        },
+        {
+            "questionText": "What is true about leadership in a project environment?",
+            "choices": [
+                "Authority is the same as leadership.",
+                "Leadership is exclusive to the project manager role.",
+                "Leadership is not exclusive to any specific role.",
+                "Leadership is granted through formal charter documents."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Leadership should not be confused with authority. Authority is a position of control granted to individuals. Leadership, on the other hand, is not exclusive to any specific role, and any team member or all team members can engage in leadership activities.",
+            "time": 75
+        },
+        {
+            "questionText": "When a Scrum team discusses issues during a retrospective but fails to show improvement, what is a recommended action?",
+            "choices": [
+                "Exclude the product owner from the meeting.",
+                "Limit the number of improvement items to 2 or 3 per meeting.",
+                "Stop using Google Spreadsheets and use software tools like JIRA.",
+                "Have a different team member facilitate the meeting each time."
+            ],
+            "correctAnswer": 1,
+            "explanation": "If a team tries to address too many issues from a retrospective, they may lack focus. A common recommendation is to select only 2 or 3 improvement items per retrospective to ensure progress can be made and observed.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key characteristic of T-shaped skilled people in Agile teams?",
+            "choices": [
+                "They have deep expertise in all necessary project skills.",
+                "They are less valuable than I-shaped specialists.",
+                "They can help reduce bottlenecks and handoffs.",
+                "They only work within their area of deep expertise."
+            ],
+            "correctAnswer": 2,
+            "explanation": "T-shaped, generalized specialists have deep expertise in one area and broad knowledge in others. This allows them to help reduce handoffs and bottlenecks by taking up work from other team members.",
+            "time": 75
+        },
+        {
+            "questionText": "In a Scrum team, if team members complain they cannot download a technical design document needed for their work, who is responsible for removing this obstacle?",
+            "choices": [
+                "The solution architect",
+                "The Scrum Master",
+                "The agile coach",
+                "The Product Owner"
+            ],
+            "correctAnswer": 1,
+            "explanation": "One of the responsibilities of the Scrum Master is to remove obstacles or impediments faced by the project team during the sprint. In this situation, the inability to access documents is a blocker.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a recommended approach for identifying risks in a project?",
+            "choices": [
+                "Only project managers identify risks during the planning phase.",
+                "Only the project team identifies risks throughout the project.",
+                "Both the project team and project manager identify risks throughout the project.",
+                "Risk identification is only needed during the planning phase."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Risk identification should involve both the project team and the project manager, and it should occur throughout the project, not just during the planning phase. The risk profile evolves over time.",
+            "time": 75
+        },
+        {
+            "questionText": "In Agile projects, what can lead to a high defect rate?",
+            "choices": [
+                "Collective product/code ownership",
+                "Pervasive testing",
+                "Pair work",
+                "Loose definition of done"
+            ],
+            "correctAnswer": 3,
+            "explanation": "A loose Definition of Done can lead to confusion and misunderstandings about when a task is truly completed, resulting in rework and a higher defect rate. Practices like collective ownership, pervasive testing, and pair work are recommended in Agile.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key benefit of involving the project team in project planning, even in a traditional/waterfall approach?",
+            "choices": [
+                "It causes project fatigue.",
+                "It causes gold plating.",
+                "It strengthens their commitment to the project.",
+                "It is not the best utilization of their time."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Participation of project team members during project planning strengthens their commitment to the project.",
+            "time": 75
+        },
+        {
+            "questionText": "When an experienced Agile team is planning for an iteration using a fairly novice technology stack for all members, what should the team seek to balance?",
+            "choices": [
+                "Balancing development of deliverable units and risk reduction efforts.",
+                "Balancing development of non-deliverable units and risk reduction efforts.",
+                "Balancing development of deliverable units and value reducing work.",
+                "Balancing development of deliverable units and risk producing work."
+            ],
+            "correctAnswer": 0,
+            "explanation": "When a team is novice to a technology stack, they should look to balance the development of deliverable units and risk reduction efforts by incorporating both value-producing and risk-reducing work into the backlog.",
+            "time": 75
+        },
+        {
+            "questionText": "When an organization is transitioning from predictive to Agile, especially for digital projects, what is most likely to be encountered?",
+            "choices": [
+                "A high degree of cost expenditure.",
+                "A high degree of employee attrition.",
+                "A high degree of changes.",
+                "A high degree of team collaboration."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Organizations transitioning from predictive to Agile, especially initially, often experience a high degree of changes.",
+            "time": 75
+        },
+        {
+            "questionText": "What type of communication is described as one-way, where a sender transmits a message to a receiver who doesn't respond, and is suitable when feedback is not needed?",
+            "choices": [
+                "Interactive communication model",
+                "Pull communication",
+                "Linear communication model",
+                "Push communication"
+            ],
+            "correctAnswer": 2,
+            "explanation": "The linear communication model is one-way communication where a sender transmits a message to a receiver who reads or listens but doesn't respond. It is suitable only when feedback is not needed.",
+            "time": 75
+        },
+        {
+            "questionText": "Which of the following Agile practices involves the entire team working on the same story or task at the same time?",
+            "choices": [
+                "Pair programming",
+                "Mobbing",
+                "Crowdsourcing",
+                "Test-Driven Development (TDD)"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Mobbing is a software development approach where the entire team works on the same story or task at the same time. Pair programming involves two people, not the whole team.",
+            "time": 75
+        },
+        {
+            "questionText": "What is an important concept for a project manager to understand when developing a resource development plan?",
+            "choices": [
+                "People are motivated only by monetary rewards.",
+                "People are motivated by authority or power.",
+                "People are motivated by peer pressure.",
+                "People perform better when they are motivated, and people are motivated by different things."
+            ],
+            "correctAnswer": 3,
+            "explanation": "People perform better when they are motivated, and people are motivated by different things. Understanding these varying motivational factors is important for a project manager.",
+            "time": 75
+        },
+        {
+            "questionText": "In an Agile team where communication gaps exist due to geographic separation, which tool or technique is suggested to help bridge this gap in a cost-effective way?",
+            "choices": [
+                "Colocation",
+                "Caves and Commons",
+                "Fishbowl window",
+                "Broken comb"
+            ],
+            "correctAnswer": 2,
+            "explanation": "When colocation is not possible for geographically distributed teams, a Fishbowl window is an Agile technique that can help bridge the communication gap.",
+            "time": 75
+        },
+        {
+            "questionText": "Which of the following represents a coaching and mentoring model, as opposed to concepts for user stories, prioritization, or describing conditions?",
+            "choices": [
+                "VUCA",
+                "INVEST",
+                "OSCAR",
+                "MoSCoW"
+            ],
+            "correctAnswer": 2,
+            "explanation": "OSCAR is a well-known coaching and mentoring model. VUCA describes conditions, INVEST relates to user stories, and MoSCoW is a prioritization technique.",
+            "time": 75
+        },
+        {
+            "questionText": "What type of project knowledge can be shared or captured effectively via documentation?",
+            "choices": [
+                "Tacit knowledge",
+                "Informal knowledge",
+                "Codified explicit knowledge",
+                "Implicit knowledge"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Knowledge management models divide knowledge into Explicit and Tacit. It is the codified explicit project knowledge that can be documented.",
+            "time": 75
+        },
+        {
+            "questionText": "When a team working on a new domain lacks prior experience, what is a crucial action for a project manager to take to help the team succeed?",
+            "choices": [
+                "Ensure they use pair programming.",
+                "Ensure they are adequately trained in the new domain.",
+                "Ensure a dedicated separate testing team exists.",
+                "Ensure they use test-first development."
+            ],
+            "correctAnswer": 1,
+            "explanation": "When a team is entirely new to a domain, the project manager's responsibility is to ensure and empower them by making sure they are adequately trained before commencing project work. Other practices are useful but depend on having foundational knowledge.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the '5 Cs' of written communication that project managers should be aware of and follow?",
+            "choices": [
+                "Clear purpose directed to the needs of the writer.",
+                "Using simple language always.",
+                "Correct grammar and spelling.",
+                "Always using formal language."
+            ],
+            "correctAnswer": 2,
+            "explanation": "One of the 5 Cs of written communication is Correct grammar and spelling in all written communication. Clear purpose should be directed to the needs of the *reader*, not the writer.",
+            "time": 75
+        },
+        {
+            "questionText": "In a scenario where a project team is struggling with integrated code issues after merging individual work, what software development practice is recommended to avoid such problems?",
+            "choices": [
+                "Osmotic communication",
+                "Continuous deployment",
+                "Fishbowl window",
+                "Continuous integration"
+            ],
+            "correctAnswer": 3,
+            "explanation": "Continuous integration is a practice in which each team member's work products are frequently integrated and validated with one another, which helps avoid issues with integrated code.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key characteristic of a project team for Agile projects?",
+            "choices": [
+                "Team size is always limited to 7 members.",
+                "Team members are always co-located.",
+                "Team members have specialized (I-shaped) skills.",
+                "Team members have T-shaped skills."
+            ],
+            "correctAnswer": 3,
+            "explanation": "Agile project development teams are formed with T-shaped skills. While colocation is ideal, teams can be distributed. Team size can vary.",
+            "time": 75
+        },
+        {
+            "questionText": "What should a facilitator specifically avoid doing during a team meeting focused on identifying an estimation tool?",
+            "choices": [
+                "Resolving conflicts if any.",
+                "Fostering collaboration.",
+                "Encouraging participation.",
+                "Making decisions on behalf of the group."
+            ],
+            "correctAnswer": 3,
+            "explanation": "Facilitation involves helping groups work together. A facilitator should avoid making decisions on behalf of the group and offering their own opinions. They should instead help the group make decisions and explore their own ideas.",
+            "time": 75
+        },
+        {
+            "questionText": "When an Agile team faces technical problems, who is best suited to research and select the appropriate technical solution (e.g., a 3rd party library)?",
+            "choices": [
+                "The Agile project manager",
+                "An external consultant",
+                "The project team members",
+                "Senior technical leadership"
+            ],
+            "correctAnswer": 2,
+            "explanation": "One of the principles of Agile is building projects around motivated individuals and trusting them to get the job done. In a technical scenario, the project team itself should do their own research and come up with the appropriate selection.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a responsibility of a project manager related to project artifacts?",
+            "choices": [
+                "To create all project artifacts personally.",
+                "To continually assess the effectiveness of their management.",
+                "To restrict access to artifacts for certain stakeholders.",
+                "To store artifacts only on a local drive."
+            ],
+            "correctAnswer": 1,
+            "explanation": "One of the responsibilities of a project manager is to continually assess the effectiveness of the management of project artifacts. They should also ensure information is up to date and accessible to all stakeholders.",
+            "time": 75
+        },
+        {
+            "questionText": "In a project facing complex, intricate, and personal information to communicate, what type of communication channel is recommended?",
+            "choices": [
+                "Text messages",
+                "Emails",
+                "WhatsApp messages",
+                "Face to face communication"
+            ],
+            "correctAnswer": 3,
+            "explanation": "Situations involving complex, intricate, and personal information benefit from more robust communication channels, such as face-to-face communication. Text-based methods are better for simple, factual information.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the typical purpose of a quality audit?",
+            "choices": [
+                "To test the quality after deliverables are developed.",
+                "To identify the root cause of a defect.",
+                "To depict the series of steps in a process.",
+                "To assess whether project activities comply with organizational and project policies."
+            ],
+            "correctAnswer": 3,
+            "explanation": "A quality audit is typically conducted by a team external to the project to assess whether project activities comply with organizational and project policies, processes, and procedures.",
+            "time": 75
+        },
+        {
+            "questionText": "When an organization wants to ensure valuable project learnings and results are shared across the organization, which entity is typically responsible for this?",
+            "choices": [
+                "A murder board",
+                "An external consultancy",
+                "A Steering committee",
+                "A PMO (Project management office)"
+            ],
+            "correctAnswer": 3,
+            "explanation": "It is the PMO (Project management office) whose one of the roles is to regularly share project learnings and results across the organization.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a potential negative outcome if the Definition of Done is loose for an Agile team?",
+            "choices": [
+                "Increased team velocity.",
+                "Improved team morale.",
+                "Higher defect rate.",
+                "Faster delivery of value."
+            ],
+            "correctAnswer": 2,
+            "explanation": "If the Definition of Done is not well-defined or is loose, it can lead to confusion and different interpretations, resulting in rework and a higher defect rate.",
+            "time": 75
+        },
+        {
+            "questionText": "Which project artifact specifies when and for how long physical and human resources, such as an LED Projector, will be available during the project?",
+            "choices": [
+                "Resource activity list",
+                "Resource calendars",
+                "Resource management plan",
+                "Project calendars"
+            ],
+            "correctAnswer": 1,
+            "explanation": "The Resource calendar specifies when and for how long a certain resource, both physical and human, will be available during the project.",
+            "time": 75
+        },
+        {
+            "questionText": "In a scenario where multiple project participants attempt to exert influence in misaligned directions, how can this situation be interpreted?",
+            "choices": [
+                "As a sign the team is in the 'norming' stage.",
+                "As a sign that more innovation can emerge.",
+                "As a sign the team is in the 'performing' stage.",
+                "As a sign that more conflict and confusion can emerge."
+            ],
+            "correctAnswer": 3,
+            "explanation": "More conflict and confusion can emerge when too many participants attempt to exert project influence in multiple misaligned directions. This is often associated with the 'storming' phase, though the question focuses on the outcome.",
+            "time": 75
+        },
+        {
+            "questionText": "How is team velocity typically used by an Agile team once a reliable velocity is established?",
+            "choices": [
+                "To determine the quality of deliverables.",
+                "To calculate the Cost Performance Index (CPI).",
+                "To predict how much longer the project will take.",
+                "To decide who works on which task."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Once a team establishes a reliable velocity (average story points completed per iteration), they can use it to predict how much longer the project will take, allowing project completion date forecasting.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the purpose of incorporating both value-producing and risk-reducing work into the backlog during iteration planning for a team new to a technology stack?",
+            "choices": [
+                "To ensure only high-value features are developed.",
+                "To avoid any risks entirely.",
+                "To balance the development of deliverable units and risk reduction efforts.",
+                "To maximize the number of features delivered in the iteration."
+            ],
+            "correctAnswer": 2,
+            "explanation": "When working with a novice technology stack, balancing the development of deliverable units with efforts to reduce technical risks by including both types of work in the backlog is crucial.",
+            "time": 75
+        },
+        {
+            "questionText": "In a project using Scrum, if the daily standup consistently runs longer than 15 minutes because the team discusses resolving problems, what is the recommended action?",
+            "choices": [
+                "Escalate the issue to the product owner.",
+                "Extend the daily standup duration to 60 minutes.",
+                "Add the issue to a parking lot and create another meeting right after the standup with relevant parties.",
+                "Add the issue to a parking lot and create another meeting at the end of the sprint."
+            ],
+            "correctAnswer": 2,
+            "explanation": "If issues are causing the standup to run long, they should be added to a parking lot and discussed in a separate meeting immediately after the standup with only the relevant team members. Extending the standup or waiting until the end of the sprint is not efficient.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a disadvantage of multitasking for a project team?",
+            "choices": [
+                "It increases team collaboration.",
+                "It improves the team's ability to predict delivery.",
+                "It reduces the throughput of the team's work.",
+                "It helps team members focus better."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Multitasking is not good for overall productivity. It reduces the throughput of the team's work, impacts the team's ability to predict delivery, and is discouraged.",
+            "time": 75
+        },
+        {
+            "questionText": "What does 'Noise' in communication refer to in a project context?",
+            "choices": [
+                "Loud background sounds during a meeting.",
+                "Any interference or barriers that might compromise the understanding of the message.",
+                "Excessive or unnecessary communication.",
+                "Informal communication channels."
+            ],
+            "correctAnswer": 1,
+            "explanation": "'Noise' includes any interference or barriers that might compromise the understanding of the message. Examples include receiver distraction, variation in perception, lack of knowledge, or lack of interest.",
+            "time": 75
+        },
+        {
+            "questionText": "Which leadership style emphasizes the leader's focus on the needs of the team members to help them grow and perform at their highest level?",
+            "choices": [
+                "Directive",
+                "Transactional",
+                "Laissez-faire",
+                "Servant leadership"
+            ],
+            "correctAnswer": 3,
+            "explanation": "Servant leadership is a leadership philosophy in which the main goal of the leader is to serve. When leaders shift their mindset and serve the team first, it benefits team members by focusing on their development and growth.",
+            "time": 75
+        },
+        {
+            "questionText": "Which Scrum role is responsible for ensuring the development team uses the Scrum framework correctly and facilitating Scrum events?",
+            "choices": [
+                "Product Owner",
+                "Development Team Member",
+                "Scrum Master",
+                "Agile Coach"
+            ],
+            "correctAnswer": 2,
+            "explanation": "The Scrum Master is responsible for coaching the development team on the Scrum framework and ensuring that team members correctly use the Scrum framework, its events, and artifacts.",
+            "time": 75
+        },
+        {
+            "questionText": "For confirming communication is understood and receiving feedback, what practices should a team use?",
+            "choices": [
+                "Only conducting retrospective sessions.",
+                "Only holding feedback sessions.",
+                "Only conducting surveys.",
+                "Holding feedback sessions, conducting surveys, and arranging product demos."
+            ],
+            "correctAnswer": 3,
+            "explanation": "Practices like holding feedback sessions, conducting surveys, and arranging product demos should be used to confirm communication is understood and feedback is received.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the main difference between portfolio management and project management?",
+            "choices": [
+                "Portfolios are temporary; projects are long-term.",
+                "Projects focus on delivering benefits; portfolios focus on deliverables.",
+                "Portfolios involve strategic, cohesive objectives; projects focus on specific, singular endeavors.",
+                "Project managers select projects; portfolio managers manage individual projects."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Projects focus on unique, short-term goals as specific, singular endeavors and are temporary. Portfolios concentrate on long-term goals and involve strategic, cohesive objectives. Portfolio managers select the right projects.",
+            "time": 75
+        },
+        {
+            "questionText": "In the OSCAR coaching and mentoring model, what is the very first step a project manager can take to assist a team member?",
+            "choices": [
+                "Review progress.",
+                "Determine what the team member aims for or wants to achieve.",
+                "Consider a range of choices.",
+                "Commit to an action."
+            ],
+            "correctAnswer": 1,
+            "explanation": "In the OSCAR model, the first step is Objective: determine what the team member aims for or wants to achieve.",
+            "time": 75
+        },
+        {
+            "questionText": "What does the concept of 'Building Quality In' emphasize in quality management?",
+            "choices": [
+                "Testing deliverables rigorously after they are developed.",
+                "Relying solely on quality assurance team inspections.",
+                "Ensuring quality is embedded during the development of deliverables.",
+                "Fixing defects as they are found during testing."
+            ],
+            "correctAnswer": 2,
+            "explanation": "'Building Quality In' emphasizes that while deliverables need to be tested, it is important to ensure quality is built in when these deliverables are developed.",
+            "time": 75
+        },
+        {
+            "questionText": "When physical resource planning is done for an engineering project, what factor should the project team consider?",
+            "choices": [
+                "It is always done in a just-in-time fashion.",
+                "It is always involved in working with an external vendor.",
+                "Factors such as the storage and movement of resources to the project location.",
+                "It is only done when resources are needed during execution."
+            ],
+            "correctAnswer": 2,
+            "explanation": "While doing physical resource planning, the project team has to consider factors such as the storage and movement of the physical resources to the project location. It's not always just-in-time or only from external vendors, and planning is done before execution.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the primary goal of a Product Owner in Scrum?",
+            "choices": [
+                "To manage the development team.",
+                "To facilitate Scrum events.",
+                "To maximize the business value of the product.",
+                "To ensure the team follows Scrum processes."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The eventual and ultimate goal of a Product Owner is to plan the work based on business value and to maximize the business value of the product by managing and optimizing the product backlog.",
+            "time": 75
+        },
+        {
+            "questionText": "When should risk identification occur in a project?",
+            "choices": [
+                "Only during the planning phase.",
+                "Only by the project manager.",
+                "Throughout the project lifecycle.",
+                "Only for negative risks."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Risk identification should occur throughout the project, not just during the planning phase, and should involve both positive and negative risks, with participation from both the project team and the project manager.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key responsibility of a Scrum Master regarding impediments?",
+            "choices": [
+                "To identify all impediments.",
+                "To escalate impediments to the Product Owner.",
+                "To remove obstacles or impediments faced by the team.",
+                "To document impediments in the risk register."
+            ],
+            "correctAnswer": 2,
+            "explanation": "One of the responsibilities of the Scrum Master is to remove obstacles or impediments faced by the project team during the sprint.",
+            "time": 75
+        },
+        {
+            "questionText": "Who is typically responsible for approving the Project Charter?",
+            "choices": [
+                "The project manager",
+                "The project team",
+                "The project sponsor or a person with similar authority",
+                "The PMO"
+            ],
+            "correctAnswer": 2,
+            "explanation": "The project charter is typically approved by the project sponsor or a person with similar authority who has the power to authorize and provide resources for the project.",
+            "time": 75
+        },
+        {
+            "questionText": "In an Agile project using Scrum, what are the three main roles?",
+            "choices": [
+                "Project Manager, Team Lead, Stakeholder",
+                "Product Owner, Scrum Master, Development Team",
+                "Scrum Master, Team Facilitator, Developer",
+                "Product Manager, Scrum Coach, Team Member"
+            ],
+            "correctAnswer": 1,
+            "explanation": "The Scrum framework roles are the Product Owner, Scrum Master, and the Development Team.",
+            "time": 75
+        },
+        {
+            "questionText": "What does 'Collective product/code ownership' mean in an Agile context?",
+            "choices": [
+                "Only the Product Owner is responsible for the code.",
+                "Only the team lead is responsible for the code.",
+                "All team members share responsibility for the code.",
+                "Individual developers own specific parts of the code."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Collective product/code ownership is a recommended practice in Agile projects. This means all team members share responsibility for the code and product.",
+            "time": 75
+        },
+        {
+            "questionText": "When planning resources, what information from the project schedule is important for a project manager to know?",
+            "choices": [
+                "The estimated cost of resources.",
+                "Who is responsible for each task.",
+                "When resources are needed during the project.",
+                "The skills of each team member."
+            ],
+            "correctAnswer": 2,
+            "explanation": "When planning resources, it is important to know 'when' they are needed. The project schedule contains all the details of the timelines of the project activities, which informs resource timing.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the key areas a servant leader focuses on to benefit the project team?",
+            "choices": [
+                "Enforcing strict adherence to processes.",
+                "Working on the development and growth of individual team members.",
+                "Making decisions for the team to increase efficiency.",
+                "Minimizing interactions with other functions in the organization."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The servant leader works on the development and growth of individual team members and builds strong relationships within the team and across the organization to get support when needed.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a primary purpose of including a contingency reserve fund in the project budget?",
+            "choices": [
+                "To allocate funds for any additional work through a vendor.",
+                "To address uncertainties that may arise during project execution.",
+                "To buy material needed for project execution.",
+                "To provide training to the project team members."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The primary reason for including a contingency reserve fund is to ensure that uncertainties can be managed in a way that does not negatively impact project objectives. These reserves are allocated to implement risk responses or address risk events.",
+            "time": 75
+        },
+        {
+            "questionText": "In an Agile team working on a challenging task, what practice involves two developers working together at one workstation?",
+            "choices": [
+                "Mobbing",
+                "Collective ownership",
+                "Pair programming",
+                "T-shaped specialization"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Pair programming is a practice where two developers work together, typically at one workstation. Mobbing involves the whole team.",
+            "time": 75
+        },
+        {
+            "questionText": "When hiring a cross-functional T-shaped generalized specialist for an Agile team, what is NOT true about them?",
+            "choices": [
+                "They have deep expertise in one area and broad knowledge in others.",
+                "They can help reduce bottlenecks by taking up work from other team members.",
+                "They are skilled in all the specialties needed on the project.",
+                "They can help reduce handoffs."
+            ],
+            "correctAnswer": 2,
+            "explanation": "T-shaped individuals have deep expertise in one area and broad knowledge in others, allowing them to help with bottlenecks and handoffs. It is unlikely for one individual to possess *all* skills needed for the project.",
+            "time": 75
+        },
+        {
+            "questionText": "What should an Agile team focus on most to support value realization from a project?",
+            "choices": [
+                "Delivering the project on-time and within budget.",
+                "Focusing on the deliverables of the project.",
+                "Focusing on the intended outcome of the project.",
+                "Focusing on the quality of the product."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Project deliverables and outcomes are different concepts. The project team should focus on the intended outcome of the project to support value realization.",
+            "time": 75
+        },
+        {
+            "questionText": "When a team is new to Agile and a project has a continuous flow of work with no periodic releases, which Agile approach is most suitable?",
+            "choices": [
+                "SCRUM",
+                "Kanban",
+                "Agile Unified Process",
+                "Crystal"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Kanban is applicable when there are no periodic releases needed and allows for a continuous flow of work. It is also less prescriptive than Scrum, making it easier for a team new to Agile to adopt.",
+            "time": 75
+        },
+        {
+            "questionText": "What happens if a Scrum team stops conducting the Daily Standup?",
+            "choices": [
+                "The team will not be able to uncover problems.",
+                "Nothing significant happens, as it's an optional meeting.",
+                "Team members will not be able to communicate their work status.",
+                "The Scrum Master will take over the task updates."
+            ],
+            "correctAnswer": 0,
+            "explanation": "If a team is not conducting the Daily Standup, they will not be able to identify the problems they are facing (uncover problems), which negatively impacts project delivery.",
+            "time": 75
+        },
+        {
+            "questionText": "Which project artifact is least useful during the planning phase of a multi-year, large government construction project that is currently in the initiation phase?",
+            "choices": [
+                "Project charter",
+                "Business case",
+                "Vision statement",
+                "Project management plan"
+            ],
+            "correctAnswer": 3,
+            "explanation": "The project management plan is an outcome of the planning process, not a document used *during* the initiation or the very beginning of planning. Project charter, business case, and vision statement are initial documents progressively elaborated upon.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the responsibilities of a project manager in supporting an Agile team?",
+            "choices": [
+                "Assigning specific tasks to individual team members.",
+                "Making technical decisions for the team.",
+                "Ensuring that the team has the ability to respond to changes.",
+                "Creating the product backlog."
+            ],
+            "correctAnswer": 2,
+            "explanation": "In an Agile setting, the project manager's focus includes ensuring that the team has the ability to respond to changes. The development team selects tasks, the team makes technical decisions, and the Product Owner creates the backlog.",
+            "time": 75
+        },
+        {
+            "questionText": "Why might using questionnaires and surveys be the best approach to collect requirements from 150+ stakeholders spread across geographies with limited time?",
+            "choices": [
+                "Because market research is sufficient for all requirements.",
+                "Because it allows collecting a large amount of data from many individuals in a short period.",
+                "Because similar project requirements can simply be reused.",
+                "Because one-on-one meetings are the most efficient method."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Using questionnaires and surveys allows for the collection of a large amount of data from many individuals in a short period of time, making it suitable for collecting requirements from a large, geographically dispersed stakeholder group under time constraints.",
+            "time": 75
+        },
+        {
+            "questionText": "What should the project team and project manager do after creating an activity list for a project?",
+            "choices": [
+                "Estimate each activity using the 3-point technique.",
+                "Sequence the activities in the order work will be performed.",
+                "Compress the schedule by removing activities.",
+                "Estimate each activity using the 1-point technique."
+            ],
+            "correctAnswer": 1,
+            "explanation": "After the activity list is created, the next step in creating a project schedule is to sequence the activities in the order in which the work will be performed, resulting in a network diagram. Estimation comes after sequencing.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the objectives of a quality audit?",
+            "choices": [
+                "To identify the root cause of defects.",
+                "To test product functionality.",
+                "To identify good and best practices being implemented.",
+                "To create process flowcharts."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Quality audit objectives may include identifying all good and best practices being implemented and identifying any gaps and shortcomings in the processes.",
+            "time": 75
+        },
+        {
+            "questionText": "What is considered an ideal, though not always possible, form of working for Agile teams?",
+            "choices": [
+                "Geographically distributed teams.",
+                "Outsourcing key development work.",
+                "Colocation.",
+                "Working in departmental silos."
+            ],
+            "correctAnswer": 2,
+            "explanation": "While colocation is mentioned as an ideal way of working for Agile teams, it is acknowledged that teams can be geographically distributed.",
+            "time": 75
+        },
+        {
+            "questionText": "If a project team has many defects and observes that 80% come from two specific modules, which tool should the project manager use to find the root cause?",
+            "choices": [
+                "Cause-and-effect diagrams",
+                "Scatter diagrams",
+                "Defect histogram",
+                "Affinity diagrams"
+            ],
+            "correctAnswer": 0,
+            "explanation": "To uncover the root cause of defects, the team should use a Cause-and-Effect diagram (also known as a fishbone or Ishikawa diagram). It helps identify factors leading to an effect.",
+            "time": 75
+        },
+        {
+            "questionText": "Which project role typically plays a significant part in communicating the project vision to the team and other stakeholders?",
+            "choices": [
+                "The Product Owner",
+                "The QA manager",
+                "The Project Manager",
+                "The Functional manager"
+            ],
+            "correctAnswer": 2,
+            "explanation": "The project manager leads the team and communicates the project vision to other stakeholders and beneficiaries to gain support and provide inspiration.",
+            "time": 75
+        },
+        {
+            "questionText": "In the context of project resource management planning, what do project management principles advise regarding physical resources needed later in a large project?",
+            "choices": [
+                "Order them immediately to ensure availability.",
+                "Delay planning for them until the execution phase begins.",
+                "Order resources at a very high cost if needed urgently.",
+                "Plan for their quantity and timing based on the project schedule for optimal use."
+            ],
+            "correctAnswer": 3,
+            "explanation": "Project managers should plan for physical resources, both in terms of quantity and the timing during the project when those resources are required for their optimal use, based on the project schedule. Ordering too early or at high cost is not optimal.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the areas where estimation may be applicable in projects?",
+            "choices": [
+                "Estimating team performance.",
+                "Estimating the impact of organizational culture.",
+                "Estimating effort to implement risk responses.",
+                "Estimating stakeholder satisfaction."
+            ],
+            "correctAnswer": 2,
+            "explanation": "One area where estimation may be applicable is adding effort estimates to implement or develop a risk response.",
+            "time": 75
+        },
+        {
+            "questionText": "What does the term 'Continuous delivery' mean in an Agile project context?",
+            "choices": [
+                "Integrating code frequently.",
+                "Delivering feature increments immediately to the customer.",
+                "Always learning new practices.",
+                "Copying features from existing applications."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Continuous delivery is the practice of delivering feature increments immediately to the customer. Continuous integration is about integrating code.",
+            "time": 75
+        },
+        {
+            "questionText": "What is true about Enterprise Environmental Factors (EEF)?",
+            "choices": [
+                "They are always internal to the organization.",
+                "They are always under the control of the project team.",
+                "They can originate outside of both projects and organizations.",
+                "They only impact the project level, not programs or portfolios."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Enterprise environmental factors (EEF) encompass conditions not under the project team's control and influence the project. They can originate outside of both projects and organizations and impact projects, programs, portfolios, and the organization.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a valid statement when it comes to involving the project team in project planning?",
+            "choices": [
+                "It is never necessary if the requirements are stable.",
+                "It leads to gold plating.",
+                "Their participation strengthens commitment.",
+                "It causes project fatigue."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Participation of project team members during project planning strengthens their commitment to the project.",
+            "time": 75
+        },
+        {
+            "questionText": "Why is confirming communication is understood and receiving feedback essential in project management?",
+            "choices": [
+                "It simplifies the communication process.",
+                "It ensures the message is accurately received and understood.",
+                "It reduces the need for detailed documentation.",
+                "It speeds up decision-making."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Confirming communication is understood and receiving feedback is essential because it ensures the message has been accurately received and understood, and potential misunderstandings can be addressed.",
+            "time": 75
+        },
+        {
+            "questionText": "What does a project scope statement include?",
+            "choices": [
+                "Only the project scope and deliverables.",
+                "Project scope, product scope, major deliverables, and exclusions.",
+                "Only project requirements and acceptance criteria.",
+                "Project management plans and the project schedule."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The project scope statement is the description of the scope, including both project and product scope, major project deliverables, and exclusions.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the primary characteristic that influences the level of upfront project planning needed for a project?",
+            "choices": [
+                "The team's ground rules.",
+                "The project's risk reports.",
+                "The development approach.",
+                "The quality requirements."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The characteristics of the project significantly influence planning. One major factor is the development approach; a predictive approach needs more upfront planning than an agile one.",
+            "time": 75
+        },
+        {
+            "questionText": "When managing project issues logged in an issue log, what is considered important to ensure resolution?",
+            "choices": [
+                "Adding a detailed issue description.",
+                "Assigning an issue owner.",
+                "Logging the issue in the PMIS instead.",
+                "Discussing the issue only during retrospectives."
+            ],
+            "correctAnswer": 1,
+            "explanation": "In order to manage project issues effectively, it is important to assign the issue owner, a person who needs to fix the issue, clearly so there is no ambiguity. Logging in issue logs is standard, and description is part of it.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a drawback of the '5 Whys' technique for root cause analysis?",
+            "choices": [
+                "It always identifies the true root cause.",
+                "It can lead to pursuing a single track or limited lines of inquiry.",
+                "It is suitable for identifying 80% of defects from two areas.",
+                "It requires extensive data collection."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The '5 Whys' technique may not be the most appropriate option for solving complex or critical problems because it can lead to pursuing a single track or a limited number of lines of inquiry when multiple underlying causes might exist.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one way a Project Manager can promote team performance through the application of emotional intelligence?",
+            "choices": [
+                "By strictly controlling team activities.",
+                "By fostering an environment of fear to ensure compliance.",
+                "By applying emotional intelligence when dealing with the project team.",
+                "By focusing solely on technical skills."
+            ],
+            "correctAnswer": 2,
+            "explanation": "A project manager should promote team performance through the application of emotional intelligence by applying it when dealing with the project team and project stakeholders.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the Scrum artifact used to display the details of the anticipated sequence of deliverables over time?",
+            "choices": [
+                "Sprint Backlog",
+                "Product Backlog",
+                "Product Increment",
+                "Product roadmap"
+            ],
+            "correctAnswer": 3,
+            "explanation": "A product roadmap is usually developed to display the details of the anticipated sequence of deliverables over time. Sprint backlog, product backlog, and increment are other Scrum artifacts.",
+            "time": 75
+        },
+        {
+            "questionText": "Who runs the Daily Standup in a self-organizing Agile team?",
+            "choices": [
+                "The Scrum master",
+                "The Product owner",
+                "The Agile coach",
+                "The team themselves"
+            ],
+            "correctAnswer": 3,
+            "explanation": "It is not the scrum master, product owner (PO), or the agile coach, but the team itself that should run their stand-ups. The scrum master may facilitate, but the team self-organizes and holds each other accountable.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one activity that a facilitator should NOT do during a team session?",
+            "choices": [
+                "Resolve conflicts.",
+                "Offer their own opinions or ideas.",
+                "Help the group explore their own ideas.",
+                "Provide structure and guidance."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The facilitator should not offer their own opinions or ideas during the session but rather help the group explore their own ideas and perspectives.",
+            "time": 75
+        },
+        {
+            "questionText": "When faced with communication barriers ('Noise'), what should the project team aim to avoid?",
+            "choices": [
+                "Using verbal communication.",
+                "Using non-verbal communication.",
+                "Using the interactive communication model.",
+                "Any interference that might compromise message understanding."
+            ],
+            "correctAnswer": 3,
+            "explanation": "The project team should aim to avoid noise, which includes any interference or barriers that might compromise the understanding of the message. Verbal, non-verbal, and interactive communication models are generally useful.",
+            "time": 75
+        },
+        {
+            "questionText": "Which of the following describes key personality traits and approaches beneficial for a project manager's career?",
+            "choices": [
+                "Sadistic tendencies.",
+                "A focus solely on technical skills.",
+                "Emotional intelligence, service-oriented approach, and courteous behavior.",
+                "The ability to dictate tasks to the team."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Key traits for a project manager include emotional intelligence, a service-oriented approach, and courteous behavior. These 'personality' aspects are considered significant for success in the role.",
+            "time": 75
+        },
+        {
+            "questionText": "Which concept helps manage project issues by clearly identifying the person responsible for fixing the problem?",
+            "choices": [
+                "Issue description.",
+                "Adding the issue to a parking lot.",
+                "Assigning an issue owner.",
+                "Holding a daily standup."
+            ],
+            "correctAnswer": 2,
+            "explanation": "In order to manage project issues, it is important to assign the issue owner, a person who needs to fix the issue, clearly so that there is no ambiguity.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key characteristic of T-shaped individuals that benefits an Agile team?",
+            "choices": [
+                "They strictly specialize in one area.",
+                "They can easily replace any other team member.",
+                "They have deep expertise in one area and broad knowledge in others.",
+                "They are only valuable for technical roles."
+            ],
+            "correctAnswer": 2,
+            "explanation": "T-shaped individuals have deep expertise in one area (vertical bar) and broad knowledge in other areas (horizontal bar), promoting collaboration and flexibility.",
+            "time": 75
+        },
+        {
+            "questionText": "Where is the Project Vision typically found?",
+            "choices": [
+                "Team charter.",
+                "Product backlog.",
+                "Project charter.",
+                "Product roadmap."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The project vision statement shows the direction of the project and defines success criteria. A team charter, product backlog, or product roadmap does not contain the project vision; the project charter does.",
+            "time": 75
+        },
+        {
+            "questionText": "If a project team is new to a technology stack, what is one way the project manager should empower them?",
+            "choices": [
+                "By making all key technical decisions.",
+                "By ensuring they are adequately trained.",
+                "By assigning them only simple tasks.",
+                "By bringing in external experts to do the work."
+            ],
+            "correctAnswer": 1,
+            "explanation": "If the team is entirely new to the domain/technology, the project manager's responsibility is to ensure and empower the team members by making sure they are adequately trained.",
+            "time": 75
+        },
+        {
+            "questionText": "What does 'Design for X' refer to in quality management?",
+            "choices": [
+                "A flowcharting technique.",
+                "Identifying the root cause of defects.",
+                "A structured, independent process for quality audits.",
+                "Applying technical guidelines during design to optimize specific aspects."
+            ],
+            "correctAnswer": 3,
+            "explanation": "Design for X is a set of technical guidelines applied during product design to optimize specific aspects like reliability, potentially resulting in cost reduction, quality improvement, and better performance.",
+            "time": 75
+        },
+        {
+            "questionText": "Why should a project manager focus on continually reviewing the external business environment for impacts on project scope/backlog in a project in a geopolitically violent country?",
+            "choices": [
+                "Because CPI and SPI are at 1, indicating good performance.",
+                "Because the internal organizational environment must be favorable.",
+                "Because factors external to the project can still impact project objectives.",
+                "Because risk register updates are not useful for such events."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The key point is that factors external to the project could still impact the project's objectives. In a geopolitically violent country, the project manager should focus on continually reviewing the external business environment.",
+            "time": 75
+        },
+        {
+            "questionText": "What is generally true about projects operating within an organization?",
+            "choices": [
+                "Projects can operate only as a stand-alone activity.",
+                "Projects can operate within a program or portfolio or as a stand-alone activity.",
+                "Projects can operate only within a program or portfolio.",
+                "Projects can operate only within a program or as a stand-alone activity."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Projects can operate within a program (multiple related projects), within a portfolio (projects, programs, operations managed together), or as a stand-alone activity.",
+            "time": 75
+        },
+        {
+            "questionText": "In a project with unclear requirements and lack of team consensus, what kind of leadership style is recommended to create clarity?",
+            "choices": [
+                "Participative",
+                "Democratic",
+                "Directive",
+                "Laissez-faire"
+            ],
+            "correctAnswer": 2,
+            "explanation": "In the moment of chaos and lack of clarity, Directive action can create more clarity.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one key concept related to the management of project artifacts?",
+            "choices": [
+                "Sharing information only with key stakeholders.",
+                "Keeping project information up to date and accessible to all stakeholders.",
+                "Creating project artifacts only during the planning phase.",
+                "Minimizing the number of project artifacts."
+            ],
+            "correctAnswer": 1,
+            "explanation": "One key concept is validating that project information (artifacts) is kept up to date (e.g., using version control) and accessible to all stakeholders.",
+            "time": 75
+        },
+        {
+            "questionText": "How does a servant leader help team members grow as professionals?",
+            "choices": [
+                "By providing them with strict deadlines and consequences.",
+                "By making all important decisions for them.",
+                "By creating an atmosphere of an open and safe environment and working on their development.",
+                "By limiting their interaction with other teams."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The servant leader works on the development and growth of individual team members and creates an atmosphere of an open and safe environment, encouraging exploration of new ways to approach work.",
+            "time": 75
+        },
+        {
+            "questionText": "What practice from Extreme Programming involves all team members working together on one item?",
+            "choices": [
+                "Pair Programming",
+                "Test-Driven Development",
+                "Mobbing",
+                "Refactoring"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Mobbing is a software development approach where the entire team works on the same story or task at the same time, often associated with Extreme Programming practices.",
+            "time": 75
+        },
+        {
+            "questionText": "Which type of project management method is appropriate when project requirements are fixed and stable and don't need multiple deliveries?",
+            "choices": [
+                "Iterative",
+                "Agile",
+                "Incremental",
+                "Predictive"
+            ],
+            "correctAnswer": 3,
+            "explanation": "Based on the characteristics provided (fixed/stable requirements, no multiple deliveries), a Predictive (waterfall) project methodology/method is appropriate. Agile methods are better for uncertainty and changing requirements.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one key benefit of having T-shaped skills in an Agile team?",
+            "choices": [
+                "Eliminates the need for specialized roles.",
+                "Increases handoffs between team members.",
+                "Helps reduce bottlenecks by allowing members to assist in areas outside their deep expertise.",
+                "Restricts team members to only one type of task."
+            ],
+            "correctAnswer": 2,
+            "explanation": "T-shaped, generalized specialists can help reduce bottlenecks by taking up work from other team members due to their broad knowledge in areas outside their deep expertise.",
+            "time": 75
+        },
+        {
+            "questionText": "In a situation where a junior team member suggests a valid change to a product component during the execution phase, what should the team do?",
+            "choices": [
+                "Reject the change because it was suggested by a junior member.",
+                "Approve the change immediately to keep motivation high.",
+                "Reject the change because it will impact project baselines.",
+                "Follow the project change control process."
+            ],
+            "correctAnswer": 3,
+            "explanation": "Changes can be requested by any project stakeholders, including the project team. The team should follow the project change control process and, based on the review outcome, approve or reject the changes.",
+            "time": 75
+        },
+        {
+            "questionText": "What should a project team prioritize when identifying risks for a project?",
+            "choices": [
+                "Only negative risks during the planning phase.",
+                "Both positive and negative risks throughout the project.",
+                "Only positive risks during the execution phase.",
+                "Risks should only be identified by the project manager."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The project team (and PM) should identify both positive and negative risks throughout the project lifecycle.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one crucial responsibility of the Scrum Master related to coaching the development team?",
+            "choices": [
+                "Coaching them on how to negotiate scope changes.",
+                "Coaching them on identifying project stakeholders.",
+                "Coaching them on correctly using the Scrum framework, events, and artifacts.",
+                "Coaching them on creating the project budget."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Another key responsibility of the Scrum Master, in addition to removing obstacles, is to coach the development team on the Scrum framework and ensure correct use of its events and artifacts.",
+            "time": 75
+        },
+        {
+            "questionText": "What does 'Pervasive testing' mean in an Agile context?",
+            "choices": [
+                "Testing done only at the end of the project.",
+                "Testing performed throughout the development lifecycle.",
+                "Testing performed only by a dedicated testing team.",
+                "Testing done only on specific modules."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Pervasive testing, such as ATDD or TDD, is a recommended practice in agile projects, implying testing is performed throughout the development lifecycle.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the purpose of providing detailed explanations for practice exam questions?",
+            "choices": [
+                "To simply provide the correct answer.",
+                "To make the tests longer.",
+                "To clarify why the answer is right and help understand underlying concepts.",
+                "To trick the test taker with irrelevant information."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Detailed explanations not only provide the correct answer but also clarify why it's the right choice, helping the user understand the underlying concepts and principles.",
+            "time": 75
+        },
+        {
+            "questionText": "When a customer support team needs to communicate feedback about a product issue to the project team but doesn't know who to contact, what is missing in this project?",
+            "choices": [
+                "Risk management plan.",
+                "Project governance.",
+                "Scope management.",
+                "Quality management plan."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The scenario describes a lack of clear escalation paths. This indicates missing project governance, which defines how the project operates and how information flows.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the formula mentioned for calculating the number of potential communication channels on a project?",
+            "choices": [
+                "n * (n + 1) / 2",
+                "n * (n - 1)",
+                "n * (n - 1) / 2",
+                "n * n"
+            ],
+            "correctAnswer": 2,
+            "explanation": "The formula to calculate the number of potential communication channels is n * (n - 1) / 2, where n is the number of stakeholders.",
+            "time": 75
+        },
+        {
+            "questionText": "What should a project manager use to track the availability of a physical resource like a projector?",
+            "choices": [
+                "Activity list",
+                "Stakeholder register",
+                "Resource calendar",
+                "Risk register"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Physical resources are tracked using project artifacts like a Resource calendar, which specifies when and for how long a resource will be available.",
+            "time": 75
+        },
+        {
+            "questionText": "In a predictive project where requirements are stable, how is involving the project team in planning generally viewed?",
+            "choices": [
+                "As a waste of time.",
+                "As detrimental to project progress.",
+                "As strengthening their commitment.",
+                "As causing gold plating."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Even in a traditional/waterfall approach, participation of project team members during project planning strengthens their commitment to the project.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one characteristic of Organizational Process Assets (OPA)?",
+            "choices": [
+                "They originate only outside the organization.",
+                "They are not under the control of the project team.",
+                "They include plans, processes, policies specific to the performing organization.",
+                "They are the same as Enterprise Environmental Factors (EEF)."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Organizational process assets (OPA) are internal to the organization and include plans, processes, policies, procedures, and a knowledge base specific to the performing organization. EEF can originate outside and are not under the team's control.",
+            "time": 75
+        },
+        {
+            "questionText": "What does the term 'program' refer to in project management?",
+            "choices": [
+                "A single, singular endeavor.",
+                "Operations managed as a group to achieve objectives.",
+                "Multiple related projects managed in a coordinated fashion.",
+                "A group of unrelated projects and operations."
+            ],
+            "correctAnswer": 2,
+            "explanation": "A program encompasses multiple projects, typically related and managed and delivered as a single package to achieve benefits not available when managing projects individually. A project is singular.",
+            "time": 75
+        },
+        {
+            "questionText": "Why is tailoring an Agile framework important for a team?",
+            "choices": [
+                "Because the frameworks come pre-customized for each team.",
+                "To make the framework less flexible.",
+                "To suit their project needs and deliver business value.",
+                "To eliminate the need for any framework."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Each team can and should customize an Agile framework and tailor it as per their needs or the needs of the project in order to deliver the business value. Frameworks are NOT pre-customized.",
+            "time": 75
+        },
+        {
+            "questionText": "Which tool or technique is recommended for a project team to categorize risks?",
+            "choices": [
+                "Work Breakdown Structure (WBS)",
+                "Risk thresholds",
+                "Risk management plan",
+                "Risk Breakdown Structure (RBS)"
+            ],
+            "correctAnswer": 3,
+            "explanation": "The Risk Breakdown Structure (RBS) is a tool that can be used by the project team for risk categorization.",
+            "time": 75
+        },
+        {
+            "questionText": "After identifying 500+ risks, what is the next logical step for the project team regarding risk management?",
+            "choices": [
+                "Develop a risk response plan for all risks.",
+                "Perform a qualitative risk analysis and prioritize the risks.",
+                "Perform a quantitative risk analysis and prioritize the risks.",
+                "Implement risk responses for all risks."
+            ],
+            "correctAnswer": 1,
+            "explanation": "After identifying risks, the next step is to prioritize them. This is typically done by performing a qualitative risk analysis, often using a probability and impact matrix. Quantitative analysis is an optional step after qualitative. Responses are developed/implemented later.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the main purpose of the Project Vision statement?",
+            "choices": [
+                "To list all project deliverables.",
+                "To show the direction of the project and define success criteria.",
+                "To document the project budget and schedule.",
+                "To assign roles and responsibilities."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The purpose of a project vision statement is to show the direction of the project and define the criteria for success.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one way a Project Manager can help an Agile team respond to changes?",
+            "choices": [
+                "By strictly controlling the project scope.",
+                "By limiting the team's ability to make decisions.",
+                "By ensuring the team has the ability to respond to changes.",
+                "By delaying all changes until the end of the project."
+            ],
+            "correctAnswer": 2,
+            "explanation": "One of the focuses of an Agile project manager in an Agile project setting should be on ensuring that the team has the ability to respond to changes.",
+            "time": 75
+        },
+        {
+            "questionText": "In a project where the team is new to the domain, what is a critical step for the project manager to ensure team success?",
+            "choices": [
+                "Outsource the challenging work.",
+                "Provide adequate training in the new domain.",
+                "Assign the most experienced team members to critical tasks.",
+                "Minimize communication to avoid confusion."
+            ],
+            "correctAnswer": 1,
+            "explanation": "When a team is new to a domain, it is the responsibility of the project manager to ensure they are adequately trained before commencing work.",
+            "time": 75
+        },
+        {
+            "questionText": "When using the linear communication model, what is a key characteristic of the receiver?",
+            "choices": [
+                "The receiver provides immediate feedback.",
+                "The receiver decodes the message.",
+                "The receiver encodes the message.",
+                "The receiver interrupts the sender."
+            ],
+            "correctAnswer": 1,
+            "explanation": "In linear communication, the sender encodes the message, and the receiver decodes the message, but doesn't respond.",
+            "time": 75
+        },
+        {
+            "questionText": "What does 'Colocation' refer to in project management, particularly in Agile contexts?",
+            "choices": [
+                "Having team members work remotely.",
+                "Having team members work in different buildings.",
+                "Having the project team work together in the same physical location.",
+                "Using a shared online workspace."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Colocation is an ideal way of working for Agile teams, meaning having the project team work together in the same physical location.",
+            "time": 75
+        },
+        {
+            "questionText": "How should project risks be prioritized?",
+            "choices": [
+                "Based only on their likelihood.",
+                "Based only on their impact.",
+                "Based on both their likelihood and impact.",
+                "Based on the project manager's discretion."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The project risks should be prioritized based on both their likelihood and impact. This is part of qualitative risk analysis.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a significant drawback of trying to bring too many changes in the shortest possible time in an organization?",
+            "choices": [
+                "It ensures maximum efficiency.",
+                "It leads to change fatigue and resistance.",
+                "It guarantees project success.",
+                "It simplifies project management."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Attempting to bring in too many changes in the shortest possible time can lead to change fatigue and may also lead to resistance to these changes.",
+            "time": 75
+        },
+        {
+            "questionText": "In the context of Agile, what does 'Velocity' primarily help a team forecast?",
+            "choices": [
+                "The quality of deliverables.",
+                "The project budget variance.",
+                "When the remaining work will be completed.",
+                "Individual team member performance."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Once a reliable velocity (average story points completed per iteration) is established, the team can use it to predict how much longer the project will take, i.e., when the remaining stories/work will be completed.",
+            "time": 75
+        },
+        {
+            "questionText": "Which Agile practice involves developers frequently integrating their work and validating it with others?",
+            "choices": [
+                "Continuous delivery",
+                "Continuous integration",
+                "Continuous learning",
+                "Mobbing"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Continuous integration is a practice in which each team member's work products are frequently integrated and validated with one another.",
+            "time": 75
+        },
+        {
+            "questionText": "Why is emotional intelligence important for project managers?",
+            "choices": [
+                "It is an optional skill that doesn't impact project success.",
+                "Many researchers have shown it is a significant factor in project success.",
+                "It helps the PM enforce authority over the team.",
+                "It is only useful in traditional projects."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Many researchers have shown that applying emotional intelligence when dealing with the project team and project stakeholders is a significant factor in determining a project's success or failure.",
+            "time": 75
+        },
+        {
+            "questionText": "In a predictive project setting, what is the definition of a project scope statement?",
+            "choices": [
+                "A document outlining stakeholder expectations.",
+                "The description of project and product scope, deliverables, and exclusions.",
+                "A list of all potential project risks.",
+                "The detailed project schedule."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The project scope statement is the description of the project scope, product scope, major project deliverables, and exclusions.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one way for a project team to ensure they are on the right path during the Review step of the OSCAR coaching model?",
+            "choices": [
+                "The project manager dictates the next steps.",
+                "The project manager discusses with team members how they will review progress.",
+                "The team member independently reviews their own progress.",
+                "Progress is reviewed only at the end of the project."
+            ],
+            "correctAnswer": 1,
+            "explanation": "In the Review step of the OSCAR model, the project manager can discuss with team members how they will review progress and ensure they are on the right path.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a recommended focus for a project team during retrospectives to effectively improve their teamwork processes?",
+            "choices": [
+                "Discussing individual performance issues.",
+                "Limiting the number of improvement items they commit to work on.",
+                "Identifying as many issues as possible.",
+                "Assigning blame for problems."
+            ],
+            "correctAnswer": 1,
+            "explanation": "To improve teamwork processes, a recommended practice is to limit the number of retrospective work items decided upon (e.g., 2 or 3) for each retro in a focused manner to increase the likelihood of completing them.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the responsibility of a Project Manager in helping the team plan and manage project scope in Agile?",
+            "choices": [
+                "Making all decisions about requirements.",
+                "Determining and prioritizing all requirements themselves.",
+                "Assisting the team in determining and prioritizing requirements.",
+                "Limiting scope changes."
+            ],
+            "correctAnswer": 2,
+            "explanation": "A project manager should be able to assist the team in planning and managing the project scope by helping them determine and prioritize requirements.",
+            "time": 75
+        },
+        {
+            "questionText": "In the context of physical resource planning, what factor is crucial to consider beyond just the quantity needed?",
+            "choices": [
+                "The brand of the resource.",
+                "The cost per unit.",
+                "The timing during the project when those resources are required.",
+                "Whether the resource is acquired internally or externally."
+            ],
+            "correctAnswer": 2,
+            "explanation": "It is equally important to know 'when' resources are needed. Project managers should plan for project resources, both in terms of quantity and the timing during the project when those resources are required for their optimal use, based on the schedule.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one common issue that occurs when daily standups run longer than 15 minutes?",
+            "choices": [
+                "Team members become bored.",
+                "The team starts discussing resolving problems.",
+                "The Product Owner dominates the meeting.",
+                "Impediments are not identified."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Daily standups often take longer than 15 minutes when the development team starts discussing resolving problems during the standup. This problem-solving should take place in a separate meeting after the standup.",
+            "time": 75
+        },
+        {
+            "questionText": "Which work items should generally be prioritized in a project?",
+            "choices": [
+                "Repetitive work items.",
+                "Work items with unambiguous understanding.",
+                "Work items that are risky, novel, or unique.",
+                "Work items that are easiest to complete."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Generally speaking, work that is unique, novel, or carries more risk should be prioritized. This is because such tasks entail more ambiguity that should be reduced early in the project. Repetitive or unambiguous work is less risky and can be scheduled later.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the main goal of project procurement processes?",
+            "choices": [
+                "To select the cheapest vendor.",
+                "To obtain goods, supplies, or services required for project completion.",
+                "To manage project risks.",
+                "To define the project scope statement."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Project procurement is the process of obtaining goods, supplies, services which are required for the successful completion of the project.",
+            "time": 75
+        },
+        {
+            "questionText": "What information regarding resources is typically included in the Project Charter?",
+            "choices": [
+                "A detailed resource management plan.",
+                "A list of pre-approved financial and other resources.",
+                "The project team's skill assessment.",
+                "Resource calendars."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The project charter usually contains a list of pre-approved financial and other resources that project managers can use during the planning phase.",
+            "time": 75
+        },
+        {
+            "questionText": "Which of the following are the three fundamental components that define the Scrum framework?",
+            "choices": [
+                "People, Process, Technology",
+                "Roles, Events, Artifacts",
+                "Planning, Execution, Monitoring",
+                "Product Owner, Scrum Master, Stakeholders"
+            ],
+            "correctAnswer": 1,
+            "explanation": "The Scrum framework is defined by its three core components: Roles (Product Owner, Scrum Master, Development Team), Events (like the Sprint, Daily Standup, etc.), and Artifacts (like the Product Backlog, Sprint Backlog, etc.).",
+            "time": 75
+        },
+        {
+            "questionText": "What shared understanding is provided by the project scope statement to stakeholders?",
+            "choices": [
+                "Project budget.",
+                "Project schedule.",
+                "Project scope.",
+                "Project team roles."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Project scope statements provide a common understanding of the project scope among project stakeholders.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a potential cause of a high defect rate in an Agile team?",
+            "choices": [
+                "Effective pair work.",
+                "Strong collective code ownership.",
+                "Clear Definition of Done.",
+                "Loose Definition of Done."
+            ],
+            "correctAnswer": 3,
+            "explanation": "A loose Definition of Done is a possible cause of a high defect rate, as it can lead to confusion about completion criteria. The other options are recommended practices to improve quality.",
+            "time": 75
+        },
+        {
+            "questionText": "In a Servant Leadership model, who does the leader primarily serve?",
+            "choices": [
+                "Themselves.",
+                "The project sponsor.",
+                "The project team and team members.",
+                "External stakeholders."
+            ],
+            "correctAnswer": 2,
+            "explanation": "By choosing servant leadership, the leader serves the project team and team members. When leaders shift their mindset and serve the team first, it benefits the team members immensely.",
+            "time": 75
+        },
+        {
+            "questionText": "When resolving conflict between team members, which skill is a project manager most likely to use?",
+            "choices": [
+                "Technical expertise",
+                "Financial analysis",
+                "Emotional intelligence",
+                "Contract negotiation"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Applying emotional intelligence is a significant factor in project success and is useful for resolving conflicts between team members.",
+            "time": 75
+        },
+        {
+            "questionText": "What are the three main components of the Scrum framework?",
+            "choices": [
+                "People, Process, Technology",
+                "Roles, Events, Artifacts",
+                "Planning, Execution, Monitoring",
+                "Product Owner, Scrum Master, Stakeholders"
+            ],
+            "correctAnswer": 1,
+            "explanation": "The Scrum framework is comprised of three main components: Roles (e.g., Product Owner), Events (e.g., Daily Standup), and Artifacts (e.g., Product Backlog).",
+            "time": 75
+        },
+        {
+            "questionText": "What is the purpose of holding feedback sessions, conducting surveys, and arranging product demos?",
+            "choices": [
+                "To collect payments from the customer.",
+                "To confirm communication is understood and receive feedback.",
+                "To document project risks.",
+                "To define the project scope."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Holding feedback sessions, conducting surveys, and arranging product demos are practices the team should use to confirm communication is understood and feedback is received.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a potential drawback of multitasking for a project team?",
+            "choices": [
+                "It increases team focus.",
+                "It slows down the team and impacts predictability.",
+                "It leads to clearer communication.",
+                "It simplifies task management."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Switching between tasks (multitasking) can slow down the team and is discouraged as it impacts the team's ability to predict delivery and deliver consistently.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the '5 Cs' of written communication related to clarity?",
+            "choices": [
+                "Complex vocabulary.",
+                "Clear purpose directed to the needs of the reader.",
+                "Concise expressions.",
+                "Comprehensive details."
+            ],
+            "correctAnswer": 1,
+            "explanation": "One of the 5 C's is 'Clear purpose and expressions directed to the needs of the reader'. Concise expressions are also a C, but this question specifically asks about clarity directed at the reader.",
+            "time": 75
+        },
+        {
+            "questionText": "In Agile, how does having team members with T-shaped skills benefit the team's knowledge range?",
+            "choices": [
+                "It narrows the team's expertise.",
+                "It provides a broader range of knowledge and experience to draw upon.",
+                "It limits team members to their primary specialization.",
+                "It reduces the need for team collaboration."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Having a team of individuals with T-shaped skills means that the team has a broader range of knowledge and experience to draw upon, which can lead to more innovative and effective solutions.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a critical factor for a project manager to ensure team members are empowered in a new domain?",
+            "choices": [
+                "Providing detailed instructions for every task.",
+                "Allowing them to learn solely through trial and error.",
+                "Ensuring they receive adequate training.",
+                "Limiting access to external resources."
+            ],
+            "correctAnswer": 2,
+            "explanation": "It is the responsibility of the project manager to ensure and empower the team members in a new domain by making sure they are adequately trained.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a characteristic of the Interactive communication model?",
+            "choices": [
+                "It is one-way communication.",
+                "It does not require feedback.",
+                "It recognizes the need to ensure messages have been understood.",
+                "It minimizes miscommunication by being one-way."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The interactive communication model is the model that recognizes the need to ensure that messages have been understood. Linear communication is one-way with no feedback.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the primary goal of a portfolio manager?",
+            "choices": [
+                "To deliver individual projects within time and budget.",
+                "To manage multiple related projects as a program.",
+                "To ensure the right projects are selected for their specific portfolio.",
+                "To oversee daily operations."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The primary responsibility of a portfolio manager is to ensure that the right projects are selected for their specific portfolio, ensuring alignment with long-term goals.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one example of 'Noise' in communication?",
+            "choices": [
+                "A well-written email.",
+                "A clear face-to-face conversation.",
+                "Lack of appropriate knowledge or lack of interest from the receiver.",
+                "Using concise expressions."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Examples of noise can include distraction of the receiver, variation in the receiver's perception, lack of appropriate knowledge, or lack of interest.",
+            "time": 75
+        },
+        {
+            "questionText": "In an Agile team using Scrum, if the team lacks acceptance criteria for user stories in the current sprint, who is responsible for ensuring they are created?",
+            "choices": [
+                "The Scrum Master coaches the team on how to write them.",
+                "The Development Team defines them.",
+                "The Product Owner is responsible.",
+                "The project manager creates them."
+            ],
+            "correctAnswer": 2,
+            "explanation": "In Scrum, the Product Owner is responsible for developing user stories, and clear acceptance criteria are a part of a well-written user story. The Product Owner must ensure they have clear acceptance criteria.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the first step in the OSCAR coaching model?",
+            "choices": [
+                "Situation",
+                "Objective",
+                "Choices",
+                "Action"
+            ],
+            "correctAnswer": 1,
+            "explanation": "The first step in the OSCAR model is Objective: determine what the team member aims for or wants to achieve.",
+            "time": 75
+        },
+        {
+            "questionText": "Why should a project manager plan for the timing of resource availability?",
+            "choices": [
+                "To order all resources at the project start.",
+                "To ensure uninterrupted and exclusive access for the team.",
+                "To avoid planning for resources entirely.",
+                "To delay resource acquisition as long as possible."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Planning for the timing of resources, as documented in the resource calendar, ensures that resources like physical equipment (e.g., projector) are available when needed, allowing the team uninterrupted and exclusive access. Planning also involves optimal timing, avoiding ordering too early or paying high costs for urgent needs.",
+            "time": 75
+        },
+        {
+            "questionText": "What should a project manager avoid when managing changes in an organization?",
+            "choices": [
+                "Using a systematic approach to stakeholder engagement.",
+                "Assessing organizational culture.",
+                "Attempting to bring too many changes in the shortest possible time.",
+                "Evaluating the impact of organizational change on the project."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The thing to avoid is attempting to bring in too many changes in the shortest possible time, as it can lead to change fatigue and resistance.",
+            "time": 75
+        },
+        {
+            "questionText": "What is true about Tacit Knowledge?",
+            "choices": [
+                "It is formal knowledge gained through codified frameworks.",
+                "It is informal knowledge gained through joint activities.",
+                "It can be easily shared via documentation.",
+                "It is less valuable than explicit knowledge."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Tacit Knowledge is described as informal and gained through joint activities among individuals, unlike Explicit Knowledge which is formal and gained through codified frameworks. Tacit knowledge is difficult to document.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key characteristic of Agile projects regarding team members and tasks?",
+            "choices": [
+                "Tasks are assigned by senior leadership.",
+                "The project manager assigns tasks.",
+                "The Product Owner assigns tasks.",
+                "Team members decide who does what."
+            ],
+            "correctAnswer": 3,
+            "explanation": "One of the things to keep in mind when answering questions related to agile is that in Agile, the project team members decide which task will be done by whom.",
+            "time": 75
+        },
+        {
+            "questionText": "What should a project manager do first in the OSCAR coaching model when trying to help a team member?",
+            "choices": [
+                "Discuss choices.",
+                "Identify the current situation.",
+                "Determine the goal the team member wants to achieve.",
+                "Agree on action steps."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The very first thing a project manager can do in this situation, based on the OSCAR model, is to determine what the team member is aiming for or what goal the team member wants to achieve (Objective).",
+            "time": 75
+        },
+        {
+            "questionText": "What is the purpose of a Resource calendar?",
+            "choices": [
+                "To list all required project activities.",
+                "To track project costs.",
+                "To specify when and for how long resources will be available.",
+                "To assign responsibilities to team members."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The Resource calendar specifies when and for how long a certain resource, such as an LED Projector (physical) or a team member (human), will be available during the project.",
+            "time": 75
+        },
+        {
+            "questionText": "Why is multitasking considered detrimental to team productivity?",
+            "choices": [
+                "It increases team efficiency.",
+                "It improves predictability of delivery.",
+                "It reduces throughput and impacts consistent delivery.",
+                "It simplifies communication."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Multitasking reduces the throughput of the team's work and impacts the team's ability to predict delivery and deliver consistently. Switching between tasks can slow down the team.",
+            "time": 75
+        },
+        {
+            "questionText": "In a complex project scenario, why is Face-to-face communication recommended?",
+            "choices": [
+                "It is the cheapest option.",
+                "It minimizes the need for documentation.",
+                "It enables rapid exchange of a broad spectrum of information (richness).",
+                "It is the fastest way to convey simple facts."
+            ],
+            "correctAnswer": 2,
+            "explanation": "For complex issues, we want the 'richness' in communication which enables the broad spectrum of information to be rapidly exchanged. Face to face communication is an example of such rich communication and is the best choice for resolving complex issues.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one area of focus for an Agile project manager in an Agile project setting?",
+            "choices": [
+                "Directly managing the development team's tasks.",
+                "Building a collaborative decision-making environment.",
+                "Selecting work items from the backlog.",
+                "Making all key decisions for the team."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The focus of an Agile project manager in an Agile setting should be on building a collaborative decision-making environment and ensuring the team can respond to changes. The development team selects work items.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a primary role of a Scrum Master regarding impediments?",
+            "choices": [
+                "To log impediments and inform the Product Owner.",
+                "To remove obstacles or impediments faced by the project team.",
+                "To prioritize impediments with the team.",
+                "To ensure impediments are documented in the risk register."
+            ],
+            "correctAnswer": 1,
+            "explanation": "One of the responsibilities of the Scrum Master is to remove obstacles or impediments faced by the project team during the sprint.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the primary characteristic of a program?",
+            "choices": [
+                "A temporary endeavor.",
+                "A collection of unrelated projects.",
+                "Multiple related projects managed in a coordinated way for benefits.",
+                "Ongoing operational work."
+            ],
+            "correctAnswer": 2,
+            "explanation": "A program refers to multiple projects, and in most cases, these multiple projects are related and managed and delivered as a single package because coordinated management yields benefits not available from individual management.",
+            "time": 75
+        },
+        {
+            "questionText": "What practice involves the entire team working together on a single user story at the same time?",
+            "choices": [
+                "Pairing",
+                "Swarming",
+                "Mobbing",
+                "Cross-functional teaming"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Mobbing is a software development approach where the entire team works on the same story or task at the same time. Swarming is a related concept but mobbing is a more specific term for this practice.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one key benefit of Continuous integration?",
+            "choices": [
+                "Delivering features immediately to the customer.",
+                "Reducing issues with integrated code.",
+                "Improving team communication speed.",
+                "Ensuring the team learns new practices."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Continuous integration is a practice where work products are frequently integrated and validated, helping to avoid issues with integrated code. Continuous delivery is about delivering features to the customer.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key benefit of servant leadership for a project team?",
+            "choices": [
+                "It gives the leader full control.",
+                "It minimizes external dependencies.",
+                "It helps team members grow and fosters a safe environment.",
+                "It ensures projects are completed faster."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The servant leader serves the team, works on their development and growth, and creates an atmosphere of an open and safe environment.",
+            "time": 75
+        },
+        {
+            "questionText": "What does the term 'impediment' refer to in Scrum?",
+            "choices": [
+                "A completed task.",
+                "A project deliverable.",
+                "An obstacle blocking the team's progress.",
+                "A risk that has materialized."
+            ],
+            "correctAnswer": 2,
+            "explanation": "In the Daily Standup, team members discuss if there is anything blocking their progress. The Scrum Master is responsible for removing these obstacles or impediments.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the core idea behind the Crystal family of methodologies?",
+            "choices": [
+                "They are strictly prescriptive.",
+                "Project selection and methodological rigor should be based on team size and criticality.",
+                "They are only suitable for single, small, co-located teams.",
+                "They emphasize technical practices over people and interactions."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The main idea behind Crystal is that project selection and methodological rigor should be based on the size of the team and the project's level of criticality. Crystal is a family of methodologies designed to scale based on these factors.",
+            "time": 75
+        },
+        {
+            "questionText": "How are different project management methods typically assessed in modern project management certifications?",
+            "choices": [
+                "Only predictive methods are assessed.",
+                "Only agile and hybrid methods are assessed.",
+                "Predictive, agile, and hybrid approaches are integrated across all knowledge domains.",
+                "Only the method used by the test taker's organization is relevant."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Modern project management certifications, such as the PMP, assess a candidate's knowledge across a spectrum of approaches. Approximately half of the examination may assess predictive methods, while the other half evaluates agile or hybrid approaches, integrated across all domain areas.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key focus for an Agile project manager working with a new team?",
+            "choices": [
+                "Ensuring the team strictly follows a prescriptive framework.",
+                "Building a collaborative decision-making environment.",
+                "Assigning tasks based on individual skills.",
+                "Limiting the team's interaction with stakeholders."
+            ],
+            "correctAnswer": 1,
+            "explanation": "For an Agile project manager, a key focus is on building a collaborative decision-making environment. Agile frameworks are meant to be tailored, not strictly followed, and the team self-assigns tasks.",
+            "time": 75
+        },
+        {
+            "questionText": "What distinguishes T-shaped skills from I-shaped skills?",
+            "choices": [
+                "I-shaped individuals have broad knowledge; T-shaped have deep expertise.",
+                "T-shaped individuals are less valuable to a team.",
+                "T-shaped individuals have deep expertise in one area and broad knowledge in others.",
+                "I-shaped skills are preferred in Agile."
+            ],
+            "correctAnswer": 2,
+            "explanation": "In Agile, T-shaped skills mean deep expertise in one area (the vertical bar of the 'T') and broad knowledge in others (the horizontal bar). Individuals with T-shaped skills offer more value than those with only deep specialization (I-shaped).",
+            "time": 75
+        },
+        {
+            "questionText": "What is one way to confirm communication is understood and receive feedback, besides feedback sessions and surveys?",
+            "choices": [
+                "Sending a follow-up email.",
+                "Conducting a formal audit.",
+                "Arranging product demos.",
+                "Updating the issue log."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Practices to confirm communication is understood and receive feedback include holding feedback sessions, conducting surveys, and arranging product demos.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one reason why a loose Definition of Done can negatively impact a project?",
+            "choices": [
+                "It increases team autonomy.",
+                "It clearly defines completion criteria.",
+                "It can lead to confusion and rework.",
+                "It speeds up delivery by reducing checks."
+            ],
+            "correctAnswer": 2,
+            "explanation": "If the Definition of Done is loose, it can lead to confusion, misunderstandings, and delays, resulting in rework because team members may have different interpretations of what 'completed' means.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a typical responsibility of a Project Manager regarding pre-approved resources listed in the charter?",
+            "choices": [
+                "To ignore them as they are already handled.",
+                "To plan for them as if they were not pre-approved.",
+                "To adjust resource planning based on the knowledge of pre-approved resources.",
+                "To request additional pre-approved resources."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The Project Charter usually contains a list of pre-approved resources. Project managers can use this information during planning and adjust their resource planning based on this knowledge.",
+            "time": 75
+        },
+        {
+            "questionText": "While a self-organizing Agile team is responsible for running its own Daily Standup, what is a supporting role the Scrum Master often performs for this event?",
+            "choices": [
+                "Deciding what each member will work on",
+                "Taking detailed notes for management",
+                "Facilitating the meeting to ensure it happens and stays on track",
+                "Reporting the team's progress to stakeholders"
+            ],
+            "correctAnswer": 2,
+            "explanation": "The Daily Standup is a meeting for the development team, run by the team. The Scrum Master's role is to act as a servant leader, which includes facilitating the event to ensure it takes place and remains a brief, focused synchronization meeting.",
+            "time": 75
+        },
+        {
+            "questionText": "What should a project team focus on to support value realization?",
+            "choices": [
+                "Meeting schedule deadlines.",
+                "Staying within the approved budget.",
+                "Delivering the intended outcome.",
+                "Producing specific deliverables."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The project team should focus on the intended outcome of the project to support value realization, as deliverables and outcomes are different concepts.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one aspect that is NOT included in the project vision statement?",
+            "choices": [
+                "Direction of the project.",
+                "Criteria for success.",
+                "Detailed budget information.",
+                "Project goals and objectives."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The project vision statement shows the direction of the project, defines success criteria, and reflects goals and objectives. Detailed budget information is not typically included.",
+            "time": 75
+        },
+        {
+            "questionText": "Why is it important for a project manager to be familiar with the procurement process?",
+            "choices": [
+                "To become a certified procurement specialist.",
+                "To make intelligent decisions regarding contracts and contractual relationships.",
+                "To negotiate the best possible price for all goods and services.",
+                "To handle all legal obligations personally."
+            ],
+            "correctAnswer": 1,
+            "explanation": "While not required to be procurement law experts, project managers should be familiar enough with the procurement process to make intelligent decisions regarding the contracts and the contractual relationship.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a responsibility of the Product Owner regarding the product backlog?",
+            "choices": [
+                "To assign backlog items to the team.",
+                "To create and refine backlog items.",
+                "To estimate the effort for backlog items.",
+                "To remove impediments related to backlog items."
+            ],
+            "correctAnswer": 1,
+            "explanation": "In Scrum, the Product Owner is responsible for managing and optimizing the product backlog, which includes creating and refining backlog items like user stories. The development team estimates effort and selects items. The Scrum Master removes impediments.",
+            "time": 75
+        },
+        {
+            "questionText": "What kind of issues are typically discussed during the Daily Standup meeting?",
+            "choices": [
+                "Detailed technical solutions.",
+                "Impediments blocking progress.",
+                "Future project risks.",
+                "Performance reviews of team members."
+            ],
+            "correctAnswer": 1,
+            "explanation": "During the Daily Standup, one of the three questions discussed is 'Is there anything blocking your progress?' This is how impediments are uncovered. Detailed problem-solving should happen outside the standup.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the role of the Project Manager in helping an Agile team determine requirements?",
+            "choices": [
+                "To dictate all requirements.",
+                "To independently gather all requirements.",
+                "To assist the team in determining and prioritizing requirements.",
+                "To delegate requirement gathering solely to the Product Owner."
+            ],
+            "correctAnswer": 2,
+            "explanation": "A project manager should be able to assist the team in planning and managing the project scope by helping them determine and prioritize requirements.",
+            "time": 75
+        },
+        {
+            "questionText": "Why is focusing on cultural awareness important for a project manager with a geographically distributed team?",
+            "choices": [
+                "To ensure all team members follow the same processes.",
+                "To simplify technical decision-making.",
+                "Because cultural differences can influence decision-making and cause conflict.",
+                "To minimize communication overhead."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Since the team is geographically distributed, the PM should focus on cultural awareness first. Cultural differences can influence the decision-making process or the speed of work, and can cause conflict and stress.",
+            "time": 75
+        },
+        {
+            "questionText": "What does 'Codified explicit knowledge' refer to?",
+            "choices": [
+                "Informal knowledge gained through experience.",
+                "Formal knowledge gained through codified frameworks.",
+                "Knowledge that cannot be documented.",
+                "Knowledge shared only verbally."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Codified explicit knowledge is described as formal and gained through codified frameworks, and it is the type of knowledge that can be documented.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a recommended practice to overcome issues with integrated code when team members work on separate branches?",
+            "choices": [
+                "Delayed integration.",
+                "Manual code review only.",
+                "Continuous integration.",
+                "Independent testing by each developer."
+            ],
+            "correctAnswer": 2,
+            "explanation": "When team members work on separate branches and merge code, issues can arise with integration. Continuous integration, where work products are frequently integrated and validated, helps to avoid such problems.",
+            "time": 75
+        },
+        {
+            "questionText": "What does the acronym VUCA, used to describe project conditions, stand for?",
+            "choices": [
+                "Velocity, Understanding, Certainty, Adaptability",
+                "Visibility, Utility, Complexity, Agility",
+                "Volatility, Uncertainty, Complexity, Ambiguity",
+                "Value, Urgency, Cost, Availability"
+            ],
+            "correctAnswer": 2,
+            "explanation": "VUCA stands for Volatility, Uncertainty, Complexity, and Ambiguity. It is a framework used to describe challenging and unpredictable project environments.",
+            "time": 75
+        },
+        {
+            "questionText": "Why is it important to prioritize risky work items early in a project?",
+            "choices": [
+                "To get them out of the way quickly.",
+                "To increase the project timeline.",
+                "To reduce the uncertainty associated with the project's scope before substantial investments.",
+                "Risky items should always be done last."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Work that carries more risk or is novel/unique entails significant ambiguity. Prioritizing such work early is advised because your objective should be to reduce the uncertainty associated with the project's scope at the beginning, before substantial investments are made.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the role of a project manager in the procurement process, regarding contracts?",
+            "choices": [
+                "They draft all contract legal clauses.",
+                "They make intelligent decisions regarding the contract and contractual relationship.",
+                "They are solely responsible for signing contracts.",
+                "They only identify the need for procurement, not the contract details."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The project manager should be familiar enough with the procurement process to make intelligent decisions regarding the contracts and the contractual relationship, although they don't need to be trained in procurement laws.",
+            "time": 75
+        },
+        {
+            "questionText": "How does involving team members in project planning typically affect their commitment?",
+            "choices": [
+                "It decreases commitment due to extra work.",
+                "It increases their commitment to the project.",
+                "It has no impact on their commitment.",
+                "It only impacts commitment in Agile projects."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Participation of project team members during project planning strengthens their commitment to the project.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the '5 Cs' of written communication focused on brevity?",
+            "choices": [
+                "Correct grammar.",
+                "Coherent logical flow.",
+                "Clear purpose.",
+                "Use concise expressions and eliminate excess words."
+            ],
+            "correctAnswer": 3,
+            "explanation": "One of the 5 Cs is 'Use concise expressions and eliminate excess words'. Correct grammar, coherent flow, and clear purpose are other Cs.",
+            "time": 75
+        },
+        {
+            "questionText": "When a project team is new to a specific technical domain, what is the project manager's key role in ensuring team success?",
+            "choices": [
+                "Taking over all technical tasks.",
+                "Ensuring they receive adequate training.",
+                "Strictly enforcing best practices from other domains.",
+                "Reducing the project scope to match the team's current skills."
+            ],
+            "correctAnswer": 1,
+            "explanation": "For a team new to a domain, the project manager should ensure they are adequately trained before starting project work.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a recommended practice for resolving conflict between team members caused by technical misunderstandings?",
+            "choices": [
+                "Ignoring the conflict hoping it resolves itself.",
+                "Escalating the conflict to senior management.",
+                "Applying emotional intelligence and potentially using appropriate communication channels.",
+                "Removing the conflicting team members from the project."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Applying emotional intelligence is important for resolving conflicts between team members. Appropriate communication channels, like face-to-face for complex issues, can also help.",
+            "time": 75
+        },
+        {
+            "questionText": "In Agile, what is the purpose of a Product roadmap?",
+            "choices": [
+                "To list all technical tasks for the sprint.",
+                "To track the budget spent each iteration.",
+                "To display the anticipated sequence of deliverables over time.",
+                "To document daily progress updates."
+            ],
+            "correctAnswer": 2,
+            "explanation": "A product roadmap is typically used to display the details of the anticipated sequence of deliverables over time.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a potential issue caused by multitasking in a project team?",
+            "choices": [
+                "Improved throughput.",
+                "Reduced ability to predict delivery.",
+                "Increased team focus.",
+                "Simplified workflow."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Multitasking reduces throughput and impacts the team's ability to predict delivery and deliver consistently.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key characteristic of team members in Agile projects?",
+            "choices": [
+                "They work in isolated silos.",
+                "They have only I-shaped skills.",
+                "They often have T-shaped skills.",
+                "They are assigned tasks by the project manager."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Agile development teams are often formed with T-shaped skills. They typically work collaboratively and the team decides tasks.",
+            "time": 75
+        },
+        {
+            "questionText": "In a project where the team has identified a large number of risks (e.g., 500+), what should they do after identification?",
+            "choices": [
+                "Immediately create risk response plans for all.",
+                "Implement responses for the most critical risks.",
+                "Prioritize the risks.",
+                "Document all risks in the issue log."
+            ],
+            "correctAnswer": 2,
+            "explanation": "After identifying a large number of risks, the next logical step is to prioritize which ones are worth focusing on, typically through qualitative analysis. Responses come later. Risks go in a risk register/log, not issue log.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one aspect of 'Noise' in communication?",
+            "choices": [
+                "The message being too short.",
+                "Using technical jargon.",
+                "Variation in the receiver's perception.",
+                "The use of visual aids."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Examples of Noise include variation in the receiver's perception, lack of knowledge, or lack of interest, which can compromise message understanding.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a benefit of having T-shaped skills in an Agile team regarding bottlenecks?",
+            "choices": [
+                "T-shaped individuals create bottlenecks.",
+                "T-shaped individuals help reduce bottlenecks by assisting others.",
+                "T-shaped skills eliminate the need for any specialists.",
+                "Bottlenecks are irrelevant in teams with T-shaped skills."
+            ],
+            "correctAnswer": 1,
+            "explanation": "T-shaped, generalized specialists can help reduce bottlenecks by taking up work from other team members.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the purpose of documenting identified risks in project artifacts like a risk register?",
+            "choices": [
+                "To assign responsibility for risks.",
+                "To ensure the project team has access to them during execution.",
+                "To eliminate all project risks.",
+                "To share them only with the project sponsor."
+            ],
+            "correctAnswer": 1,
+            "explanation": "It is important to document identified risks in project artifacts such as a risk register or risk logs. This ensures that the project team has access to these identified risks during project execution.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the '5 Cs' of written communication that ensures the message flows logically?",
+            "choices": [
+                "Concise expressions.",
+                "Correct grammar.",
+                "Clear purpose.",
+                "Coherent, logical flow of ideas."
+            ],
+            "correctAnswer": 3,
+            "explanation": "One of the 5 Cs is 'Coherent, logical flow of ideas'.",
+            "time": 75
+        },
+        {
+            "questionText": "When a project team decides to utilize a master services agreement (MSA) for a hybrid project with both predictive and adaptive work, where should the adaptive work details typically be placed?",
+            "choices": [
+                "In a separate contract.",
+                "Integrated directly into the main MSA clauses.",
+                "In an appendix or supplement.",
+                "They should not be documented."
+            ],
+            "correctAnswer": 2,
+            "explanation": "For hybrid projects with both predictive and adaptive work, the adaptive work can be placed in an appendix or a supplement to the Master Services Agreement (MSA). This allows changes in the adaptive scope without impacting other elements of the contract.",
+            "time": 75
+        },
+        {
+            "questionText": "For a geographically distributed Agile team where co-location is not possible, which technique helps bridge communication gaps by providing a persistent video link between locations?",
+            "choices": [
+                "Daily Standup",
+                "Fishbowl window",
+                "Retrospective",
+                "Osmotic communication"
+            ],
+            "correctAnswer": 1,
+            "explanation": "A Fishbowl window is a long-lived video conference link between two locations. It helps distributed teams gain some of the benefits of co-location by creating a virtual shared space, which can bridge communication gaps.",
+            "time": 75
+        },
+        {
+            "questionText": "In communication theory, what does the term 'Noise' refer to?",
+            "choices": [
+                "Only auditory distractions",
+                "Any interference that compromises the understanding of a message",
+                "A message that is too long",
+                "Informal communication channels"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Noise refers to any interference or barriers that might compromise the understanding of a message. This can include physical distractions, differences in perception, lack of knowledge, or cultural differences.",
+            "time": 75
+        },
+        {
+            "questionText": "In an Agile team, what is the benefit of practices like Pair work, Pervasive testing, and Collective product/code ownership?",
+            "choices": [
+                "They increase the defect rate.",
+                "They are recommended practices to improve quality.",
+                "They make the Definition of Done less important.",
+                "They increase handoffs between team members."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Pair work, pervasive testing (such as ATDD/TDD), and collective product/code ownership are all recommended practices to be adopted in Agile projects to improve quality.",
+            "time": 75
+        },
+        {
+            "questionText": "What aspect of physical resource planning considers how materials will be stored and moved to the project site?",
+            "choices": [
+                "Resource scheduling.",
+                "Cost estimation.",
+                "Logistics and storage.",
+                "Procurement process."
+            ],
+            "correctAnswer": 2,
+            "explanation": "While doing the physical resource planning, the project team has to consider factors such as the storage and movement of the physical resources to the project location.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key focus for a Project Manager in an Agile setting regarding the team?",
+            "choices": [
+                "Directly assigning tasks to team members.",
+                "Building a collaborative decision-making environment.",
+                "Performing detailed technical research.",
+                "Creating the team's development plans."
+            ],
+            "correctAnswer": 1,
+            "explanation": "In an Agile project setting, the focus of an Agile project manager should be on building a collaborative decision-making environment and ensuring the team can respond to changes. The team selects tasks and makes technical decisions.",
+            "time": 75
+        },
+        {
+            "questionText": "Which Agile methodology's selection is based on team size and project criticality?",
+            "choices": [
+                "Scrum",
+                "Extreme Programming (XP)",
+                "Kanban",
+                "Crystal"
+            ],
+            "correctAnswer": 3,
+            "explanation": "The Crystal methodology is a family of methodologies where selection is based on the size of the team and the project's level of criticality, with each methodology offering varying levels of rigor.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one key aspect of the Daily Standup that should help keep the meeting short?",
+            "choices": [
+                "Standing up during the meeting.",
+                "Inviting only essential team members.",
+                "Using a fixed agenda with detailed status updates.",
+                "Assigning action items to the Project Manager."
+            ],
+            "correctAnswer": 0,
+            "explanation": "The daily stand-up should take place with participants standing up to remind people to keep the meeting short and to the point.",
+            "time": 75
+        },
+        {
+            "questionText": "What should a project team do to overcome challenges and make progress in teamwork processes, especially after retrospectives identify issues?",
+            "choices": [
+                "Exclude certain members from retrospectives.",
+                "Focus on completing a limited number of improvement items from the retrospective.",
+                "Stop documenting retrospective items.",
+                "Spend more time identifying problems rather than solving them."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The best way for a team to show some improvement is only to decide on 2 or 3 retrospective work items for each retro in a focused manner and try to complete those work items in the upcoming iterations.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a primary responsibility of a Project Manager regarding resource planning?",
+            "choices": [
+                "To procure all necessary resources personally.",
+                "To identify the quantity and timing of resources needed.",
+                "To delegate all resource planning to the team.",
+                "To ensure resources are only acquired from external vendors."
+            ],
+            "correctAnswer": 1,
+            "explanation": "It is not only important for a project manager to know what resources are needed and in what quantity, but it is also equally important to know 'when' they are needed, based on the project schedule.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the primary goal of the 'Design for X' (DFX) set of technical guidelines in product design?",
+            "choices": [
+                "To create a universal design for all products",
+                "To optimize a specific aspect of the design, such as reliability or cost",
+                "To accelerate the design phase by skipping certain steps",
+                "To ensure the design is aesthetically pleasing above all else"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Design for X (DFX) is a set of technical guidelines applied during product design to optimize a specific aspect ('X'), such as reliability, manufacturability, or cost. This can lead to quality improvements and better performance.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one key aspect of 'Building Quality In'?",
+            "choices": [
+                "Testing deliverables as late as possible.",
+                "Ensuring quality is embedded during development.",
+                "Fixing all defects found during final inspection.",
+                "Outsourcing quality control."
+            ],
+            "correctAnswer": 1,
+            "explanation": "'Building Quality In' means ensuring that the project ensures quality is built in when deliverables are developed, rather than relying solely on testing after development.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the benefit of having T-shaped skills in an Agile team regarding handoffs?",
+            "choices": [
+                "It increases the number of handoffs.",
+                "It eliminates all handoffs.",
+                "T-shaped individuals can help reduce handoffs.",
+                "Handoffs are irrelevant with T-shaped skills."
+            ],
+            "correctAnswer": 2,
+            "explanation": "T-shaped, generalized specialists can help reduce handoffs because they are skilled in additional skills which can help reduce handoff whenever applicable.",
+            "time": 75
+        },
+        {
+            "questionText": "In a project with fixed and stable requirements, which project methodology is most appropriate?",
+            "choices": [
+                "Agile",
+                "Iterative",
+                "Predictive",
+                "Hybrid"
+            ],
+            "correctAnswer": 2,
+            "explanation": "When project requirements are fixed and stable and there is no need for multiple deliveries, a Predictive methodology is appropriate. Agile, Iterative, and Hybrid methods are better suited for situations with uncertainty or evolving requirements.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a primary reason why Agile/Scrum teams meet daily?",
+            "choices": [
+                "To receive status updates from management.",
+                "To assign new tasks for the day.",
+                "To uncover problems.",
+                "To document all completed tasks."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The primary reason why Agile/Scrum teams meet daily (in the Daily Standup) is to uncover problems or impediments.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key responsibility of a Project Manager regarding the project vision?",
+            "choices": [
+                "To create the project vision alone.",
+                "To ensure only the project sponsor knows the vision.",
+                "To play a significant role in incorporating the project vision and ensuring everyone is aware of it.",
+                "To delegate communication of the vision to the team."
+            ],
+            "correctAnswer": 2,
+            "explanation": "The Project Manager plays a significant role in incorporating the project vision and ensuring that everyone involved is aware of what the project's vision is. They also communicate it to stakeholders.",
+            "time": 75
+        },
+        {
+            "questionText": "When using the OSCAR coaching model, what step follows determining the team member's objective and current situation?",
+            "choices": [
+                "Review",
+                "Action",
+                "Choices",
+                "Outcome"
+            ],
+            "correctAnswer": 2,
+            "explanation": "The OSCAR model steps are Objective, Situation, Choices, Action, Review. After determining the Objective and Situation, the next step is Choices, where the mentor asks the team member to consider options to bridge the gap.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one benefit of servant leadership?",
+            "choices": [
+                "Increased managerial authority.",
+                "Development and growth of individual team members.",
+                "Reduced need for team collaboration.",
+                "Focus on achieving personal goals."
+            ],
+            "correctAnswer": 1,
+            "explanation": "When leaders shift their mindset and serve the team first, it benefits the team members immensely. The servant leader works on the development and growth of individual team members.",
+            "time": 75
+        },
+        {
+            "questionText": "What types of resources are tracked during project execution using artifacts like a Resource calendar?",
+            "choices": [
+                "Only human resources.",
+                "Only physical resources.",
+                "Only financial resources.",
+                "Both physical and human resources."
+            ],
+            "correctAnswer": 3,
+            "explanation": "It is important for project managers to be aware of ways resources, both physical and human, are tracked during project execution. One example is the Resource calendar.",
+            "time": 75
+        },
+        {
+            "questionText": "How can contracting be handled for a hybrid project with both predictive and adaptive elements?",
+            "choices": [
+                "Use only a fixed-price contract.",
+                "Use separate contracts for predictive and adaptive parts.",
+                "Develop an MSA with adaptive work in an appendix/supplement.",
+                "Agile methods don't use contracts, so focus on value-add delivery."
+            ],
+            "correctAnswer": 2,
+            "explanation": "When a project has elements of both predictive and adaptive work, the team can develop a Master Services Agreement (MSA) for overall engagement, with adaptive work placed in an appendix or supplement. Agile projects can have contracts.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key benefit of confirming communication is understood and receiving feedback?",
+            "choices": [
+                "It reduces the need for meetings.",
+                "It ensures the message is accurately received.",
+                "It allows the sender to control the information flow.",
+                "It eliminates all potential misunderstandings."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Confirming communication is understood and receiving feedback ensures that the message has been accurately received and understood by the recipient. While it addresses potential misunderstandings, it may not eliminate *all* of them.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one characteristic of the Daily Standup meeting?",
+            "choices": [
+                "It should last for one hour.",
+                "It should ideally occur at the same time and location every working day.",
+                "It must be attended by all stakeholders.",
+                "It is primarily for reporting status to the Project Manager."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The daily stand-up should ideally occur at the same time and location every working day. It's a 15-minute time-boxed event for the development team. It's for the team to sync, not report to the PM.",
+            "time": 75
+        },
+        {
+            "questionText": "Which tool is specifically designed to help a project team hierarchically categorize identified project risks?",
+            "choices": [
+                "Work Breakdown Structure (WBS)",
+                "Gantt Chart",
+                "Risk Breakdown Structure (RBS)",
+                "Stakeholder Register"
+            ],
+            "correctAnswer": 2,
+            "explanation": "A Risk Breakdown Structure (RBS) is a hierarchical representation of potential risk sources. It helps the project team to categorize risks and ensures a comprehensive risk identification process.",
+            "time": 75
+        },
+        {
+            "questionText": "What kind of knowledge is described as informal and gained through joint activities among individuals?",
+            "choices": [
+                "Explicit Knowledge.",
+                "Codified Knowledge.",
+                "Tacit Knowledge.",
+                "Documented Knowledge."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Tacit Knowledge is described as informal and gained through joint activities among individuals. Explicit knowledge is formal and codified.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one benefit of having T-shaped skills in an Agile team?",
+            "choices": [
+                "It limits team flexibility.",
+                "It requires more handoffs.",
+                "It promotes collaboration and flexibility.",
+                "It reduces the overall skillset of the team."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Having T-shaped skills in Agile is important because it promotes collaboration and flexibility within the team.",
+            "time": 75
+        },
+        {
+            "questionText": "When considering motivations for team members, what is a key point for a project manager to remember?",
+            "choices": [
+                "All team members are motivated by the same things.",
+                "Team members are primarily motivated by external recognition.",
+                "People are motivated by different things.",
+                "Motivation is not a factor in project performance."
+            ],
+            "correctAnswer": 2,
+            "explanation": "People perform better when they are motivated, and people are motivated by different things. Understanding these varying factors is important.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the recommended approach for handling issues that arise during a daily standup and cause it to run long?",
+            "choices": [
+                "Continue the discussion until resolved.",
+                "Defer discussion to the end-of-sprint retrospective.",
+                "Add the issue to a parking lot and discuss immediately after the standup with relevant parties.",
+                "Ignore the issue until it becomes a major problem."
+            ],
+            "correctAnswer": 2,
+            "explanation": "If issues cause the standup to run long, add the issue to a parking lot and create another meeting right after the standup with relevant parties to address the problem.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one activity that a facilitator should perform during a team meeting?",
+            "choices": [
+                "Offer their own opinions.",
+                "Make decisions for the group.",
+                "Foster Collaboration.",
+                "Dictate the agenda."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Facilitation involves activities designed to help groups work together. A facilitator should foster collaboration and encourage participation, while avoiding making decisions or offering opinions.",
+            "time": 75
+        },
+        {
+            "questionText": "What is the fundamental difference between project management and portfolio management?",
+            "choices": [
+                "Project management is strategic, while portfolio management is tactical.",
+                "Project management focuses on 'doing the work right,' while portfolio management focuses on 'doing the right work.'",
+                "There is no significant difference; the terms are interchangeable.",
+                "Portfolio management is a sub-discipline of project management."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Project management is concerned with executing projects correctly to deliver specific outputs ('doing the work right'). Portfolio management is a strategic function focused on selecting and managing a group of projects and programs to align with the organization's business objectives, thus 'doing the right work'.",
+            "time": 75
+        },
+        {
+            "questionText": "What does the concept of 'Serving the project team and team members' relate to?",
+            "choices": [
+                "Directive leadership.",
+                "Laissez-faire leadership.",
+                "Servant leadership.",
+                "Transactional leadership."
+            ],
+            "correctAnswer": 2,
+            "explanation": "By choosing servant leadership, the leader serves the project team and team members. This mindset benefits the team members immensely.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one key area a servant leader focuses on to get help from other functions in the organization?",
+            "choices": [
+                "Building strong relationships across the organization.",
+                "Dictating terms to other departments.",
+                "Minimizing interaction with outside teams.",
+                "Relying solely on formal escalation paths."
+            ],
+            "correctAnswer": 0,
+            "explanation": "The servant leader builds strong and effective relationships not only within the team but also across the organization and with other functions, so that if help is needed, it will be provided by people from other teams.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a potential consequence if project governance is missing?",
+            "choices": [
+                "Increased project scope.",
+                "Lack of clear escalation paths.",
+                "Reduced communication channels.",
+                "Improved team autonomy."
+            ],
+            "correctAnswer": 1,
+            "explanation": "A scenario where a team doesn't know whom to contact or escalate issues to is a clear case of missing project governance, as there are no clearly defined escalation paths.",
+            "time": 75
+        },
+        {
+            "questionText": "In the context of project planning for physical resources, what information is needed from the project schedule?",
+            "choices": [
+                "The overall project duration.",
+                "The dependencies between tasks.",
+                "The quantity of each resource needed.",
+                "The timing during the project when resources are required."
+            ],
+            "correctAnswer": 3,
+            "explanation": "The project schedule contains details of the timelines of project activities. This information is crucial for knowing 'when' resources are needed during the project.",
+            "time": 75
+        },
+        {
+            "questionText": "What is one of the '5 Cs' of written communication related to controlling the flow of information?",
+            "choices": [
+                "Correct grammar.",
+                "Concise expressions.",
+                "Clear purpose.",
+                "Control the flow of words and ideas."
+            ],
+            "correctAnswer": 3,
+            "explanation": "One of the 5 Cs is 'Control the flow of words and ideas'.",
+            "time": 75
+        },
+        {
+            "questionText": "How should a project team manage identified risks?",
+            "choices": [
+                "By ignoring risks with low impact.",
+                "By regularly reviewing them and prioritizing based on likelihood and impact.",
+                "By only focusing on risks with high likelihood.",
+                "By developing responses for every identified risk immediately."
+            ],
+            "correctAnswer": 1,
+            "explanation": "The project team must regularly review the identified risks and their potential impact on the project, and prioritize them based on their likelihood and impact. Prioritizing based on only one factor is not sufficient. Responses are developed after prioritization.",
+            "time": 75
+        },
+        {
+            "questionText": "What does Continuous delivery allow an Agile team to do?",
+            "choices": [
+                "Integrate code more frequently.",
+                "Deploy features only at the end of the sprint.",
+                "Deliver feature increments immediately to the customer.",
+                "Reduce the need for testing."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Continuous delivery is the practice of delivering feature increments immediately to the customer. Continuous integration is about frequent code integration.",
+            "time": 75
+        },
+        {
+            "questionText": "In a project facing chaos, what is the potential benefit of a directive leadership style?",
+            "choices": [
+                "Increased team autonomy.",
+                "Creation of more clarity and momentum.",
+                "Reduced need for communication.",
+                "Encouragement of passive team members."
+            ],
+            "correctAnswer": 1,
+            "explanation": "In the moment of chaos, Directive action can create more clarity and momentum which is needed in the situation.",
+            "time": 75
+        },
+        {
+            "questionText": "What is a key benefit of having T-shaped skills in a team?",
+            "choices": [
+                "Reduces the need for planning.",
+                "Provides a broader range of knowledge and experience.",
+                "Limits communication to only the primary skill area.",
+                "Makes individual performance easier to measure."
+            ],
+            "correctAnswer": 1,
+            "explanation": "Having a team of individuals with T-shaped skills means that the team has a broader range of knowledge and experience to draw upon, which can lead to more innovative and effective solutions.",
+            "time": 75
+        },
+        {
+            "questionText": "What type of communication is most suitable for simple, factual information?",
+            "choices": [
+                "Face-to-face communication.",
+                "Rich communication channels.",
+                "Text messages or emails.",
+                "Interactive communication."
+            ],
+            "correctAnswer": 2,
+            "explanation": "Sending text messages, emails, or WhatsApp messages is useful for situations that convey simple, factual information. Complex/personal information needs richer channels.",
+            "time": 75
+        }
+    ]
+}

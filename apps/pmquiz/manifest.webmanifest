@@ -1,0 +1,39 @@
+{
+  "name": "PM Certification Quiz",
+  "short_name": "PM Quiz",
+  "description": "Free Project Management Certification Practice - All 8 Performance Domains",
+  "start_url": "./?source=pwa",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#8E24AA",
+  "orientation": "portrait",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Upload Quiz",
+      "short_name": "Upload",
+      "description": "Upload a custom question bank",
+      "url": "./?shortcut=upload",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Select Bank",
+      "short_name": "Select",
+      "description": "Choose a predefined question bank",
+      "url": "./?shortcut=select",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f0f4f8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a" />
+    <meta name="description" content="Ledger Suite: local-first decision workspace with guided steps and inline instructions." />
+    <link rel="canonical" href="https://shfqrkhn.github.io/LocalFirstApps/apps/ledgersuite/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shfqrkhn.github.io/LocalFirstApps/apps/ledgersuite/" />
+    <meta property="og:title" content="Ledger Suite" />
+    <meta property="og:description" content="Offline-first managerial judgment and operational analysis workspace." />
+    <meta property="og:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/ledgersuite/.resources/screenshot.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ledger Suite" />
+    <meta name="twitter:description" content="Offline-first managerial judgment and operational analysis workspace." />
+    <meta name="twitter:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/ledgersuite/.resources/screenshot.png" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <title>Ledger Suite</title>
+    <link rel="icon" type="image/png" sizes="32x32" href=".resources/Ledger_32.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href=".resources/Ledger_128.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <!-- Modern Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="app-header">
+      <img src=".resources/Ledger_64.png" alt="Ledger Suite logo" width="40" height="40" />
+      <div>
+        <h1>Ledger Suite</h1>
+        <p>Local-first decision workspace with guided steps.</p>
+      </div>
+      <div class="header-actions">
+        <span class="chip">Case Analysis + Governance Wedge</span>
+        <a class="chip sponsor-chip" href="https://github.com/sponsors/shfqrkhn?o=esb" target="_blank" rel="noopener noreferrer">Sponsor</a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="panel">
+        <div class="hero-badge">Welcome to Ledger Suite</div>
+        <h2>Start Your Analysis</h2>
+        <p class="panel-lead">Follow these guided steps to structure your decisions cleanly. You can revisit any section at any time.</p>
+        <ol class="guide-list">
+          <li>Create or select a Workspace and Case File.</li>
+          <li>Write the Decision Memo (title, core question, and proposed choice).</li>
+          <li>Add Evidence, Assumptions, and Options.</li>
+          <li>Complete Governance and Outcome checks.</li>
+          <li>Export a snapshot before sharing or resetting local data.</li>
+        </ol>
+      </section>
+
+      <section class="panel split">
+        <div>
+          <h2>Step 1: Workspace</h2>
+          <p class="panel-lead">Workspaces keep unrelated decisions separate.</p>
+          <label for="workspace-select">Workspace</label>
+          <p class="inline-help">Select an existing workspace or create a new one.</p>
+          <div class="row">
+            <select id="workspace-select" aria-label="Workspace"></select>
+            <button id="new-workspace-btn" type="button" class="secondary">New Workspace</button>
+          </div>
+        </div>
+
+        <div>
+          <h2>Step 1: Case File</h2>
+          <p class="panel-lead">Each case file is one decision or analysis problem.</p>
+          <label for="case-select">Case</label>
+          <p class="inline-help">Create a new case when your question changes.</p>
+          <div class="row">
+            <select id="case-select" aria-label="Case file"></select>
+            <button id="new-case-btn" type="button" class="secondary">New Case</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Step 2: Decision Memo</h2>
+        <p class="panel-lead">Capture the core decision first. Keep each field concise and specific.</p>
+        <form id="memo-form" novalidate>
+          <label for="memo-title">Decision title</label>
+          <p class="inline-help">Use a short title someone else can understand instantly.</p>
+          <input id="memo-title" name="title" type="text" maxlength="120" required  placeholder="e.g., Migrate Infrastructure to GCP" />
+
+          <label for="memo-question">Core question</label>
+          <p class="inline-help">Write the exact question this case needs to answer.</p>
+          <textarea id="memo-question" name="question" rows="3" maxlength="500" required placeholder="e.g., Should we move our primary databases from AWS to GCP by Q4 to reduce latency?" ></textarea>
+
+          <label for="memo-evidence-summary">Evidence summary</label>
+          <textarea id="memo-evidence-summary" name="evidenceSummary" rows="3" maxlength="1200" placeholder="e.g., DevOps review shows 20% lower latency running parallel loads on GCP." ></textarea>
+
+          <label for="memo-assumption-summary">Assumption summary</label>
+          <textarea id="memo-assumption-summary" name="assumptionSummary" rows="3" maxlength="1200" placeholder="e.g., Assuming switching costs do not exceed $50k in engineering hours." ></textarea>
+
+          <label for="memo-choice">Leading choice</label>
+          <textarea id="memo-choice" name="choice" rows="3" maxlength="800" placeholder="e.g., Proceed with full GCP migration starting August 1st." ></textarea>
+
+          <label for="memo-rationale">Rationale</label>
+          <textarea id="memo-rationale" name="rationale" rows="3" maxlength="1200" placeholder="e.g., The latency improvements heavily outweigh the initial switching engineering costs." ></textarea>
+
+          <div class="actions" role="group" aria-label="Memo actions">
+            <button type="submit">Save Memo</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel split-three">
+        <div>
+          <h2>Step 3: Evidence Items</h2>
+          <p class="inline-help">Add verifiable facts, sources, and notes.</p>
+          <form id="evidence-form" novalidate>
+            <label for="evidence-kind">Type</label>
+            <input id="evidence-kind" name="kind" type="text" maxlength="40" placeholder="e.g., Report, Interview, KPI" required />
+            <label for="evidence-citation">Citation</label>
+            <input id="evidence-citation" name="citation" type="text" maxlength="140" required  placeholder="e.g., Q3 DevOps Uptime Analytics" />
+            <label for="evidence-notes">Notes</label>
+            <textarea id="evidence-notes" name="notes" rows="3" maxlength="500" placeholder="e.g., Emphasizes heavy latency spikes in our current US-East regions." ></textarea>
+            <button type="submit">Add Evidence</button>
+          </form>
+          <ul id="evidence-list" class="item-list" aria-label="Evidence list"></ul>
+        </div>
+
+        <div>
+          <h2>Step 3: Assumptions</h2>
+          <p class="inline-help">Track what you believe to be true and your confidence level.</p>
+          <form id="assumption-form" novalidate>
+            <label for="assumption-statement">Statement</label>
+            <textarea id="assumption-statement" name="statement" rows="3" maxlength="300" placeholder="e.g., Vendor mapping tools will automate 90% of data translation." required></textarea>
+            <label for="assumption-confidence">Confidence (0-100)</label>
+            <input id="assumption-confidence" name="confidence" type="number" min="0" max="100" step="1" value="50" required />
+            <button type="submit">Add Assumption</button>
+          </form>
+          <ul id="assumption-list" class="item-list" aria-label="Assumption list"></ul>
+        </div>
+
+        <div>
+          <h2>Step 3: Option Set</h2>
+          <p class="inline-help">List candidate options, then score and note tradeoffs.</p>
+          <form id="option-form" novalidate>
+            <label for="option-name">Option</label>
+            <input id="option-name" name="name" type="text" maxlength="80" required  placeholder="e.g., Delay roll-out to Q1 next year" />
+            <label for="option-score">Score (0-10)</label>
+            <input id="option-score" name="score" type="number" min="0" max="10" step="0.1" value="5" required />
+            <label for="option-tradeoff">Tradeoff note</label>
+            <textarea id="option-tradeoff" name="tradeoff" rows="3" maxlength="300" placeholder="e.g., Decreases execution risk but elongates latency pain." ></textarea>
+            <button type="submit">Add Option</button>
+          </form>
+          <ul id="option-list" class="item-list" aria-label="Option list"></ul>
+        </div>
+      </section>
+
+      <section class="panel split">
+        <div>
+          <h2>Step 4: Review Matrix</h2>
+          <p class="inline-help">Define evaluation dimensions and scoring rationale.</p>
+          <form id="matrix-form">
+            <label for="matrix-dimensions">Dimensions (comma-separated)</label>
+            <input id="matrix-dimensions" name="dimensions" type="text" maxlength="300" placeholder="e.g., Risk, Cost, Feasibility, Time" />
+            <label for="matrix-notes">Scoring notes</label>
+            <textarea id="matrix-notes" name="notes" rows="3" maxlength="600" placeholder="e.g., Scores are 1-10. Feasibility is weighted 2x because we lack backend engineers." ></textarea>
+            <button type="submit">Save Matrix</button>
+          </form>
+        </div>
+
+        <div>
+          <h2>Step 4: Outcome Review</h2>
+          <p class="inline-help">After execution, compare expected and actual outcomes.</p>
+          <form id="outcome-form">
+            <label for="outcome-expected">Expected vs actual</label>
+            <textarea id="outcome-expected" name="expectedVsActual" rows="3" maxlength="700" placeholder="e.g., Expected 0 downtime, actual was 15 minutes due to a DNS propagation delay." ></textarea>
+            <label for="outcome-lessons">Lessons</label>
+            <textarea id="outcome-lessons" name="lessons" rows="3" maxlength="700" placeholder="e.g., Always test vendor mapping tools thoroughly on staging data first." ></textarea>
+            <button type="submit">Save Outcome</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel split">
+        <div>
+          <h2>Step 4: Governance Review</h2>
+          <p class="inline-help">Document accountability, compliance, and governance risk.</p>
+          <form id="governance-form">
+            <label for="governance-accountability">Accountability check</label>
+            <textarea id="governance-accountability" name="accountability" rows="3" maxlength="700" placeholder="e.g., The Lead DBA is responsible for the execution; CTO approved the budget." ></textarea>
+            <label for="governance-compliance">Compliance considerations</label>
+            <textarea id="governance-compliance" name="compliance" rows="3" maxlength="700" placeholder="e.g., The data transfer complies with our standing GDPR storage policies." ></textarea>
+            <label for="governance-risk">Governance risk note</label>
+            <textarea id="governance-risk" name="riskNote" rows="3" maxlength="700" placeholder="e.g., Moderate operational risk; roll-back plan is documented in Runbook B." ></textarea>
+            <button type="submit">Save Governance Review</button>
+          </form>
+        </div>
+
+        <div>
+          <h2>Step 4: Pack Hooks</h2>
+          <p class="inline-help">Capture reusable review hooks for strategy and operations.</p>
+          <form id="pack-hook-form">
+            <label for="pack-hook-type">Hook type</label>
+            <select id="pack-hook-type" name="hookType">
+              <option value="strategy">Strategy</option>
+              <option value="operations">Operations</option>
+              <option value="financial-performance">Financial/Performance</option>
+              <option value="ethics-tradeoff">Ethics/Tradeoff</option>
+              <option value="innovation-sustainability">Innovation/Sustainability</option>
+            </select>
+            <label for="pack-hook-contract">Contract note</label>
+            <textarea id="pack-hook-contract" name="contractNote" rows="3" maxlength="600" placeholder="e.g., Review latency metrics 30 days post-migration to confirm 20% gain." ></textarea>
+            <label for="pack-hook-status">Status</label>
+            <input id="pack-hook-status" name="status" type="text" maxlength="60" value="ready"  placeholder="e.g., pending, ready, blocked" />
+            <button type="submit">Save Pack Hook</button>
+          </form>
+          <ul id="pack-hook-list" class="item-list" aria-label="Pack hook list"></ul>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Step 5: Export / Import / Print</h2>
+        <p class="panel-lead">Export before sharing or resetting. Import validates first, then commits only when you confirm.</p>
+        <div class="actions">
+          <button type="button" id="export-json-btn">Export JSON Snapshot</button>
+          <button type="button" id="export-zip-btn" class="secondary">Export ZIP Snapshot</button>
+          <button type="button" id="export-md-btn" class="secondary">Export Markdown Brief</button>
+          <button type="button" id="print-brief-btn" class="secondary">Print Brief</button>
+        </div>
+        <p id="opfs-status" class="status" aria-live="polite"></p>
+        <label for="import-file">Import snapshot file</label>
+        <div class="row import-row">
+          <input id="import-file" type="file" accept="application/json,.zip,application/zip" />
+          <button id="commit-import-btn" type="button" class="secondary" disabled>Commit Import</button>
+        </div>
+        <p id="import-preview" class="status" aria-live="polite"></p>
+      </section>
+
+      <details class="panel expandable-panel">
+        <summary>
+          <h2>Recovery and Release Checks</h2>
+          <span class="chevron"></span>
+        </summary>
+        <div class="panel-content">
+          <p class="inline-help">Use these controls if local data is inconsistent, storage is full, or an update is pending.</p>
+        <p id="storage-health" aria-live="polite">Storage usage: checking...</p>
+        <div class="actions">
+          <button type="button" id="run-repair-btn" class="secondary">Run Integrity Repair</button>
+          <button type="button" id="reset-local-btn" class="secondary">Reset Local Data</button>
+          <button type="button" id="clear-cache-btn" class="secondary">Clear App Cache</button>
+          <button type="button" id="run-rc-check-btn">Run RC Check</button>
+          <button type="button" id="apply-update-btn" disabled>Apply Update</button>
+        </div>
+        <p id="rc-check-output" class="status" aria-live="polite"></p>
+        </div>
+      </details>
+
+      <article id="print-brief" class="print-brief" aria-label="Printable brief"></article>
+
+      <p id="status" aria-live="polite" class="status global-status"></p>
+    </main>
+
+    <footer>
+      <span>Ledger Suite</span>
+      <span id="app-version">v0.1.46</span>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

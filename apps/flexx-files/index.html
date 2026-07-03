@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Flexx Files - Offline Strength Tracker</title>
+    <meta name="description" content="Privacy-first, offline-first strength training tracker with automatic progression">
+    <meta name="theme-color" content="#050505">
+    <link rel="canonical" href="https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/" />
+    <meta property="og:title" content="Flexx Files - Offline Strength Tracker" />
+    <meta property="og:description" content="Offline-first strength tracker with progression, plate math, rest timing, and local workout history." />
+    <meta property="og:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/screenshot.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Flexx Files - Offline Strength Tracker" />
+    <meta name="twitter:description" content="Offline-first strength tracker with progression, plate math, rest timing, and local workout history." />
+    <meta name="twitter:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/screenshot.png" />
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <a class="sponsor-link" href="https://github.com/sponsors/shfqrkhn?o=esb" target="_blank" rel="noopener noreferrer">Sponsor</a>
+    <div id="app">
+        <!-- Dynamic Content Area -->
+        <main id="main-content" class="view-container" role="main" aria-live="polite" tabindex="-1"></main>
+
+        <!-- Floating Timer (Non-Blocking) -->
+        <div id="timer-dock" class="timer-dock" role="timer" aria-live="off" aria-atomic="true">
+            <div class="flex-row">
+                <span class="timer-display" id="timer-val" aria-label="Rest timer">00:00</span>
+                <span class="text-xs" style="margin-left: 10px; opacity: 0.7;">RESTING</span>
+            </div>
+            <div class="timer-controls">
+                <button class="timer-skip" onclick="window.skipTimer()" aria-label="Skip rest timer">SKIP</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+            <button class="nav-item active" data-view="today" aria-label="Navigate to training" aria-current="page">
+                <span class="icon" aria-hidden="true">⚡</span><span>TRAIN</span>
+            </button>
+            <button class="nav-item" data-view="history" aria-label="Navigate to workout logs">
+                <span class="icon" aria-hidden="true">📅</span><span>LOGS</span>
+            </button>
+            <button class="nav-item" data-view="progress" aria-label="Navigate to progress charts">
+                <span class="icon" aria-hidden="true">📈</span><span>GAINS</span>
+            </button>
+            <button class="nav-item" data-view="settings" aria-label="Navigate to system settings">
+                <span class="icon" aria-hidden="true">⚙️</span><span>SYSTEM</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Custom Modal Layer (Replaces Native Alerts) -->
+    <div id="modal-layer" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-body" aria-hidden="true">
+        <div class="modal-box">
+            <h3 id="modal-title" class="modal-title"></h3>
+            <div id="modal-body" class="modal-body"></div>
+            <div id="modal-actions" class="modal-actions"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touch Action Verification</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .test-result { margin: 10px; padding: 10px; border: 1px solid #ccc; }
+        .pass { background-color: #d4edda; color: #155724; }
+        .fail { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Touch Action Verification</h1>
+    <div id="results"></div>
+
+    <!-- Test Elements -->
+    <button id="test-button">Button</button>
+    <div class="nav-item" id="test-nav-item">Nav Item</div>
+    <div class="stepper-btn" id="test-stepper-btn">Stepper Btn</div>
+    <div class="set-btn" id="test-set-btn">Set Btn</div>
+    <div class="timer-dock" id="test-timer-dock">Timer Dock</div>
+    <summary id="test-summary">Summary</summary>
+    <label id="test-label">Label</label>
+    <a href="#" id="test-link">Link</a>
+    <input type="text" id="test-input">
+    <select id="test-select"><option>Option</option></select>
+    <textarea id="test-textarea"></textarea>
+    <div role="button" id="test-role-button">Role Button</div>
+    <div role="tab" id="test-role-tab">Role Tab</div>
+    <div role="switch" id="test-role-switch">Role Switch</div>
+
+    <script>
+        const selectors = [
+            'button',
+            '.nav-item',
+            '.stepper-btn',
+            '.set-btn',
+            '.timer-dock',
+            'summary',
+            'label',
+            'a',
+            'input',
+            'select',
+            'textarea',
+            '[role="button"]',
+            '[role="tab"]',
+            '[role="switch"]'
+        ];
+
+        const resultsDiv = document.getElementById('results');
+        let allPassed = true;
+
+        selectors.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (!element) {
+                logResult(selector, false, 'Element not found');
+                allPassed = false;
+                return;
+            }
+
+            const computedStyle = window.getComputedStyle(element);
+            const touchAction = computedStyle.getPropertyValue('touch-action');
+
+            if (touchAction === 'manipulation') {
+                logResult(selector, true, `touch-action: ${touchAction}`);
+            } else {
+                logResult(selector, false, `Expected 'manipulation', got '${touchAction}'`);
+                allPassed = false;
+            }
+        });
+
+        if (allPassed) {
+            const summary = document.createElement('div');
+            summary.className = 'test-result pass';
+            summary.textContent = 'ALL TESTS PASSED: Mobile zoom prevention active.';
+            resultsDiv.prepend(summary);
+            console.log('VERIFICATION PASSED');
+        } else {
+            const summary = document.createElement('div');
+            summary.className = 'test-result fail';
+            summary.textContent = 'TESTS FAILED: Double-tap zoom may be possible.';
+            resultsDiv.prepend(summary);
+            console.error('VERIFICATION FAILED');
+        }
+
+        function logResult(name, passed, message) {
+            const div = document.createElement('div');
+            div.className = `test-result ${passed ? 'pass' : 'fail'}`;
+            div.textContent = `${name}: ${message}`;
+            resultsDiv.appendChild(div);
+        }
+    </script>
+</body>
+</html>

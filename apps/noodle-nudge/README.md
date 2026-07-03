@@ -1,0 +1,67 @@
+# Noodle Nudge
+
+<p><a href="https://github.com/sponsors/shfqrkhn?o=esb"><strong>Sponsor this project</strong></a></p>
+
+Private reflection and self-inquiry app.
+
+- **Status:** Stable maintenance app
+- **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/noodle-nudge](https://shfqrkhn.github.io/LocalFirstApps/apps/noodle-nudge/)
+- **Portfolio Role:** Personal-growth experiment.
+
+Noodle Nudge is a browser-based reflection tool for prompts, assessments, journaling, and self-discovery workflows.
+
+## Screenshot
+
+![Noodle Nudge reflection app](./docs/images/screenshot.jpeg)
+
+## Why This Exists
+
+Reflection tools are most useful when they are private, simple, and available when needed. Noodle Nudge keeps the user in a local-first environment instead of a social or cloud workflow.
+
+## What It Does
+
+- Provides daily reflection prompts.
+- Includes self-assessment workflows.
+- Supports private journaling and self-inquiry.
+- Runs as a static app from GitHub Pages.
+- Emphasizes local privacy.
+
+## Quick Start
+
+1. Open the live demo.
+2. Start with the daily prompt.
+3. Use assessments when useful.
+4. Record reflections locally.
+5. Back up any data you need before clearing browser storage.
+
+## Privacy And Data Model
+
+- No account or backend is required for normal use.
+- Personal reflections should stay local unless the user chooses to export or share them.
+- This app is not medical care, crisis support, or therapy.
+
+## Relationship To Other Projects
+
+Noodle Nudge is a stable personal-growth app. It is intentionally not part of the active flagship set so maintenance energy stays focused.
+
+## Repository Layout
+
+```text
+.
+├── docs/index.html
+├── docs/icons/
+├── scripts/
+└── README.md
+```
+
+## Deployment
+
+GitHub Pages serves the `docs/` app.
+
+## Maintenance
+
+Maintenance-only unless privacy, compatibility, or content quality needs a targeted update.
+
+## License
+
+See `LICENSE`.

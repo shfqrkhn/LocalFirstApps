@@ -1,0 +1,2801 @@
+{
+  "topic": "Stakeholder Performance Domain Quiz",
+  "questions": [
+    {
+      "questionText": "Which statement best defines a project stakeholder?",
+      "choices": [
+        "Anyone who has an interest in the project or can influence its outcome.",
+        "Only members of the project team.",
+        "Only external parties such as customers and vendors.",
+        "Only senior executives and regulatory bodies."
+      ],
+      "correctAnswer": 0,
+      "explanation": "A stakeholder is anyone who has an interest in the project or can influence its outcome. This includes not only the project team, but also external parties such as customers, vendors, regulatory bodies, and even the local community. The correct answer reflects the comprehensive definition of stakeholders.",
+      "time": 75
+    },
+    {
+      "questionText": "Which of the following is a recommended approach for building a strong relationship with project stakeholders?",
+      "choices": [
+        "Ensure effective communication with stakeholders throughout the project lifecycle.",
+        "Implement a risk response plan to address stakeholder concerns.",
+        "Avoid engaging stakeholders until project execution is well underway.",
+        "Limit transparency to protect sensitive project information."
+      ],
+      "correctAnswer": 0,
+      "explanation": "Effective communication is key to building strong relationships with stakeholders. The project team should establish open communication channels with stakeholders and keep them informed about the project's progress, challenges, and risks throughout the project lifecycle.",
+      "time": 75
+    },
+    {
+      "questionText": "Which of the following is NOT a recommended approach for building a strong relationship with project stakeholders?",
+      "choices": [
+        "Engage stakeholders early and often in the project planning process.",
+        "Develop and maintain trust with stakeholders through transparency and honesty.",
+        "Implement a risk response plan to address stakeholder concerns.",
+        "Ensure effective communication with stakeholders throughout the project lifecycle."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Implementing a risk response plan is certainly necessary to manage project risks, but it does not directly address how to build a strong relationship with stakeholders. Recommended approaches include effective communication, building trust through transparency and honesty, and engaging stakeholders early and often.",
+      "time": 75
+    },
+    {
+      "questionText": "Why is it important to engage stakeholders early and often in the project planning process?",
+      "choices": [
+        "It helps to build trust and strengthen relationships.",
+        "It is a mandatory step required by the PMO.",
+        "It simplifies the project scope statement.",
+        "It allows the project manager to delegate all planning tasks."
+      ],
+      "correctAnswer": 0,
+      "explanation": "Inviting stakeholders to participate in the planning and overall decision-making process can help build trust and strengthen relationships.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the suggested course of action when stakeholders have concerns or issues with the project?",
+      "choices": [
+        "Address them promptly.",
+        "Document them and address them at the end of the project.",
+        "Implement a risk response plan instead.",
+        "Delegate the concerns to the functional manager."
+      ],
+      "correctAnswer": 0,
+      "explanation": "If stakeholders have concerns or issues with the project, the project team should address them promptly. This can help prevent issues from escalating and damaging relationships.",
+      "time": 75
+    },
+    {
+      "questionText": "In a project where the customer support team doesn't know whom to contact or escalate feedback to, what is clearly missing?",
+      "choices": [
+        "Scope management.",
+        "Risk management plan.",
+        "Project governance with clearly defined escalation paths.",
+        "Quality management plan."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The fact that the Customer Support team wants to communicate feedback to the project team, and they don't know whom to contact or escalate this finding to, is clearly a case of missing project governance.",
+      "time": 75
+    },
+    {
+      "questionText": "Which project artifact is used to describe the participation of various roles in completing tasks or deliverables for a project or business process?",
+      "choices": [
+        "Stakeholder register.",
+        "RACI chart.",
+        "Stakeholder engagement assessment matrix.",
+        "Stakeholder responsibility assessment matrix."
+      ],
+      "correctAnswer": 1,
+      "explanation": "A RACI chart, which is a form of a Responsibility Assignment Matrix, also known as a RACI matrix or Linear Responsibility Chart, describes the participation of various roles in completing tasks or deliverables for a project or business process.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the main difference between portfolio management and project management?",
+      "choices": [
+        "Portfolio management focuses on delivering tangible outputs, while project management focuses on strategic objectives.",
+        "Portfolio management involves managing multiple projects, while project management is a singular endeavor.",
+        "Portfolio management concentrates on long-term goals and strategic objectives, while project management focuses on unique, short-term goals.",
+        "Portfolio management manages projects and programs, while project management manages only projects."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The main difference between portfolio and project management is that projects focus on unique, short-term goals as specific, singular endeavors and are temporary. In contrast, portfolios concentrate on long-term goals and involve strategic, cohesive objectives.",
+      "time": 75
+    },
+    {
+      "questionText": "Why does an organization run multiple related projects in a coordinated fashion as a program?",
+      "choices": [
+        "To simplify individual project management.",
+        "To ensure resources are shared equally among projects.",
+        "Program activities managed coordinately have the potential to yield benefits not available when managing projects individually.",
+        "It reduces the number of stakeholders involved."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Program activities, when managed in a coordinated manner, have the potential to yield benefits not available when managing the projects individually.",
+      "time": 75
+    },
+    {
+      "questionText": "According to PMI, who typically approves the project charter?",
+      "choices": [
+        "The project manager.",
+        "The project team.",
+        "The project sponsor or a person with similar authority.",
+        "The PMO."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The project charter is typically approved by the project sponsor or a person with similar authority who has the power to authorize and provide resources for the project.",
+      "time": 75
+    },
+    {
+      "questionText": "Why should project artifacts be kept accessible to all stakeholders?",
+      "choices": [
+        "To simplify the change control process.",
+        "To ensure project information validation.",
+        "To reduce the need for communication.",
+        "To allow stakeholders to perform project manager duties."
+      ],
+      "correctAnswer": 1,
+      "explanation": "As a project manager, you should validate that the project information is kept up to date (by using version control, for example) and accessible to all stakeholders. This helps in careful management of project artifacts and ensures stakeholders have accurate information.",
+      "time": 75
+    },
+    {
+      "questionText": "What can happen if project information validation is lacking?",
+      "choices": [
+        "The project schedule will be compressed.",
+        "The defect count will increase.",
+        "A project sponsor might become unhappy due to incorrect or inaccurate information.",
+        "The project team will require T-shaped skills."
+      ],
+      "correctAnswer": 2,
+      "explanation": "If project information validation is lacking, incorrect or inaccurate information may be shared with stakeholders, such as a project sponsor. This can lead to dissatisfaction and a lack of trust in the project's reporting and management.",
+      "time": 75
+    },
+    {
+      "questionText": "Which project artifact typically contains the project vision, showing the direction and defining the criteria for success?",
+      "choices": [
+        "Team charter.",
+        "Product backlog.",
+        "Project charter.",
+        "Product roadmap."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A team charter, product backlog, or product roadmap does not contain the project vision; the project charter does.",
+      "time": 75
+    },
+    {
+      "questionText": "In a project, which role is best suited to help the team better understand the project vision?",
+      "choices": [
+        "Project manager.",
+        "QA manager.",
+        "Project sponsor.",
+        "Functional manager."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The project sponsor is best suited to help the team better understand the project vision. The project manager also has a key role in communicating the project vision to other stakeholders and beneficiaries to gain support for the project and provide inspiration.",
+      "time": 75
+    },
+    {
+      "questionText": "Who is responsible for ensuring that everyone involved is aware of what the project's vision is and meeting the expectations of different stakeholders?",
+      "choices": [
+        "The project team.",
+        "The functional manager.",
+        "The project manager.",
+        "The quality assurance team."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The project manager leads the team to meet the expectations of different stakeholders and the project goals. The Project Manager should, through presenting the vision, provide direction and inspiration for the project team, playing a significant role in incorporating the project vision and ensuring everyone is aware of it.",
+      "time": 75
+    },
+    {
+      "questionText": "In Scrum, who is responsible for managing and optimizing the product backlog to maximize the business value of the product?",
+      "choices": [
+        "The Scrum Master.",
+        "The development team.",
+        "The project sponsor.",
+        "The Product Owner."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The product owner is responsible for managing and optimizing the product backlog to maximize the business value of the product.",
+      "time": 75
+    },
+    {
+      "questionText": "The internal environment of an organization, such as its organizational culture, can have what kind of impact on a project?",
+      "choices": [
+        "Always favorable.",
+        "Always unfavorable.",
+        "Only neutral.",
+        "Favorable, unfavorable, or neutral."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The internal environment of an organization, such as its organizational culture and the geographical distribution of facilities and resources, can have a favorable, unfavorable, or neutral impact on the project.",
+      "time": 75
+    },
+    {
+      "questionText": "External environmental factors, such as marketplace conditions and industry standards, may have what kind of impact on a project?",
+      "choices": [
+        "Always favorable.",
+        "Always unfavorable.",
+        "Only neutral.",
+        "Favorable, unfavorable, or neutral."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Similarly, the external environment, which comprises factors outside the boundaries of the project-executing organization, such as marketplace conditions and industry standards, may also have a favorable, unfavorable, or neutral impact on the project.",
+      "time": 75
+    },
+    {
+      "questionText": "What happens to a project's communication complexity as the number of project stakeholders increases?",
+      "choices": [
+        "It decreases linearly.",
+        "It increases linearly.",
+        "It decreases exponentially.",
+        "It increases exponentially."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Based on the formula for communication channels (n * (n - 1)/2), a project's communication complexity increases exponentially as the number of project stakeholders increases. The more stakeholders there are, the greater the project’s communication complexity.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the formula used to calculate the number of potential communication channels in a project?",
+      "choices": [
+        "n + (n - 1) / 2",
+        "n * (n + 1) / 2",
+        "n * (n - 1) / 2",
+        "n * n"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The formula to calculate the number of potential communication channels is as follows: n * (n - 1)/2, where n represents the number of stakeholders.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a common problem in project management that can increase with more people involved due to increased communication complexity?",
+      "choices": [
+        "Scope creep.",
+        "Resource overallocation.",
+        "Miscommunication.",
+        "Technical debt."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Miscommunication is a common problem in project management that can affect project elements such as cost, schedule, and quality. Communication becomes more complicated as more people get involved, increasing the likelihood of miscommunication.",
+      "time": 75
+    },
+    {
+      "questionText": "As a project manager with a large project stakeholder community, how might you need to adjust your project communication plan?",
+      "choices": [
+        "Simplify the plan by reducing communication frequency.",
+        "Craft the plan with more details.",
+        "Delegate all communication to the project sponsor.",
+        "Use only formal written communication."
+      ],
+      "correctAnswer": 1,
+      "explanation": "As a project manager, you may need to carefully craft your project communication plan with more details if there is a large project stakeholder community to manage the increased complexity.",
+      "time": 75
+    },
+    {
+      "questionText": "Which project artifact specifies when and for how long a certain physical resource will be available during the project, information relevant for stakeholders needing resources?",
+      "choices": [
+        "Resource activity list.",
+        "Resource management plan.",
+        "Resource calendars.",
+        "Project calendars."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A 'Resource calendar' is a project artifact which specifies when and for how long a certain resource, such as an LED Projector, will be available during the project.",
+      "time": 75
+    },
+    {
+      "questionText": "Which document lists all the project stakeholders?",
+      "choices": [
+        "Project charter.",
+        "Communication management plan.",
+        "Risk register.",
+        "Stakeholder register."
+      ],
+      "correctAnswer": 3,
+      "explanation": "A risk register captures individual risks and risk responses, with low-probability/impact risks often placed on a watchlist. The document that lists all project stakeholders is the stakeholder register.",
+      "time": 75
+    },
+    {
+      "questionText": "When collecting project requirements from over 150 geographically dispersed stakeholders with only two days available, which technique is most effective?",
+      "choices": [
+        "Market research.",
+        "One-on-one meetings.",
+        "Using questionnaires and surveys.",
+        "Reusing requirements from a similar past project."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Using questionnaires and surveys is the most effective technique in this scenario. It allows for the collection of a large amount of data from many geographically dispersed individuals in a short period of time, such as two days.",
+      "time": 75
+    },
+    {
+      "questionText": "Why is it not advisable to simply reuse requirements from a similar project previously done by the organization for a new project?",
+      "choices": [
+        "It is against PMI guidelines.",
+        "Every project is unique and may have different needs.",
+        "It requires additional approval from the project sponsor.",
+        "It leads to scope creep."
+      ],
+      "correctAnswer": 1,
+      "explanation": "A project manager cannot and should not simply use the requirements from a similar past project. This is because every project is unique, and a new project may have different needs.",
+      "time": 75
+    },
+    {
+      "questionText": "Which stakeholder is most likely to ask for an estimation of the time required to complete the project?",
+      "choices": [
+        "The project team.",
+        "The functional manager.",
+        "The customer support team.",
+        "The project sponsor or senior leadership."
+      ],
+      "correctAnswer": 3,
+      "explanation": "On many occasions, there will be a need, mostly coming from the project sponsor, and sometimes from the senior leadership, to understand the estimated time required to complete the project.",
+      "time": 75
+    },
+    {
+      "questionText": "Which process involves formalizing acceptance of the completed project deliverables?",
+      "choices": [
+        "Define Scope.",
+        "Control Scope.",
+        "Validate Scope.",
+        "Control Quality."
+      ],
+      "correctAnswer": 2,
+      "explanation": "'Validate Scope' is the process of formalizing acceptance of the completed project deliverables.",
+      "time": 75
+    },
+    {
+      "questionText": "What is one of the main outputs of the scope validation process?",
+      "choices": [
+        "Change requests.",
+        "Accepted deliverables.",
+        "Work performance data.",
+        "Project management plan updates."
+      ],
+      "correctAnswer": 1,
+      "explanation": "One of the main outputs of the scope validation process is accepted deliverables, which are formally signed off and approved by authorized stakeholders, such as the customer.",
+      "time": 75
+    },
+    {
+      "questionText": "The verified deliverables from the \"Control Quality\" process serve as an input to which process involving stakeholders?",
+      "choices": [
+        "Define Scope.",
+        "Create WBS.",
+        "Validate Scope.",
+        "Monitor and Control Project Work."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The verified deliverables from the \"Control Quality\" process are an input to the \"Validate Scope\" process.",
+      "time": 75
+    },
+    {
+      "questionText": "Who formally signs off and approves accepted deliverables in the scope validation process?",
+      "choices": [
+        "The project manager.",
+        "The quality assurance team.",
+        "Authorized stakeholders, such as the customer.",
+        "The development team."
+      ],
+      "correctAnswer": 2,
+      "explanation": "One of the main outputs of the scope validation process is accepted deliverables, which are formally signed off and approved by authorized stakeholders, such as the customer.",
+      "time": 75
+    },
+    {
+      "questionText": "Why is it important for stakeholders to get involved early on during planning and provide input about the quality of deliverables?",
+      "choices": [
+        "To ensure quality is built in from the start.",
+        "To minimize miscommunication.",
+        "So that 'Control Quality' can assess performance and recommend necessary changes.",
+        "To formally approve the project charter."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Stakeholders need to get involved early on during planning and provide input about the quality of deliverables so that the \"Control Quality\" process can later assess performance against those expectations and recommend necessary changes, if any.",
+      "time": 75
+    },
+    {
+      "questionText": "How are work performance reports typically circulated to project stakeholders?",
+      "choices": [
+        "Via ad-hoc email updates.",
+        "Through the communication process as defined in the project communication management plan.",
+        "By posting them in a central repository without notification.",
+        "Only to the project sponsor upon request."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Work performance reports are the physical or electronic representation of performance information intended to generate decisions, actions, or awareness within the project stakeholder community. These work performance reports are circulated to the project stakeholders through the communication process as defined in the project communication management plan.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the purpose of work performance reports for the project stakeholder community?",
+      "choices": [
+        "To document project issues.",
+        "To formally accept project deliverables.",
+        "To generate decisions, actions, or awareness regarding project performance.",
+        "To request additional funding."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Work performance reports are the physical or electronic representation of performance information intended to generate decisions, actions, or awareness within the project stakeholder community.",
+      "time": 75
+    },
+    {
+      "questionText": "Earned value measurements, such as SPI and CPI, can be used by a Project Manager to share details on how a project is doing in terms of cost, schedule, and scope in which report for stakeholders?",
+      "choices": [
+        "Risk report.",
+        "Issue log.",
+        "Work performance report.",
+        "Lessons learned register."
+      ],
+      "correctAnswer": 2,
+      "explanation": "One of the ways a PM can share details of how a project is doing in terms of cost, schedule, and scope is by using earned value measurements, such as SPI and CPI. This information is typically included in a work performance report.",
+      "time": 75
+    },
+    {
+      "questionText": "If a project's Cost Performance Index (CPI) is 1.2, how would a stakeholder interpreting a work performance report likely perceive the project's cost performance?",
+      "choices": [
+        "The project is over budget.",
+        "The project is on budget.",
+        "The project is under budget.",
+        "The CPI value is irrelevant to cost performance."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A Cost Performance Index (CPI) greater than 1 indicates favorable cost performance. A CPI of 1.2 means the project is performing well in terms of cost and is currently under budget.",
+      "time": 75
+    },
+    {
+      "questionText": "If a project's Schedule Performance Index (SPI) is 0.6, how would a stakeholder interpreting a work performance report likely perceive the project's schedule performance?",
+      "choices": [
+        "The project is ahead of schedule.",
+        "The project is on schedule.",
+        "The project is behind schedule.",
+        "The SPI value is irrelevant to schedule performance."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A Schedule Performance Index (SPI) less than 1 indicates unfavorable schedule performance. An SPI of 0.6 suggests the project is not doing well in terms of schedule and is currently behind schedule, likely requiring action to bring it back on track.",
+      "time": 75
+    },
+    {
+      "questionText": "Which document provides justification for undertaking a project, program, or portfolio, often used to get buy-in from stakeholders and leadership?",
+      "choices": [
+        "Project charter.",
+        "Benefit management plan.",
+        "Project management plan.",
+        "Business case."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The business case provides justification for undertaking a project, program, or portfolio.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the purpose of a benefit management plan?",
+      "choices": [
+        "To list all potential project risks.",
+        "To detail the project execution activities.",
+        "To justify the project to stakeholders.",
+        "To measure and track benefits from the project investment until the realization of the last projected benefit."
+      ],
+      "correctAnswer": 3,
+      "explanation": "A benefit management plan is used for measuring and tracking benefits from the start of the project investment until the realization of the last projected benefit. It aims to ensure that the desired benefits are specific, measurable, agreed upon, realistic, and time-bound.",
+      "time": 75
+    },
+    {
+      "questionText": "Which project artifact usually contains a list of pre-approved financial and other resources that project managers can use during planning?",
+      "choices": [
+        "Resource management plan.",
+        "Business case.",
+        "Benefit management plan.",
+        "Project charter."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The project charter usually contains a list of pre-approved financial and other resources that project managers can use during the planning phase to plan resources and other project management activities.",
+      "time": 75
+    },
+    {
+      "questionText": "How do pre-approved resources listed in the project charter influence resource planning?",
+      "choices": [
+        "They increase the need for external vendors.",
+        "They necessitate using only just-in-time delivery.",
+        "They allow the project manager to adjust resource planning based on existing available resources.",
+        "They remove the need for resource planning altogether."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Because there are pre-approved resources (e.g., software licenses) available within the organization, the project manager can adjust resource planning based on this information. The project charter often contains a list of pre-approved financial and other resources that can be used during planning.",
+      "time": 75
+    },
+    {
+      "questionText": "In the Validate Scope process, how is the acceptance of completed project deliverables formalized?",
+      "choices": [
+        "By verbally confirming completion with the project team.",
+        "By updating the project schedule.",
+        "Through formal sign-off and approval by authorized stakeholders.",
+        "By moving the deliverables to the next phase."
+      ],
+      "correctAnswer": 2,
+      "explanation": "One of the main outputs of the scope validation process is accepted deliverables, which are formally signed off and approved by authorized stakeholders, such as the customer.",
+      "time": 75
+    },
+    {
+      "questionText": "Where do the verified deliverables come from that serve as an input to the Validate Scope process?",
+      "choices": [
+        "The Define Scope process.",
+        "The Control Quality process.",
+        "The Plan Quality Management process.",
+        "The Perform Integrated Change Control process."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The verified deliverables from the \"Control Quality\" process are an input to the \"Validate Scope\" process.",
+      "time": 75
+    },
+    {
+      "questionText": "What skill is crucial for a project manager to use when dealing with conflicts between team members, which also applies to dealing with stakeholders?",
+      "choices": [
+        "Negotiation skills.",
+        "Emotional intelligence.",
+        "Team bonding activities.",
+        "Artificial intelligence."
+      ],
+      "correctAnswer": 1,
+      "explanation": "To resolve conflict between team members, a project manager is most likely to use emotional intelligence. Applying emotional intelligence when dealing with the project team and stakeholders is a significant factor in determining a project's success or failure.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a significant factor in determining a project's success or failure, related to dealing with the project team and stakeholders?",
+      "choices": [
+        "Using a predictive approach.",
+        "Applying emotional intelligence.",
+        "Minimizing communication.",
+        "Centralizing decision-making."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Applying emotional intelligence when dealing with the project team and project stakeholders is a significant factor in determining a project's success or failure.",
+      "time": 75
+    },
+    {
+      "questionText": "Why is emotional intelligence important for project managers when dealing with stakeholders?",
+      "choices": [
+        "It allows them to avoid dealing with conflicts.",
+        "It helps them enforce authority.",
+        "It is a significant factor in determining a project's success or failure.",
+        "It simplifies the creation of project documentation."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Emotional intelligence is important for project managers because research shows that applying it when dealing with the project team and stakeholders is a significant factor in determining a project's success or failure.",
+      "time": 75
+    },
+    {
+      "questionText": "In Scrum, who is responsible for writing acceptance criteria for user stories?",
+      "choices": [
+        "The Scrum Master.",
+        "The development team.",
+        "The project sponsor.",
+        "The Product Owner."
+      ],
+      "correctAnswer": 3,
+      "explanation": "In Scrum, the Product Owner is responsible for developing the user stories, and clear acceptance criteria are a part of a well-written user story.",
+      "time": 75
+    },
+    {
+      "questionText": "The Product Owner's ultimate goal regarding the product backlog is to plan the work based on what factor?",
+      "choices": [
+        "Latest technology used.",
+        "Ease of use.",
+        "Business value.",
+        "Simple navigation."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The eventual and ultimate goal of a product owner is to plan the work based on business value.",
+      "time": 75
+    },
+    {
+      "questionText": "With which stakeholders should the Product Owner collaborate to maximize the business value of the product?",
+      "choices": [
+        "Customers, business leaders, development teams, project managers, and other stakeholders.",
+        "Only the development team.",
+        "Only the project sponsor.",
+        "Only customers."
+      ],
+      "correctAnswer": 0,
+      "explanation": "The Product Owner has to collaborate and work closely with various stakeholders, such as customers, business leaders, development teams, project managers, and other stakeholders, to maximize the business value of the product.",
+      "time": 75
+    },
+    {
+      "questionText": "Which of the following can be a possible cause of a high defect rate, potentially impacting stakeholder satisfaction with quality?",
+      "choices": [
+        "Collective product/code ownership.",
+        "Pervasive testing.",
+        "Loose definition of done.",
+        "Pair work."
+      ],
+      "correctAnswer": 2,
+      "explanation": "If the Definition of Done is not well-defined or is loose, it can lead to confusion, misunderstandings, and delays in the project. This is because team members may have different interpretations of what is expected to be completed before a task or user story is considered done. Hence, a possible reason for a higher defect rate could be the loose Definition of Done.",
+      "time": 75
+    },
+    {
+      "questionText": "To overcome a loose Definition of Done and improve quality for stakeholders, with whom should the project team work?",
+      "choices": [
+        "The Scrum Master.",
+        "The functional manager.",
+        "The product owner.",
+        "The quality assurance team lead."
+      ],
+      "correctAnswer": 2,
+      "explanation": "To overcome this, the project team should work with the product owner and prepare a robust Definition of Done.",
+      "time": 75
+    },
+    {
+      "questionText": "To support value realization from a project for stakeholders, what should the project team focus on the most?",
+      "choices": [
+        "Delivering the project on-time and within budget.",
+        "The deliverables of the project.",
+        "The intended outcome of the project.",
+        "The quality of the product."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Project deliverables and outcomes are different concepts. Deliverables are the tangible or intangible items produced by the project. To support value realization, the project team should focus on the intended outcome of the project, which is the result or benefit for which the project was undertaken.",
+      "time": 75
+    },
+    {
+      "questionText": "When distinguishing between project deliverables and outcomes, what is the primary focus for supporting value realization for stakeholders?",
+      "choices": [
+        "Achieving the planned project deliverables.",
+        "Ensuring the quality of deliverables.",
+        "Focusing on the intended outcome of the project.",
+        "Completing the project within cost and schedule."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Project deliverables are the tangible or intangible items produced, while project outcomes are the results or benefits. To support value realization, the focus should be on the intended outcome of the project.",
+      "time": 75
+    },
+    {
+      "questionText": "Which of the following is a valid way to measure project business value for stakeholders?",
+      "choices": [
+        "Number of defects.",
+        "Cost variance.",
+        "Employee satisfaction.",
+        "Market share."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Market share is a valid metric for measuring a project's business value. Other metrics like cost variance or number of defects measure project performance or quality, not necessarily the overall business value delivered to stakeholders.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a key benefit of managing multiple related projects as a program, as opposed to managing them individually?",
+      "choices": [
+        "Reduced need for stakeholder communication.",
+        "Ability to obtain benefits not available when managing projects individually.",
+        "Simplified project management processes.",
+        "Lower overall project risk."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Organizations often run multiple related projects as a program because program activities that are managed in a coordinated manner have the potential to obtain benefits not available from managing the projects individually.",
+      "time": 75
+    },
+    {
+      "questionText": "Portfolio management involves the management of projects, programs, and operations as a group to achieve what specific purpose for the organization and its stakeholders?",
+      "choices": [
+        "Operational efficiency.",
+        "Short-term project goals.",
+        "Strategic objectives.",
+        "Resource leveling."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Similarly, portfolio management involves the management of projects, programs, and operations as a group to achieve strategic objectives.",
+      "time": 75
+    },
+    {
+      "questionText": "Why does a project manager need to understand the motivational factors of their team members (internal stakeholders)?",
+      "choices": [
+        "To assign tasks based on personal preferences.",
+        "To ensure everyone is motivated by monetary rewards.",
+        "People perform better when they are motivated.",
+        "To determine project deadlines."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A project manager needs to understand the motivational factors of team members because people perform better when they are motivated. Since different things motivate different people, understanding these individual factors is key to improving team performance.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a key principle of motivation for team performance?",
+      "choices": [
+        "Monetary rewards only.",
+        "Authority or power.",
+        "Different things.",
+        "Peer pressure."
+      ],
+      "correctAnswer": 2,
+      "explanation": "People perform better when they are motivated, and it's important to recognize that people are motivated by different things. Effective project managers seek to understand these varied motivational factors.",
+      "time": 75
+    },
+    {
+      "questionText": "The ADKAR Model of Change Management is described as an outcome-oriented method aiming to minimize resistance to what aspect relevant to organizational stakeholders?",
+      "choices": [
+        "Technical debt.",
+        "Scope creep.",
+        "Organizational change.",
+        "Risk events."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The ADKAR Model of Change Management is an outcome-oriented change management method that aims to minimize resistance to organizational change.",
+      "time": 75
+    },
+    {
+      "questionText": "VUCA (volatility, uncertainty, complexity, and ambiguity) is used to describe general conditions and situations. What else can it be utilized for in a project setting, relevant to stakeholders' awareness?",
+      "choices": [
+        "Prioritizing user stories.",
+        "Measuring project performance.",
+        "Identifying risks.",
+        "Calculating earned value."
+      ],
+      "correctAnswer": 2,
+      "explanation": "VUCA stands for volatility, uncertainty, complexity, and ambiguity, which is used to describe general conditions and situations. It can be employed to identify risks in the project.",
+      "time": 75
+    },
+    {
+      "questionText": "The INVEST acronym is related to what concept frequently used by Product Owner stakeholders in Agile?",
+      "choices": [
+        "Risk response strategies.",
+        "User stories.",
+        "Team velocity.",
+        "Project baselines."
+      ],
+      "correctAnswer": 1,
+      "explanation": "INVEST is an acronym that provides a guideline for writing effective user stories in an agile context.",
+      "time": 75
+    },
+    {
+      "questionText": "MoSCoW is a prioritization technique. Who typically uses this technique to prioritize work items, such as in a product backlog, while considering stakeholder needs?",
+      "choices": [
+        "The Scrum Master.",
+        "The project manager.",
+        "The development team.",
+        "The Product Owner."
+      ],
+      "correctAnswer": 3,
+      "explanation": "MoSCoW is a prioritization technique. In Agile frameworks like Scrum, the Product Owner is responsible for prioritizing the product backlog to maximize value.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the purpose of a product roadmap, often developed by Product Owners or product value teams?",
+      "choices": [
+        "To list project risks.",
+        "To show the project's organizational structure.",
+        "To display the details of the anticipated sequence of deliverables over time.",
+        "To define the project's budget baseline."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A product roadmap is essentially used to display the details of the anticipated sequence of deliverables over time, providing a high-level strategic overview of the product's evolution.",
+      "time": 75
+    },
+    {
+      "questionText": "Who typically develops the product roadmap?",
+      "choices": [
+        "The Scrum Master.",
+        "The project manager.",
+        "The testing team.",
+        "The product owner or a product owner value team."
+      ],
+      "correctAnswer": 3,
+      "explanation": "A product roadmap is usually developed by the product owner or a product owner value team, which may include the product manager and all the relevant product owners for that area of the product.",
+      "time": 75
+    },
+    {
+      "questionText": "In a retrospective meeting, who typically attends along with the project team and the servant leader (facilitator)?",
+      "choices": [
+        "The project sponsor.",
+        "The customer.",
+        "The functional manager.",
+        "The product owner."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The retrospective is attended by the product owner, the project team, and the servant leader (or Scrum Master) who facilitates the retrospective meeting.",
+      "time": 75
+    },
+    {
+      "questionText": "Despite holding retrospective meetings, a project team is not showing much improvement in teamwork processes. What is a possible reason related to stakeholder presence?",
+      "choices": [
+        "The project sponsor is not attending.",
+        "The product owner is present, potentially causing some team members to be hesitant to speak up.",
+        "The functional manager is too dominant in discussions.",
+        "External stakeholders are not invited."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Sometimes, team members might be hesitant to speak openly and honestly during a retrospective in the presence of the product owner or other figures of authority. This can hinder psychological safety and prevent the team from addressing the real root causes of issues.",
+      "time": 75
+    },
+    {
+      "questionText": "Servant leadership is described as building strong and effective relationships not only within the team but also across the organization and with other functions. This is beneficial for team members needing help from whom?",
+      "choices": [
+        "External consultants.",
+        "Vendors.",
+        "People from other teams within the organization.",
+        "Senior executives only."
+      ],
+      "correctAnswer": 2,
+      "explanation": "By fostering strong relationships across the organization, a servant leader ensures that if the project team needs assistance from other functions (e.g., an IT admin department), that help is more readily provided by people from other teams.",
+      "time": 75
+    },
+    {
+      "questionText": "What is one of the roles of the PMO (Project Management Office) regarding project learnings and results for the organization's stakeholders?",
+      "choices": [
+        "To keep them confidential within the PMO.",
+        "To share them regularly across the organization.",
+        "To sell them to external organizations.",
+        "To only share them with project sponsors."
+      ],
+      "correctAnswer": 1,
+      "explanation": "One of the key roles of a PMO is to serve as a central repository for project knowledge, sharing project learnings, best practices, and results across the organization to improve future project performance.",
+      "time": 75
+    },
+    {
+      "questionText": "A murder board is described as a panel of individuals, usually executives or senior managers, who review projects at different stages for what purpose?",
+      "choices": [
+        "To provide advisory support and direction.",
+        "To capture and share project learnings.",
+        "To determine whether the project should continue or not.",
+        "To formally accept project deliverables."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A murder board is a panel of individuals, usually executives or senior managers, who review projects at different stages to determine whether the project should continue or not based on its alignment with strategic goals and its viability.",
+      "time": 75
+    },
+    {
+      "questionText": "A steering committee is described as an advisory body of key stakeholders. What is their usual role?",
+      "choices": [
+        "To manage the project budget.",
+        "To provide direction and support on a need basis to the project team.",
+        "To capture project learnings.",
+        "To formally approve project changes."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The steering committee, an advisory body of key stakeholders, usually provides direction and support on an as-needed basis to the project team, helping to guide the project and resolve high-level issues.",
+      "time": 75
+    },
+    {
+      "questionText": "Who should participate in the risk identification process?",
+      "choices": [
+        "Only the project manager.",
+        "Only risk experts.",
+        "Both the project team and the project manager.",
+        "Only the project sponsor."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Both the project team and the project manager should participate in the risk identification process. Involving the team brings diverse perspectives and expertise, leading to a more comprehensive list of risks.",
+      "time": 75
+    },
+    {
+      "questionText": "Risk identification should occur at what point in the project lifecycle?",
+      "choices": [
+        "Only during the planning phase.",
+        "Throughout the project.",
+        "Only at the beginning of the project.",
+        "Only during project execution."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Risk identification is an iterative process that should occur throughout the project, not just during the planning phase. This is crucial for real-world project management as new risks can emerge at any time.",
+      "time": 75
+    },
+    {
+      "questionText": "Why is it crucial for risk identification to occur throughout the project?",
+      "choices": [
+        "To ensure risks are avoided completely.",
+        "The risk profile of the project continues to evolve throughout the project's lifecycle.",
+        "To simplify risk response planning.",
+        "It is a mandatory requirement from the project sponsor."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The risk profile of a project is not static; it continues to evolve throughout the project's lifecycle. Therefore, the team should remain vigilant for emerging risks and monitor the status of identified risks throughout the project.",
+      "time": 75
+    },
+    {
+      "questionText": "After identifying over 500 risks for a project, what is the next logical step for the team before developing risk responses?",
+      "choices": [
+        "Implement risk responses for all identified risks.",
+        "Perform a qualitative risk analysis and prioritize the risks.",
+        "Delegate risk management to the project sponsor.",
+        "Eliminate risks with low impact."
+      ],
+      "correctAnswer": 1,
+      "explanation": "After identifying risks, the next logical step is to prioritize them to determine which ones warrant further attention. This is done through qualitative risk analysis, often using a probability and impact matrix, to focus risk planning efforts on the most significant risks.",
+      "time": 75
+    },
+    {
+      "questionText": "After performing qualitative risk analysis and prioritizing risks, what is the next *optional* phase in risk management?",
+      "choices": [
+        "Implement risk responses.",
+        "Perform a quantitative risk analysis and prioritize the risks.",
+        "Update the risk register.",
+        "Hold a risk audit."
+      ],
+      "correctAnswer": 1,
+      "explanation": "After completing qualitative analysis, the next optional phase is to \"Perform a quantitative risk analysis.\" This process numerically analyzes the effect of identified risks on overall project objectives and is typically used for high-priority risks.",
+      "time": 75
+    },
+    {
+      "questionText": "Who might request a work performance report to understand project progress objectively?",
+      "choices": [
+        "A junior team member.",
+        "The project manager.",
+        "A key stakeholder.",
+        "A functional manager."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A key stakeholder, such as a project sponsor or customer, would likely request a work performance report to objectively understand the project's progress against baselines.",
+      "time": 75
+    },
+    {
+      "questionText": "Which form of communication is recommended for situations involving complex, intricate, and personal information with a team member?",
+      "choices": [
+        "Sending text messages.",
+        "Sending emails.",
+        "Remote pairing.",
+        "Face to face communication."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Situations that involve complex, intricate, and personal information benefit from more robust communication channels, such as face-to-face communication. Given that addressing a sensitive and personal topic requires nuance and empathy, face-to-face communication is the correct choice.",
+      "time": 75
+    },
+    {
+      "questionText": "Which form of communication is useful for situations that convey simple, factual information?",
+      "choices": [
+        "Face to face communication.",
+        "Sending text messages, emails, or WhatsApp messages.",
+        "Video conferencing.",
+        "Formal presentations."
+      ],
+      "correctAnswer": 1,
+      "explanation": "While face-to-face communication is best for complex topics, sending text messages, emails, or other forms of written electronic communication is useful for conveying simple, factual information where immediate feedback or nuanced discussion is not required.",
+      "time": 75
+    },
+    {
+      "questionText": "'Noise' in communication includes any interference or barriers that might compromise the understanding of the message by the receiver (stakeholder). Which of the following is an example of 'Noise'?",
+      "choices": [
+        "Using concise expressions.",
+        "Coherent, logical flow of ideas.",
+        "Lack of appropriate knowledge or lack of interest from the receiver.",
+        "Confirming communication is understood."
+      ],
+      "correctAnswer": 2,
+      "explanation": "'Noise' refers to any interference or barrier that might compromise the understanding of a message. Examples can include physical distractions, language differences, cultural misunderstandings, or internal factors like a receiver's lack of appropriate knowledge or interest.",
+      "time": 75
+    },
+    {
+      "questionText": "To ensure successful communication in a project, which of the following should the project team aim to avoid?",
+      "choices": [
+        "Verbal communication.",
+        "Non-verbal communication.",
+        "Using the interactive communication model.",
+        "Noise that includes any interference or barriers."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The project team should aim to avoid or minimize noise, which includes any interference or barriers that might compromise the understanding of the message, to ensure effective communication.",
+      "time": 75
+    },
+    {
+      "questionText": "Why is the interactive communication model recommended?",
+      "choices": [
+        "It minimizes miscommunication.",
+        "It recognizes the need to ensure that messages have been understood.",
+        "It is suitable only when feedback is not needed.",
+        "It is a one-way communication method."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The interactive communication model is recommended because it is a multi-directional exchange that includes feedback loops, which recognizes the need to ensure that messages have been correctly received and understood.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the primary reason for including a contingency reserve fund in the project budget, relevant to addressing uncertainties for stakeholders?",
+      "choices": [
+        "To cover the cost of gold plating.",
+        "To deal with uncertainties that may arise during project execution.",
+        "To provide monetary rewards to the project team.",
+        "To acquire physical resources from external vendors."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The primary reason for including a contingency reserve fund in the project budget is to manage the 'known-unknown' risks—uncertainties that are identified but whose impact is not certain—without negatively impacting the project objectives.",
+      "time": 75
+    },
+    {
+      "questionText": "When is the contingency reserve used in a project?",
+      "choices": [
+        "Before the project planning phase.",
+        "Only if the project is over budget.",
+        "When a risk occurs as part of the risk response strategy.",
+        "To cover the cost of project closing activities."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The contingency reserve is used when an identified risk materializes. It is a part of the risk response strategy to cover the cost or time impact of that specific risk event.",
+      "time": 75
+    },
+    {
+      "questionText": "If risks do not materialize in a project, what happens to the contingency reserve associated with those risks?",
+      "choices": [
+        "It is added to the project's profit.",
+        "It is not spent.",
+        "It is used for additional project work.",
+        "It is returned to the project sponsor."
+      ],
+      "correctAnswer": 1,
+      "explanation": "If identified risks do not materialize, the contingency reserve associated with those risks is not spent. This can result in the project being completed under budget.",
+      "time": 75
+    },
+    {
+      "questionText": "Which type of contract is most suitable when the scope of work is clearly defined and the requirements are well understood?",
+      "choices": [
+        "Time and Material (T&M).",
+        "Cost-reimbursable.",
+        "Fixed-price.",
+        "Unit price."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Fixed-price contracts are most suitable when the scope of work is clearly defined and the requirements are well understood, as this allows the seller to accurately price the work and accept the risk of cost overruns.",
+      "time": 75
+    },
+    {
+      "questionText": "When developing a contract with an external vendor, what must the Project Manager ensure regarding the project's needs?",
+      "choices": [
+        "That only critical needs are included.",
+        "That all the needs of the project are included in the contract.",
+        "That needs can be defined later during execution.",
+        "That the vendor estimates the project needs."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The project manager must ensure that all the project's needs, requirements, and deliverables are clearly and completely included in the contract to avoid ambiguity and disputes later on.",
+      "time": 75
+    },
+    {
+      "questionText": "When a project has requirements that necessitate both predictive and adaptive styles of project management, what type of agreement is suitable for the overall engagement with the parties involved?",
+      "choices": [
+        "A fixed-price contract.",
+        "Separate contracts for predictive and adaptive parts.",
+        "A Master Services Agreement (MSA).",
+        "A simple letter of intent."
+      ],
+      "correctAnswer": 2,
+      "explanation": "In projects with both predictive and adaptive requirements, a Master Service Agreement (MSA) is often suitable for the overall engagement. It can set the general terms, while specific work orders or appendices can detail the different types of work.",
+      "time": 75
+    },
+    {
+      "questionText": "In a Master Services Agreement (MSA) for a project with both predictive and adaptive work, where can the adaptive work elements be placed to allow for more frequent changes?",
+      "choices": [
+        "In the main body of the contract.",
+        "In an appendix or supplement.",
+        "They should be excluded from the contract.",
+        "In a separate risk register."
+      ],
+      "correctAnswer": 1,
+      "explanation": "For adaptive work, where changes are expected to happen more frequently, the details can be placed in an appendix, supplement, or statement of work. This allows changes to occur in the adaptive scope without impacting the overarching MSA.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the benefit of placing adaptive work in an appendix or supplement of a Master Services Agreement?",
+      "choices": [
+        "It makes the contract legally binding.",
+        "It simplifies the predictive part of the work.",
+        "It allows changes to occur in the adaptive scope without impacting the overall contract.",
+        "It reduces the overall cost of the project."
+      ],
+      "correctAnswer": 2,
+      "explanation": "By placing adaptive work in an appendix or supplement, changes to that scope can be managed more flexibly without requiring a formal change to the main body of the Master Services Agreement, which governs the overall relationship.",
+      "time": 75
+    },
+    {
+      "questionText": "If a project team is unsure who should act upon escalations, and this lack of clarity leads to inaction, what is missing in the project?",
+      "choices": [
+        "A robust risk management plan.",
+        "Clear roles and responsibilities.",
+        "Sufficient team capacity.",
+        "A detailed communication plan."
+      ],
+      "correctAnswer": 1,
+      "explanation": "A lack of clarity around who should handle escalations points to a gap in project governance, specifically undefined roles and responsibilities. The project manager needs to establish clear escalation paths and ensure the team knows who is responsible for what.",
+      "time": 75
+    },
+    {
+      "questionText": "To address a lack of clarity on who handles escalations, what should the project manager do?",
+      "choices": [
+        "Add the issue to the lessons learned register.",
+        "Discuss the issue with the functional manager.",
+        "Establish a project governance structure, determine appropriate governance, and define an escalation path.",
+        "Discuss the issue with the project sponsor."
+      ],
+      "correctAnswer": 2,
+      "explanation": "To resolve ambiguity around escalations, the project manager should establish a clear project governance structure. This includes defining specific escalation paths and thresholds, and communicating them to the entire project team.",
+      "time": 75
+    },
+    {
+      "questionText": "In a moment of chaos, such as a nano-technology project lacking clarity on requirements and facing a tight schedule, which leadership style can create clarity for the team and stakeholders?",
+      "choices": [
+        "Democratic.",
+        "Participative.",
+        "Laissez-faire.",
+        "Directive."
+      ],
+      "correctAnswer": 3,
+      "explanation": "In moments of chaos or crisis, a directive leadership style can be effective in creating clarity and providing a clear path forward. The project manager takes control and makes decisions to stabilize the situation.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a potential negative consequence of attempting to bring too many organizational changes in the shortest possible time, which could impact stakeholders?",
+      "choices": [
+        "Increased employee motivation.",
+        "Change fatigue and resistance to changes.",
+        "Faster project delivery.",
+        "Reduced communication complexity."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Attempting to implement too many changes too quickly can lead to change fatigue among stakeholders and employees. This overload can result in confusion, burnout, and increased resistance to the changes.",
+      "time": 75
+    },
+    {
+      "questionText": "When acting as a facilitator for a project team, what should the facilitator avoid doing?",
+      "choices": [
+        "Fostering Collaboration.",
+        "Encouraging Participation.",
+        "Resolving conflicts if any.",
+        "Making decisions or offering opinions."
+      ],
+      "correctAnswer": 3,
+      "explanation": "A facilitator's role is to guide the group's process, not to influence the content of their discussion. To maintain impartiality and empower the group, the facilitator should avoid making decisions for the group or offering their own opinions on the subject matter.",
+      "time": 75
+    },
+    {
+      "questionText": "What is an undesirable characteristic of project deliverables or project management artifacts?",
+      "choices": [
+        "They are tangible or intangible items produced by the project.",
+        "They serve as illustrative examples of tasks.",
+        "They fail to provide value to the project team or project stakeholders.",
+        "They describe the participation of various roles in tasks."
+      ],
+      "correctAnswer": 2,
+      "explanation": "To the greatest extent possible, the project team should avoid creating models, methods, and artifacts that offer no utility or value to the project team or other project stakeholders.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the definition of explicit knowledge in the context of knowledge management?",
+      "choices": [
+        "Informal knowledge gained through joint activities.",
+        "Formal knowledge that can be codified, such as in documents, databases, or procedures.",
+        "Knowledge shared verbally.",
+        "Knowledge specific to a technical domain."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Knowledge management models divide knowledge into two components. Explicit knowledge is formal knowledge that can be readily articulated, codified, stored, and accessed. It is often found in documents, databases, and process flows.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the definition of tacit knowledge in the context of knowledge management?",
+      "choices": [
+        "Formal knowledge gained through codified frameworks.",
+        "Knowledge documented in project artifacts.",
+        "Informal knowledge gained through experience, intuition, and joint activities among individuals.",
+        "Knowledge shared via presentations."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Knowledge management models divide knowledge into two components. Tacit knowledge is informal and difficult to articulate or codify; it is gained through personal experience, insight, and joint activities among individuals.",
+      "time": 75
+    },
+    {
+      "questionText": "What type of project knowledge can be shared or captured via documentation?",
+      "choices": [
+        "Only tacit knowledge.",
+        "Only informal knowledge.",
+        "Only codified explicit knowledge.",
+        "All types of knowledge."
+      ],
+      "correctAnswer": 2,
+      "explanation": "It is the codified explicit project knowledge that can be documented and shared through artifacts like manuals, reports, and databases. Tacit knowledge is much harder to document and is often shared through mentorship and collaboration.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a key responsibility of the Scrum Master regarding obstacles faced by the project team during a sprint, impacting their ability to deliver value to stakeholders?",
+      "choices": [
+        "To assign tasks to team members.",
+        "To remove obstacles or impediments.",
+        "To prioritize the product backlog.",
+        "To write acceptance criteria for user stories."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Scrum Master role is crucial in the Scrum framework because one of the primary responsibilities of the Scrum Master is to remove obstacles or impediments that are hindering the project team's progress during the sprint.",
+      "time": 75
+    },
+    {
+      "questionText": "In Scrum, what is a key responsibility of the Scrum Master besides removing obstacles?",
+      "choices": [
+        "Reporting project status to the project sponsor.",
+        "Managing the project budget.",
+        "Coaching the development team on the Scrum framework and ensuring correct usage.",
+        "Conducting daily stand-up meetings."
+      ],
+      "correctAnswer": 2,
+      "explanation": "In addition to helping the team by removing obstacles, another key responsibility of the Scrum Master is to act as a coach, guiding the development team on the Scrum framework and ensuring that team members correctly use its principles and practices.",
+      "time": 75
+    },
+    {
+      "questionText": "Who should run the daily stand-ups in an Agile team?",
+      "choices": [
+        "The Scrum Master.",
+        "The Product Owner.",
+        "The Agile coach.",
+        "The team itself."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The daily stand-up is a meeting for the development team, by the development team. While a Scrum Master may facilitate, the meeting is owned by and should be run by the team members themselves to foster ownership and self-organization.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the primary reason why Agile/Scrum teams meet daily for the Daily Stand-up?",
+      "choices": [
+        "To provide status updates to the project manager.",
+        "To assign tasks for the day.",
+        "To uncover problems.",
+        "To hold long technical discussions."
+      ],
+      "correctAnswer": 2,
+      "explanation": "While the Daily Stand-up helps with planning and coordination, its primary purpose is to quickly uncover problems or impediments that are blocking progress so they can be addressed promptly.",
+      "time": 75
+    },
+    {
+      "questionText": "If a project team stops doing daily stand-ups, what is a likely negative impact?",
+      "choices": [
+        "The team will be able to uncover problems more efficiently.",
+        "Nothing much happens as daily stand up is optional.",
+        "The team will not be able to uncover problems in a timely manner.",
+        "The Product Owner will assign tasks."
+      ],
+      "correctAnswer": 2,
+      "explanation": "If a team stops conducting the Daily Stand-up, they lose a critical, structured opportunity to report and address impediments. This means problems may go undiscovered for longer, negatively impacting project delivery.",
+      "time": 75
+    },
+    {
+      "questionText": "What should happen in a Daily Stand-up if a team member faces an impediment?",
+      "choices": [
+        "The team should immediately stop and solve the problem.",
+        "The team member should wait until the end of the sprint to report it.",
+        "The impediment should be mentioned so the team is aware and can decide if it's a blocker.",
+        "The Scrum Master should solve the problem outside the meeting."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Daily Stand-up is for identifying, not solving, problems. A team member facing an impediment should state it clearly so the team is aware. The actual problem-solving should happen after the meeting with only the relevant people involved.",
+      "time": 75
+    },
+    {
+      "questionText": "In an Agile project setting, what is a key focus for the Agile project manager?",
+      "choices": [
+        "Assigning work items from the backlog to team members.",
+        "Selecting work items from the backlog for the sprint.",
+        "Building a collaborative decision-making environment.",
+        "Controlling the daily activities of the team."
+      ],
+      "correctAnswer": 2,
+      "explanation": "In an Agile setting, the project manager's role shifts from command-and-control to servant leadership. A key focus is on building a collaborative decision-making environment where the team is empowered and self-organizing.",
+      "time": 75
+    },
+    {
+      "questionText": "In an Agile project, while the development team selects work items and decides who works on what, what is a key focus for the Agile project manager?",
+      "choices": [
+        "Estimating the effort for each work item.",
+        "Ensuring that the team has the ability to respond to changes.",
+        "Reporting detailed daily progress to stakeholders.",
+        "Managing all external dependencies."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The focus of an Agile project manager (or servant leader) is to create an environment where the team can thrive. This includes shielding the team from interruptions and ensuring they have the ability to respond to changes effectively, thus maintaining agility.",
+      "time": 75
+    },
+    {
+      "questionText": "If a project team consistently takes longer than 15 minutes for their daily stand-up meetings because they are discussing how to resolve problems, what should they do?",
+      "choices": [
+        "Extend the stand-up duration to 60 minutes.",
+        "Add the issue to a parking lot and create another meeting at the end of the sprint to address it.",
+        "Escalate the issue to the product owner for scope reduction.",
+        "Add the issue to a parking lot and create another meeting right after the stand-up with relevant parties."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The daily stand-up should be kept to its timebox (typically 15 minutes) to maintain focus. If problem-solving discussions arise, they should be 'parked' and addressed in a separate meeting immediately after the stand-up with only the necessary participants.",
+      "time": 75
+    },
+    {
+      "questionText": "When addressing issues or problems in a project, what general principle should project managers and teams follow?",
+      "choices": [
+        "Pass it on to senior leadership.",
+        "Delegate it to the project sponsor.",
+        "Address the problems themselves as much as possible.",
+        "Add all issues to a parking lot for later review."
+      ],
+      "correctAnswer": 2,
+      "explanation": "As a general principle, project managers and teams should take ownership and address problems themselves whenever possible, rather than immediately passing them on to others. Escalation is appropriate when an issue is beyond the team's authority or capability to resolve.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a characteristic of T-shaped, generalized specialists in Agile teams?",
+      "choices": [
+        "They have deep expertise in all specialties needed on the project.",
+        "They can help reduce bottlenecks by taking up work from other team members.",
+        "They only work on tasks within their deep expertise.",
+        "They are less valuable to the team than I-shaped specialists."
+      ],
+      "correctAnswer": 1,
+      "explanation": "T-shaped team members have deep expertise in one area (the vertical bar of the 'T') and broad knowledge in other areas (the horizontal bar). This allows them to be flexible and take on work outside their specialty, which helps reduce bottlenecks and improves team flow.",
+      "time": 75
+    },
+    {
+      "questionText": "How can T-shaped, generalized specialists help reduce handoffs in an Agile team?",
+      "choices": [
+        "By only working on tasks within their specialty.",
+        "By having broad knowledge in other areas and sometimes working on activities before and after their primary role.",
+        "By delegating tasks to I-shaped specialists.",
+        "By eliminating the need for documentation."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Generalized specialists can spend time on activities that come before or after their primary work. Because they have a broader skill set, they can perform multiple types of tasks within a single work item, reducing the need to hand it off to another specialist.",
+      "time": 75
+    },
+    {
+      "questionText": "Which of the following is NOT true about T-shaped, generalized specialists?",
+      "choices": [
+        "They offer more value than I-shaped skills.",
+        "They can help reduce bottlenecks.",
+        "They are skilled in all the specialties needed on the project and can take any role as needed.",
+        "They can help reduce handoffs."
+      ],
+      "correctAnswer": 2,
+      "explanation": "T-shaped skills refer to a team member who has deep expertise in one area and broad knowledge in others. While they have multiple skills, it is highly unlikely that a single individual would have deep expertise in all the skills needed to deliver the entire project.",
+      "time": 75
+    },
+    {
+      "questionText": "What practices are recommended to be adopted in agile projects to potentially reduce defect rates, in contrast to a loose Definition of Done?",
+      "choices": [
+        "Lack of testing and inspection.",
+        "Centralized decision making.",
+        "Pair work, pervasive testing, and collective product/code ownership.",
+        "Minimizing stakeholder involvement."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Practices like pair work (or mobbing), pervasive testing (such as ATDD or TDD), and collective product/code ownership are all recommended in agile projects to build quality in and reduce defect rates. A loose Definition of Done often contributes to higher defect rates.",
+      "time": 75
+    },
+    {
+      "questionText": "What does collective code ownership mean in Extreme Programming (XP)?",
+      "choices": [
+        "Only pre-identified team members are authorized to modify any project work product.",
+        "Any team member is authorized to modify only non-urgent project work products.",
+        "Any team member is authorized to modify any project work product or deliverables, emphasizing team-wide ownership and accountability.",
+        "The code is owned by the project manager."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Collective code ownership is a project acceleration and collaboration technique whereby any team members are authorized to modify any project work product or deliverables, thus emphasizing team-wide ownership and accountability.",
+      "time": 75
+    },
+    {
+      "questionText": "Which of the following is a recommended prioritization guideline for project work, considering factors like learning and ambiguity?",
+      "choices": [
+        "Prioritize work items which are repetitive.",
+        "Prioritize work items which are unambiguous.",
+        "Prioritize work items which are novel or unique.",
+        "Prioritize work items with the lowest risk."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Work that is novel, unique, or carries more risk also carries significant ambiguity and learning opportunities. It is generally recommended to prioritize such work early in the project to address uncertainty and validate assumptions sooner.",
+      "time": 75
+    },
+    {
+      "questionText": "Work items that are repetitive in nature or have a clear, unambiguous understanding should generally be scheduled for when?",
+      "choices": [
+        "The beginning of the project to reduce uncertainty.",
+        "The later phases of the project development.",
+        "Only if the project is ahead of schedule.",
+        "They should be outsourced to external vendors."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Work that is repetitive and well-understood is considerably less risky. Such tasks can often be scheduled for later phases of project development, after more uncertain and high-risk items have been addressed.",
+      "time": 75
+    },
+    {
+      "questionText": "A manufacturing company plans a new quality control system project to address high defect rates. What should be a key component of the project's justification?",
+      "choices": [
+        "A detailed stakeholder list.",
+        "A comprehensive change management plan.",
+        "A cost-benefit analysis and assumptions.",
+        "Detailed resource allocation plans."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Project justification typically includes a cost-benefit analysis, which weighs the expected benefits of the project against its expected costs, along with the assumptions made during the analysis.",
+      "time": 75
+    },
+    {
+      "questionText": "Which communication method is a one-way communication where a sender transmits a message to a receiver who does not provide a response?",
+      "choices": [
+        "Interactive communication model.",
+        "Linear communication model.",
+        "Pull communication.",
+        "Push communication."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The linear communication model describes one-way communication in which a sender transmits a message to a receiver who listens or reads but does not provide feedback within the model.",
+      "time": 75
+    },
+    {
+      "questionText": "The linear communication model is suitable only under what specific condition?",
+      "choices": [
+        "When maximum interaction is needed.",
+        "When feedback is not needed.",
+        "When complex information is being shared.",
+        "When the stakeholder community is small."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The linear communication model is suitable only for situations where feedback from the receiver is not required, such as in mass communications or formal announcements.",
+      "time": 75
+    },
+    {
+      "questionText": "In the linear communication model, what action does the receiver perform?",
+      "choices": [
+        "Encodes the message.",
+        "Decodes the message.",
+        "Provides feedback.",
+        "Transmits the message."
+      ],
+      "correctAnswer": 1,
+      "explanation": "In linear communication, the sender encodes a message and transmits it through a channel. The receiver's role is to receive and decode the message to understand its meaning.",
+      "time": 75
+    },
+    {
+      "questionText": "Confirming communication is understood and receiving feedback is an essential part of effective communication. Which practices should the team use for this purpose?",
+      "choices": [
+        "Holding feedback sessions, conducting surveys, arranging product demos, conducting retrospective sessions.",
+        "Sending one-way linear communications.",
+        "Avoiding non-verbal cues.",
+        "Minimizing interaction with stakeholders."
+      ],
+      "correctAnswer": 0,
+      "explanation": "Confirming that communication is understood is essential. Effective practices include holding feedback sessions, conducting surveys, arranging product demos, and conducting retrospective sessions, all of which provide opportunities for feedback and clarification.",
+      "time": 75
+    },
+    {
+      "questionText": "The PMBOK Guide recommends using the 5 Cs of written communication. Which of the following is one of these 5 Cs?",
+      "choices": [
+        "Clear purpose and expressions directed to the needs of the writer.",
+        "Concise expression and elimination of excess words.",
+        "Focus on quantity over quality.",
+        "Exclusion of all technical jargon."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The 5 Cs of written communication include: Clear purpose, Concise expression, Coherent and logical flow, Controlling the flow of words, and Correct grammar and spelling. Using concise expressions and eliminating excess words is a key component.",
+      "time": 75
+    },
+    {
+      "questionText": "When writing a message, the PMBOK guide's 5 Cs of written communication emphasize focusing on whose needs?",
+      "choices": [
+        "The needs of the writer.",
+        "The needs of the performing organization.",
+        "The needs of the project sponsor.",
+        "The needs of the reader."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The 5 Cs of written communication include 'Clear purpose and expressions directed to the needs of the reader.' The focus should always be on the recipient's understanding, not the writer's perspective.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a recommended best practice for written communication according to the PMBOK guide's 5 Cs?",
+      "choices": [
+        "Using excessive words to provide context.",
+        "Ignoring grammar and spelling in informal communication.",
+        "Ensuring correct grammar and spelling in all written communication.",
+        "Focusing the purpose and expressions on the writer's needs."
+      ],
+      "correctAnswer": 2,
+      "explanation": "One of the 5 Cs is 'Correct grammar and spelling.' Maintaining correctness in all written communication, both formal and informal, ensures professionalism and clarity.",
+      "time": 75
+    },
+    {
+      "questionText": "A robust Definition of Done is important to ensure everyone has a shared understanding of the level of quality and completeness expected for each deliverable. Who should the project team work with to prepare this?",
+      "choices": [
+        "The Scrum Master.",
+        "The quality assurance manager.",
+        "The project manager.",
+        "The product owner."
+      ],
+      "correctAnswer": 3,
+      "explanation": "To create a robust Definition of Done, the project team should collaborate with the product owner to ensure a shared understanding of the quality and completeness required for a product increment to be considered shippable.",
+      "time": 75
+    },
+    {
+      "questionText": "How does establishing a clear Definition of Done help the project team and potentially satisfy stakeholders?",
+      "choices": [
+        "It allows the team to postpone difficult tasks.",
+        "It reduces rework and increases efficiency.",
+        "It increases the number of defects.",
+        "It removes the need for testing."
+      ],
+      "correctAnswer": 1,
+      "explanation": "By establishing a clear Definition of Done, the team ensures everyone has a shared understanding of the quality and completeness expected for each deliverable. This clarity helps reduce rework, increase efficiency, and improve overall product quality.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a key takeaway from the formula for potential communication channels regarding stakeholders?",
+      "choices": [
+        "Communication complexity decreases with more stakeholders.",
+        "Communication complexity is independent of the number of stakeholders.",
+        "Communication complexity increases exponentially as the number of project stakeholders increases.",
+        "The formula is only applicable to Agile projects."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The key takeaway from the formula n(n-1)/2 is that a project’s communication complexity increases exponentially as the number of project stakeholders increases. This highlights the importance of a deliberate communication strategy on larger projects.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the purpose of documenting identified risks in project artifacts such as a risk register or risk logs?",
+      "choices": [
+        "To avoid performing risk analysis.",
+        "To ensure that the project team has access to these identified risks during project execution.",
+        "To transfer risk ownership to the project sponsor.",
+        "To eliminate all project uncertainties."
+      ],
+      "correctAnswer": 1,
+      "explanation": "It is important to document identified risks in artifacts such as a risk register or risk logs. This creates a central record that ensures the project team has access to this information for analysis, response planning, and monitoring during project execution.",
+      "time": 75
+    },
+    {
+      "questionText": "For the PMP exam, what is advised regarding following the principles and guidelines mentioned in the PMBOK Guide?",
+      "choices": [
+        "It is only necessary if your organization follows them.",
+        "It is advised to follow them regardless of organizational practices.",
+        "They are irrelevant for the exam.",
+        "They should be customized based on the project."
+      ],
+      "correctAnswer": 1,
+      "explanation": "For the PMP Exam, it is advised to base answers on the principles and guidelines mentioned in the PMBOK Guide and other PMI standards, even if they differ from practices in your own organization.",
+      "time": 75
+    },
+    {
+      "questionText": "In a scenario where there are recurring escalations because the team is unsure who should act on them, what is the root cause, and what should the PM do?",
+      "choices": [
+        "Root cause: Lack of technical skills; PM should hire T-shaped people.",
+        "Root cause: Lack of trust with the sponsor; PM should improve communication.",
+        "Root cause: Lack of clarity on escalation handling; PM should establish project governance and define the escalation path.",
+        "Root cause: High defect count; PM should focus on quality control."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The root cause of recurring, unhandled escalations is a lack of clarity around roles, responsibilities, and processes. The project manager needs to establish a clear project governance structure, define escalation paths and thresholds, and ensure the project team is aware of them.",
+      "time": 75
+    },
+    {
+      "questionText": "Project management plans are created by which role, according to the PMBOK Guide?",
+      "choices": [
+        "The project sponsor.",
+        "The project manager.",
+        "The project team.",
+        "The PMO."
+      ],
+      "correctAnswer": 1,
+      "explanation": "According to the PMBOK Guide, while the Project Charter is typically issued by the sponsor, the detailed project management plans are created by the project manager, often in collaboration with the project team and other key stakeholders.",
+      "time": 75
+    },
+    {
+      "questionText": "What is one of the activities a project manager *can* be called upon to perform, according to PMI, related to project initiation stakeholders?",
+      "choices": [
+        "Approving the project charter.",
+        "Assisting in business case development.",
+        "Excluding stakeholders from planning.",
+        "Taking all decision-making power."
+      ],
+      "correctAnswer": 1,
+      "explanation": "According to PMI, the project manager can be called upon to perform additional activities beyond direct project execution, such as assisting in the development of the business case that justifies the project.",
+      "time": 75
+    },
+    {
+      "questionText": "According to PMI, which role should typically *not* approve the project charter?",
+      "choices": [
+        "The project sponsor.",
+        "A person with similar authority.",
+        "The project manager.",
+        "The project initiating entity."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The project manager should not typically approve the project charter. The charter is usually approved by the project sponsor or a similar authority who authorizes the project and its resources.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the position of control given to certain individuals within an organization through formal means such as a charter document or designated title?",
+      "choices": [
+        "Leadership.",
+        "Authority.",
+        "Responsibility.",
+        "Accountability."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Authority is the formal right to exercise power and control, typically granted to an individual through a designated title, a role in the organizational structure, or a formal document like a project charter.",
+      "time": 75
+    },
+    {
+      "questionText": "Unlike authority, leadership in a project environment is not exclusive to any specific role. Who can engage in \"leadership\" activities?",
+      "choices": [
+        "Only the project manager.",
+        "Only the project sponsor.",
+        "Only the project team lead.",
+        "Any team member or all the team members."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Leadership is an action and an influence, not a formal position. In a project environment, any team member can and should engage in leadership activities, such as guiding, motivating, and influencing others toward a common goal.",
+      "time": 75
+    },
+    {
+      "questionText": "What happens to the project baselines (cost, schedule, performance) if a suggested change is accepted during the execution phase?",
+      "choices": [
+        "They remain unchanged.",
+        "They will be replaced by the new plan.",
+        "They may be impacted.",
+        "They must be approved by the project sponsor."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Once project baselines for cost, schedule, and scope are established, accepting a change request during execution will likely impact one or more of these baselines, requiring a formal update through the change control process.",
+      "time": 75
+    },
+    {
+      "questionText": "Who can request changes to a project?",
+      "choices": [
+        "Only the product owner.",
+        "Only the project sponsor.",
+        "Only the project manager.",
+        "Any project stakeholders of the project including the Project team."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Changes can be requested by any stakeholder involved in the project, including the project team, customers, the project manager, or the sponsor.",
+      "time": 75
+    },
+    {
+      "questionText": "If a project team receives a change request, what should they do?",
+      "choices": [
+        "Reject the change immediately.",
+        "Approve the change if suggested by a junior member to keep motivation high.",
+        "Approve the change if it impacts baselines.",
+        "Follow the project change control process and approve or reject based on the outcome."
+      ],
+      "correctAnswer": 3,
+      "explanation": "All change requests, regardless of who requests them, should be formally evaluated through the project's established change control process. The change should be approved or rejected based on the analysis of its impact, not on the seniority of the requester.",
+      "time": 75
+    },
+    {
+      "questionText": "What does the value, \"Individuals and interactions over processes and tools,\" in Agile emphasize, relevant to stakeholder collaboration?",
+      "choices": [
+        "Strict adherence to processes and tools.",
+        "Prioritizing documentation over conversations.",
+        "The importance of collaboration and communication within the team, including involving team members in decision-making.",
+        "Minimizing stakeholder involvement in discussions."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Agile value, “Individuals and interactions over processes and tools,” emphasizes that while processes and tools are valuable, direct communication, collaboration, and involving team members in decision-making are more effective for solving problems and delivering value.",
+      "time": 75
+    },
+    {
+      "questionText": "If a key stakeholder's engagement is declining, what is a recommended first step for the project manager?",
+      "choices": [
+        "Stop communicating with that stakeholder.",
+        "Initiate a one-on-one meeting to understand concerns, gather feedback, and reconfirm expectations.",
+        "Escalate the issue to senior leadership immediately.",
+        "Proceed with the project without their input."
+      ],
+      "correctAnswer": 1,
+      "explanation": "To address declining engagement from a key stakeholder, the project manager should proactively initiate a one-on-one meeting. This provides an opportunity to understand their concerns, gather feedback, and reconfirm expectations, allowing for corrective actions to re-engage them effectively.",
+      "time": 75
+    },
+    {
+      "questionText": "The product owner's approach to delivering only the essential features needed to provide value and validate the product idea through user feedback aligns with which concept?",
+      "choices": [
+        "Minimum Marketable Feature (MMF).",
+        "Scope baseline.",
+        "Minimum Viable Product (MVP).",
+        "Work Breakdown Structure (WBS)."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The product owner’s approach aligns with the MVP concept, which involves delivering only the essential features needed to provide value and validate the product idea through user feedback. MMF focuses on the smallest feature set that provides value to be marketed or sold.",
+      "time": 75
+    },
+    {
+      "questionText": "In project procurement management processes, agreements describe the relationship between which two parties?",
+      "choices": [
+        "Project manager and project team.",
+        "Project sponsor and PMO.",
+        "Buyer and vendor or seller.",
+        "Stakeholder and functional manager."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Project procurement management processes involve agreements that describe the legal and working relationship between two parties: the buyer (the organization performing the project) and the vendor or seller (the external provider of goods or services).",
+      "time": 75
+    },
+    {
+      "questionText": "Regarding contractual agreements with vendors, what scenario should be avoided as much as possible because it results in one party ending up worse off?",
+      "choices": [
+        "Win-win scenarios.",
+        "Negotiated scenarios.",
+        "Lose-win, win-lose, or lose-lose scenarios.",
+        "Fixed-price scenarios."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Contractual agreements should ideally be a win-win for both the buyer and the vendor. Scenarios like lose-win, win-lose, or lose-lose are not sustainable as they result in one or both parties being dissatisfied, which can damage the relationship and the project.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the primary characteristic of a project?",
+      "choices": [
+        "Ongoing, repetitive activities.",
+        "A temporary endeavor undertaken to create a unique product, service, or result.",
+        "Management of multiple related projects.",
+        "Achieving strategic objectives."
+      ],
+      "correctAnswer": 1,
+      "explanation": "A project is defined as a temporary endeavor with a specific start and end date, aimed at creating a unique product, service, or result.",
+      "time": 75
+    },
+    {
+      "questionText": "Operations are described as what type of activities?",
+      "choices": [
+        "Temporary endeavors with a clear start and finish.",
+        "Ongoing, repetitive activities to sustain business functions.",
+        "Management of multiple projects as a group.",
+        "Activities aimed at creating a unique result."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Operations involve the ongoing, repetitive activities required to sustain business functions, such as manufacturing, IT support, or customer service.",
+      "time": 75
+    },
+    {
+      "questionText": "After a project to deploy new software and complete training is finished, what happens regarding the project team's responsibilities?",
+      "choices": [
+        "They continue to monitor and maintain the software.",
+        "Their responsibilities should end after the handover to operations is completed.",
+        "They start planning the next related project.",
+        "They become part of the operations team."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Once a project's deliverables are complete and formally handed over, the project is considered closed. Ongoing monitoring and maintenance become the responsibility of the operations team. The project team’s responsibilities end with the successful handover.",
+      "time": 75
+    },
+    {
+      "questionText": "What does extrinsic motivation refer to?",
+      "choices": [
+        "Motivation that comes from within an individual.",
+        "Motivation that comes from external rewards or recognition.",
+        "Motivation driven by a sense of purpose.",
+        "Motivation derived from peer pressure."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Extrinsic motivation refers to motivation that comes from external factors, such as a bonus, a promotion, a tangible reward, or public recognition.",
+      "time": 75
+    },
+    {
+      "questionText": "In a geographically dispersed team, what is the most effective tool for real-time access to project information?",
+      "choices": [
+        "Email communication.",
+        "Face-to-face meetings.",
+        "A shared cloud-based document repository.",
+        "Printed status reports."
+      ],
+      "correctAnswer": 2,
+      "explanation": "In a geographically dispersed team, a shared cloud-based document repository is the most effective tool for providing all team members with real-time access to the latest project information and artifacts, regardless of their location.",
+      "time": 75
+    },
+    {
+      "questionText": "What is tracked and managed in an issue log?",
+      "choices": [
+        "Individual risks.",
+        "Overall risk exposure.",
+        "Issues, not risks.",
+        "Project performance metrics."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The issue log is used to track and manage issues, which are current problems or points of conflict that must be addressed. A risk register, in contrast, is used to document potential future events (risks).",
+      "time": 75
+    },
+    {
+      "questionText": "What is the definition of domains in the updated framework for the PMP Examination Content Outline?",
+      "choices": [
+        "Fundamental responsibilities of project managers.",
+        "Illustrative examples of activities associated with tasks.",
+        "Overarching knowledge areas crucial to the practice of project management.",
+        "Specific tools and techniques used in project management."
+      ],
+      "correctAnswer": 2,
+      "explanation": "In the PMP Examination Content Outline, Domains are defined as the overarching high-level knowledge areas that are crucial to the practice of project management (e.g., People, Process, Business Environment).",
+      "time": 75
+    },
+    {
+      "questionText": "What do tasks represent within each domain in the PMP Examination Content Outline?",
+      "choices": [
+        "Overarching knowledge areas.",
+        "Illustrative examples of activities.",
+        "The underlying responsibilities of the project manager.",
+        "Metrics for measuring project success."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Within each domain, Tasks represent the underlying responsibilities of the project manager. They describe the specific work that project managers perform.",
+      "time": 75
+    },
+    {
+      "questionText": "What purpose do enablers serve in the PMP Examination Content Outline?",
+      "choices": [
+        "They are an exhaustive list of all activities.",
+        "They serve as illustrative examples of activities associated with each task.",
+        "They define the boundaries of the project scope.",
+        "They determine the percentage of questions on the exam."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Enablers serve as illustrative examples of the work associated with each task. They are not an exhaustive list but provide examples to clarify the scope of the task.",
+      "time": 75
+    },
+    {
+      "questionText": "What proportion of questions on the PMP examination will assess predictive project management methods?",
+      "choices": [
+        "Approximately one quarter.",
+        "Approximately one third.",
+        "Approximately half.",
+        "Approximately three quarters."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Approximately half of the PMP examination assesses predictive project management methods, while the other half evaluates agile or hybrid approaches.",
+      "time": 75
+    },
+    {
+      "questionText": "In which areas will predictive, agile, and hybrid approaches be integrated across the PMP examination?",
+      "choices": [
+        "Only in specific domain areas or tasks.",
+        "Only in the planning domain.",
+        "Only in the execution domain.",
+        "Across all three domain areas."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Predictive, agile, and hybrid approaches are integrated across all three domain areas (People, Process, Business Environment) and are not confined to any specific domain or task.",
+      "time": 75
+    },
+    {
+      "questionText": "What does the Job Task Analysis (JTA) research confirm about contemporary project management professionals?",
+      "choices": [
+        "They primarily use predictive methods.",
+        "They primarily use agile methods.",
+        "They operate within diverse project settings and employ various project methodologies.",
+        "They focus solely on technical skills."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Job Task Analysis (JTA) research confirmed that contemporary project management professionals operate in diverse project environments and utilize a variety of project approaches (predictive, agile, and hybrid).",
+      "time": 75
+    },
+    {
+      "questionText": "What is the purpose of practice exams aligned with the PMBOK Guide, 7th Edition?",
+      "choices": [
+        "To provide a summary of the latest PMBOK Guide.",
+        "To gauge readiness by mimicking the format, content, and difficulty of the actual exam.",
+        "To replace the need for studying the PMBOK Guide.",
+        "To offer external information not found in the guide."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Practice exams mimic the format, content, and difficulty level of the actual exam, helping candidates gauge their readiness. Questions are typically aligned with the latest PMBOK Guide, ensuring preparation is based on current standards.",
+      "time": 75
+    },
+    {
+      "questionText": "What is typically provided for each question in practice exams to help users understand underlying concepts and principles?",
+      "choices": [
+        "Detailed explanations for why the correct answer is right.",
+        "References to external sources.",
+        "Simple answers without justification.",
+        "An exhaustive list of all related concepts."
+      ],
+      "correctAnswer": 0,
+      "explanation": "Detailed explanations are typically provided for each question. They not only identify the correct answer but also clarify why it's the right choice, helping users understand the underlying concepts and principles of project management.",
+      "time": 75
+    },
+    {
+      "questionText": "In a project with stable requirements and no need for multiple deliveries, which project methodology/method is appropriate?",
+      "choices": [
+        "Iterative.",
+        "Agile.",
+        "Incremental.",
+        "Predictive."
+      ],
+      "correctAnswer": 3,
+      "explanation": "For projects where requirements are fixed and stable, and there is no need for multiple deliveries, the predictive (or waterfall) methodology is the most appropriate choice.",
+      "time": 75
+    },
+    {
+      "questionText": "For a software development project needing a continuous flow of work and value to customers, with a team new to Agile, which approach is less prescriptive and easier to adapt?",
+      "choices": [
+        "SCRUM.",
+        "Agile Unified Process.",
+        "Crystal.",
+        "Kanban."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Among the agile options, Kanban is highly adaptable and allows for a continuous flow of work. It is less prescriptive than other frameworks like Scrum, making it a suitable choice for a team that is new to agile methods.",
+      "time": 75
+    },
+    {
+      "questionText": "In Scrum, what is the 15-minute time-boxed event for the development team to synchronize activities and plan for the next 24 hours?",
+      "choices": [
+        "Sprint Planning.",
+        "Sprint Review.",
+        "Daily Scrum or Daily Standup.",
+        "Sprint Retrospective."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Daily Scrum (or Daily Stand-up) is a 15-minute time-boxed event for the Development Team to inspect progress toward the Sprint Goal and adapt the Sprint Backlog as necessary.",
+      "time": 75
+    },
+    {
+      "questionText": "What are the three questions typically discussed in a Daily Scrum?",
+      "choices": [
+        "What went wrong yesterday? What will we do today? What is the project status?",
+        "What did you do yesterday? What will you do today? Is there anything blocking your progress?",
+        "What is the budget status? What is the schedule status? What is the quality status?",
+        "What did the Product Owner do yesterday? What will the Scrum Master do today? Are stakeholders happy?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The three classic questions for the Daily Scrum are: What did you do yesterday? What will you do today? Is there anything blocking your progress? These help the team coordinate and identify impediments.",
+      "time": 75
+    },
+    {
+      "questionText": "What are the three Scrum roles?",
+      "choices": [
+        "Project Manager, Team Lead, Business Analyst.",
+        "Product Owner, Scrum Master, and the Development Team.",
+        "Scrum Master, Agile Coach, Stakeholder.",
+        "Product Owner, Team Member, Quality Assurance."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Scrum framework defines three specific roles: the Product Owner (responsible for maximizing product value), the Scrum Master (a servant-leader for the team), and the Development Team (self-organizing professionals who do the work).",
+      "time": 75
+    },
+    {
+      "questionText": "What are some examples of Scrum events or ceremonies?",
+      "choices": [
+        "Risk Identification Meeting, Change Control Meeting, Status Meeting.",
+        "Daily Stand-Up, Backlog Refinement Meeting, Sprint Retrospective, and Sprint Review.",
+        "Project Planning Meeting, Requirements Gathering Meeting, Design Review.",
+        "Lessons Learned Meeting, Procurement Meeting, Stakeholder Identification Meeting."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Scrum events (often called ceremonies) include the Sprint itself, Sprint Planning, Daily Scrum (or Stand-Up), Sprint Review, and Sprint Retrospective. Backlog Refinement is a common ongoing activity.",
+      "time": 75
+    },
+    {
+      "questionText": "What are the three Scrum artifacts?",
+      "choices": [
+        "Project Charter, Project Management Plan, Work Performance Reports.",
+        "Business Case, Stakeholder Register, Risk Register.",
+        "Sprint Backlog, Product Backlog, and Product Increment.",
+        "Requirements Document, Design Document, Test Plan."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The three official artifacts in Scrum are the Product Backlog (the master list of all work), the Sprint Backlog (the plan for the current Sprint), and the Product Increment (the sum of all completed backlog items during a Sprint).",
+      "time": 75
+    },
+    {
+      "questionText": "What does a CPI of 0.20 indicate about a project's cost performance?",
+      "choices": [
+        "The project is under budget.",
+        "The project is on budget.",
+        "The project is significantly over budget and not performing well in terms of cost.",
+        "The CPI is not relevant to cost performance."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A Cost Performance Index (CPI) of less than 1 indicates a cost overrun. A CPI of 0.20 is significantly less than 1, signaling that the project is heavily over budget and performing very poorly in terms of cost efficiency.",
+      "time": 75
+    },
+    {
+      "questionText": "When planning resources for a project, what is it equally important for a project manager to know besides what resources are needed and in what quantity?",
+      "choices": [
+        "The cost of the resources.",
+        "Who will be using the resources.",
+        "When they are needed.",
+        "The vendor providing the resources."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Effective resource planning requires knowing not only what resources are needed and in what quantity, but also precisely when they are needed to align with the project schedule and avoid delays or unnecessary costs.",
+      "time": 75
+    },
+    {
+      "questionText": "What does the project schedule contain that is important for resource planning, helping to determine when resources are needed?",
+      "choices": [
+        "Details of the project budget.",
+        "Stakeholder contact information.",
+        "Details of the timelines of the project activities, their sequence, and estimations.",
+        "Risk mitigation plans."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The project schedule contains all the details of the timelines of project activities, their sequence, and their duration estimations. This information is critical for determining when specific resources need to be available.",
+      "time": 75
+    },
+    {
+      "questionText": "According to the PMBOK Guide, the project scope statement is the description of the project scope. What else does it include?",
+      "choices": [
+        "Only the project scope.",
+        "Major project deliverables and exclusions.",
+        "Only project exclusions.",
+        "Resource assignments and timelines."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The project scope statement provides a detailed description of the project's scope, including its boundaries, major deliverables, acceptance criteria, and explicit scope exclusions.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a benefit of including explicit scope exclusions in the project scope statement?",
+      "choices": [
+        "It simplifies the definition of product scope.",
+        "It helps in managing stakeholder expectations.",
+        "It reduces the need for change control.",
+        "It guarantees project success."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Explicitly listing what is out of scope (exclusions) in the project scope statement is a key technique for managing stakeholder expectations by preventing assumptions and misunderstandings about what the project will deliver.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the first thing a project manager should do when mentoring a team member using the GROW model?",
+      "choices": [
+        "Determine the team member's current situation.",
+        "Discuss how to review progress.",
+        "Ask the team member to consider choices.",
+        "Determine what the team member aims for or what goal they want to achieve."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The GROW model stands for Goal, Reality, Options, and Will/Way Forward. The first step in this coaching model is to establish the Goal: determining what the team member is aiming for or what they want to achieve.",
+      "time": 75
+    },
+    {
+      "questionText": "Which statement about how teams should use Agile frameworks is correct?",
+      "choices": [
+        "Agile frameworks are suited for knowledge work projects with uncertainty.",
+        "Agile teams can blend multiple flavors of agile methodologies.",
+        "Agile frameworks must be followed rigidly without any customization.",
+        "Agile frameworks are not customized for the team, but the team customizes the framework."
+      ],
+      "correctAnswer": 3,
+      "explanation": "According to the Agile Practice Guide, Agile frameworks themselves are not customized for a specific team. Rather, each team should customize and tailor a chosen framework (like Scrum or XP) to fit their specific needs and project context to best deliver business value.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the correct understanding of how teams relate to Agile frameworks?",
+      "choices": [
+        "Agile frameworks are tailor-made for each team.",
+        "Teams must rigidly follow one specific Agile framework without modification.",
+        "Each and every team can and should customize an Agile framework and tailor it as per their needs.",
+        "Only experienced Agile teams can tailor frameworks."
+      ],
+      "correctAnswer": 2,
+      "explanation": "It is a common misconception that teams must rigidly follow an Agile framework. In fact, teams are encouraged to inspect their processes and adapt the framework, tailoring it to best suit their project's needs and context in order to maximize value delivery.",
+      "time": 75
+    },
+    {
+      "questionText": "Which project artifact will be least useful during the planning phase for a large, multi-year, government-sponsored road construction project that is currently in the initiation stage?",
+      "choices": [
+        "Project charter.",
+        "Business case.",
+        "Vision statement.",
+        "Project management plan and scope management plan."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The project management plan and its subsidiary plans (like the scope management plan) are outputs of the planning process. Therefore, they would not exist yet and would be the least useful during the planning phase itself. The charter, business case, and vision are inputs to planning.",
+      "time": 75
+    },
+    {
+      "questionText": "What does a 'parking lot' meeting right after the daily stand-up help address?",
+      "choices": [
+        "Issues that require long technical discussions that would extend the stand-up.",
+        "Non-urgent items that can wait until the end of the sprint.",
+        "Issues that need escalation to the project sponsor.",
+        "Assigning ownership to issues logged during the stand-up."
+      ],
+      "correctAnswer": 0,
+      "explanation": "A 'parking lot' is a technique to keep the daily stand-up focused and within its timebox. Complex issues or discussions that arise are 'parked' to be addressed immediately after the meeting by only the relevant team members.",
+      "time": 75
+    },
+    {
+      "questionText": "In Scrum, if user stories don't have acceptance criteria for the current sprint, whose responsibility is it to ensure they are written?",
+      "choices": [
+        "The Scrum Master.",
+        "The development team.",
+        "The project sponsor.",
+        "The Product Owner."
+      ],
+      "correctAnswer": 3,
+      "explanation": "In Scrum, the Product Owner is responsible for developing user stories and ensuring they have clear acceptance criteria. Well-written acceptance criteria are essential for the team to understand what 'done' means for a story.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the primary function of acceptance criteria for user stories in Scrum?",
+      "choices": [
+        "To define the scope of the entire project.",
+        "To assign tasks to team members.",
+        "To define the boundaries of user stories and provide details on functionality to determine if a story is completed and works as expected.",
+        "To estimate the effort required for the user story."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Acceptance criteria define the boundaries of a user story. They provide precise details on the required functionality, which helps the team understand what is expected and serves as the basis for testing to confirm the story is complete.",
+      "time": 75
+    },
+    {
+      "questionText": "Which of the following is NOT a recommended practice when an organization is transitioning into agile delivery from predictive/waterfall?",
+      "choices": [
+        "Transitioning in a phased manner.",
+        "Experiencing a high degree of changes.",
+        "Attempting to implement too many changes in the shortest possible time.",
+        "Starting with only digital projects as a first attempt."
+      ],
+      "correctAnswer": 2,
+      "explanation": "When an organization transitions to agile, attempting to implement too many changes too quickly can lead to change fatigue, confusion, and resistance. A more measured, phased approach is generally more successful.",
+      "time": 75
+    },
+    {
+      "questionText": "Which of the following is a common experience for organizations just beginning to use an agile approach?",
+      "choices": [
+        "High degree of cost expenditure.",
+        "High degree of employee attrition.",
+        "High degree of changes.",
+        "Low level of team collaboration."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Organizations that are new to agile often experience a high degree of change as they adapt their processes, culture, and roles. This transition period requires careful change management.",
+      "time": 75
+    },
+    {
+      "questionText": "When is a time and material (T&M) contract typically suitable?",
+      "choices": [
+        "When the scope of work is clearly defined.",
+        "When the requirements are well understood.",
+        "When the scope of work is uncertain and requires flexibility.",
+        "Only for purchasing physical resources."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Time and material (T&M) contracts are suitable when the scope of work is not well-defined or is expected to change. This contract type provides flexibility for the buyer, as they pay for the time and materials spent, but it carries more cost risk for the buyer.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a key aspect the PM must ensure regarding expected deliverables and results in a contract with a vendor?",
+      "choices": [
+        "They are not clearly stated.",
+        "They only include tangible outputs.",
+        "They clearly state expected deliverables and results, including knowledge transfer from vendor to buyer.",
+        "The vendor defines them independently."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A project manager should ensure that a contract clearly states all expected deliverables and results. This includes not just the final products but also aspects like documentation, training, and knowledge transfer from the vendor to the buyer's team.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the role of the Project Management Office (PMO) in an organization?",
+      "choices": [
+        "To execute all projects directly.",
+        "To provide support and oversight to other projects executed by the organization.",
+        "To approve all project budgets.",
+        "To hire all project team members."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The role of a Project Management Office (PMO) is to standardize project-related governance processes and facilitate the sharing of resources, methodologies, tools, and techniques. It provides support and oversight to projects within the organization.",
+      "time": 75
+    },
+    {
+      "questionText": "What should a project manager working on physical resource planning for an engineering project consider?",
+      "choices": [
+        "Only the cost of acquiring resources.",
+        "Only when resources are needed during execution.",
+        "Factors such as the storage and movement of the physical resources to the project location.",
+        "Always obtaining resources from an external vendor."
+      ],
+      "correctAnswer": 2,
+      "explanation": "When planning for physical resources, especially in a field like engineering, the project team must consider logistical factors beyond just acquisition, such as the storage, transportation, and handling of the physical resources at the project site.",
+      "time": 75
+    },
+    {
+      "questionText": "When considering physical resource planning for an engineering project, is it always involved in working with an external vendor?",
+      "choices": [
+        "Yes, physical resources are always sourced externally.",
+        "No, you don't always have to obtain physical resources from vendors.",
+        "Yes, unless the resource is pre-approved in the charter.",
+        "No, only human resources involve external vendors."
+      ],
+      "correctAnswer": 1,
+      "explanation": "It's important to note that physical resources do not always have to be obtained from external vendors; they can often be sourced internally from other parts of the organization.",
+      "time": 75
+    },
+    {
+      "questionText": "Confirming communication is understood is essential. Which of the following is a practice that can help with this?",
+      "choices": [
+        "Sending the message only once.",
+        "Using linear communication.",
+        "Holding feedback sessions.",
+        "Avoiding eye contact."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Confirming that communication is understood and receiving feedback is a crucial part of effective communication. Practices like holding dedicated feedback sessions create a two-way dialogue to ensure messages are received and interpreted correctly.",
+      "time": 75
+    },
+    {
+      "questionText": "To ensure project activities comply with organizational and project policies and processes, which type of review is typically conducted by a team external to the project?",
+      "choices": [
+        "Testing.",
+        "Inspection.",
+        "Quality audit.",
+        "Process analysis."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A quality audit is a structured, independent review to determine if project activities comply with organizational and project policies, processes, and procedures. It is typically conducted by a team external to the project to ensure objectivity.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the definition of a program?",
+      "choices": [
+        "A specific, singular endeavor.",
+        "Ongoing, repetitive activities.",
+        "Multiple related projects managed in a coordinated way.",
+        "Management of projects, programs, and operations as a group."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A program refers to a group of related projects, subsidiary programs, and program activities that are managed in a coordinated way to obtain benefits not available from managing them individually.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the definition of a portfolio?",
+      "choices": [
+        "A singular project endeavor.",
+        "Ongoing operational activities.",
+        "Multiple projects managed as a single package.",
+        "The management of projects, programs, subportfolios, and operations as a group to attain strategic objectives."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Portfolio management involves the centralized management of one or more portfolios to achieve strategic objectives. This includes identifying, prioritizing, authorizing, managing, and controlling projects, programs, and other related work.",
+      "time": 75
+    },
+    {
+      "questionText": "When starting project planning, initial project documents such as the vision statement, project charter, and business case are progressively elaborated to identify and define what?",
+      "choices": [
+        "Resource calendars.",
+        "A coordinated path to achieve the desired outcome.",
+        "Detailed technical solutions.",
+        "Risk response plans for all identified risks."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The project team progressively elaborates initial high-level documents, such as the vision statement, project charter, and business case, to develop more detailed plans and define a coordinated path to achieve the project's desired outcome.",
+      "time": 75
+    },
+    {
+      "questionText": "In Agile, what does 'mobbing' refer to?",
+      "choices": [
+        "Crowdsourcing project ideas.",
+        "The entire team working on the same story or task at the same time.",
+        "Pair programming by two developers.",
+        "Team members working on individual tasks independently."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Mobbing, also known as mob programming, is a software development approach where the entire team works on the same thing, at the same time, in the same space, and at the same computer.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a key responsibility of a project manager in managing project artifacts?",
+      "choices": [
+        "Creating all project artifacts personally.",
+        "Ensuring they are kept up to date and accessible to all stakeholders.",
+        "Limiting access to project artifacts to only the project team.",
+        "Archiving artifacts immediately after they are created."
+      ],
+      "correctAnswer": 1,
+      "explanation": "A key responsibility of a project manager is to carefully manage project artifacts. This includes validating that the information is kept up to date (e.g., through version control) and is accessible to all relevant stakeholders.",
+      "time": 75
+    },
+    {
+      "questionText": "Which document helps provide a common understanding of the project scope among project stakeholders?",
+      "choices": [
+        "Project charter.",
+        "Stakeholder register.",
+        "Risk register.",
+        "Project scope statement."
+      ],
+      "correctAnswer": 3,
+      "explanation": "The project scope statement is the key document that describes the project scope, major deliverables, assumptions, and constraints. It provides a common understanding of the project scope among all project stakeholders.",
+      "time": 75
+    },
+    {
+      "questionText": "What are the characteristics of projects that are suitable for the Crystal methodology?",
+      "choices": [
+        "Fixed requirements and single delivery.",
+        "Large team size and high criticality.",
+        "Geographically dispersed teams and complex issues.",
+        "Projects with high technical debt."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The Crystal family of methodologies suggests that the specific approach should be selected based on factors like team size and project criticality. Different 'colors' of Crystal (e.g., Crystal Clear, Crystal Orange) are designed for different contexts of team size and potential impact.",
+      "time": 75
+    },
+    {
+      "questionText": "In Scrum, who facilitates the daily stand-up meeting?",
+      "choices": [
+        "The Product Owner.",
+        "The Development Team.",
+        "The Scrum Master.",
+        "Any team member."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The Scrum Master is responsible for ensuring the Daily Scrum takes place and that the Development Team keeps it within the 15-minute time-box. The Scrum Master facilitates the event as needed but the meeting is for the Development Team.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the purpose of a project vision statement?",
+      "choices": [
+        "To list all project activities.",
+        "To document project risks.",
+        "To show the direction of the project and define the criteria for success.",
+        "To track project expenditures."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The purpose of a project vision statement is to provide a concise, high-level overview of the project's goals. It shows the direction of the project, inspires the team, and helps define the criteria for success.",
+      "time": 75
+    },
+    {
+      "questionText": "What is generally true about risk identification?",
+      "choices": [
+        "It only involves identifying negative risks.",
+        "It should occur only during the planning phase.",
+        "Both positive and negative risks should be identified throughout the project.",
+        "Only the project manager is responsible for it."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Effective risk identification is an iterative process that occurs throughout the project. It involves the entire team and should identify both threats (negative risks) and opportunities (positive risks), which are then documented in a risk register.",
+      "time": 75
+    },
+    {
+      "questionText": "Why should both positive and negative risks be identified in a project?",
+      "choices": [
+        "To comply with organizational policies.",
+        "Positive risks represent opportunities that can be leveraged to benefit the project.",
+        "Negative risks are always more likely to occur.",
+        "It simplifies the risk response planning process."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Identifying only negative risks (threats) provides an incomplete picture. Identifying positive risks (opportunities) allows the project team to develop strategies to enhance or exploit them, potentially improving project outcomes.",
+      "time": 75
+    },
+    {
+      "questionText": "What should be used to document identified risks to ensure the project team has access to them during project execution?",
+      "choices": [
+        "Lessons learned register.",
+        "Issue log.",
+        "Risk register or risk logs.",
+        "Project management plan."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Identified risks should be documented in a risk register or risk log. This artifact serves as a central repository for risk information, ensuring the entire project team has access to it for ongoing analysis, response planning, and monitoring.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the purpose of Earned Value Analysis (EVA) tools like SPI and CPI for a project sponsor?",
+      "choices": [
+        "To understand the root cause of defects.",
+        "To assess whether the project is on schedule and its cost efficiency.",
+        "To identify project risks.",
+        "To determine the project's internal rate of return."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Earned Value Analysis provides quantitative metrics for project performance. The Schedule Performance Index (SPI) assesses if the project is on schedule, while the Cost Performance Index (CPI) assesses its cost efficiency, providing objective data for stakeholders like the sponsor.",
+      "time": 75
+    },
+    {
+      "questionText": "What should be prioritized when it comes to overall quality management?",
+      "choices": [
+        "Testing quality after deliverables are developed.",
+        "Finding defects as late as feasible.",
+        "Building Quality In.",
+        "Ensuring the testing team works in isolation."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A core principle of modern quality management is 'Build Quality In.' This means focusing on preventing defects through good processes and practices, which is more effective and less costly than finding and fixing defects after the fact through inspection.",
+      "time": 75
+    },
+    {
+      "questionText": "How does building quality in compare to testing quality in overall quality management?",
+      "choices": [
+        "Testing is better than building quality in.",
+        "Building quality in is better than testing quality.",
+        "They are equally effective.",
+        "Testing is not a part of quality management."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Proactively 'building' quality into the product and process is considered more effective and efficient than 'testing' quality in later. Prevention is better than inspection and correction.",
+      "time": 75
+    },
+    {
+      "questionText": "What quality management tool helps identify the various factors (or causes) leading to an effect (usually a problem)?",
+      "choices": [
+        "Scatter diagrams.",
+        "Defect histogram.",
+        "Affinity diagrams.",
+        "Cause-and-effect diagrams (fishbone or Ishikawa)."
+      ],
+      "correctAnswer": 3,
+      "explanation": "A Cause-and-Effect diagram (also known as a fishbone or Ishikawa diagram) is a root cause analysis tool. It helps a team brainstorm and visually organize the potential causes of a specific problem or effect.",
+      "time": 75
+    },
+    {
+      "questionText": "Should the project team be involved in project planning?",
+      "choices": [
+        "No, it causes project fatigue and gold plating.",
+        "Yes, participation strengthens their commitment to the project.",
+        "No, it is not the best utilization of their time before work starts.",
+        "Only the project manager should be involved."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Involving the project team in the planning process is a best practice. Their participation leverages their expertise to create a more realistic plan and strengthens their commitment and ownership of the project.",
+      "time": 75
+    },
+    {
+      "questionText": "When leading a geographically distributed team, what should a project manager new to Agile focus on first?",
+      "choices": [
+        "Choosing a specific Agile framework like Scrum.",
+        "Ensuring all team members have T-shaped skills.",
+        "Focusing on cultural awareness.",
+        "Minimizing communication channels."
+      ],
+      "correctAnswer": 2,
+      "explanation": "When leading a team of geographically distributed members, a project manager should first focus on cultural awareness. Cultural differences can significantly influence communication styles, decision-making, and conflict resolution, making it a critical foundation for team success.",
+      "time": 75
+    },
+    {
+      "questionText": "What is one of the 5 C's of written communication?",
+      "choices": [
+        "Candid.",
+        "Controlling flow of words and ideas.",
+        "Creative.",
+        "Comprehensive."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The 5 Cs of written communication are: Clear purpose, Concise expression, Coherent and logical flow, Controlling the flow of words and ideas, and Correct grammar and spelling. 'Controlling the flow' is one of these principles.",
+      "time": 75
+    },
+    {
+      "questionText": "What personal skills should a project manager encourage a new project manager trainee to acquire for a successful career?",
+      "choices": [
+        "Being sadist.",
+        "Being autocratic.",
+        "Emotional intelligence, service-oriented, courteous.",
+        "Technical skills only."
+      ],
+      "correctAnswer": 2,
+      "explanation": "For a successful career, project managers need a blend of skills. PMI emphasizes the importance of personality traits and leadership skills such as emotional intelligence, a service-oriented mindset, and courteousness in building effective relationships with teams and stakeholders.",
+      "time": 75
+    },
+    {
+      "questionText": "In a project where the team lacks skills in a specific domain (e.g., game development), what should the project manager do to ensure team success?",
+      "choices": [
+        "Ensure the team uses pair programming.",
+        "Ensure there is a dedicated testing team.",
+        "Ensure the team uses test-first development.",
+        "Ensure that the team members are adequately trained in the new domain."
+      ],
+      "correctAnswer": 3,
+      "explanation": "It is the responsibility of the project manager (or servant leader) to empower the team. If the team lacks critical domain knowledge, the manager must ensure they receive adequate training to be successful before they begin development work.",
+      "time": 75
+    },
+    {
+      "questionText": "What does 'continuous delivery' mean in Agile practices?",
+      "choices": [
+        "Frequently integrating and validating team members' work products.",
+        "Always looking to learn new practices throughout the project lifecycle.",
+        "Delivering feature increments immediately to the customer.",
+        "Copying features from an existing application."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Continuous delivery is the practice of automating the release process so that software can be reliably released to users or customers at any time. It often means delivering feature increments immediately upon completion.",
+      "time": 75
+    },
+    {
+      "questionText": "What does 'continuous integration' mean in Agile practices?",
+      "choices": [
+        "Delivering feature increments immediately to the customer.",
+        "Frequently integrating and validating team members' work products with one another.",
+        "Always looking to learn new practices.",
+        "Copying features from an existing application."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Continuous integration (CI) is a practice where developers frequently merge their code changes into a central repository, after which automated builds and tests are run. It ensures that work products are integrated and validated frequently.",
+      "time": 75
+    },
+    {
+      "questionText": "If an experienced, highly competent and skilled project team has been working together for a long time, what leadership style is recommended for the project manager?",
+      "choices": [
+        "Autocratic, centralizing decision-making.",
+        "Directive, centralizing decision-making.",
+        "A 'hands-off', laissez-faire leadership style with empowered delegation.",
+        "Strictly controlling all team activities."
+      ],
+      "correctAnswer": 2,
+      "explanation": "With a highly competent, experienced, and engaged team, a delegating or laissez-faire leadership style is most effective. Empowered delegation yields more productivity than centralized control, as skilled individuals often resent being micromanaged.",
+      "time": 75
+    },
+    {
+      "questionText": "When is an autocratic or directive leadership style NOT suitable?",
+      "choices": [
+        "In a moment of chaos to create clarity.",
+        "When the project staff is highly competent and skilled.",
+        "When dealing with new team members.",
+        "When managing project risks."
+      ],
+      "correctAnswer": 1,
+      "explanation": "An autocratic or directive leadership style is not suitable when the project team consists of highly competent and skilled individuals. Such a style can be demotivating and is counterproductive in an environment where expertise and engagement are high.",
+      "time": 75
+    },
+    {
+      "questionText": "Why does multitasking reduce overall productivity and impact a team's ability to predict delivery?",
+      "choices": [
+        "It simplifies the project scope.",
+        "It increases communication complexity.",
+        "It reduces the throughput of the team's work and causes switching costs.",
+        "It improves team collaboration."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Multitasking is detrimental to productivity due to the mental 'switching cost' incurred when moving between different tasks. This reduces the team's overall throughput and makes it difficult to predict delivery dates consistently.",
+      "time": 75
+    },
+    {
+      "questionText": "Which project artifact provides details on the timelines of project activities, their sequence, and estimations?",
+      "choices": [
+        "Scope baseline.",
+        "Project schedule.",
+        "Activity list.",
+        "Resource calendar."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The project schedule is the artifact that contains the detailed timelines of project activities, their logical sequence, and the estimations for completing them, among other things.",
+      "time": 75
+    },
+    {
+      "questionText": "After creating the activity list, what is the next step when creating a schedule for your project?",
+      "choices": [
+        "Estimate each activity.",
+        "Compress the schedule.",
+        "Sequence the activities.",
+        "Identify risks."
+      ],
+      "correctAnswer": 2,
+      "explanation": "In schedule management, after the 'Define Activities' process creates the activity list, the next step is 'Sequence Activities.' This involves taking the activities from the list and arranging them in the logical order in which the work will be performed.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a key responsibility of a program manager?",
+      "choices": [
+        "To manage a single project to deliver a tangible output.",
+        "To ensure that the right projects are selected for their portfolio.",
+        "To oversee all projects comprising the program to ensure it achieves its intended outcomes.",
+        "To handle operational activities."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A program manager is responsible for managing a program, which involves overseeing all the constituent projects to ensure that the program as a whole achieves its intended outcomes and benefits.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the primary responsibility of a portfolio manager?",
+      "choices": [
+        "To ensure that projects within the portfolio are completed on time.",
+        "To maximize the business value of individual products.",
+        "To ensure that the right projects are selected and prioritized to align with the organization's strategic goals.",
+        "To remove impediments for agile teams."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The primary responsibility of a portfolio manager is to ensure that the organization selects and invests in the right projects and programs. This involves inspecting and prioritizing work to ensure it aligns with the company's long-term strategic objectives.",
+      "time": 75
+    },
+    {
+      "questionText": "Inspecting each project individually to determine if it aligns with the company's long-term goals relates to what discipline?",
+      "choices": [
+        "Project management.",
+        "Program management.",
+        "Portfolio management.",
+        "Operational management."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Portfolio management involves inspecting and selecting projects and programs to ensure the collection of work (the portfolio) aligns with the organization's long-term strategic goals and provides maximum value.",
+      "time": 75
+    },
+    {
+      "questionText": "Enterprise environmental factors (EEF) can originate from where?",
+      "choices": [
+        "Only inside the organization.",
+        "Only outside the organization.",
+        "Inside the organization or outside the organization.",
+        "Only within individual projects."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Enterprise Environmental Factors (EEFs) are conditions not under the immediate control of the team that influence, constrain, or direct the project. They can be internal to the organization (e.g., culture, infrastructure) or external (e.g., market conditions, regulations).",
+      "time": 75
+    },
+    {
+      "questionText": "Organizational process assets (OPA) are described as being internal to the organization. What do they include?",
+      "choices": [
+        "Marketplace conditions and industry standards.",
+        "Existing internal infrastructure and computer systems.",
+        "Plans, processes, policies, procedures, and knowledge bases specific to the performing organization.",
+        "Naturally occurring phenomena and legislation."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Organizational Process Assets (OPAs) are the plans, processes, policies, procedures, and knowledge bases that are specific to and used by the performing organization. They are internal assets that the project can leverage.",
+      "time": 75
+    },
+    {
+      "questionText": "An analyst states that OPAs are internal to organizations, and EEFs can be either internal or external. Is this understanding correct?",
+      "choices": [
+        "True.",
+        "False.",
+        "True for OPA, but false for EEF.",
+        "False for OPA, but true for EEF."
+      ],
+      "correctAnswer": 0,
+      "explanation": "The understanding is correct. Organizational Process Assets (OPAs) are always internal to the organization. Enterprise Environmental Factors (EEFs) can originate from inside the organization (e.g., culture) or outside of it (e.g., laws).",
+      "time": 75
+    },
+    {
+      "questionText": "What are the seven basic quality tools that a project manager should be familiar with for the PMP Exam?",
+      "choices": [
+        "Flowcharts, Histograms, Pareto Charts, Scatter Diagrams, Control Charts, Check Sheets, Cause-and-Effect Diagrams.",
+        "SWOT Analysis, PESTLE Analysis, Risk Register, Stakeholder Register, WBS, Project Charter, Communication Plan.",
+        "Earned Value Management, Variance Analysis, Trend Analysis, Reserve Analysis, Make-or-Buy Analysis, Regression Analysis, Simulation.",
+        "Daily Standup, Sprint Planning, Sprint Review, Sprint Retrospective, Product Backlog, Sprint Backlog, Product Increment."
+      ],
+      "correctAnswer": 0,
+      "explanation": "The seven basic quality control (QC) tools are: Cause-and-effect diagrams, Check sheets, Control charts, Flowcharts, Histograms, Pareto charts, and Scatter diagrams. Project managers should be familiar with these for the PMP Exam.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the primary benefit of using a Cause-and-Effect diagram?",
+      "choices": [
+        "To prioritize project tasks.",
+        "To identify the various factors (or causes) leading to an effect (a problem).",
+        "To calculate project cost variance.",
+        "To sequence project activities."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The primary benefit of a Cause-and-Effect diagram (also known as a fishbone or Ishikawa diagram) is to help a team identify, explore, and display the possible causes of a specific problem or effect.",
+      "time": 75
+    },
+    {
+      "questionText": "In a Cause-and-Effect (fishbone) diagram, where is the quality-related problem typically depicted?",
+      "choices": [
+        "Branching off to the left.",
+        "On the left-hand side of the diagram.",
+        "On the right-hand side of the diagram.",
+        "At the top of the diagram."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Named for its resemblance to a fish skeleton, this quality management tool works by defining a quality-related problem (the effect) at the 'head' of the fish, on the right-hand side of the diagram. Potential root causes then branch off to the left.",
+      "time": 75
+    },
+    {
+      "questionText": "The causes and sub-clauses in a fishbone diagram are usually grouped into six main categories. Which of the following is one of these categories?",
+      "choices": [
+        "Stakeholders.",
+        "Budget.",
+        "Measurements.",
+        "Scope."
+      ],
+      "correctAnswer": 2,
+      "explanation": "The causes and sub-causes in a fishbone diagram are often grouped into categories to stimulate brainstorming. Common categories (the 6Ms) include Measurements, Materials, Personnel (Manpower), Environment, Methods, and Machines.",
+      "time": 75
+    },
+    {
+      "questionText": "Why should project managers familiarize themselves with the 7 QC tools for the PMP Exam?",
+      "choices": [
+        "They are required for all projects.",
+        "They may appear in scenario questions related to quality management.",
+        "They replace traditional project management techniques.",
+        "They are only relevant for manufacturing projects."
+      ],
+      "correctAnswer": 1,
+      "explanation": "While not every tool is used on every project, PMP exam questions often present scenarios where a specific quality tool is the appropriate choice for analyzing a problem. Familiarity with the 7 QC tools is therefore essential.",
+      "time": 75
+    },
+    {
+      "questionText": "What kind of analysis can help a team decide whether to develop firmware code needed for a project within the organization or to outsource it?",
+      "choices": [
+        "Trend analysis.",
+        "Cost-benefit analysis.",
+        "Root cause analysis.",
+        "Make-or-buy analysis."
+      ],
+      "correctAnswer": 3,
+      "explanation": "A make-or-buy analysis is a technique used to determine whether a particular product or service can be produced more cost-effectively by the organization itself or if it should be purchased from an outside supplier.",
+      "time": 75
+    },
+    {
+      "questionText": "What is the document called that is the result of the make or buy analysis?",
+      "choices": [
+        "Make or buy plan.",
+        "Make or buy decision.",
+        "Make or buy report.",
+        "Make or buy analysis document."
+      ],
+      "correctAnswer": 1,
+      "explanation": "The output of performing a make-or-buy analysis is the make-or-buy decision, which documents the choice to either produce an item internally or procure it from an external source.",
+      "time": 75
+    },
+    {
+      "questionText": "What is a primary reason for using one contract type over another?",
+      "choices": [
+        "Minimizing cost.",
+        "Accelerating the schedule.",
+        "Shifting risk.",
+        "Simplifying communication."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A primary driver for choosing a specific contract type (e.g., fixed-price vs. cost-reimbursable) is the allocation of risk. Different contract types shift the financial and performance risk between the buyer and the seller.",
+      "time": 75
+    },
+    {
+      "questionText": "When dealing with potential threats (negative risks), which response strategy is NOT typically used?",
+      "choices": [
+        "Avoid.",
+        "Mitigate.",
+        "Transfer.",
+        "Enhance."
+      ],
+      "correctAnswer": 3,
+      "explanation": "Risk response strategies for threats (negative risks) include Escalate, Avoid, Transfer, Mitigate, and Accept. Enhance is a strategy used for opportunities (positive risks).",
+      "time": 75
+    },
+    {
+      "questionText": "When dealing with potential opportunities (positive risks), which response strategy is NOT typically used?",
+      "choices": [
+        "Exploit.",
+        "Enhance.",
+        "Mitigate.",
+        "Share."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Risk response strategies for opportunities (positive risks) include Escalate, Exploit, Share, Enhance, and Accept. Mitigate is a strategy used for threats (negative risks).",
+      "time": 75
+    },
+    {
+      "questionText": "Where are individual risks and their risk responses typically captured?",
+      "choices": [
+        "Issue log.",
+        "Project charter.",
+        "Risk register.",
+        "Work performance report."
+      ],
+      "correctAnswer": 2,
+      "explanation": "A list of identified individual risks, along with their characteristics and planned risk responses, are captured and maintained in the risk register.",
+      "time": 75
+    },
+    {
+      "questionText": "Risks that score low on probability and impact are typically placed where?",
+      "choices": [
+        "Risk register.",
+        "Watchlist.",
+        "Issue log.",
+        "Risk report."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Risks that are assessed as having a very low probability of occurrence and a very low potential impact are often placed on a watchlist within the risk register for periodic monitoring, rather than having proactive response plans developed.",
+      "time": 75
+    },
+    {
+      "questionText": "In a project where the team is new to the specific domain of work, what is the responsibility of the project manager to ensure team success?",
+      "choices": [
+        "Assume the team will learn on the job.",
+        "Ensure the team is adequately trained in the domain.",
+        "Replace team members lacking domain experience.",
+        "Focus only on project management processes."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Because the team is new to the specific domain, it is the responsibility of the project manager to empower the team by ensuring they are adequately trained before they commence the project development work.",
+      "time": 75
+    },
+    {
+      "questionText": "What should a project manager use to confirm communication is understood and receive feedback?",
+      "choices": [
+        "Daily status reports.",
+        "Formal change requests.",
+        "Practices like retrospective sessions, feedback sessions, surveys, and product demos.",
+        "Signing off on project documents."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Confirming communication is understood and receiving feedback is an essential part of effective communication. Practices like retrospective sessions, feedback sessions, surveys, and product demos can help achieve this.",
+      "time": 75
+    },
+    {
+      "questionText": "Why is understanding cultural awareness important for a project manager leading a geographically distributed team?",
+      "choices": [
+        "It helps in assigning tasks based on location.",
+        "Cultural differences can influence decision-making and work speed, potentially causing conflict.",
+        "It is required by PMI guidelines.",
+        "It simplifies project reporting."
+      ],
+      "correctAnswer": 1,
+      "explanation": "When leading a team of geographically distributed members, cultural awareness is critical. Cultural differences can influence decision-making, communication styles, and the speed at which work is completed. Not recognizing these differences can lead to conflict and project delays.",
+      "time": 75
+    }
+  ]
+}
