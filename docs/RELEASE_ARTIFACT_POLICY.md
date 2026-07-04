@@ -1,0 +1,31 @@
+# Release Artifact Policy
+
+Release archives are runtime-focused static copies of LocalFirstApps. They should be safe to unzip and run without source-only test/package files or retired standalone app surfaces.
+
+## Allowed
+
+- Suite launcher files, shared shell files, app runtime folders under `apps/<slug>/`, public screenshots, app READMEs, manifests, and static assets.
+- Local-first import/export behavior initiated by the user inside an app.
+- Public docs that explain local-first behavior, file-mode limits, and app intake rules.
+
+## Forbidden
+
+- `node_modules/`, `test-results/`, package-management files, source-only tests, private planning notes, backups, exports, PII, credentials, API keys, OAuth flows, telemetry, accounts, silent upload paths, and JS popup APIs.
+- Standalone redirect folders or URLs for `AI-Studio-Cleaner`, `C3Pedal`, `CommonGround`, `Flexx-Files`, `LedgerSuite`, `Noodle-Nudge`, `PMQuiz`, or `TS-Dash`.
+- CommonGround BYOAI/provider overlays or any suite app behavior that requires OAuth, API keys, or remote AI providers.
+
+## Release Claims
+
+- Allowed: static local-first utilities, browser-local storage, no shared backend, no telemetry, no accounts, and user-controlled file/export flows.
+- Not claimed unless separately evidenced: regulated advice, external sync, account recovery, cloud backup, provider integration, or standalone app continuity outside the suite.
+
+## Verification
+
+Before publishing release assets, run:
+
+```bash
+npm run test:all
+git diff --check
+```
+
+Download the published ZIP and verify it contains no forbidden paths and no app-level OAuth/API-key/provider behavior.

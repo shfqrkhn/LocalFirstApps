@@ -10,6 +10,7 @@ A focused suite of small, privacy-first browser apps that run as static local-fi
 - **Runtime model:** static files, browser storage, no server-side processing
 - **Maintainer handoff:** [`docs/AI_MAINTAINER_HANDOFF.md`](./docs/AI_MAINTAINER_HANDOFF.md)
 - **Future app intake:** [`docs/future-app-intake.md`](./docs/future-app-intake.md)
+- **Release artifact policy:** [`docs/RELEASE_ARTIFACT_POLICY.md`](./docs/RELEASE_ARTIFACT_POLICY.md)
 
 ## Screenshot
 

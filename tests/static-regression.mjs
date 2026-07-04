@@ -68,6 +68,7 @@ function assertManifestRefs(file) {
 const index = readFileSync(join(root, "index.html"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
 const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
+const releasePolicy = readFileSync(join(root, "docs", "RELEASE_ARTIFACT_POLICY.md"), "utf8");
 
 assert(readme.includes("github.com/sponsors/shfqrkhn"), "README must keep sponsor CTA.");
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
@@ -79,6 +80,9 @@ assert(readme.includes("npm run test:all"), "README must document the full test 
 assert(readme.includes("Release archives omit source-only test and package-management files"), "README must explain runtime-focused release archives.");
 assert(readme.includes("The original standalone repo surfaces have been retired."), "README must document retired standalone repo surfaces accurately.");
 assert(!readme.includes("retained only as redirects/archives"), "README must not claim deleted standalone repos are retained.");
+assert(releasePolicy.includes("runtime-focused static copies"), "Release policy must define runtime-focused archives.");
+assert(releasePolicy.includes("CommonGround BYOAI/provider overlays"), "Release policy must block retired CommonGround provider overlays.");
+assert(releasePolicy.includes("Download the published ZIP"), "Release policy must require published ZIP verification.");
 for (const exportIgnored of [
   "tests export-ignore",
   "package.json export-ignore",
