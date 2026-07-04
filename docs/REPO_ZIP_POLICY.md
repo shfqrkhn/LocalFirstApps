@@ -1,6 +1,6 @@
-# Release Artifact Policy
+# Repository ZIP Policy
 
-Release archives are runtime-focused static copies of LocalFirstApps. They should be safe to unzip and run without source-only test/package files or retired standalone app surfaces.
+Users should run the live GitHub Pages suite or download the repository through **Code > Download ZIP**. The repository ZIP is a runtime-focused static copy of LocalFirstApps and should be safe to unzip and run without GitHub Releases or retired standalone app surfaces.
 
 ## Allowed
 
@@ -14,18 +14,18 @@ Release archives are runtime-focused static copies of LocalFirstApps. They shoul
 - Standalone redirect folders or URLs for `AI-Studio-Cleaner`, `C3Pedal`, `CommonGround`, `Flexx-Files`, `LedgerSuite`, `Noodle-Nudge`, `PMQuiz`, or `TS-Dash`.
 - CommonGround BYOAI/provider overlays or any suite app behavior that requires OAuth, API keys, or remote AI providers.
 
-## Release Claims
+## Public Claims
 
 - Allowed: static local-first utilities, browser-local storage, no shared backend, no telemetry, no accounts, and user-controlled file/export flows.
 - Not claimed unless separately evidenced: regulated advice, external sync, account recovery, cloud backup, provider integration, or standalone app continuity outside the suite.
 
 ## Verification
 
-Before publishing release assets, run:
+Before pushing public ZIP/download-facing changes, run:
 
 ```bash
 npm run test:all
 git diff --check
 ```
 
-Download the published ZIP and verify it contains no forbidden paths and no app-level OAuth/API-key/provider behavior.
+Download the repository ZIP and verify it contains no forbidden paths and no app-level OAuth/API-key/provider behavior.

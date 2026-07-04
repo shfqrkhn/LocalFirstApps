@@ -5,12 +5,12 @@
 A focused suite of small, privacy-first browser apps that run as static local-first tools.
 
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps](https://shfqrkhn.github.io/LocalFirstApps/)
-- **Latest Release:** [GitHub latest release](https://github.com/shfqrkhn/LocalFirstApps/releases/latest)
+- **Repository ZIP:** [Download current main ZIP](https://github.com/shfqrkhn/LocalFirstApps/archive/refs/heads/main.zip)
 - **License:** MIT
 - **Runtime model:** static files, browser storage, no server-side processing
 - **Maintainer handoff:** [`docs/AI_MAINTAINER_HANDOFF.md`](./docs/AI_MAINTAINER_HANDOFF.md)
 - **Future app intake:** [`docs/future-app-intake.md`](./docs/future-app-intake.md)
-- **Release artifact policy:** [`docs/RELEASE_ARTIFACT_POLICY.md`](./docs/RELEASE_ARTIFACT_POLICY.md)
+- **Repository ZIP policy:** [`docs/REPO_ZIP_POLICY.md`](./docs/REPO_ZIP_POLICY.md)
 
 ## Screenshot
 
@@ -43,7 +43,7 @@ The apps are static browser apps. Data stays in the browser unless a specific ap
 
 ## Local Use
 
-Download the latest release zip or the repo, extract it, and open `index.html` in a browser. Individual apps live under `apps/<app>/`.
+Download the current main repository ZIP with **Code > Download ZIP** or the direct ZIP link above, extract it, and open `index.html` in a browser. Individual apps live under `apps/<app>/`.
 
 The launcher works from `file://`. Some individual apps use browser modules, workers, or local `fetch`, so full app and PWA behavior requires serving the folder over `http://localhost` or GitHub Pages because browsers restrict those APIs from `file://`.
 
@@ -61,10 +61,10 @@ npm run test:all
 
 The tests check the suite shell, migrated app entry points, local-file launch, live Pages routes, responsive layout, stale old URLs, redirect-sensitive paths, media links, and unwanted non-product files.
 
-Release archives omit source-only test and package-management files so downloaded copies stay focused on running the apps.
+The repository ZIP omits source-only test and package-management files where `.gitattributes` marks them `export-ignore`, so downloaded copies stay focused on running the apps.
 
 Before adding a new module under `apps/<slug>/`, apply the intake contract in [`docs/future-app-intake.md`](./docs/future-app-intake.md).
 
 ## Migration
 
-The original standalone repo surfaces have been retired. Canonical links, screenshots, releases, and future development now live in this consolidated suite.
+The original standalone repo surfaces have been retired. Canonical links, screenshots, and future development now live in this consolidated suite.

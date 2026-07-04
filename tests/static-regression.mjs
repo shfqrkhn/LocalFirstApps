@@ -68,21 +68,22 @@ function assertManifestRefs(file) {
 const index = readFileSync(join(root, "index.html"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
 const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
-const releasePolicy = readFileSync(join(root, "docs", "RELEASE_ARTIFACT_POLICY.md"), "utf8");
+const zipPolicy = readFileSync(join(root, "docs", "REPO_ZIP_POLICY.md"), "utf8");
 
 assert(readme.includes("github.com/sponsors/shfqrkhn"), "README must keep sponsor CTA.");
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
-assert(readme.includes("[GitHub latest release](https://github.com/shfqrkhn/LocalFirstApps/releases/latest)"), "README must link the latest release.");
+assert(readme.includes("[Download current main ZIP](https://github.com/shfqrkhn/LocalFirstApps/archive/refs/heads/main.zip)"), "README must link the repository ZIP.");
+assert(!readme.includes("/releases/latest"), "README must not link GitHub Releases.");
 assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "README must include the suite launcher screenshot.");
 assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(readme.includes("npm run test:all"), "README must document the full test gate.");
-assert(readme.includes("Release archives omit source-only test and package-management files"), "README must explain runtime-focused release archives.");
+assert(readme.includes("The repository ZIP omits source-only test and package-management files"), "README must explain runtime-focused repository ZIP archives.");
 assert(readme.includes("The original standalone repo surfaces have been retired."), "README must document retired standalone repo surfaces accurately.");
 assert(!readme.includes("retained only as redirects/archives"), "README must not claim deleted standalone repos are retained.");
-assert(releasePolicy.includes("runtime-focused static copies"), "Release policy must define runtime-focused archives.");
-assert(releasePolicy.includes("CommonGround BYOAI/provider overlays"), "Release policy must block retired CommonGround provider overlays.");
-assert(releasePolicy.includes("Download the published ZIP"), "Release policy must require published ZIP verification.");
+assert(zipPolicy.includes("runtime-focused static copy"), "Repository ZIP policy must define runtime-focused archives.");
+assert(zipPolicy.includes("CommonGround BYOAI/provider overlays"), "Repository ZIP policy must block retired CommonGround provider overlays.");
+assert(zipPolicy.includes("Download the repository ZIP"), "Repository ZIP policy must require ZIP verification.");
 for (const exportIgnored of [
   "tests export-ignore",
   "package.json export-ignore",
@@ -91,7 +92,7 @@ for (const exportIgnored of [
   "apps/flexx-files/package.json export-ignore",
   "apps/flexx-files/package-lock.json export-ignore"
 ]) {
-  assert(exportAttrs.includes(exportIgnored), `Release/source archives must exclude non-runtime file: ${exportIgnored}`);
+  assert(exportAttrs.includes(exportIgnored), `Repository ZIP/source archives must exclude non-runtime file: ${exportIgnored}`);
 }
 
 for (const [slug, label, screenshot] of apps) {
