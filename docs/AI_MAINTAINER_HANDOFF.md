@@ -19,6 +19,14 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - No JS popup APIs; use in-app UI.
 - Critical flows should be usable by keyboard-only, mouse-only, and touch-only input.
 
+## OmniOS Transfer Contract
+
+- Product truth: consolidated static local-first utility suite, not standalone retired app surfaces or provider/OAuth integrations.
+- Execution truth: preserve per-app completeness, suite shell, file/live, visual, local-file, static, and privacy gates before publishing.
+- Evidence truth: use `docs/EVIDENCE_RECEIPT.md`, per-app README/screenshot checks, protected-path scans, and tests; public claims must stay within `PASS` or `PASS_WITH_LIMITATIONS`.
+- Operations truth: live Pages or current main repository ZIP are the only distribution paths; GitHub Releases stay absent.
+- Transfer truth: update this handoff and the evidence receipt when app membership, screenshots, privacy claims, shared shell behavior, or public-surface guarantees change.
+
 ## Current Suite Apps
 
 - `apps/ts-dash`

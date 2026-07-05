@@ -90,6 +90,9 @@ assert(evidenceReceipt.includes("PASS_WITH_LIMITATIONS"), "Evidence receipt must
 assert(evidenceReceipt.includes("No backend/telemetry/accounts/OAuth/API keys"), "Evidence receipt must preserve suite privacy boundary.");
 assert(evidenceReceipt.includes("Per-app launcher/README/screenshot/shared shell"), "Evidence receipt must cover per-app completeness.");
 assert(handoff.includes("git rev-list --left-right --count HEAD...@{u}"), "Handoff must require a current upstream delta check.");
+for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
+  assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
+}
 assert(!handoff.includes("ahead of origin before this handoff pass"), "Handoff must not preserve stale ahead/behind state.");
 for (const exportIgnored of [
   "tests export-ignore",
