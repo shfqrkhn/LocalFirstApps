@@ -82,6 +82,16 @@ const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "u
   .map((file) => file.replace(/\\/g, "/"));
 const forbiddenTrackedFiles = trackedFiles.filter((file) => forbiddenTrackedPathPattern.test(file));
 
+function exportIgnoreMap(paths) {
+  const output = execFileSync("git", ["check-attr", "export-ignore", "--", ...paths], { cwd: root, encoding: "utf8" });
+  const map = new Map();
+  for (const line of output.split(/\r?\n/).filter(Boolean)) {
+    const match = line.match(/^(.*): export-ignore: (.*)$/);
+    if (match) map.set(match[1].replace(/\\/g, "/"), match[2]);
+  }
+  return map;
+}
+
 assert(readme.includes("github.com/sponsors/shfqrkhn"), "README must keep sponsor CTA.");
 assert(forbiddenTrackedFiles.length === 0, `Forbidden tracked paths: ${forbiddenTrackedFiles.join(", ")}`);
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
@@ -154,6 +164,22 @@ for (const exportIgnored of [
   "apps/flexx-files/package-lock.json export-ignore"
 ]) {
   assert(exportAttrs.includes(exportIgnored), `Repository ZIP/source archives must exclude non-runtime file: ${exportIgnored}`);
+}
+const exportIgnoredPaths = [
+  "tests",
+  "package.json",
+  "package-lock.json",
+  "apps/flexx-files/tests",
+  "apps/flexx-files/package.json",
+  "apps/flexx-files/package-lock.json"
+];
+const runtimeZipPaths = ["index.html", "README.md", "suite-shell.css", "suite-shell.js", "apps/ts-dash/index.html", "apps/commonground/index.html"];
+const exportAttrsResolved = exportIgnoreMap([...exportIgnoredPaths, ...runtimeZipPaths]);
+for (const file of exportIgnoredPaths) {
+  assert(exportAttrsResolved.get(file) === "set", `Git export-ignore must exclude non-runtime archive path: ${file}`);
+}
+for (const file of runtimeZipPaths) {
+  assert(exportAttrsResolved.get(file) === "unspecified", `Runtime archive path must remain downloadable: ${file}`);
 }
 
 for (const [slug, label, screenshot] of apps) {

@@ -62,7 +62,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 | Per-app launcher/README/screenshot/shared shell | `PASS_WITH_LIMITATIONS` | static regression tests, per-app membership evidence | Recheck after each app migration, screenshot change, or app-membership claim. |
 | File/live behavior clarity | `PASS_WITH_LIMITATIONS` | shared shell, local-file and live tests | GitHub Pages and local file behavior should both be tested after runtime changes. |
 | Pages API summary | `PASS_WITH_LIMITATIONS` | latest current-head Pages workflow, deployments API, live HTTP 200 | The Pages API `.status` field can lag or contradict successful workflow deployments; report the residue separately. |
-| Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `.gitattributes`, `docs/REPO_ZIP_POLICY.md`, static tests | Recheck no tests, packages, exports, private notes, or retired provider overlays are bundled. |
+| Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `.gitattributes`, `git check-attr export-ignore`, `docs/REPO_ZIP_POLICY.md`, static tests | Recheck no tests, packages, exports, private notes, or retired provider overlays are bundled. |
 | Input accessibility | `PASS_WITH_LIMITATIONS` | visual regression target-size checks, local-file/live smoke, static shell checks | Does not certify screen-reader behavior or every app-specific workflow. |
 | Recovery/data safety | `PASS_WITH_LIMITATIONS` | README, local-file/live tests, per-app README/static checks | App-specific export/import/reset behavior varies and must not be generalized without tests. |
 
