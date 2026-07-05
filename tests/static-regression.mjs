@@ -99,6 +99,9 @@ assert(handoff.includes("git rev-list --left-right --count HEAD...@{u}"), "Hando
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
 }
+for (const phrase of ["Doctrine Delta Decision", "promote", "reject", "quarantine", "keep_local", "source-backed, reusable, non-secret", "explicitly approves publication"]) {
+  assert(handoff.includes(phrase), `Handoff missing doctrine delta term: ${phrase}`);
+}
 assert(!handoff.includes("ahead of origin before this handoff pass"), "Handoff must not preserve stale ahead/behind state.");
 for (const exportIgnored of [
   "tests export-ignore",
