@@ -16,6 +16,12 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - Public claims may not exceed `PASS` or `PASS_WITH_LIMITATIONS`; `NOT_RUN`, `BLOCKED`, and `NO_GO` items must stay unpublished or be labeled as unavailable.
 - Volatile app membership, links, screenshots, file/live behavior, and GitHub settings must be rechecked from current repo state before reliance.
 
+## Currentness Watchdog
+
+- Recheck claim evidence before public-facing changes, not on a fixed calendar.
+- If current evidence is stale, missing, inaccessible, or contradicted by app/repo/GitHub state, downgrade the affected claim to `NOT_RUN`, `BLOCKED`, or `NO_GO`.
+- Do not preserve old status snapshots as proof after app membership, screenshots, shared shell behavior, links, workflows, or public privacy wording changes.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |

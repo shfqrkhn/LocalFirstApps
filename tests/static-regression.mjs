@@ -92,6 +92,9 @@ assert(evidenceReceipt.includes("Per-app launcher/README/screenshot/shared shell
 for (const phrase of ["Claim Firewall Invariant", "Claim Boundaries", "must map", "NOT_RUN", "BLOCKED", "current repo state"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing claim firewall term: ${phrase}`);
 }
+for (const phrase of ["Currentness Watchdog", "stale, missing, inaccessible", "downgrade the affected claim", "app/repo/GitHub state"]) {
+  assert(evidenceReceipt.includes(phrase), `Evidence receipt missing currentness watchdog term: ${phrase}`);
+}
 assert(handoff.includes("git rev-list --left-right --count HEAD...@{u}"), "Handoff must require a current upstream delta check.");
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
