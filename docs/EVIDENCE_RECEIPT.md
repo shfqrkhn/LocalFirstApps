@@ -34,6 +34,12 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - Accessibility claims require current evidence from static checks, visual/input-size checks, local-file checks, live checks, focus/label review, and tap-target/no-overflow checks where applicable.
 - If an app lacks direct input-mode coverage, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN`; do not claim full accessibility from static presence alone.
 
+## Recovery And Data Safety Evidence
+
+- App-specific import, export, reset, browser-storage, and recovery claims must remain user-triggered, local-first, and tied to current tests or explicit manual evidence.
+- Suite-wide recovery claims may cover local/file/live survivability only within tested paths; they must not imply shared cloud backup, accounts, OAuth, API keys, or silent upload.
+- If an app lacks direct recovery-path coverage in the current pass, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN` before public use.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |
@@ -44,6 +50,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 | File/live behavior clarity | `PASS_WITH_LIMITATIONS` | shared shell, local-file and live tests | GitHub Pages and local file behavior should both be tested after runtime changes. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `.gitattributes`, `docs/REPO_ZIP_POLICY.md`, static tests | Recheck no tests, packages, exports, private notes, or retired provider overlays are bundled. |
 | Input accessibility | `PASS_WITH_LIMITATIONS` | visual regression target-size checks, local-file/live smoke, static shell checks | Does not certify screen-reader behavior or every app-specific workflow. |
+| Recovery/data safety | `PASS_WITH_LIMITATIONS` | README, local-file/live tests, per-app README/static checks | App-specific export/import/reset behavior varies and must not be generalized without tests. |
 
 ## Required Before Public-Facing Change
 
