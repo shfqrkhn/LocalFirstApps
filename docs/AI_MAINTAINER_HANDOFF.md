@@ -63,6 +63,7 @@ Also run a secret scan and link/media check before committing or pushing.
 ## Continuation Notes
 
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
+- If the Pages API summary reports `errored`, compare the latest current-head `Deploy GitHub Pages` workflow, deployments API SHA, and live HTTP 200 before editing source; treat a contradictory API summary as stale residue and report it with limitations.
 - Use `docs/future-app-intake.md` before adding any new module.
 - Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.
 - Future userscripts belong in a separate userscripts repo by default, not LocalFirstApps.

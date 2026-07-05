@@ -129,10 +129,14 @@ for (const phrase of ["Input Accessibility Evidence", "keyboard-only", "mouse/po
 for (const phrase of ["Recovery And Data Safety Evidence", "import, export, reset", "user-triggered", "local-first", "silent upload", "Recovery/data safety"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing recovery/data safety term: ${phrase}`);
 }
+for (const phrase of ["Pages API Residue Evidence", "current-head `Deploy GitHub Pages` workflow succeeds", "live URL fails", "PASS_WITH_LIMITATIONS", "stale residue"]) {
+  assert(evidenceReceipt.includes(phrase), `Evidence receipt missing Pages API residue term: ${phrase}`);
+}
 for (const phrase of ["Per-App Membership Evidence", "apps/<slug>/", "launcher card", "file-mode notice", "old screenshots", "Userscripts", "future-app-intake.md"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing per-app membership term: ${phrase}`);
 }
 assert(handoff.includes("git rev-list --left-right --count 'HEAD...@{u}'"), "Handoff must require a PowerShell-safe current upstream delta check.");
+assert(handoff.includes("treat a contradictory API summary as stale residue"), "Handoff must preserve Pages API residue handling.");
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
 }

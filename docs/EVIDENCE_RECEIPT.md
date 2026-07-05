@@ -29,6 +29,12 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - If any proof is missing, stale, or contradicted by GitHub/repo/app state, record the repo as `PASS_WITH_LIMITATIONS`, `NOT_RUN`, `BLOCKED`, or `NO_GO` instead of safe.
 - The final status table must name remaining risks rather than implying safety from silence.
 
+## Pages API Residue Evidence
+
+- GitHub Pages API status is not sufficient by itself when it contradicts current-head workflow and live URL evidence.
+- If `gh api repos/shfqrkhn/LocalFirstApps/pages` reports `errored` but the latest current-head `Deploy GitHub Pages` workflow succeeds, deployments list the same head SHA, and `https://shfqrkhn.github.io/LocalFirstApps/` returns HTTP 200, report the API summary as stale residue with `PASS_WITH_LIMITATIONS` instead of changing source.
+- Treat it as a real blocker only when the latest current-head Pages workflow fails for a source/build reason, deployment SHA lags runtime payload changes, or the live URL fails.
+
 ## Input Accessibility Evidence
 
 - Critical suite workflows must remain usable by keyboard-only, mouse/pointer-only, and touch-only users.
@@ -55,6 +61,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 | No backend/telemetry/accounts/OAuth/API keys | `PASS` | static scan and app-provider pattern test | Future apps must pass intake before joining the suite. |
 | Per-app launcher/README/screenshot/shared shell | `PASS_WITH_LIMITATIONS` | static regression tests, per-app membership evidence | Recheck after each app migration, screenshot change, or app-membership claim. |
 | File/live behavior clarity | `PASS_WITH_LIMITATIONS` | shared shell, local-file and live tests | GitHub Pages and local file behavior should both be tested after runtime changes. |
+| Pages API summary | `PASS_WITH_LIMITATIONS` | latest current-head Pages workflow, deployments API, live HTTP 200 | The Pages API `.status` field can lag or contradict successful workflow deployments; report the residue separately. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `.gitattributes`, `docs/REPO_ZIP_POLICY.md`, static tests | Recheck no tests, packages, exports, private notes, or retired provider overlays are bundled. |
 | Input accessibility | `PASS_WITH_LIMITATIONS` | visual regression target-size checks, local-file/live smoke, static shell checks | Does not certify screen-reader behavior or every app-specific workflow. |
 | Recovery/data safety | `PASS_WITH_LIMITATIONS` | README, local-file/live tests, per-app README/static checks | App-specific export/import/reset behavior varies and must not be generalized without tests. |
