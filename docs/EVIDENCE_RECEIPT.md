@@ -28,6 +28,12 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - If any proof is missing, stale, or contradicted by GitHub/repo/app state, record the repo as `PASS_WITH_LIMITATIONS`, `NOT_RUN`, `BLOCKED`, or `NO_GO` instead of safe.
 - The final status table must name remaining risks rather than implying safety from silence.
 
+## Input Accessibility Evidence
+
+- Critical suite workflows must remain usable by keyboard-only, mouse/pointer-only, and touch-only users.
+- Accessibility claims require current evidence from static checks, visual/input-size checks, local-file checks, live checks, focus/label review, and tap-target/no-overflow checks where applicable.
+- If an app lacks direct input-mode coverage, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN`; do not claim full accessibility from static presence alone.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |
@@ -37,6 +43,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 | Per-app launcher/README/screenshot/shared shell | `PASS_WITH_LIMITATIONS` | static regression tests | Recheck after each app migration or screenshot change. |
 | File/live behavior clarity | `PASS_WITH_LIMITATIONS` | shared shell, local-file and live tests | GitHub Pages and local file behavior should both be tested after runtime changes. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `.gitattributes`, `docs/REPO_ZIP_POLICY.md`, static tests | Recheck no tests, packages, exports, private notes, or retired provider overlays are bundled. |
+| Input accessibility | `PASS_WITH_LIMITATIONS` | visual regression target-size checks, local-file/live smoke, static shell checks | Does not certify screen-reader behavior or every app-specific workflow. |
 
 ## Required Before Public-Facing Change
 
