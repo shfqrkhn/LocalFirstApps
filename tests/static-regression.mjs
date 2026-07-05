@@ -75,6 +75,7 @@ const zipPolicy = readFileSync(join(root, "docs", "REPO_ZIP_POLICY.md"), "utf8")
 const evidenceReceipt = readFileSync(join(root, "docs", "EVIDENCE_RECEIPT.md"), "utf8");
 const handoff = readFileSync(join(root, "docs", "AI_MAINTAINER_HANDOFF.md"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
+const codeqlConfig = readFileSync(join(root, ".github", "codeql", "codeql-config.yml"), "utf8");
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
   .split(/\r?\n/)
   .filter(Boolean)
@@ -115,8 +116,11 @@ for (const phrase of ["Safe-To-Publish Receipt", "clean synced tree", "no GitHub
 for (const phrase of ["Runtime app code scanning", ".github/workflows/codeql.yml", "CodeQL JavaScript analysis", "PASS_WITH_LIMITATIONS"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing code scanning term: ${phrase}`);
 }
-for (const phrase of ["github/codeql-action/init@v4", "github/codeql-action/analyze@v4", "languages: javascript-typescript", "security-events: write"]) {
+for (const phrase of ["github/codeql-action/init@v4", "github/codeql-action/analyze@v4", "languages: javascript-typescript", "security-events: write", "config-file: ./.github/codeql/codeql-config.yml"]) {
   assert(codeqlWorkflow.includes(phrase), `CodeQL workflow missing: ${phrase}`);
+}
+for (const phrase of ["paths-ignore:", "tests/**", "node_modules/**", "test-results/**", "playwright-report/**", "apps/commonground/assets/**"]) {
+  assert(codeqlConfig.includes(phrase), `CodeQL config missing: ${phrase}`);
 }
 for (const phrase of ["Input Accessibility Evidence", "keyboard-only", "mouse/pointer-only", "touch-only", "focus/label review", "tap-target/no-overflow", "Input accessibility"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing input accessibility term: ${phrase}`);
