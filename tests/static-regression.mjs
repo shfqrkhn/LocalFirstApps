@@ -104,6 +104,9 @@ for (const phrase of ["Input Accessibility Evidence", "keyboard-only", "mouse/po
 for (const phrase of ["Recovery And Data Safety Evidence", "import, export, reset", "user-triggered", "local-first", "silent upload", "Recovery/data safety"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing recovery/data safety term: ${phrase}`);
 }
+for (const phrase of ["Per-App Membership Evidence", "apps/<slug>/", "launcher card", "file-mode notice", "old screenshots", "Userscripts", "future-app-intake.md"]) {
+  assert(evidenceReceipt.includes(phrase), `Evidence receipt missing per-app membership term: ${phrase}`);
+}
 assert(handoff.includes("git rev-list --left-right --count HEAD...@{u}"), "Handoff must require a current upstream delta check.");
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);

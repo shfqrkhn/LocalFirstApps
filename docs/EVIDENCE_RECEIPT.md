@@ -40,13 +40,19 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - Suite-wide recovery claims may cover local/file/live survivability only within tested paths; they must not imply shared cloud backup, accounts, OAuth, API keys, or silent upload.
 - If an app lacks direct recovery-path coverage in the current pass, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN` before public use.
 
+## Per-App Membership Evidence
+
+- A suite app is public-ready only when the current repo contains its `apps/<slug>/` folder, README, screenshot, launcher card, shared shell wiring, return link, file-mode notice, and app-specific privacy/input/recovery evidence.
+- Deleted standalone surfaces, old screenshots, old README text, or portfolio memories are not evidence that an app still exists, remains supported, or should be restored.
+- Userscripts, provider overlays, OAuth/API-key flows, or high-trust apps must stay out of the suite unless `docs/future-app-intake.md` approves the fit and the evidence receipt gets a new bounded claim row.
+
 ## Claim Boundaries
 
 | Area | Class | Evidence | Limit |
 | --- | --- | --- | --- |
 | Static local-first suite | `PASS` | launcher, app folders, static tests | Individual browser capabilities can vary by local file mode. |
 | No backend/telemetry/accounts/OAuth/API keys | `PASS` | static scan and app-provider pattern test | Future apps must pass intake before joining the suite. |
-| Per-app launcher/README/screenshot/shared shell | `PASS_WITH_LIMITATIONS` | static regression tests | Recheck after each app migration or screenshot change. |
+| Per-app launcher/README/screenshot/shared shell | `PASS_WITH_LIMITATIONS` | static regression tests, per-app membership evidence | Recheck after each app migration, screenshot change, or app-membership claim. |
 | File/live behavior clarity | `PASS_WITH_LIMITATIONS` | shared shell, local-file and live tests | GitHub Pages and local file behavior should both be tested after runtime changes. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `.gitattributes`, `docs/REPO_ZIP_POLICY.md`, static tests | Recheck no tests, packages, exports, private notes, or retired provider overlays are bundled. |
 | Input accessibility | `PASS_WITH_LIMITATIONS` | visual regression target-size checks, local-file/live smoke, static shell checks | Does not certify screen-reader behavior or every app-specific workflow. |
