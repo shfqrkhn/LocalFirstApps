@@ -211,6 +211,7 @@ const exportIgnoredPaths = [
 const runtimeZipPaths = ["index.html", "README.md", "suite-shell.css", "suite-shell.js", "apps/ts-dash/index.html", "apps/commonground/index.html"];
 const exportAttrsResolved = exportIgnoreMap([...exportIgnoredPaths, ...runtimeZipPaths]);
 const archiveEntries = gitArchiveEntries();
+const appReadmeRecoveryPattern = /\b(export|back up|backup|reset|clearing browser storage|browser storage)\b|no separate .*?(export|import|backup|recovery) workflow|no .*?cloud backup/i;
 for (const file of exportIgnoredPaths) {
   assert(exportAttrsResolved.get(file) === "set", `Git export-ignore must exclude non-runtime archive path: ${file}`);
   assert(!archiveEntries.includes(file) && !archiveEntries.some((entry) => entry.startsWith(`${file}/`)), `Generated repository archive must exclude non-runtime path: ${file}`);
@@ -238,6 +239,7 @@ for (const [slug, label, screenshot] of apps) {
   assert(appIndex.includes("../../suite-shell.js"), `${label} must use shared suite shell JS.`);
   assert(appIndex.includes('class="lfa-suite-home"'), `${label} must expose a LocalFirstApps return link.`);
   assert(appIndex.includes('class="lfa-file-notice"'), `${label} must explain local file mode.`);
+  assert(appReadmeRecoveryPattern.test(appReadme), `${label} README must state export/import/reset recovery behavior or an explicit limitation.`);
   assert(!appProviderPattern.test(`${appReadme}\n${appIndex}`), `${label} must not expose OAuth/API-key/provider app behavior.`);
 }
 

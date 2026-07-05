@@ -44,6 +44,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 ## Recovery And Data Safety Evidence
 
 - App-specific import, export, reset, browser-storage, and recovery claims must remain user-triggered, local-first, and tied to current tests or explicit manual evidence.
+- Each app README must state the app-specific data/recovery boundary, including export/import/reset behavior or an explicit limitation when no separate recovery workflow exists.
 - Suite-wide recovery claims may cover local/file/live survivability only within tested paths; they must not imply shared cloud backup, accounts, OAuth, API keys, or silent upload.
 - If an app lacks direct recovery-path coverage in the current pass, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN` before public use.
 

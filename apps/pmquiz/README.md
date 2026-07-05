@@ -40,6 +40,8 @@ Exam preparation works best when practice is fast, repeatable, and available off
 
 - No account or backend is required for normal use.
 - Quiz state and uploaded custom files stay in the browser.
+- Custom question-file uploads are user-triggered and read locally for the active quiz.
+- PMQuiz does not provide a separate cloud backup, account recovery, or export workflow for quiz progress; use **Reset Quiz & Load New** to clear the current session.
 - No tracking or cookies are required by the app.
 
 ## Relationship To Other Projects
