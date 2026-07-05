@@ -92,6 +92,22 @@ function exportIgnoreMap(paths) {
   return map;
 }
 
+function gitArchiveEntries() {
+  const archive = execFileSync("git", ["archive", "--format=tar", "HEAD"], { cwd: root, maxBuffer: 128 * 1024 * 1024 });
+  const names = [];
+  for (let offset = 0; offset + 512 <= archive.length;) {
+    const header = archive.subarray(offset, offset + 512);
+    if (header.every((byte) => byte === 0)) break;
+    const name = header.subarray(0, 100).toString("utf8").replace(/\0.*$/, "");
+    const prefix = header.subarray(345, 500).toString("utf8").replace(/\0.*$/, "");
+    const rawSize = header.subarray(124, 136).toString("utf8").replace(/\0.*$/, "").trim();
+    const size = Number.parseInt(rawSize || "0", 8) || 0;
+    if (name) names.push((prefix ? `${prefix}/${name}` : name).replace(/\\/g, "/"));
+    offset += 512 + Math.ceil(size / 512) * 512;
+  }
+  return names;
+}
+
 assert(readme.includes("github.com/sponsors/shfqrkhn"), "README must keep sponsor CTA.");
 assert(forbiddenTrackedFiles.length === 0, `Forbidden tracked paths: ${forbiddenTrackedFiles.join(", ")}`);
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
@@ -111,6 +127,7 @@ assert(!readme.includes("retained only as redirects/archives"), "README must not
 assert(zipPolicy.includes("runtime-focused static copy"), "Repository ZIP policy must define runtime-focused archives.");
 assert(zipPolicy.includes("CommonGround BYOAI/provider overlays"), "Repository ZIP policy must block retired CommonGround provider overlays.");
 assert(zipPolicy.includes("Download the repository ZIP"), "Repository ZIP policy must require ZIP verification.");
+assert(zipPolicy.includes("git archive"), "Repository ZIP policy must tie download claims to generated archive evidence.");
 assert(evidenceReceipt.includes("PASS_WITH_LIMITATIONS"), "Evidence receipt must define limited claims.");
 assert(evidenceReceipt.includes("No backend/telemetry/accounts/OAuth/API keys"), "Evidence receipt must preserve suite privacy boundary.");
 assert(evidenceReceipt.includes("Per-app launcher/README/screenshot/shared shell"), "Evidence receipt must cover per-app completeness.");
@@ -175,11 +192,14 @@ const exportIgnoredPaths = [
 ];
 const runtimeZipPaths = ["index.html", "README.md", "suite-shell.css", "suite-shell.js", "apps/ts-dash/index.html", "apps/commonground/index.html"];
 const exportAttrsResolved = exportIgnoreMap([...exportIgnoredPaths, ...runtimeZipPaths]);
+const archiveEntries = gitArchiveEntries();
 for (const file of exportIgnoredPaths) {
   assert(exportAttrsResolved.get(file) === "set", `Git export-ignore must exclude non-runtime archive path: ${file}`);
+  assert(!archiveEntries.includes(file) && !archiveEntries.some((entry) => entry.startsWith(`${file}/`)), `Generated repository archive must exclude non-runtime path: ${file}`);
 }
 for (const file of runtimeZipPaths) {
   assert(exportAttrsResolved.get(file) === "unspecified", `Runtime archive path must remain downloadable: ${file}`);
+  assert(archiveEntries.includes(file), `Generated repository archive must include runtime path: ${file}`);
 }
 
 for (const [slug, label, screenshot] of apps) {

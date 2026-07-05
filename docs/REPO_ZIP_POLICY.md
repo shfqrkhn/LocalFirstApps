@@ -1,6 +1,6 @@
 # Repository ZIP Policy
 
-Users should run the live GitHub Pages suite or download the repository through **Code > Download ZIP**. The repository ZIP is a runtime-focused static copy of LocalFirstApps and should be safe to unzip and run without GitHub Releases or retired standalone app surfaces.
+Users should run the live GitHub Pages suite or download the repository through **Code > Download ZIP**. The generated repository ZIP is a runtime-focused static copy of LocalFirstApps and should be safe to unzip and run without GitHub Releases or retired standalone app surfaces.
 
 ## Allowed
 
@@ -10,7 +10,7 @@ Users should run the live GitHub Pages suite or download the repository through 
 
 ## Forbidden
 
-- `node_modules/`, `test-results/`, package-management files, source-only tests, private planning notes, backups, exports, PII, credentials, API keys, OAuth flows, telemetry, accounts, silent upload paths, and JS popup APIs.
+- `node_modules/`, `test-results/`, private planning notes, backups, exports, PII, credentials, API keys, OAuth flows, telemetry, accounts, silent upload paths, JS popup APIs, and source-only maintenance files that `.gitattributes` excludes from generated archives.
 - Standalone redirect folders or URLs for `AI-Studio-Cleaner`, `C3Pedal`, `CommonGround`, `Flexx-Files`, `LedgerSuite`, `Noodle-Nudge`, `PMQuiz`, or `TS-Dash`.
 - CommonGround BYOAI/provider overlays or any suite app behavior that requires OAuth, API keys, or remote AI providers.
 
@@ -28,4 +28,4 @@ npm run qa
 git diff --check
 ```
 
-Download the repository ZIP and verify it contains no forbidden paths and no app-level OAuth/API-key/provider behavior.
+Download the repository ZIP through GitHub **Code > Download ZIP** or verify the generated archive with `git archive`; it must contain runtime files and no forbidden paths or app-level OAuth/API-key/provider behavior.
