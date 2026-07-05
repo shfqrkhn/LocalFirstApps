@@ -54,10 +54,7 @@ Every new module must:
 Run:
 
 ```bash
-npm test
-npm run test:visual
-npm run test:file
-npm run test:live
+npm run qa
 ```
 
 Also check:

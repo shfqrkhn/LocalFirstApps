@@ -56,7 +56,7 @@ python -m http.server 8080
 From a git checkout:
 
 ```bash
-npm run test:all
+npm run qa
 ```
 
 The tests check the suite shell, migrated app entry points, local-file launch, live Pages routes, responsive layout, stale old URLs, redirect-sensitive paths, media links, and unwanted non-product files.

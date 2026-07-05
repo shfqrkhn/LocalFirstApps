@@ -66,6 +66,7 @@ function assertManifestRefs(file) {
 }
 
 const index = readFileSync(join(root, "index.html"), "utf8");
+const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
 const readme = readFileSync(join(root, "README.md"), "utf8");
 const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
 const zipPolicy = readFileSync(join(root, "docs", "REPO_ZIP_POLICY.md"), "utf8");
@@ -79,7 +80,11 @@ assert(!readme.includes("/releases/latest"), "README must not link GitHub Releas
 assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "README must include the suite launcher screenshot.");
 assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
-assert(readme.includes("npm run test:all"), "README must document the full test gate.");
+assert(pkg.scripts?.qa === "npm run test:all", "package must expose the full QA gate.");
+assert(readme.includes("npm run qa"), "README must document the full QA gate.");
+assert(zipPolicy.includes("npm run qa"), "Repository ZIP policy must include the full QA gate.");
+assert(evidenceReceipt.includes("npm run qa"), "Evidence receipt must include the full QA gate.");
+assert(handoff.includes("npm run qa"), "Maintainer handoff must include the full QA gate.");
 assert(readme.includes("The repository ZIP omits source-only test and package-management files"), "README must explain runtime-focused repository ZIP archives.");
 assert(readme.includes("The original standalone repo surfaces have been retired."), "README must document retired standalone repo surfaces accurately.");
 assert(!readme.includes("retained only as redirects/archives"), "README must not claim deleted standalone repos are retained.");

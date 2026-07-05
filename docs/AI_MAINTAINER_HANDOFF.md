@@ -55,10 +55,7 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 ## Required Checks
 
 ```bash
-npm test
-npm run test:visual
-npm run test:file
-npm run test:live
+npm run qa
 ```
 
 Also run a secret scan and link/media check before committing or pushing.

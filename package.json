@@ -8,7 +8,8 @@
     "test:visual": "playwright test tests/visual-regression.spec.mjs --reporter=line",
     "test:file": "playwright test tests/local-file-regression.spec.mjs --reporter=line",
     "test:live": "playwright test tests/live-regression.spec.mjs --reporter=line",
-    "test:all": "npm test && npm run test:visual && npm run test:file && npm run test:live"
+    "test:all": "npm test && npm run test:visual && npm run test:file && npm run test:live",
+    "qa": "npm run test:all"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1"

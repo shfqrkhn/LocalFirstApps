@@ -62,7 +62,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 
 - `git status --short --ignored`
 - `git rev-list --left-right --count HEAD..."@{u}"`
-- `npm run test:all`
+- `npm run qa`
 - `git diff --check`
 - protected-path scan
 - live Pages check after runtime or public-surface changes
