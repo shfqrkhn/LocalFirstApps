@@ -62,7 +62,7 @@ Also run a secret scan and link/media check before committing or pushing.
 
 ## Continuation Notes
 
-- Verify the current branch delta with `git rev-list --left-right --count HEAD...@{u}` before pushing; do not rely on stale ahead/behind notes.
+- Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
 - Use `docs/future-app-intake.md` before adding any new module.
 - Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.
 - Future userscripts belong in a separate userscripts repo by default, not LocalFirstApps.
