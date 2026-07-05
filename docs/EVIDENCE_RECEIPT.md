@@ -70,6 +70,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 
 - `git status --short --ignored`
 - `git rev-list --left-right --count 'HEAD...@{u}'`
+- `gh release list --limit 5` returns no releases
 - `npm run qa`
 - `git diff --check`
 - protected-path scan
