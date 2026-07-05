@@ -50,6 +50,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 ## Per-App Membership Evidence
 
 - A suite app is public-ready only when the current repo contains its `apps/<slug>/` folder, README, screenshot, launcher card, shared shell wiring, return link, file-mode notice, and app-specific privacy/input/recovery evidence.
+- The canonical app registry, actual `apps/` directories, launcher cards, and README app links must match in the static regression gate; unexpected app folders are repo-sprawl blockers until intake and docs are updated.
 - Deleted standalone surfaces, old screenshots, old README text, or portfolio memories are not evidence that an app still exists, remains supported, or should be restored.
 - Userscripts, provider overlays, OAuth/API-key flows, or high-trust apps must stay out of the suite unless `docs/future-app-intake.md` approves the fit and the evidence receipt gets a new bounded claim row.
 

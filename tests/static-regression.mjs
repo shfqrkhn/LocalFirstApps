@@ -11,6 +11,7 @@ const apps = [
   ["flexx-files", "Flexx Files", "screenshot.png"],
   ["commonground", "CommonGround", "screenshot-app.png"]
 ];
+const expectedAppSlugs = apps.map(([slug]) => slug).sort();
 
 const oldRepoPattern = /https:\/\/shfqrkhn\.github\.io\/(TS-Dash|PMQuiz|Noodle-Nudge|LedgerSuite|Flexx-Files|CommonGround)\//;
 const oldAbsolutePathPattern = /\/(TS-Dash|PMQuiz|Noodle-Nudge|LedgerSuite|Flexx-Files|CommonGround)\//;
@@ -22,6 +23,14 @@ const forbiddenTrackedPathPattern = /(^|\/)(node_modules|offline|linkedin-post-p
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+function sameList(left, right) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function uniqueSorted(values) {
+  return [...new Set(values.filter(Boolean))].sort();
 }
 
 function walk(dir) {
@@ -81,6 +90,12 @@ const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "u
   .filter(Boolean)
   .map((file) => file.replace(/\\/g, "/"));
 const forbiddenTrackedFiles = trackedFiles.filter((file) => forbiddenTrackedPathPattern.test(file));
+const actualAppSlugs = readdirSync(join(root, "apps"), { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name)
+  .sort();
+const launcherAppSlugs = uniqueSorted([...index.matchAll(/href=["']\.\/apps\/([^/"']+)\/["']/g)].map((match) => match[1]));
+const readmeAppSlugs = uniqueSorted([...readme.matchAll(/LocalFirstApps\/apps\/([^/)]+)\//g)].map((match) => match[1]));
 
 function exportIgnoreMap(paths) {
   const output = execFileSync("git", ["check-attr", "export-ignore", "--", ...paths], { cwd: root, encoding: "utf8" });
@@ -110,6 +125,9 @@ function gitArchiveEntries() {
 
 assert(readme.includes("github.com/sponsors/shfqrkhn"), "README must keep sponsor CTA.");
 assert(forbiddenTrackedFiles.length === 0, `Forbidden tracked paths: ${forbiddenTrackedFiles.join(", ")}`);
+assert(sameList(actualAppSlugs, expectedAppSlugs), `Actual apps folder does not match canonical app registry. actual=${actualAppSlugs.join(",")} expected=${expectedAppSlugs.join(",")}`);
+assert(sameList(launcherAppSlugs, expectedAppSlugs), `Launcher cards do not match canonical app registry. launcher=${launcherAppSlugs.join(",")} expected=${expectedAppSlugs.join(",")}`);
+assert(sameList(readmeAppSlugs, expectedAppSlugs), `README app links do not match canonical app registry. readme=${readmeAppSlugs.join(",")} expected=${expectedAppSlugs.join(",")}`);
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
 assert(readme.includes("[Download current main ZIP](https://github.com/shfqrkhn/LocalFirstApps/archive/refs/heads/main.zip)"), "README must link the repository ZIP.");
 assert(!readme.includes("/releases/latest"), "README must not link GitHub Releases.");
