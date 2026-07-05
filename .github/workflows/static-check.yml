@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   static-check:
@@ -15,8 +19,6 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
-      - run: npm test
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:visual
-      - run: npm run test:file
+      - run: npm run qa
       - run: npm audit --audit-level=moderate
