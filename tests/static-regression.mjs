@@ -69,6 +69,7 @@ const index = readFileSync(join(root, "index.html"), "utf8");
 const readme = readFileSync(join(root, "README.md"), "utf8");
 const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
 const zipPolicy = readFileSync(join(root, "docs", "REPO_ZIP_POLICY.md"), "utf8");
+const handoff = readFileSync(join(root, "docs", "AI_MAINTAINER_HANDOFF.md"), "utf8");
 
 assert(readme.includes("github.com/sponsors/shfqrkhn"), "README must keep sponsor CTA.");
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
@@ -84,6 +85,8 @@ assert(!readme.includes("retained only as redirects/archives"), "README must not
 assert(zipPolicy.includes("runtime-focused static copy"), "Repository ZIP policy must define runtime-focused archives.");
 assert(zipPolicy.includes("CommonGround BYOAI/provider overlays"), "Repository ZIP policy must block retired CommonGround provider overlays.");
 assert(zipPolicy.includes("Download the repository ZIP"), "Repository ZIP policy must require ZIP verification.");
+assert(handoff.includes("git rev-list --left-right --count HEAD...@{u}"), "Handoff must require a current upstream delta check.");
+assert(!handoff.includes("ahead of origin before this handoff pass"), "Handoff must not preserve stale ahead/behind state.");
 for (const exportIgnored of [
   "tests export-ignore",
   "package.json export-ignore",

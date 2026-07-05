@@ -1,6 +1,6 @@
 # AI Maintainer Handoff
 
-Last updated: 2026-07-03.
+Last updated: 2026-07-05.
 Repo: `D:\VSCode\GH\LocalFirstApps`.
 
 Treat this as a public-safe continuation map. Re-read current files before editing.
@@ -51,7 +51,7 @@ Also run a secret scan and link/media check before committing or pushing.
 
 ## Continuation Notes
 
-- This local repo was ahead of origin before this handoff pass. Verify `git rev-list --left-right --count HEAD...origin/main` before pushing.
+- Verify the current branch delta with `git rev-list --left-right --count HEAD...@{u}` before pushing; do not rely on stale ahead/behind notes.
 - Use `docs/future-app-intake.md` before adding any new module.
 - Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.
 - Future userscripts belong in a separate userscripts repo by default, not LocalFirstApps.
