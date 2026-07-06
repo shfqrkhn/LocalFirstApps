@@ -1,16 +1,16 @@
-const CACHE_NAME = "ledger-suite-shell-v0.1.46";
+const CACHE_NAME = "ledger-suite-shell-v0.1.47";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./manifest.webmanifest",
-  "./.resources/Ledger_16.png",
-  "./.resources/Ledger_32.png",
-  "./.resources/Ledger_48.png",
-  "./.resources/Ledger_64.png",
-  "./.resources/Ledger_128.png",
-  "./.resources/Ledger_256.png"
+  "./resources/Ledger_16.png",
+  "./resources/Ledger_32.png",
+  "./resources/Ledger_48.png",
+  "./resources/Ledger_64.png",
+  "./resources/Ledger_128.png",
+  "./resources/Ledger_256.png"
 ];
 
 self.addEventListener("install", (event) => {

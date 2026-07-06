@@ -55,7 +55,19 @@ async function collectLayoutAudit(page) {
         return style.display !== "none" && style.visibility !== "hidden" && box.width > 0 && box.height > 0 && box.height < 28;
       })
       .slice(0, 5)
-      .map((element) => element.id || element.textContent?.trim()?.slice(0, 40) || element.tagName.toLowerCase())
+      .map((element) => element.id || element.textContent?.trim()?.slice(0, 40) || element.tagName.toLowerCase()),
+    brokenImages: [...document.querySelectorAll("img")]
+      .filter((element) => {
+        const style = getComputedStyle(element);
+        const box = element.getBoundingClientRect();
+        return style.display !== "none" &&
+          style.visibility !== "hidden" &&
+          box.width > 0 &&
+          box.height > 0 &&
+          (!element.complete || element.naturalWidth === 0 || element.naturalHeight === 0);
+      })
+      .slice(0, 5)
+      .map((element) => element.getAttribute("src") || element.getAttribute("alt") || "img")
   }));
 }
 
@@ -107,6 +119,7 @@ for (const [name, path] of pages) {
       expect(audit.visibleBody).toBe(true);
       expect(audit.overflowX).toBe(0);
       expect(audit.undersizedInteractive).toEqual([]);
+      expect(audit.brokenImages).toEqual([]);
     });
   }
 }

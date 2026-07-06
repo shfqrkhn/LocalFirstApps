@@ -12,7 +12,7 @@ LedgerSuite helps leaders and operators draft decision memos, track evidence, we
 
 ## Screenshot
 
-![LedgerSuite decision workspace](./.resources/screenshot.png)
+![LedgerSuite decision workspace](./resources/screenshot.png)
 
 ## Why This Exists
 
@@ -54,7 +54,7 @@ LedgerSuite is the operator/management utility in LocalFirstApps. `CommonGround`
 ├── styles.css
 ├── manifest.webmanifest
 ├── sw.js
-└── .resources/
+└── resources/
 ```
 
 ## Deployment

@@ -7,7 +7,7 @@ const apps = [
   ["ts-dash", "TS-Dash", "screenshot.png"],
   ["pmquiz", "PMQuiz", "screenshot.png"],
   ["noodle-nudge", "Noodle Nudge", "images/screenshot.jpeg"],
-  ["ledgersuite", "LedgerSuite", ".resources/screenshot.png"],
+  ["ledgersuite", "LedgerSuite", "resources/screenshot.png"],
   ["flexx-files", "Flexx Files", "screenshot.png"],
   ["commonground", "CommonGround", "screenshot-app.png"]
 ];
