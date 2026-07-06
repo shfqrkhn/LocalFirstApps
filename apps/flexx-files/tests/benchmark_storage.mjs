@@ -38,8 +38,6 @@ Object.defineProperty(global, 'navigator', {
     writable: true,
     configurable: true
 });
-global.alert = (msg) => console.log('ALERT:', msg);
-global.confirm = () => true;
 
 // Mock requestIdleCallback
 global.requestIdleCallbackCalls = 0;

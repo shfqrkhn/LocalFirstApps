@@ -17,7 +17,7 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - Every app must keep a README, screenshot, launcher card, shared suite shell, and return link.
 - No hidden backend, telemetry, account dependency, OAuth, API key, or silent upload.
 - No JS popup APIs; use in-app UI.
-- Critical flows should be usable by keyboard-only, mouse-only, and touch-only input.
+- Critical flows should be usable with one available input mode after setup: keyboard only, mouse/pointer only, touch only, or platform-limited input only.
 
 ## OmniOS Transfer Contract
 
@@ -25,6 +25,9 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - Execution truth: preserve per-app completeness, suite shell, file/live, visual, local-file, static, and privacy gates before publishing.
 - Evidence truth: use `docs/EVIDENCE_RECEIPT.md`, per-app README/screenshot checks, protected-path scans, and tests; public claims must stay within `PASS` or `PASS_WITH_LIMITATIONS`.
 - Operations truth: live Pages or current main repository ZIP are the only distribution paths; GitHub Releases stay absent.
+- Reliability truth: keep launcher, shell, file/live, import/export/reset, and per-app flows self-checking, crash-recoverable, state-explicit, modular, maintainable, simple, one-input accessible, and TDD/SDD-backed; remove complexity that does not improve resilience or usability.
+- Design truth: keep UI changes modern minimalist, utilitarian, professional, joyful, responsive, and contextual to each local-first utility; use local CSS/tokens and native controls first, treat MIT UI libraries/resources as inspiration only unless a source-backed need justifies a dependency, vendor required runtime UI/chart dependencies with license notices, and reject browser JS popups, blocking overlays, overlapping components, inaccessible controls, unbounded motion, external runtime CDNs, or arbitrary component copy-paste.
+- Single input truth: after setup, critical suite workflows must remain fully operable by keyboard only, mouse/pointer only, touch only, or platform-limited input only; never require a combined input-mode path.
 - Transfer truth: update this handoff and the evidence receipt when app membership, screenshots, privacy claims, shared shell behavior, or public-surface guarantees change.
 
 ## Doctrine Delta Decision

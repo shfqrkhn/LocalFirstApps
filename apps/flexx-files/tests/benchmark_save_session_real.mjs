@@ -18,10 +18,6 @@ global.window.cancelIdleCallback = (id) => {};
 global.window.setTimeout = (cb) => cb();
 global.window.clearTimeout = (id) => {};
 
-// Mock Alert/Confirm
-global.window.alert = () => {};
-global.window.confirm = () => true;
-
 // Mock Logger to suppress noise
 const noop = () => {};
 global.console = { ...console, warn: noop, info: noop, debug: noop, error: noop };

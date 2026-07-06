@@ -37,9 +37,17 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 
 ## Input Accessibility Evidence
 
-- Critical suite workflows must remain usable by keyboard-only, mouse/pointer-only, and touch-only users.
-- Accessibility claims require current evidence from static checks, visual/input-size checks, local-file checks, live checks, focus/label review, and tap-target/no-overflow checks where applicable.
-- If an app lacks direct input-mode coverage, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN`; do not claim full accessibility from static presence alone.
+- After setup, critical suite workflows must remain fully usable with one available input mode: keyboard only, mouse/pointer only, touch only, or platform-limited input only.
+- No critical workflow may require a combined keyboard-plus-pointer, keyboard-plus-touch, hover-plus-keyboard, drag-plus-keyboard, or browser-popup path.
+- Accessibility claims require current evidence from static checks, visual/input-size checks, local-file checks, live checks, focus/label review, platform text-entry support, and tap-target/no-overflow checks where applicable.
+- If keyboard-only, mouse-only, touch-only, or platform-limited operation is not directly covered for an app, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN`; do not claim full accessibility from static presence alone.
+
+## Design Language Evidence
+
+- UI changes must preserve a modern minimalist, utilitarian, professional, joyful, responsive, local-first-suite-contextual design language with local CSS/tokens, semantic native controls, visible focus, reduced-motion-safe transitions, no horizontal overflow, and no component overlap.
+- MIT UI libraries/resources such as Uiverse, Open Props, Primer, Radix Colors, Pico CSS, Heroicons, Bootstrap Icons, Floating UI, or A11y Dialog are inspiration sources only unless a source-backed, license-checked, tested need justifies a dependency.
+- Runtime third-party UI/chart dependencies must be vendored with license notices under `vendor/`; app shells and service workers must not reference runtime CDN, remote font, or remote icon URLs.
+- Reject browser JS popups, blocking overlays, arbitrary component copy-paste, mixed visual systems, unbounded animation, external CDNs, or styling that hides file/live/privacy boundaries.
 
 ## Recovery And Data Safety Evidence
 
@@ -47,6 +55,13 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - Each app README must state the app-specific data/recovery boundary, including export/import/reset behavior or an explicit limitation when no separate recovery workflow exists.
 - Suite-wide recovery claims may cover local/file/live survivability only within tested paths; they must not imply shared cloud backup, accounts, OAuth, API keys, or silent upload.
 - If an app lacks direct recovery-path coverage in the current pass, label it `PASS_WITH_LIMITATIONS` or `NOT_RUN` before public use.
+
+## Mission-Critical Reliability Evidence
+
+- Critical launcher, app shell, file/live, import/export/reset, and per-app workflows must stay self-checking, crash-recoverable, state-explicit, modular, maintainable, simple, one-input accessible, and TDD/SDD-backed.
+- Runtime failures must fail closed with visible in-app status, preserved local user control, no browser popup APIs, no hidden upload, and no OAuth/API-key/provider overlay unless intake explicitly approves it.
+- New complexity is acceptable only when it directly improves resilience, usability, state clarity, privacy, or maintainability and is covered by current tests or explicit evidence.
+- Autonomous AI-assisted development must start from current files, add or update tests before broad suite or app changes, keep claims inside evidence boundaries, and leave a reproducible recovery path.
 
 ## Per-App Membership Evidence
 
@@ -66,7 +81,10 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 | Pages API summary | `PASS_WITH_LIMITATIONS` | latest current-head Pages workflow, deployments API, live HTTP 200 | The Pages API `.status` field can lag or contradict successful workflow deployments; report the residue separately. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `.gitattributes`, `git check-attr export-ignore`, `git archive`, `docs/REPO_ZIP_POLICY.md`, static tests | Recheck no tests, packages, exports, private notes, or retired provider overlays are bundled. |
 | Input accessibility | `PASS_WITH_LIMITATIONS` | visual regression target-size checks, local-file/live smoke, static shell checks | Does not certify screen-reader behavior or every app-specific workflow. |
+| Single input operation | `PASS_WITH_LIMITATIONS` | input accessibility evidence, static shell checks, no browser popup policy | Does not certify every OS assistive technology or unusual HID/browser pairing. |
+| Design language/UI safety | `PASS_WITH_LIMITATIONS` | handoff/evidence docs, static tests, visual/local-file/live checks where run | Does not certify every viewport or assistive technology; each app may use contextual surfaces within the shared suite shell. |
 | Recovery/data safety | `PASS_WITH_LIMITATIONS` | README, local-file/live tests, per-app README/static checks | App-specific export/import/reset behavior varies and must not be generalized without tests. |
+| Mission-critical reliability | `PASS_WITH_LIMITATIONS` | mission-critical reliability evidence, static/visual/file/live tests | Does not make every app equally feature-complete; app-specific recovery must be tested before public claims. |
 
 ## Required Before Public-Facing Change
 

@@ -9,9 +9,7 @@ const ASSETS = [
   './json-worker.js',
   './icons/icon-192.png',
   './icons/icon-512.png',
-  'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
-  'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap'
+  '../../vendor/bootstrap-5.3.0.min.css'
 ];
 
 self.addEventListener('install', event => {
@@ -37,7 +35,7 @@ async function trimCache(cacheNameOrInstance, maxItems) {
 }
 
 self.addEventListener('activate', event => {
-  const allowedCaches = [CACHE_NAME, 'selfquiz-data-v1', 'selfquiz-fonts-v1'];
+  const allowedCaches = [CACHE_NAME, 'selfquiz-data-v1'];
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.filter(key => !allowedCaches.includes(key)).map(key => caches.delete(key))

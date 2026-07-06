@@ -13,10 +13,9 @@ const APP_SHELL_URLS = [
     './favicon.ico',
     './icons/icon-192x192.png',
     './icons/icon-512x512.png',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
-    'https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.js',
-    'https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+Pro:wght@400;600;700&display=swap'
+    '../../vendor/bootstrap-5.3.3.min.css',
+    '../../vendor/bootstrap-5.3.3.bundle.min.js',
+    '../../vendor/chart-4.4.2.umd.js'
 ];
 
 // Dynamic Content: JSON files to be pre-cached for offline access.

@@ -47,7 +47,7 @@ Every new module must:
 - avoid stale standalone Pages URLs and absolute old app paths;
 - avoid `alert`, `confirm`, and `prompt`;
 - avoid horizontal scrolling on supported viewports;
-- support keyboard-only, mouse-only, and touch-only critical workflows.
+- support one-input-mode critical workflows after setup: keyboard only, mouse/pointer only, touch only, or platform-limited input only.
 
 ## Required Checks
 

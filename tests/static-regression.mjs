@@ -18,6 +18,7 @@ const oldAbsolutePathPattern = /\/(TS-Dash|PMQuiz|Noodle-Nudge|LedgerSuite|Flexx
 const secretPattern = /(sk-[A-Za-z0-9_-]{20,}|AIza[0-9A-Za-z_-]{20,}|gh[pousr]_[A-Za-z0-9_]{20,}|xox[baprs]-[A-Za-z0-9-]{20,})/;
 const popupPattern = /\b(alert|confirm|prompt)\s*\(/;
 const appProviderPattern = /\b(BYOAI|API key|OAuth|OpenAI|Gemini|generativelanguage|chat\/completions)\b/i;
+const externalRuntimeDependencyPattern = /https:\/\/(?:cdn\.jsdelivr\.net|unpkg\.com|cdnjs\.cloudflare\.com)|fonts\.(?:googleapis|gstatic)\.com|bootstrap-icons/i;
 const forbiddenNames = new Set(["CLAUDE.md", "CODEBASE.md"]);
 const forbiddenTrackedPathPattern = /(^|\/)(node_modules|offline|linkedin-post-package|test-results|playwright-report|\.codex-remote-attachments)(\/|$)|^data\/(manual-overrides\.json|latest-simulation\.json|scoreboards)(\/|$)|(^|\/).*\.((env)|(pem)|(key)|(p12)|(pfx))$|(^|\/)(exports?|backups?|logs?|scratch)(\/|$)/i;
 
@@ -169,11 +170,17 @@ for (const phrase of ["github/codeql-action/init@v4", "github/codeql-action/anal
 for (const phrase of ["paths-ignore:", "tests/**", "node_modules/**", "test-results/**", "playwright-report/**", "apps/commonground/assets/**"]) {
   assert(codeqlConfig.includes(phrase), `CodeQL config missing: ${phrase}`);
 }
-for (const phrase of ["Input Accessibility Evidence", "keyboard-only", "mouse/pointer-only", "touch-only", "focus/label review", "tap-target/no-overflow", "Input accessibility"]) {
+for (const phrase of ["Input Accessibility Evidence", "keyboard only", "mouse/pointer only", "touch only", "platform-limited input only", "No critical workflow may require", "platform text-entry support", "Single input operation"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing input accessibility term: ${phrase}`);
+}
+for (const phrase of ["Design Language Evidence", "modern minimalist", "Uiverse", "Open Props", "Design language/UI safety", "browser JS popups", "component overlap", "vendored with license notices"]) {
+  assert(evidenceReceipt.includes(phrase), `Evidence receipt missing design language term: ${phrase}`);
 }
 for (const phrase of ["Recovery And Data Safety Evidence", "import, export, reset", "user-triggered", "local-first", "silent upload", "Recovery/data safety"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing recovery/data safety term: ${phrase}`);
+}
+for (const phrase of ["Mission-Critical Reliability Evidence", "self-checking", "crash-recoverable", "state-explicit", "TDD/SDD", "Autonomous AI-assisted development", "Mission-critical reliability"]) {
+  assert(evidenceReceipt.includes(phrase), `Evidence receipt missing mission-critical reliability term: ${phrase}`);
 }
 for (const phrase of ["Pages API Residue Evidence", "current-head `Deploy GitHub Pages` workflow succeeds", "live URL fails", "PASS_WITH_LIMITATIONS", "stale residue"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing Pages API residue term: ${phrase}`);
@@ -185,6 +192,12 @@ assert(handoff.includes("git rev-list --left-right --count 'HEAD...@{u}'"), "Han
 assert(handoff.includes("treat a contradictory API summary as stale residue"), "Handoff must preserve Pages API residue handling.");
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
+}
+for (const phrase of ["Reliability truth", "self-checking", "crash-recoverable", "state-explicit", "TDD/SDD-backed", "remove complexity"]) {
+  assert(handoff.includes(phrase), `Handoff missing reliability truth term: ${phrase}`);
+}
+for (const phrase of ["Design truth", "Single input truth", "modern minimalist", "MIT UI libraries/resources", "browser JS popups", "external runtime CDNs", "arbitrary component copy-paste", "combined input-mode path"]) {
+  assert(handoff.includes(phrase), `Handoff missing design truth term: ${phrase}`);
 }
 for (const phrase of ["Doctrine Delta Decision", "promote", "reject", "quarantine", "keep_local", "source-backed, reusable, non-secret", "explicitly approves publication"]) {
   assert(handoff.includes(phrase), `Handoff missing doctrine delta term: ${phrase}`);
@@ -208,7 +221,20 @@ const exportIgnoredPaths = [
   "apps/flexx-files/package.json",
   "apps/flexx-files/package-lock.json"
 ];
-const runtimeZipPaths = ["index.html", "README.md", "suite-shell.css", "suite-shell.js", "apps/ts-dash/index.html", "apps/commonground/index.html"];
+const runtimeZipPaths = [
+  "index.html",
+  "README.md",
+  "suite-shell.css",
+  "suite-shell.js",
+  "vendor/bootstrap-5.3.0.min.css",
+  "vendor/bootstrap-5.3.3.bundle.min.js",
+  "vendor/bootstrap-5.3.3.min.css",
+  "vendor/bootstrap-LICENSE.txt",
+  "vendor/chart-4.4.2.umd.js",
+  "vendor/chartjs-LICENSE.md",
+  "apps/ts-dash/index.html",
+  "apps/commonground/index.html"
+];
 const exportAttrsResolved = exportIgnoreMap([...exportIgnoredPaths, ...runtimeZipPaths]);
 const archiveEntries = gitArchiveEntries();
 const appReadmeRecoveryPattern = /\b(export|back up|backup|reset|clearing browser storage|browser storage)\b|no separate .*?(export|import|backup|recovery) workflow|no .*?cloud backup/i;
@@ -218,7 +244,11 @@ for (const file of exportIgnoredPaths) {
 }
 for (const file of runtimeZipPaths) {
   assert(exportAttrsResolved.get(file) === "unspecified", `Runtime archive path must remain downloadable: ${file}`);
-  assert(archiveEntries.includes(file), `Generated repository archive must include runtime path: ${file}`);
+  if (trackedFiles.includes(file)) {
+    assert(archiveEntries.includes(file), `Generated repository archive must include runtime path: ${file}`);
+  } else {
+    assert(existsSync(join(root, file)), `Pending runtime path must exist in the workspace before commit: ${file}`);
+  }
 }
 
 for (const [slug, label, screenshot] of apps) {
@@ -244,6 +274,12 @@ for (const [slug, label, screenshot] of apps) {
 }
 
 assert(!existsSync(join(root, "apps", "commonground", "byoai.js")), "CommonGround must not bundle the retired BYOAI provider overlay.");
+const bootstrapLicense = readFileSync(join(root, "vendor", "bootstrap-LICENSE.txt"), "utf8");
+assert(bootstrapLicense.includes("MIT License"), "Vendored Bootstrap must keep its MIT license notice.");
+assert(bootstrapLicense.includes("@popperjs/core"), "Vendored Bootstrap bundle notice must include its bundled Popper dependency.");
+const chartLicense = readFileSync(join(root, "vendor", "chartjs-LICENSE.md"), "utf8");
+assert(chartLicense.includes("MIT License"), "Vendored Chart.js must keep its MIT license notice.");
+assert(chartLicense.includes("@kurkle/color"), "Vendored Chart.js notice must include its bundled color dependency.");
 
 const flexxPackage = JSON.parse(readFileSync(join(root, "apps", "flexx-files", "package.json"), "utf8"));
 const flexxLock = JSON.parse(readFileSync(join(root, "apps", "flexx-files", "package-lock.json"), "utf8"));
@@ -261,6 +297,7 @@ for (const file of walk(root)) {
   assert(!popupPattern.test(text), `JS popup API found in ${relative(root, file)}`);
   if (relative(root, file).startsWith(`apps${"/"}`) || relative(root, file).startsWith(`apps${"\\"}`)) {
     assert(!appProviderPattern.test(text), `OAuth/API-key/provider behavior found in ${relative(root, file)}`);
+    assert(!externalRuntimeDependencyPattern.test(text), `External runtime CDN/font/icon dependency found in ${relative(root, file)}`);
   }
   if (/\.html$/i.test(file)) assertLocalHtmlRefs(file, text);
   if (/\.(webmanifest|json)$/i.test(file) && /manifest/i.test(file)) assertManifestRefs(file);

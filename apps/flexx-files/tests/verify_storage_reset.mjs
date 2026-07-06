@@ -71,8 +71,6 @@ global.document = {
     createElement: () => ({ textContent: '', innerHTML: '', href: '', click: () => {} }),
     querySelector: () => null
 };
-global.alert = (msg) => console.log('ALERT:', msg);
-global.confirm = () => true;
 
 // === TEST ===
 async function runTest() {
