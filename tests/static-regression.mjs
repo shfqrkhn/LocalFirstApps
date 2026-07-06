@@ -84,6 +84,7 @@ const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
 const zipPolicy = readFileSync(join(root, "docs", "REPO_ZIP_POLICY.md"), "utf8");
 const evidenceReceipt = readFileSync(join(root, "docs", "EVIDENCE_RECEIPT.md"), "utf8");
 const handoff = readFileSync(join(root, "docs", "AI_MAINTAINER_HANDOFF.md"), "utf8");
+const suiteShellCss = readFileSync(join(root, "suite-shell.css"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
 const codeqlConfig = readFileSync(join(root, ".github", "codeql", "codeql-config.yml"), "utf8");
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
@@ -250,6 +251,15 @@ for (const file of runtimeZipPaths) {
     assert(existsSync(join(root, file)), `Pending runtime path must exist in the workspace before commit: ${file}`);
   }
 }
+
+assert(suiteShellCss.includes('content: "Apps";'), "Shared suite return control must use a compact visual label.");
+assert(/\.lfa-suite-home\s*{[\s\S]*z-index:\s*40;/.test(suiteShellCss), "Shared suite return control must not use a blocking overlay z-index.");
+assert(/\.lfa-suite-home\s*{[\s\S]*background:\s*rgba\(248,\s*250,\s*252,\s*\.72\);/.test(suiteShellCss), "Shared suite return control must stay translucent.");
+assert(/\.lfa-suite-home\s*{[\s\S]*opacity:\s*\.72;/.test(suiteShellCss), "Shared suite return control must stay visually quiet by default.");
+assert(/@media \(max-width: 520px\)\s*{[\s\S]*\.lfa-suite-home\s*{[\s\S]*opacity:\s*\.66;/.test(suiteShellCss), "Shared suite return control must be quieter on small screens.");
+assert(/\.lfa-suite-home:focus-visible,[\s\S]*\.lfa-suite-home:hover\s*{[\s\S]*opacity:\s*1;/.test(suiteShellCss), "Shared suite return control must become fully visible on focus and hover.");
+assert(/backdrop-filter:\s*blur\(12px\)/.test(suiteShellCss), "Shared suite return control must use a lightweight frosted surface.");
+assert(!/background:\s*rgba\(16,\s*20,\s*18,\s*\.92\)/.test(suiteShellCss), "Shared suite return control must not revert to the heavy opaque dark pill.");
 
 for (const [slug, label, screenshot] of apps) {
   const appDir = join(root, "apps", slug);
