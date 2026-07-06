@@ -45,6 +45,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 ## Design Language Evidence
 
 - UI changes must preserve a modern minimalist, utilitarian, professional, joyful, responsive, local-first-suite-contextual design language with local CSS/tokens, semantic native controls, visible focus, reduced-motion-safe transitions, no horizontal overflow, and no component overlap.
+- Signature Ecosystem Evidence: LocalFirstApps must look and feel like part of the shared `shfqrkhn` ecosystem while staying contextual to compact, privacy-first local utilities.
 - MIT UI libraries/resources such as Uiverse, Open Props, Primer, Radix Colors, Pico CSS, Heroicons, Bootstrap Icons, Floating UI, or A11y Dialog are inspiration sources only unless a source-backed, license-checked, tested need justifies a dependency.
 - Runtime third-party UI/chart dependencies must be vendored with license notices under `vendor/`; app shells and service workers must not reference runtime CDN, remote font, or remote icon URLs.
 - Reject browser JS popups, blocking overlays, arbitrary component copy-paste, mixed visual systems, unbounded animation, external CDNs, or styling that hides file/live/privacy boundaries.
@@ -83,6 +84,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 | Input accessibility | `PASS_WITH_LIMITATIONS` | visual regression target-size checks, local-file/live smoke, static shell checks | Does not certify screen-reader behavior or every app-specific workflow. |
 | Single input operation | `PASS_WITH_LIMITATIONS` | input accessibility evidence, static shell checks, no browser popup policy | Does not certify every OS assistive technology or unusual HID/browser pairing. |
 | Design language/UI safety | `PASS_WITH_LIMITATIONS` | handoff/evidence docs, static tests, visual/local-file/live checks where run | Does not certify every viewport or assistive technology; each app may use contextual surfaces within the shared suite shell. |
+| Signature ecosystem fit | `PASS_WITH_LIMITATIONS` | shared signature design system reference, design evidence, static/visual/live tests | Does not require identical UI components; each utility may keep its own task density and control style. |
 | Recovery/data safety | `PASS_WITH_LIMITATIONS` | README, local-file/live tests, per-app README/static checks | App-specific export/import/reset behavior varies and must not be generalized without tests. |
 | Mission-critical reliability | `PASS_WITH_LIMITATIONS` | mission-critical reliability evidence, static/visual/file/live tests | Does not make every app equally feature-complete; app-specific recovery must be tested before public claims. |
 
