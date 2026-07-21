@@ -81,12 +81,21 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 | File/live behavior clarity | `PASS_WITH_LIMITATIONS` | shared shell, local-file and live tests | GitHub Pages and local file behavior should both be tested after runtime changes. |
 | Pages API summary | `PASS_WITH_LIMITATIONS` | latest current-head Pages workflow, deployments API, live HTTP 200 | The Pages API `.status` field can lag or contradict successful workflow deployments; report the residue separately. |
 | Repository ZIP safety | `PASS_WITH_LIMITATIONS` | `.gitattributes`, `git check-attr export-ignore`, `git archive`, `docs/REPO_ZIP_POLICY.md`, static tests | Recheck no tests, packages, exports, private notes, or retired provider overlays are bundled. |
-| Input accessibility | `PASS_WITH_LIMITATIONS` | visual regression target-size checks, local-file/live smoke, static shell checks | Does not certify screen-reader behavior or every app-specific workflow. |
-| Single input operation | `PASS_WITH_LIMITATIONS` | input accessibility evidence, static shell checks, no browser popup policy | Does not certify every OS assistive technology or unusual HID/browser pairing. |
+| Input accessibility | `PASS_WITH_LIMITATIONS` | visual target-size checks, file/live smoke, app behavior suite, capability matrix | Does not certify screen-reader behavior or every assistive technology. |
+| Single input operation | `PASS_WITH_LIMITATIONS` | keyboard, pointer, and touch app behavior flows; static shell checks | Does not certify every OS assistive technology or unusual HID/browser pairing. |
 | Design language/UI safety | `PASS_WITH_LIMITATIONS` | handoff/evidence docs, static tests, visual/local-file/live checks where run | Does not certify every viewport or assistive technology; each app may use contextual surfaces within the shared suite shell. |
 | Signature ecosystem fit | `PASS_WITH_LIMITATIONS` | shared signature design system reference, design evidence, static/visual/live tests | Does not require identical UI components; each utility may keep its own task density and control style. |
-| Recovery/data safety | `PASS_WITH_LIMITATIONS` | README, local-file/live tests, per-app README/static checks | App-specific export/import/reset behavior varies and must not be generalized without tests. |
-| Mission-critical reliability | `PASS_WITH_LIMITATIONS` | mission-critical reliability evidence, static/visual/file/live tests | Does not make every app equally feature-complete; app-specific recovery must be tested before public claims. |
+| Recovery/data safety | `PASS_WITH_LIMITATIONS` | capability matrix; app-specific export/import/reset/corruption tests; native Flexx tests | Recovery intentionally varies by product; source-file-only and session-only boundaries remain explicit. |
+| Mission-critical reliability | `PASS_WITH_LIMITATIONS` | static/visual/file/behavior gates and native correctness/recovery tests | Does not make every app equally feature-complete or replace manual assistive-technology review. |
+
+## 2026-07-21 Local Hardening Evidence
+
+- `PASS`: six canonical apps remain in launcher/README/folder parity with protected-path, privacy, dependency, and archive guardrails.
+- `PASS`: six isolated browser flows cover valid or invalid import, export/reset where supported, persistence/repair, keyboard, pointer, and touch behavior.
+- `PASS`: Flexx native checks cover plate math, last non-deload selection, draft persistence, and app-scoped reset that preserves unrelated storage.
+- `PASS`: CommonGround's Sponsor control no longer occludes Settings; its index precache revision was updated with the runtime fix.
+- `PASS_WITH_LIMITATIONS`: file mode provides a safe fallback, not full module/worker/PWA execution; PMQuiz has no progress backup; TS-Dash recovery relies on source/export files.
+- `NOT_RUN`: live Pages validation is deliberately separate until a publication pass; no deployment is implied by local evidence.
 
 ## Required Before Public-Facing Change
 

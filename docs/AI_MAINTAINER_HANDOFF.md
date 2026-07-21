@@ -1,6 +1,6 @@
 # AI Maintainer Handoff
 
-Last updated: 2026-07-05.
+Last updated: 2026-07-21.
 Repo: `D:\VSCode\GH\LocalFirstApps`.
 
 Treat this as a public-safe continuation map. Re-read current files before editing.
@@ -52,17 +52,20 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
 - `docs/future-app-intake.md`: required intake contract for new modules.
+- `docs/CAPABILITY_RECOVERY_MATRIX.md`: per-app storage, recovery, input, and test boundaries.
 - `tests/static-regression.mjs`: canonical app list and static guardrails.
-- `tests/*.spec.mjs`: visual, local-file, and live smoke checks.
+- `tests/app-behavior-regression.spec.mjs`: isolated synthetic-data import/export/reset/recovery flows.
+- `tests/*.spec.mjs`: behavioral, visual, local-file, and live checks.
 - Private planning references may exist in the local GH workspace docs bundle; do not publish or copy them by default.
 
 ## Required Checks
 
 ```bash
+npm run test:local
 npm run qa
 ```
 
-Also run a secret scan and link/media check before committing or pushing.
+Use `test:local` while hardening without publishing. `qa` adds the read-only live Pages gate and is required before publication. Also run a secret scan and link/media check before committing or pushing.
 
 ## Continuation Notes
 
@@ -71,5 +74,6 @@ Also run a secret scan and link/media check before committing or pushing.
 - Use `docs/future-app-intake.md` before adding any new module.
 - Keep `tests/static-regression.mjs`, the actual `apps/` directories, launcher cards, and README app links in exact membership parity; an unregistered app folder is a repo-sprawl blocker, not an implicit new app.
 - Keep each app README explicit about its data/recovery boundary; document export/import/reset support or state the limitation when no separate recovery workflow exists.
+- Keep `docs/CAPABILITY_RECOVERY_MATRIX.md`, the behavior suite, and package gates aligned whenever a recovery or input contract changes.
 - Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.
 - Future userscripts belong in a separate userscripts repo by default, not LocalFirstApps.

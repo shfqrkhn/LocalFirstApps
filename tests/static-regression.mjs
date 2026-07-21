@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 
@@ -84,7 +85,10 @@ const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
 const zipPolicy = readFileSync(join(root, "docs", "REPO_ZIP_POLICY.md"), "utf8");
 const evidenceReceipt = readFileSync(join(root, "docs", "EVIDENCE_RECEIPT.md"), "utf8");
 const handoff = readFileSync(join(root, "docs", "AI_MAINTAINER_HANDOFF.md"), "utf8");
+const capabilityMatrix = readFileSync(join(root, "docs", "CAPABILITY_RECOVERY_MATRIX.md"), "utf8");
 const suiteShellCss = readFileSync(join(root, "suite-shell.css"), "utf8");
+const commonGroundIndex = readFileSync(join(root, "apps", "commonground", "index.html"));
+const commonGroundSw = readFileSync(join(root, "apps", "commonground", "sw.js"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
 const codeqlConfig = readFileSync(join(root, ".github", "codeql", "codeql-config.yml"), "utf8");
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
@@ -137,10 +141,19 @@ assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "R
 assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(pkg.scripts?.qa === "npm run test:all", "package must expose the full QA gate.");
+assert(pkg.scripts?.["test:local"]?.includes("test:behavior"), "local gate must include app behavior coverage.");
+assert(pkg.scripts?.["test:local"]?.includes("test:flexx"), "local gate must include native Flexx correctness coverage.");
 assert(readme.includes("npm run qa"), "README must document the full QA gate.");
 assert(zipPolicy.includes("npm run qa"), "Repository ZIP policy must include the full QA gate.");
 assert(evidenceReceipt.includes("npm run qa"), "Evidence receipt must include the full QA gate.");
 assert(handoff.includes("npm run qa"), "Maintainer handoff must include the full QA gate.");
+assert(readme.includes("CAPABILITY_RECOVERY_MATRIX.md"), "README must link the capability/recovery matrix.");
+for (const [slug, label] of apps) {
+  assert(capabilityMatrix.includes(`| ${label} |`), `Capability/recovery matrix missing ${slug}.`);
+}
+for (const phrase of ["PASS_WITH_LIMITATIONS", "test:local", "keyboard", "pointer", "touch", "corrupt"]) {
+  assert(capabilityMatrix.includes(phrase), `Capability/recovery matrix missing term: ${phrase}`);
+}
 assert(readme.includes("The repository ZIP omits source-only test and package-management files"), "README must explain runtime-focused repository ZIP archives.");
 assert(readme.includes("The original standalone repo surfaces have been retired."), "README must document retired standalone repo surfaces accurately.");
 assert(!readme.includes("retained only as redirects/archives"), "README must not claim deleted standalone repos are retained.");
@@ -284,6 +297,11 @@ for (const [slug, label, screenshot] of apps) {
 }
 
 assert(!existsSync(join(root, "apps", "commonground", "byoai.js")), "CommonGround must not bundle the retired BYOAI provider overlay.");
+const commonGroundIndexRevision = createHash("md5").update(commonGroundIndex).digest("hex");
+assert(
+  commonGroundSw.includes(`url:"index.html",revision:"${commonGroundIndexRevision}"`),
+  "CommonGround service worker must precache the current index.html revision."
+);
 const bootstrapLicense = readFileSync(join(root, "vendor", "bootstrap-LICENSE.txt"), "utf8");
 assert(bootstrapLicense.includes("MIT License"), "Vendored Bootstrap must keep its MIT license notice.");
 assert(bootstrapLicense.includes("@popperjs/core"), "Vendored Bootstrap bundle notice must include its bundled Popper dependency.");
