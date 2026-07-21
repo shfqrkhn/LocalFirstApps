@@ -297,7 +297,9 @@ for (const [slug, label, screenshot] of apps) {
 }
 
 assert(!existsSync(join(root, "apps", "commonground", "byoai.js")), "CommonGround must not bundle the retired BYOAI provider overlay.");
-const commonGroundIndexRevision = createHash("md5").update(commonGroundIndex).digest("hex");
+const commonGroundIndexRevision = createHash("md5")
+  .update(commonGroundIndex.toString("utf8").replace(/\r\n?/g, "\n"))
+  .digest("hex");
 assert(
   commonGroundSw.includes(`url:"index.html",revision:"${commonGroundIndexRevision}"`),
   "CommonGround service worker must precache the current index.html revision."
