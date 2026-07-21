@@ -126,8 +126,18 @@ test("Noodle Nudge exports, rejects corrupt backup data, and performs guarded re
 });
 
 test("LedgerSuite persists memo edits, rejects malformed imports, repairs corruption, and backs up reset", async ({ page }) => {
+  let mainFrameNavigations = 0;
+  page.on("framenavigated", (frame) => {
+    if (frame === page.mainFrame()) {
+      mainFrameNavigations += 1;
+    }
+  });
+
   await gotoApp(page, "ledgersuite");
-  await expect(page.locator("#status")).toContainText("ready");
+  await expect(page.locator("html")).toHaveAttribute("data-app-ready", "true");
+  await page.waitForFunction(() => Boolean(navigator.serviceWorker?.controller));
+  await page.waitForTimeout(100);
+  expect(mainFrameNavigations).toBe(1);
 
   await page.locator("#memo-title").fill("Regression decision");
   await page.locator("#memo-question").fill("Does this persist safely?");

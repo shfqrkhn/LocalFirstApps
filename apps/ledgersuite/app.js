@@ -1560,6 +1560,7 @@ async function registerServiceWorker() {
   }
 
   try {
+    const wasControlledAtRegistration = Boolean(navigator.serviceWorker.controller);
     const registration = await navigator.serviceWorker.register("sw.js");
     handleRegistration(registration);
 
@@ -1570,7 +1571,7 @@ async function registerServiceWorker() {
     });
 
     navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (!appState.reloadingForUpdate) {
+      if (wasControlledAtRegistration && !appState.reloadingForUpdate) {
         appState.reloadingForUpdate = true;
         window.location.reload();
       }
@@ -1643,6 +1644,7 @@ async function boot() {
     wireEvents();
     await refreshSelectorsAndCase();
     await registerServiceWorker();
+    document.documentElement.dataset.appReady = "true";
     announce("Ledger Suite RC candidate is ready for offline decision analysis.");
   } catch (error) {
     await logRecovery("startup-failure", String(error?.message || error));
