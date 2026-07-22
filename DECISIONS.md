@@ -106,3 +106,12 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Compatibility:** R2 changes no database version, store, record schema, route, cache prefix, worker registration, transfer/export/import format, or user-data migration. Existing formats and URLs remain tested.
 - **Evidence:** `shared/omnicore/manifest.json`, `tests/omnicore-regression.mjs`, existing browser fault/recovery suites, and the deterministic offline shell manifests. Full candidate and moderate dependency audit pass locally.
 - **Rollback:** Revert implementation commit `1db2892`. R2 performed no data mutation or schema upgrade, so rollback is code-only.
+
+## D-014 — Seed LifeOS without absorbing app runtimes
+
+- **State:** Accepted and verified locally for R3A.
+- **Decision:** CommonGround LifeOS is a product shell label over the unchanged HealthOS Focus runtime. Focus remains HealthOS-owned; Reflection remains Noodle-owned and adapter-only; Strength remains a link to canonical Flexx Files. Shell membership grants no cross-app data access.
+- **Restore safety:** HealthOS backup restore commits a durable pending-preference marker with canonical IndexedDB state before one localStorage preference write. Preference failure is visible and retryable and cannot claim complete restore.
+- **Reflection boundary:** Ten local assessment definitions and the bounded 42-rule scorer are versioned behind a Noodle-owned adapter. Structural/scoring validation is not content approval. The only LifeOS mapping is an exact preview fixture with mutation explicitly forbidden.
+- **Compatibility:** HealthOS/Noodle/Flexx routes, stores, records, formats, worker/cache scopes, scoring outputs, UI workflows, and legacy module URLs remain supported without migration.
+- **Rollback:** Revert implementation commit `17863b9`; no data downgrade or migration reversal is required.

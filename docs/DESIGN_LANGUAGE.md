@@ -1,6 +1,6 @@
 # CommonGround design language
 
-Status: R2 first adoption; further app-by-app adoption requires its own parity gate.
+Status: R3A bounded adoption; further app-by-app adoption requires its own parity gate.
 
 CommonGround is the product name and shared design language. LifeOS and WorkOS are navigational groupings, not separate runtimes. Existing apps retain their routes, storage, file formats, and identities while converging visually.
 
@@ -14,4 +14,4 @@ CommonGround is the product name and shared design language. LifeOS and WorkOS a
 - Navigation keeps the user inside the selected app; cross-app movement returns through the suite shell. No hidden shared runtime state.
 - Dark and light modes share semantic roles and meet WCAG-oriented contrast checks. Apps must not infer user health, ability, identity, or readiness from theme or appearance.
 
-CommonGround and HealthOS are the first bounded consumers. Both load the shared primitives and use the canonical font/touch/focus vocabulary while retaining their app palette and layout values. Their adoption passes existing responsive, keyboard, file-mode, offline, and accessibility gates. A mass stylesheet switch remains prohibited because it would make regressions difficult to attribute and could break product contracts.
+CommonGround and the HealthOS-owned LifeOS seed are the first bounded consumers. Both load the shared primitives and use the canonical font/touch/focus vocabulary while retaining app-owned palette and layout values. Reflection and Strength membership does not grant stylesheet, runtime, or data ownership. Adoption passes existing responsive, keyboard, file-mode, offline, and accessibility gates. A mass stylesheet switch remains prohibited because it would make regressions difficult to attribute and could break product contracts.

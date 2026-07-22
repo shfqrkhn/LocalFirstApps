@@ -28,6 +28,7 @@ Reflection tools are most useful when they are private, simple, and available wh
 - Runs as a static app from GitHub Pages.
 - Emphasizes local privacy.
 - Evaluates canonical assessment formulas with a bounded allowlisted interpreter; assessment content is never executable code.
+- Exposes the ten canonical definitions and 42-rule scorer through a versioned Noodle-owned Reflection adapter without granting LifeOS data access.
 - Stages a content-addressed complete offline shell, requires explicit compatible activation, and retains a last-known-good shell without touching sibling app caches.
 
 ## Quick Start
@@ -58,6 +59,8 @@ Noodle Nudge is the canonical HealthOS reflection and self-inquiry module, while
 ├── JSON/
 ├── manifest.json
 ├── pwa-shell.json
+├── reflection/
+├── reflection-adapter.js
 ├── scoring.js
 ├── service-worker.js
 └── README.md
@@ -69,7 +72,7 @@ Host this app folder under the LocalFirstApps GitHub Pages site or another stati
 
 ## Maintenance
 
-Maintenance-only unless privacy, compatibility, or content quality needs a targeted update.
+Preserve the independent route, IndexedDB, UI, backup shape, worker scope, and compatibility `scoring.js` URL. Structural/scoring validation is not content approval.
 
 ## License
 

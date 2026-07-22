@@ -246,3 +246,18 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `NOT_RUN`: no push, remote mutation, deployment, live-route validation of this commit, release, route retirement, app data migration, or owner acceptance occurred.
 - **Rollback:** revert `1db2892`. R2 is code-only and requires no data downgrade or recovery migration.
 - **Next exact action:** obtain owner review, then execute only the bounded R3A LifeOS foundation prompt in `docs/MPES_IMPLEMENTATION_PLAN.md`.
+
+## 2026-07-22 R3A CommonGround LifeOS Foundation
+
+**State:** `VERIFIED_LOCAL`; owner acceptance, deployment, and publication remain `NOT_RUN`.
+
+- `PASS`: implementation commit `17863b9` defines CommonGround LifeOS `1.0.0` as a HealthOS-owned shell/adapter contract. Focus is active; Reflection is Noodle-owned and adapter-only; Strength links to canonical Flexx. Shell membership grants no foreign storage, mutation, worker, cache, or synchronization authority.
+- `PASS`: HealthOS restore commits records, receipts, runtime, and a durable `preferences-pending` marker in one IndexedDB transaction, then attempts one preference write. Injected preference failure rejects with a typed error, reports no false success, survives reload, and completes through idempotent retry without restoring records again.
+- `PASS`: Noodle owns a versioned Reflection adapter with all ten local assessment definitions and the bounded scorer. Exact 42-rule fixtures remain unchanged; hostile definitions/formulas/backups fail closed; the former scoring URL and legacy backup shape remain compatible.
+- `PASS`: the synthetic future LifeOS mapping fixture is exact, preview-only, and explicitly mutation-forbidden. No HealthOS/LifeOS code reads or writes Noodle data.
+- `PASS`: no database version, store, persisted record, schema, route, import/export/backup/CSV format, worker registration, cache prefix, UI data model, or user-data migration changed. HealthOS, Noodle, and Flexx remain independently launchable.
+- `PASS`: `npm run test:r3a`, `npm test`, `npm run test:behavior`, and `npm run ci:candidate` passed. Candidate coverage includes 139 deterministic runtime files, 35 responsive visual cases, seven file-mode cases, 34 browser-behavior cases, seven automated accessibility routes, offline recovery, and foreign-scope survival. `npm audit --audit-level=moderate` found zero vulnerabilities; `git diff --check` passed.
+- `PASS_WITH_LIMITATIONS`: deterministic failures do not certify every browser's real quota/eviction behavior; automated accessibility does not certify every assistive technology; structural/scoring validation is not qualified assessment, health, or training-content approval.
+- `NOT_RUN`: no push, remote mutation, deployment, live-route validation of this commit, release, retirement, data migration, content approval, or owner acceptance occurred.
+- **Rollback:** revert `17863b9`. R3A changes no schema and performs no user-data migration, so rollback is code-only; an interrupted pending-preference marker is an inert app-owned runtime record under the prior build.
+- **Next exact action:** obtain owner review, then execute only the bounded R3B Strength foundation prompt in `docs/MPES_IMPLEMENTATION_PLAN.md`.

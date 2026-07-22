@@ -59,7 +59,7 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**R2 VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `1db2892` extracts only proven OmniCore `1.0.0` seams and wires CommonGround plus HealthOS through app-owned adapters without changing stores, schemas, formats, routes, worker scopes, or user data. The full candidate gate and moderate audit pass. Manual AT, real browser quota/eviction, qualified content/domain review, owner acceptance, deployment, and publication remain `NOT_RUN`. R3A is next only after owner review; TS-Dash/WorkOS migration and later HealthOS modules remain inactive.
+**R3A VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `17863b9` seeds CommonGround LifeOS `1.0.0` over the unchanged HealthOS Focus runtime, makes cross-storage preference restore failure-visible and resumable, and versions Noodle-owned pure Reflection seams with exact ten-definition/42-rule parity. Flexx remains a canonical linked app; no route, store, schema, format, worker/cache scope, UI data model, or user data migrated. The full candidate gate and moderate audit pass. Manual AT, real browser quota/eviction, qualified content/domain review, owner acceptance, deployment, and publication remain `NOT_RUN`. R3B is next only after owner review; TS-Dash/WorkOS migration and later HealthOS modules remain inactive.
 
 ## Key Files
 
@@ -74,6 +74,8 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 - `shared/pwa-worker.js`, `shared/pwa-assurance.js`, and `docs/PWA_ASSURANCE_CONTRACT.md`: M2 complete-shell staging, activation, health, scoped reset, and last-known-good contract.
 - `apps/noodle-nudge/scoring.js` and `apps/noodle-nudge/pwa-shell.json`: inert bounded scoring and app-owned complete-shell definition.
 - `apps/healthos/modules/healthos.js`, `apps/healthos/modules/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: HealthOS-owned observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract. The former `shared/` URLs are compatibility re-exports.
+- `apps/healthos/modules/lifeos-shell.js`, `apps/healthos/lifeos-adapter.js`, and `docs/LIFEOS_CONTRACT.md`: R3A shell membership, isolation, recovery, Reflection-preview, and rollback contract.
+- `apps/noodle-nudge/reflection/*`, `apps/noodle-nudge/reflection-adapter.js`, and `tests/r3a-lifeos-regression.mjs`: Noodle-owned definitions/scoring/backup-preview seams, exact parity, hostile bounds, and compatibility evidence.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
@@ -101,7 +103,7 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- After owner review of verified R2, execute only the bounded R3A LifeOS foundation goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin UI/data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, retirement, or publication.
+- After owner review of verified R3A, execute only the bounded R3B Strength foundation goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin data/UI migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, retirement, or publication.
 - Keep OmniCore pure and dependency-free. Every promoted contract requires a minimal semver API, two real consumers, app-owned adapters, explicit failure behavior, deterministic faults, and code-only rollback. Never move app transaction scope, stores, workers, routes, or domain records into OmniCore.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.

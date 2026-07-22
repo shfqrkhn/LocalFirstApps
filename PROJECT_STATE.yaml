@@ -1,11 +1,11 @@
 project:
   id: localfirstapps-unified-suite
   version: 0.3.0
-  phase: r2_omnicore_extraction_verified
-  status: r2_verified_local_with_declared_review_limitations
+  phase: r3a_lifeos_foundation_verified
+  status: r3a_verified_local_with_declared_review_limitations
   repository: https://github.com/shfqrkhn/LocalFirstApps
-  git_head: 1db289204978de75e6941258c5623b990b586ca8
-  git_head_role: verified_r2_implementation_commit_before_evidence_close
+  git_head: 17863b96ffedab330545ff27cce121f919eebbc6
+  git_head_role: verified_r3a_implementation_commit_before_evidence_close
   takeover_baseline_head: ff25f15af266c2737fbc497983c26d582b2629d9
   m2_baseline_head: dd9a5879fadda8d63930a00e08c9c7c0e779e20e
   branch: agent/commonground-consolidation
@@ -49,10 +49,10 @@ project:
       - Knowledge Engine
       - Learning Engine
     implementation: isolated_static_apps_with_explicit_file_transfer
-  active_milestone: R2
-  active_packet: R2-omnicore-extraction
+  active_milestone: R3
+  active_packet: R3A-lifeos-foundation
   active_packet_state: VERIFIED_LOCAL
-  active_governance_packet: r2-pure-contract-extraction-and-two-consumer-proof
+  active_governance_packet: r3a-lifeos-shell-restore-and-reflection-extraction
   active_governance_packet_state: VERIFIED_LOCAL
   completed_packets:
     - M1-shared-interchange-and-recovery
@@ -61,10 +61,11 @@ project:
     - R0-safety-containment
     - R1-engineering-foundations
     - R2-omnicore-extraction
+    - R3A-lifeos-foundation
   completed_governance_packets:
     - adversarial-audit-and-r0-plan
   baseline_reconciliation: VERIFIED
-  next_milestone: R3A-lifeos-foundation_after_owner_review
+  next_milestone: R3B-strength-foundation_after_owner_review
   requirements:
     - id: CG-MERGE
       state: IMPLEMENTED
@@ -95,7 +96,7 @@ project:
       evidence: exact-preview portable transfer, atomic receipt and rollback, complete integrity backup/restore, scoped reset, and deterministic TS-Dash CSV fixture
     - id: FULL-LOCAL-VERIFICATION
       state: VERIFIED
-      evidence: npm run ci:candidate passed contracts including OmniCore two-consumer faults, 5 native Flexx checks, R1 foundations, 35 visual, 7 file, 34 behavior, 7 accessibility routes, deterministic 133-file build; npm audit reported 0 vulnerabilities on 2026-07-22
+      evidence: npm run ci:candidate passed contracts including OmniCore and R3A LifeOS/Reflection faults, 5 native Flexx checks, R1 foundations, 35 visual, 7 file, 34 behavior, 7 accessibility routes, deterministic 139-file build; npm audit reported 0 vulnerabilities on 2026-07-22
     - id: RELEASE
       state: NOT_RUN
       evidence: no publication authority granted
@@ -111,6 +112,9 @@ project:
     - id: R2-OMNICORE-EXTRACTION
       state: VERIFIED
       evidence: OmniCore 1.0.0 manifest and pure error, integrity, time, IndexedDB completion, and receipt modules; CommonGround and HealthOS app-owned adapters; app-owned HealthOS domain modules with compatibility re-exports; deterministic two-consumer/fault fixture; unchanged stores, schemas, formats, routes, workers, and cache scopes; full candidate and zero-vulnerability audit
+    - id: R3A-LIFEOS-FOUNDATION
+      state: VERIFIED
+      evidence: CommonGround LifeOS 1.0.0 shell and HealthOS-owned adapter; durable failure-visible preference recovery marker/retry; Noodle-owned ten-definition and 42-rule Reflection adapter; old scoring URL and backup compatibility; non-mutating exact preview fixture; unchanged routes, stores, schemas, formats, workers, and cache scopes
   decisions:
     - id: D-001
       state: ACCEPTED
@@ -148,6 +152,9 @@ project:
     - id: D-013
       state: ACCEPTED
       decision: OmniCore 1.0.0 promotes only proven pure contracts with CommonGround and HealthOS adapters; mutation scope and domain logic remain app-owned, and old HealthOS shared URLs remain compatibility re-exports.
+    - id: D-014
+      state: ACCEPTED
+      decision: CommonGround LifeOS is seeded by HealthOS Focus without absorbing app runtimes; Reflection stays Noodle-owned and adapter-only, Strength stays linked to Flexx, and preference restore is failure-visible and resumable.
   risks:
     - id: R-001
       status: controlled
@@ -201,6 +208,10 @@ project:
       status: controlled
       risk: omnicore_abstraction_creep_or_shared_runtime_coupling
       control: machine-readable exclusions, two-consumer gate, app-owned adapters/databases/workers/transactions, compatibility tests, and code-only rollback
+    - id: R-014
+      status: controlled
+      risk: cross_storage_restore_can_commit_records_before_preferences
+      control: durable pending-preference marker in the canonical IndexedDB transaction, one normalized preference write, explicit incomplete status, idempotent retry, and injected-failure browser proof
   evidence:
     - path: docs/EVIDENCE_RECEIPT.md
       state: VERIFIED_LOCAL
@@ -220,6 +231,8 @@ project:
       state: VERIFIED_AUTOMATED_WITH_MANUAL_AT_NOT_RUN
     - path: tests/omnicore-regression.mjs
       state: VERIFIED
+    - path: tests/r3a-lifeos-regression.mjs
+      state: VERIFIED
   unknowns:
     - storage_quota_and_eviction_behavior_varies_by_browser
     - background_notification_audio_vibration_and_wake_lock_delivery_varies_by_browser
@@ -227,5 +240,5 @@ project:
     - exact_consolidation_deployment_is_not_run
   blockers: []
   implementation_plan: docs/MPES_IMPLEMENTATION_PLAN.md
-  next_action: Obtain owner review of verified R2, then execute only the bounded R3A LifeOS foundation goal in docs/MPES_IMPLEMENTATION_PLAN.md. Keep TS-Dash rewrite, WorkOS migration, later HealthOS modules, route retirement, and publication inactive. Do not mutate remotes absent explicit authority.
+  next_action: Obtain owner review of verified R3A, then execute only the bounded R3B Strength foundation goal in docs/MPES_IMPLEMENTATION_PLAN.md. Keep data/UI migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, route retirement, and publication inactive. Do not mutate remotes absent explicit authority.
   updated_at: 2026-07-22

@@ -4,10 +4,10 @@
 
 Local-first daily-state records and trustworthy focus timing.
 
-- **Status:** M3A bounded proof
+- **Status:** R3A verified local LifeOS seed
 - **Version:** 0.1.0
 - **Canonical route:** `https://shfqrkhn.github.io/LocalFirstApps/apps/healthos/` (not deployed; publication remains separately authorized)
-- **Portfolio Role:** LifeOS → HealthOS focus module and navigation surface
+- **Portfolio Role:** CommonGround LifeOS shell seed and Focus module
 
 HealthOS Focus links to Noodle Nudge and Flexx Files without merging their code or storage. It owns only its daily-state records, focus sessions, active timer, import receipts, preferences, PWA caches, and worker scope.
 
@@ -29,7 +29,7 @@ HealthOS Focus links to Noodle Nudge and Flexx Files without merging their code 
 - IndexedDB `healthos-focus` v1 stores M1-compatible typed `daily_state` and `focus_session` records, portable-import receipts, and the active timer.
 - Daily mood, energy, sleep quality, stress, soreness, pain flags, intended focus, recovery need, and notes remain separate; there is no combined health/productivity score.
 - Portable JSON requires exact preview and confirmation before atomic receipt-backed import. Applied imports can be rolled back without removing replay protection.
-- Complete integrity-protected backup includes records, receipts, active timer, and cue preferences. Restore validates before atomic record replacement.
+- Complete integrity-protected backup includes records, receipts, active timer, and cue preferences. Restore atomically replaces IndexedDB state with a durable pending-preference marker; preference failure is visible and resumable without restoring records twice.
 - TS-Dash CSV is explicit and deterministic, retaining units, source IDs, truth class, derivation labels, and a correlation limitation.
 - Factory reset downloads a complete backup first, then clears only HealthOS-owned data, preferences, caches, and exact worker scope.
 

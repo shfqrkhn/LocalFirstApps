@@ -4,7 +4,7 @@ Version `1.0.0` defines the bounded HealthOS foundation and focus-timer proof. T
 
 ## Topology and ownership
 
-HealthOS Focus is an independently launchable static app and a minimal navigation surface. Noodle Nudge remains canonical for reflection and self-inquiry. Flexx Files remains canonical for strength, readiness, drafts, progression, and backups. HealthOS does not read or mutate either app's browser storage; there is no central suite database, hidden synchronization, background business mutation, account, telemetry, external transmission, or AI dependency.
+HealthOS Focus is an independently launchable static app and the seed runtime beneath the CommonGround LifeOS `1.0.0` shell label. Noodle Nudge remains canonical for reflection and self-inquiry. Flexx Files remains canonical for strength, readiness, drafts, progression, and backups. HealthOS does not read or mutate either app's browser storage; there is no central suite database, hidden synchronization, background business mutation, account, telemetry, external transmission, or AI dependency.
 
 HealthOS owns only IndexedDB `healthos-focus` v1, the `healthos.preferences.v1` localStorage key, `healthos-` caches, and the exact worker scope under `apps/healthos/`. Cross-app movement uses explicit portable files.
 
@@ -32,7 +32,7 @@ Audio, vibration, system notification, and screen wake lock are capability-detec
 
 Life states remain observations: READY, FOCUSED, STRETCHED, OVERLOADED, DEGRADED, RECOVERING, BLOCKED, and CRISIS. Guidance reduces scope and demands where appropriate; it does not diagnose, prescribe, shame, gamify, require streaks, force advancement, or replace qualified support.
 
-Complete backup includes records, receipts, active timer, and cue preferences with SHA-256 integrity. Restore validates before atomically replacing canonical IndexedDB stores. Factory reset downloads this backup first and clears only HealthOS-owned state. The content-addressed PWA shell follows the M2 contract for explicit compatible activation, offline/subpath behavior, last-known-good recovery, scoped cache clear, honest storage health, and safe reduced `file://` fallback.
+Complete backup includes records, receipts, active timer, and cue preferences with SHA-256 integrity. Restore validates, then atomically replaces canonical IndexedDB stores while recording a durable `preferences-pending` recovery marker in the same transaction. It performs one preference commit afterward: failure is visible, never reported as success, and leaves an idempotent retry path that completes without restoring records again. Factory reset downloads a backup first and clears only HealthOS-owned state. The content-addressed PWA shell follows the M2 contract for explicit compatible activation, offline/subpath behavior, last-known-good recovery, scoped cache clear, honest storage health, and safe reduced `file://` fallback.
 
 TS-Dash export is explicit deterministic CSV. It preserves source app, record ID, truth class, units, source precision, derivation labels, and the statement that observational correlation does not establish causation. TS-Dash remains generic and never reads HealthOS storage.
 
