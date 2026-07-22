@@ -14,7 +14,7 @@
     <meta name="twitter:title" content="Noodle Nudge" />
     <meta name="twitter:description" content="Private local-first reflection, journaling, and self-inquiry app." />
     <meta name="twitter:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/noodle-nudge/images/screenshot.jpeg" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self';">
     <meta name="theme-color" content="#2563EB">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -76,6 +76,10 @@
         </nav>
     </header>
 
+    <div id="pwa-update-notice" class="container alert alert-info d-none justify-content-between align-items-center gap-3 mt-3" role="status">
+        <span id="pwa-update-message">A verified Noodle Nudge update is ready.</span>
+        <button class="btn btn-primary flex-shrink-0" type="button" data-action="activate-update">Reload to update</button>
+    </div>
     <main class="container my-4" id="app-root" tabindex="-1"></main>
     <footer class="container text-center mt-5 mb-3 text-muted"><small>Noodle Nudge v<span id="app-version"></span></small></footer>
     
@@ -85,9 +89,12 @@
     <script src="../../vendor/bootstrap-5.3.3.bundle.min.js"></script>
 
     <script type="module">
+        import { createNoodleScoringEnvironment, evaluateScoringExpression, validateAssessmentScoring } from './scoring.js';
+        import { activatePwaUpdate, registerPwaAssurance } from '../../shared/pwa-assurance.js';
         const MasterBlueprint = { appName: "Noodle Nudge", appShortName: "NoodleNudge", version: "1.2.29", license: "MIT", author: "The Sentient Architect", featureFlags: { enableDailyContent: true, enableAssessments: true, enableDebugPanel: new URLSearchParams(window.location.search).has('debug'), }, appDescription: "A private offline-first PWA for self-discovery.", database: { dbName: "NoodleNudgeDB", dbVersion: 1, dbStoreName: "appState", }, pwaConfig: { cacheName: 'noodle-nudge-cache-v1.2.29' }, stateSchema: { assessments: {}, dailyContent: {}, userAnswers: {}, userResults: {}, userHistory: {}, viewDate: new Date().toISOString(), appConfig: { version: "1.2.29", lastVisit: "" }, debugLog: [], }, contentUrls: { assessments: ['./JSON/Q1_Core%20Personality.json', './JSON/Q2_Core%20Values.json', './JSON/Q3_Core%20Agency.json', './JSON/Q4_Work%20Motivation.json', './JSON/Q5_Perceived%20Stress%20Scale%20(PSS).json', './JSON/Q6_Conflict%20%26%20Negotiation%20Style.json', './JSON/Q7_Authentic%20%26%20Ethical%20Leadership.json', './JSON/Q8_Assertiveness%20Profile.json', './JSON/Q9_Power%20%26%20Influence%20Profile.json', './JSON/Q10_Proactive%20Personality%20Scale.json'], daily: ['./JSON/Content_CognitiveBiases.json', './JSON/Content_Meditations.json', './JSON/Content_Quotes.json', './JSON/Content_Reflections.json'], }, localization: { defaultLanguage: "en", strings: { en: { dashboardTitle: "Today's Nudge", assessmentsTitle: "Assessments", settingsTitle: "Settings", takeAssessmentsCTA: "Discover Your Core Profile", takeAssessmentsCTADescription: "Start your journey of self-discovery with our foundational assessments.", startAssessment: "Start Assessment", retakeAssessment: "Retake", submitAnswers: "Submit Answers", backToList: "Back to Assessments", resultsTitle: "Your Results for", viewResults: "View Full Results", dailyQuote: "Quote for Today", dailyReflection: "Reflection for Today", dailyMeditation: "Meditation for Today", dailyBias: "Cognitive Bias for Today", exportData: "Export My Data", importData: "Import My Data", resetData: "Reset All Data", resetConfirmation: "Are you sure you want to permanently delete all your data? This action cannot be undone.", dataExported: "Data exported successfully!", dataImported: "Data imported successfully! The app will now reload.", dataReset: "All data has been reset.", error: "An error occurred.", }, }, }, };
         Object.freeze(MasterBlueprint.featureFlags); Object.freeze(MasterBlueprint.database); Object.freeze(MasterBlueprint.pwaConfig); Object.freeze(MasterBlueprint.contentUrls); Object.freeze(MasterBlueprint.localization); Object.freeze(MasterBlueprint.stateSchema); Object.freeze(MasterBlueprint);
         const NoodleNudge = {}; window.NoodleNudge = NoodleNudge;
+        NoodleNudge.PWA = { registration: null, updateRegistration: null, compatible: false };
         NoodleNudge.Utils = (()=>{const m={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};return {getDayOfYear:t=>{const e=new Date(t);return Math.floor((Date.UTC(e.getFullYear(),e.getMonth(),e.getDate())-Date.UTC(e.getFullYear(),0,0))/864e5)},sanitizeHTML:t=>{if(t==null)return"";return String(t).replace(/[&<>"']/g,c=>m[c])}}})();
         NoodleNudge.L10N = (() => ({ get: (key) => MasterBlueprint.localization.strings.en[key] || `[${key}]` }))();
         NoodleNudge.State = (() => { let state = {}; const subscribers = new Set(); return { subscribe: (cb) => { subscribers.add(cb); return () => subscribers.delete(cb); }, get: () => ({ ...state }), /* Optimized: Shallow copy for O(1) access. Verified 3.9M x speedup vs deep clone. */ set: (newState, options = {}) => { const { silent = false, persist = true } = options; state = { ...state, ...newState }; if (!silent) [...subscribers].forEach(cb => cb(state)); if (persist) { const { assessments, dailyContent, ...s } = state; NoodleNudge.DB.set('appState', s).catch(err => NoodleNudge.Logger.error("Failed to persist state:", err)); } }, init: (schema) => { state = JSON.parse(JSON.stringify(schema)); } }; })();
@@ -102,19 +109,7 @@
         })();
         
         NoodleNudge.Scoring = (() => {
-            const scoringRegex = /^([A-Z_]+)\((.*)\)$/s;
-            const reSplitReverseScore = /,\s*REVERSE_SCORE/;
-            const reCleanArray = /[\[\]']/g;
-            const reCleanArrayParens = /[\[\]()']/g;
-            const reCleanQuotes = /'/g;
-            const reCleanScoreTitle = /\s*Style Score|\s*Score/gi;
-            const reAndOr = /\b(AND|OR)\b/gi;
             const reScoreSuffix = /([a-zA-Z_$][\w$]*)_score\b/g;
-            const reIdentifiers = /[a-zA-Z_$][\w$]*/g;
-            const reKeywords = /^(NORMALIZE|CONCAT|IF|IS_IN_TOP_CATEGORY|COUNT_SUBTYPE_IN_TOP_CATEGORY|COMPARE_SUBTYPE_COUNTS|IDENTIFY_HIGHEST_SCORE_DIMENSIONS|IDENTIFY_MAX_SCORE_DIMENSION)$/;
-            const reLiterals = /^(true|false|null|undefined|NaN|Infinity)$/;
-            const reSecurity = /[{};\\\\]|constructor|prototype|__proto__|arguments|callee/;
-            const shadowedGlobals = ['window', 'document', 'fetch', 'XMLHttpRequest', 'globalThis', 'localStorage', 'sessionStorage', 'indexedDB', 'cookieStore', 'caches', 'navigator', 'location', 'screen', 'history', 'performance', 'crypto', 'frames', 'self', 'parent', 'top', 'opener', 'alert', 'prompt', 'confirm', 'open', 'close', 'print', 'postMessage', 'setTimeout', 'setInterval', 'Reflect', 'Proxy', 'Function', 'Object', 'Symbol', 'WeakMap', 'WeakSet', 'Map', 'Set', 'BigInt', 'Intl', 'NoodleNudge', 'MasterBlueprint'];
 
             const sanitizeResult = (val) => {
                 if (typeof val === 'string' && /^(constructor|prototype|__proto__)$/.test(val)) return "BLOCKED";
@@ -149,6 +144,7 @@
             };
         
             const calculateResults = (assessment, answers) => {
+                validateAssessmentScoring(assessment);
                 const results = { assessmentId: assessment.id, assessmentTitle: assessment.title, timestamp: new Date().toISOString(), scores: [] };
                 const calculatedScores = new Map();
                 const getScore = (id) => answers[id] || 0;
@@ -173,14 +169,6 @@
                 
                 const allRules = [...(assessment.scoringRubric.primaryScores || []), ...(assessment.scoringRubric.derivativeInsights || [])];
                 
-                const ScoringHelpers = {
-                    SUM: (argsStr) => { const p=argsStr.split(reSplitReverseScore); const n=p[0].replace(reCleanArray,'').split(',').map(s=>s.trim()).filter(Boolean); const r=p[1]?p[1].replace(reCleanArrayParens,'').split(',').map(s=>s.trim()).filter(Boolean):[]; let t=0; n.forEach(id=>t+=getScore(id)); r.forEach(id=>t+=6-getScore(id)); return t; },
-                    SUM_AND_AVERAGE: (argsStr) => { const p=argsStr.split(reSplitReverseScore); const n=p[0].replace(reCleanArray,'').split(',').map(s=>s.trim()).filter(Boolean); const r=p[1]?p[1].replace(reCleanArrayParens,'').split(',').map(s=>s.trim()).filter(Boolean):[]; let t=0; n.forEach(id=>t+=getScore(id)); r.forEach(id=>t+=6-getScore(id)); const c=n.length+r.length; return c>0?t/c:0; },
-                    AVERAGE_SCORE: (argsStr) => { const ids=argsStr.replace(reCleanArray,'').split(',').map(s=>s.trim()).filter(Boolean); const sum=ids.reduce((acc,id)=>acc+getScore(id),0); return ids.length>0?sum/ids.length:0; },
-                    COLLECT_ITEMS_FROM_CATEGORY: (argsStr) => { const [sid,cid]=argsStr.replace(reCleanQuotes,'').split(',').map(s=>s.trim()); const sec=assessment.sections.find(s=>s.id===sid); if(!sec)return"E:S"; const iids=answers[sid]?.[cid]||[]; return sanitizeResult(iids.map(id=>sec.items.find(i=>i.id===id)?.text).filter(Boolean).join(', ')); },
-                    IDENTIFY_MAX_SCORE_DIMENSION: (argsStr) => { const sids=argsStr.replace(reCleanQuotes,'').split(',').map(s=>s.trim()); let max=-Infinity,title="N/A"; sids.forEach(id=>{const val=calculatedScores.get(id);if(typeof val==='number'&&val>max){max=val;const rule=allRules.find(r=>r.id===id);title=rule?rule.title.replace(reCleanScoreTitle,''):id;}}); return sanitizeResult(title); }
-                };
-
                                 const processRules = (rules) => {
                     const adj = new Map();
                     const inDegree = new Map();
@@ -221,12 +209,7 @@
 
                         const calc = rule.calculation || rule.calculationLogic;
                         try {
-                            const match = calc.match(scoringRegex);
-                            if (match && ScoringHelpers[match[1]]) {
-                                calculatedScores.set(rule.id, ScoringHelpers[match[1]](match[2]));
-                            } else {
-                                calculatedScores.set(rule.id, evaluateExpression(calc, calculatedScores, assessment, answers));
-                            }
+                            calculatedScores.set(rule.id, evaluateExpression(calc, calculatedScores, assessment, answers));
                         } catch(err) {
                             NoodleNudge.Logger.error(`Scoring error for rule "${rule.id}":`, err);
                             calculatedScores.set(rule.id, "Calculation Error");
@@ -294,55 +277,9 @@
                 return results;
             };
 
-            const evalCache = new Map();
             const evaluateExpression = (expression, scores, assessment, answers) => {
-                const helpers = {
-                    NORMALIZE: (val, min, max) => (val === undefined || isNaN(val)) ? undefined : ((val - min) / (max - min)) * 100,
-                    CONCAT: (...args) => sanitizeResult(args.join('')),
-                    IS_IN_TOP_CATEGORY: (itemId, sectionId) => { const sec = assessment.sections.find(s => s.id === sectionId); if (!sec) return false; const topKey = sec.categories.find(c => c.id.includes('_most_important'))?.id; if (!topKey) return false; return answers[sectionId]?.[topKey]?.includes(itemId) || false; },
-                    COUNT_SUBTYPE_IN_TOP_CATEGORY: (subtype, sectionId) => { const sec = assessment.sections.find(s => s.id === sectionId); if (!sec) return 0; const topKey = sec.categories.find(c => c.id.includes('_most_important'))?.id; if (!topKey) return 0; const itemIds = answers[sectionId]?.[topKey] || []; return itemIds.reduce((c, id) => { const i = sec.items.find(item => item.id === id); return i && i.subType === subtype ? c + 1 : c; }, 0); },
-                    COMPARE_SUBTYPE_COUNTS: (sA, sB, sectionAId, sectionBId) => { let g1 = helpers.COUNT_SUBTYPE_IN_TOP_CATEGORY(sA, sectionAId); let g2 = helpers.COUNT_SUBTYPE_IN_TOP_CATEGORY(sB, sectionBId); return g1 > g2 ? 'social' : 'personal'; },
-                    IDENTIFY_HIGHEST_SCORE_DIMENSIONS: (scoreArray, labels) => { const max = Math.max(...scoreArray); return sanitizeResult(labels.filter((_, i) => scoreArray[i] === max).join(', ')); },
-                    IF: (condition, thenVal, elseVal) => sanitizeResult(condition ? thenVal : elseVal),
-                    IDENTIFY_MAX_SCORE_DIMENSION: (argsStr) => {
-                        const sids = argsStr.replace(reCleanQuotes, '').split(',').map(s => s.trim());
-                        let max = -Infinity, title = "N/A";
-                        const allRules = [...(assessment.scoringRubric.primaryScores || []), ...(assessment.scoringRubric.derivativeInsights || [])];
-                        sids.forEach(id => {
-                            const val = scores.get(id);
-                            if (typeof val === 'number' && val > max) {
-                                max = val;
-                                const rule = allRules.find(r => r.id === id);
-                                title = rule ? rule.title.replace(reCleanScoreTitle, '') : id;
-                            }
-                        });
-                        return sanitizeResult(title);
-                    }
-                };
-
-                let cached = evalCache.get(expression);
-                if (!cached) {
-                    let proc = expression.replace(reAndOr, m => m.toUpperCase() === 'AND' ? '&&' : '||').replace(reScoreSuffix, '$1');
-
-                    // Security Check 1: Prevent Computed Property Access (exploit vector)
-                    // Matches [ preceded by Identifier, ), ], ', or "
-                    const reComputedProp = /[a-zA-Z0-9_$)'"\]]\s*\[/;
-                    if (reComputedProp.test(proc)) throw new Error("Security Violation: Computed Property Access");
-
-                    // Security Check 2: Block dangerous keywords
-                    if (reSecurity.test(proc)) throw new Error("Security Violation");
-
-                    // Variable Extraction: Mask strings to avoid false positives (e.g. 'Variety')
-                    const reStrings = /"[^"]*"|'[^']*'/g;
-                    const maskedProc = proc.replace(reStrings, '""');
-                    const vars = [...new Set([...maskedProc.matchAll(reIdentifiers)].map(m => m[0]).filter(id => !reKeywords.test(id) && isNaN(id) && !reLiterals.test(id)))];
-
-                    // Shadow globals to prevent access
-                    cached = { func: new Function(...shadowedGlobals, ...vars, ...Object.keys(helpers), `"use strict"; return ${proc}`), vars };
-                    evalCache.set(expression, cached);
-                }
-
-                return sanitizeResult(cached.func(...shadowedGlobals.map(() => undefined), ...cached.vars.map(v => { if(!scores.has(v)) throw new ReferenceError(v); return scores.get(v); }), ...Object.values(helpers)));
+                const rules = [...(assessment.scoringRubric.primaryScores || []), ...(assessment.scoringRubric.derivativeInsights || [])];
+                return sanitizeResult(evaluateScoringExpression(expression, createNoodleScoringEnvironment({ assessment, answers, scores, rules })));
             };
 
             return { processAndSaveResults, calculateResults };
@@ -405,7 +342,23 @@
                     NoodleNudge.Logger.error(`Route not found: ${path}`);
                 }
             };
-            const handleAction = (e) => { const target = e.target.closest('[data-action]'); if (!target) return; e.preventDefault(); let { viewDate } = NoodleNudge.State.get(); let newDate = new Date(viewDate); if (target.dataset.action === 'prev-day') { newDate.setDate(newDate.getDate() - 1); } else if (target.dataset.action === 'next-day') { newDate.setDate(newDate.getDate() + 1); } NoodleNudge.State.set({ viewDate: newDate.toISOString() }); /* Optimized: navigate('dashboard') removed to prevent double-render */ };
+            const handleAction = async (e) => {
+                const target = e.target.closest('[data-action]');
+                if (!target) return;
+                e.preventDefault();
+                if (target.dataset.action === 'activate-update') {
+                    target.disabled = true;
+                    try { await activatePwaUpdate(NoodleNudge.PWA.updateRegistration, 1); }
+                    catch (error) { target.disabled = false; NoodleNudge.UI.showToast(error.message, 'danger'); }
+                    return;
+                }
+                let { viewDate } = NoodleNudge.State.get();
+                const newDate = new Date(viewDate);
+                if (target.dataset.action === 'prev-day') newDate.setDate(newDate.getDate() - 1);
+                else if (target.dataset.action === 'next-day') newDate.setDate(newDate.getDate() + 1);
+                else return;
+                NoodleNudge.State.set({ viewDate: newDate.toISOString() });
+            };
             const handleDebugAction = (e) => { const target = e.target.closest('[data-debug-action]'); if (!target) return; e.preventDefault(); const action = target.dataset.debugAction; if (action === 'force-reload') NoodleNudge.Content.loadAllContent(); else if (action === 'clear-state') NoodleNudge.SettingsManager.resetData(); else if (action === 'toast-success') NoodleNudge.UI.showToast('This is a success test.', 'success'); else if (action === 'toast-danger') NoodleNudge.UI.showToast('This is a danger test.', 'danger'); else if (action === 'fill-random') NoodleNudge.SettingsManager.fillWithRandomData(); };
             const handleNav = (e) => { const target = e.target.closest('[data-nav]'); if (!target) return; e.preventDefault(); navigate(target.dataset.nav, { id: target.dataset.assessmentId }); };
             const moveCard = (c) => { const sec=c.closest('.card-sort-section');const ctrs=[sec.querySelector('.card-sort-source'),...sec.querySelectorAll('.card-sort-target')];let i=(ctrs.indexOf(c.parentElement)+1)%ctrs.length;while(i!==ctrs.indexOf(c.parentElement)){const d=ctrs[i];const l=d.classList.contains('card-sort-source')?Infinity:(parseInt(d.dataset.limit)||Infinity);if(d.children.length-1<l){d.appendChild(c);c.focus();const h=d.querySelector('h4');const targetName=h?h.childNodes[0].textContent.trim():'Target';NoodleNudge.UI.showToast(`Moved to ${targetName}`,'success');break;}i=(i+1)%ctrs.length;} };
@@ -439,7 +392,25 @@
                 const currentState = NoodleNudge.State.get();
                 if (!currentState.assessments || Object.keys(currentState.assessments).length === 0) { NoodleNudge.Logger.info("No content found; fetching from network..."); NoodleNudge.Content.loadAllContent(); } else { NoodleNudge.Logger.info("Content already available in state."); }
                 navigate('dashboard');
-                if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js').then(reg => NoodleNudge.Logger.info('Service Worker registered.', reg)).catch(err => NoodleNudge.Logger.error('Service Worker registration failed:', err)); }
+                const pwaClient = await registerPwaAssurance({
+                    appId: 'noodle-nudge',
+                    scriptUrl: './service-worker.js',
+                    currentDataSchema: 1,
+                    onUpdate: ({ registration, compatible }) => {
+                        NoodleNudge.PWA.updateRegistration = registration;
+                        NoodleNudge.PWA.compatible = compatible;
+                        const notice = document.getElementById('pwa-update-notice');
+                        const message = document.getElementById('pwa-update-message');
+                        const button = notice.querySelector('[data-action="activate-update"]');
+                        message.textContent = compatible ? 'A verified Noodle Nudge update is ready.' : 'A staged update is incompatible with this data schema and remains inactive.';
+                        button.hidden = !compatible;
+                        notice.classList.remove('d-none');
+                        notice.classList.add('d-flex');
+                    },
+                    onControllerChange: () => window.location.reload(),
+                    onError: (error) => NoodleNudge.Logger.error('PWA assurance failed:', error)
+                });
+                NoodleNudge.PWA.registration = pwaClient?.registration || null;
                 NoodleNudge.UI.hideLoader();
                 const vEl = document.getElementById("app-version"); if(vEl) vEl.textContent = MasterBlueprint.version; NoodleNudge.Logger.info("Noodle Nudge initialization complete."); } catch (e) { NoodleNudge.Logger.error("Init failed:", e); NoodleNudge.UI.hideLoader(); NoodleNudge.UI.showToast("Failed to initialize app. Please reload.", "danger"); }
             };

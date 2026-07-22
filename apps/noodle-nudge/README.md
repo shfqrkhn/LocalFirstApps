@@ -25,6 +25,8 @@ Reflection tools are most useful when they are private, simple, and available wh
 - Supports private journaling and self-inquiry.
 - Runs as a static app from GitHub Pages.
 - Emphasizes local privacy.
+- Evaluates canonical assessment formulas with a bounded allowlisted interpreter; assessment content is never executable code.
+- Stages a content-addressed complete offline shell, requires explicit compatible activation, and retains a last-known-good shell without touching sibling app caches.
 
 ## Quick Start
 
@@ -53,6 +55,8 @@ Noodle Nudge is the canonical HealthOS reflection and self-inquiry module, while
 ├── images/
 ├── JSON/
 ├── manifest.json
+├── pwa-shell.json
+├── scoring.js
 ├── service-worker.js
 └── README.md
 ```

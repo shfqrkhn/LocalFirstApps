@@ -18,7 +18,11 @@ class MemoryCache {
 }
 
 function makeHarness(mode) {
-  const stores = new Map([["fixture-shell-previous", new MemoryCache()]]);
+  const stores = new Map([
+    ["fixture-shell-previous", new MemoryCache()],
+    ["fixture-shell-incomplete", new MemoryCache()],
+    ["foreign-app-shell", new MemoryCache()]
+  ]);
   const events = new Map();
   const currentName = "fixture-shell-2";
   const caches = {
@@ -67,4 +71,13 @@ assert.equal(activation.skipCount(), 0, "a sibling app must not activate this wo
 activation.events.get("message")({ data: { type: "LFA_ACTIVATE_UPDATE" }, source: { url: "https://local.test/apps/fixture/" } });
 assert.equal(activation.skipCount(), 1, "an in-scope client may explicitly activate this worker");
 
-console.log("PWA worker fail-closed regression passed for missing, corrupt, and quota-interrupted candidates.");
+let installPromise;
+activation.events.get("install")({ waitUntil(promise) { installPromise = promise; } });
+await installPromise;
+let activatePromise;
+activation.events.get("activate")({ waitUntil(promise) { activatePromise = promise; } });
+await activatePromise;
+assert.equal(activation.stores.has("foreign-app-shell"), true, "activation must retain foreign caches");
+assert.equal(activation.stores.has("fixture-shell-incomplete"), false, "activation must remove incomplete app-owned caches");
+
+console.log("PWA worker fail-closed and foreign-cache isolation regression passed.");

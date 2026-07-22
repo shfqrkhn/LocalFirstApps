@@ -1,0 +1,58 @@
+{
+  "core_profile_v1.0.0": [
+    { "id": "extraversion", "value": 2.5 },
+    { "id": "agreeableness", "value": 3.75 },
+    { "id": "conscientiousness", "value": 2.5 },
+    { "id": "neuroticism", "value": 3.75 },
+    { "id": "openness", "value": 2.5 },
+    { "id": "creative_potential", "value": 37.5 },
+    { "id": "procrastination_tendency", "value": 62.5 },
+    { "id": "typeA_tendency", "value": 48.75 },
+    { "id": "ambiguity_tolerance", "value": 35 },
+    { "id": "assertiveness_tendency", "value": 35.625 },
+    { "id": "jungian_type_proxy", "value": "ISFP" }
+  ],
+  "core_values_v1.0.0": [
+    { "id": "top_terminal_values", "value": "A Comfortable Life, A World at Peace, Freedom (independence)" },
+    { "id": "top_instrumental_values", "value": "Ambitious (hard-working), Independent (self-reliant), Loving (affectionate, tender)" },
+    { "id": "achievement_drive", "value": true },
+    { "id": "social_orientation", "value": "personal" },
+    { "id": "ethical_predisposition", "value": false }
+  ],
+  "core_agency_v1.0.0": [
+    { "id": "core_self_evaluation", "value": 2.9166666666666665 },
+    { "id": "locus_of_control", "value": "External" },
+    { "id": "self_efficacy", "value": 2.9166666666666665 }
+  ],
+  "work_motivation_v1.0.0": [
+    { "id": "motivating_potential_score", "value": 40 },
+    { "id": "key_career_drivers", "value": "Clarity" },
+    { "id": "preferred_environment", "value": "Structured/Routine" }
+  ],
+  "pss_v1.0.0": [{ "id": "perceived_stress_score", "value": 26 }],
+  "conflict_style_v1.0.0": [
+    { "id": "competing_score", "value": 1 },
+    { "id": "accommodating_score", "value": 2 },
+    { "id": "collaborating_score", "value": 3 },
+    { "id": "avoiding_score", "value": 4 },
+    { "id": "compromising_score", "value": 5 },
+    { "id": "dominant_style", "value": "Compromising" }
+  ],
+  "authentic_ethical_leadership_v1.0.0": [
+    { "id": "self_awareness", "value": 3.4166666666666665 },
+    { "id": "internalized_moral_perspective", "value": 3 },
+    { "id": "balanced_processing", "value": 2.75 },
+    { "id": "relational_transparency", "value": 2.875 },
+    { "id": "ethical_leadership", "value": 3 }
+  ],
+  "assertiveness_profile_v1.0.0": [{ "id": "assertiveness", "value": 2.6 }],
+  "power_influence_v1.0.0": [
+    { "id": "machiavellianism", "value": 2.6666666666666665 },
+    { "id": "reward_power", "value": 2.6666666666666665 },
+    { "id": "coercive_power", "value": 3.3333333333333335 },
+    { "id": "legitimate_power", "value": 4.666666666666667 },
+    { "id": "expert_power", "value": 2.3333333333333335 },
+    { "id": "referent_power", "value": 3.5 }
+  ],
+  "proactive_personality_v1.0.0": [{ "id": "proactive_personality", "value": 3 }]
+}

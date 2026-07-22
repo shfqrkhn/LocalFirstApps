@@ -111,6 +111,10 @@ const healthSw = readFileSync(join(root, "apps", "healthos", "sw.js"), "utf8");
 const healthPwaShell = readFileSync(join(root, "apps", "healthos", "pwa-shell.json"), "utf8");
 const healthApp = readFileSync(join(root, "apps", "healthos", "app.js"), "utf8");
 const healthStorage = readFileSync(join(root, "apps", "healthos", "storage.js"), "utf8");
+const pmQuizWorker = readFileSync(join(root, "apps", "pmquiz", "service-worker.js"), "utf8");
+const noodleIndex = readFileSync(join(root, "apps", "noodle-nudge", "index.html"), "utf8");
+const noodleScoring = readFileSync(join(root, "apps", "noodle-nudge", "scoring.js"), "utf8");
+const noodleWorker = readFileSync(join(root, "apps", "noodle-nudge", "service-worker.js"), "utf8");
 const sharedHealth = readFileSync(join(root, "shared", "healthos.js"), "utf8");
 const sharedFocusTimer = readFileSync(join(root, "shared", "focus-timer.js"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
@@ -421,6 +425,12 @@ for (const phrase of ["App-owned shell manifest", "Activation and recovery", "la
   assert(pwaContract.includes(phrase), `PWA assurance documentation missing: ${phrase}`);
 }
 assert(!/install[\s\S]{0,300}skipWaiting/.test(sharedPwaWorker), "PWA updates must not skip waiting during install.");
+assert(pmQuizWorker.includes("key.startsWith(CACHE_PREFIX)"), "PMQuiz cache cleanup must be app-prefix scoped.");
+assert(!pmQuizWorker.includes("caches.match("), "PMQuiz must not search sibling app caches.");
+assert(!noodleIndex.includes("unsafe-eval") && !noodleIndex.includes("new Function"), "Noodle scoring content must remain inert.");
+assert(noodleIndex.includes("activatePwaUpdate") && noodleIndex.includes("registerPwaAssurance"), "Noodle updates must be explicitly activated through PWA assurance.");
+assert(noodleScoring.includes("ALLOWED_FUNCTIONS") && noodleScoring.includes("LIMITS"), "Noodle scoring must use an allowlisted bounded interpreter.");
+assert(noodleWorker.includes('cachePrefix: "noodle-nudge-"') && noodleWorker.includes("LFAPwaWorker.register"), "Noodle worker must use the app-owned PWA contract.");
 assert(!existsSync(join(root, "apps", "commonground", "assets")) || readdirSync(join(root, "apps", "commonground", "assets")).length === 0, "Opaque CommonGround generated assets must be removed.");
 assert(!existsSync(join(root, "apps", "commonground", "workbox-8c29f6e4.js")), "Duplicate CommonGround Workbox runtime must be removed.");
 const bootstrapLicense = readFileSync(join(root, "vendor", "bootstrap-LICENSE.txt"), "utf8");

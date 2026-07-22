@@ -9,7 +9,8 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const pilots = [
   { app: "commonground", manifest: "apps/commonground/pwa-shell.json", shell: "0.2.2-m2", schema: 4 },
   { app: "flexx-files", manifest: "apps/flexx-files/pwa-shell.json", shell: "3.9.74", schema: "v3" },
-  { app: "healthos", manifest: "apps/healthos/pwa-shell.json", shell: "0.1.0-m3a", schema: 1 }
+  { app: "healthos", manifest: "apps/healthos/pwa-shell.json", shell: "0.1.0-m3a", schema: 1 },
+  { app: "noodle-nudge", manifest: "apps/noodle-nudge/pwa-shell.json", shell: "1.2.30-r0", schema: 1 }
 ];
 
 for (const pilot of pilots) {
@@ -25,7 +26,7 @@ for (const pilot of pilots) {
   assert.ok(manifest.assets.some((asset) => asset.url === manifest.navigationFallback));
   for (const asset of manifest.assets) {
     assert.match(asset.sha256, /^[a-f0-9]{64}$/);
-    const absolute = resolve(dirname(manifestPath), asset.url);
+    const absolute = resolve(dirname(manifestPath), decodeURIComponent(asset.url));
     const repositoryRelative = relative(root, absolute);
     assert.ok(repositoryRelative && !repositoryRelative.startsWith("..") && !resolve(repositoryRelative).startsWith(".."), `${pilot.app} asset escapes the repository.`);
     const digest = createHash("sha256").update(await readFile(absolute)).digest("hex");
@@ -44,4 +45,4 @@ assert.deepEqual(classifyStorageEstimate(undefined), { available: false, usage: 
 assert.equal(classifyStorageEstimate({ usage: 95, quota: 100 }).state, "high");
 assert.equal(classifyStorageEstimate({ usage: 10, quota: 100 }).state, "healthy");
 
-console.log("PWA assurance contract regression passed for CommonGround, Flexx Files, and HealthOS.");
+console.log("PWA assurance contract regression passed for CommonGround, Flexx Files, HealthOS, and Noodle Nudge.");

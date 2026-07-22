@@ -11,6 +11,7 @@ let server;
 let baseUrl;
 let commonGroundWorkerRevision;
 let flexxWorkerRevision;
+let noodleWorkerRevision;
 const pwaFaults = new Map();
 
 const mime = new Map([
@@ -37,6 +38,7 @@ test.use({ hasTouch: true });
 test.beforeAll(async () => {
   commonGroundWorkerRevision = 1;
   flexxWorkerRevision = 1;
+  noodleWorkerRevision = 1;
   server = createServer(async (request, response) => {
     try {
       const url = new URL(request.url || "/", "http://127.0.0.1");
@@ -46,6 +48,10 @@ test.beforeAll(async () => {
       }
       if (url.pathname === "/__test__/flexx-worker-update") {
         flexxWorkerRevision += 1;
+        return response.writeHead(204, { "cache-control": "no-store" }).end();
+      }
+      if (url.pathname === "/__test__/noodle-worker-update") {
+        noodleWorkerRevision += 1;
         return response.writeHead(204, { "cache-control": "no-store" }).end();
       }
       if (url.pathname === "/__test__/pwa-fault") {
@@ -78,6 +84,14 @@ test.beforeAll(async () => {
       }
       if (url.pathname === "/apps/flexx-files/pwa-shell.json" && flexxWorkerRevision > 1) {
         body = Buffer.from(body.toString("utf8").replace('"shellVersion": "3.9.74"', `"shellVersion": "3.9.74-test-${flexxWorkerRevision}"`));
+      }
+      if (url.pathname === "/apps/noodle-nudge/service-worker.js") {
+        headers["cache-control"] = "no-store";
+        const shell = noodleWorkerRevision === 1 ? "1.2.30-r0" : `1.2.30-r0-test-${noodleWorkerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace('shellVersion: "1.2.30-r0"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${noodleWorkerRevision}\n`);
+      }
+      if (url.pathname === "/apps/noodle-nudge/pwa-shell.json" && noodleWorkerRevision > 1) {
+        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "1.2.30-r0"', `"shellVersion": "1.2.30-r0-test-${noodleWorkerRevision}"`));
       }
       if (fault === "corrupt") body = Buffer.concat([body, Buffer.from("\n/* deterministic-corruption */\n")]);
       response.writeHead(200, headers);
@@ -176,6 +190,104 @@ test("Noodle Nudge exports, rejects corrupt backup data, and performs guarded re
   await expect(page.locator("#toast-container")).toContainText("again within 5 seconds");
   await reset.click();
   await expect(page.locator("#toast-container")).toContainText("Data reset complete");
+});
+
+test("PMQuiz activation preserves sibling app caches", async ({ page }) => {
+  await page.goto(baseUrl);
+  await page.evaluate(async () => (await caches.open("r0-foreign-sentinel")).put("/r0-foreign-proof", new Response("keep")));
+  await gotoApp(page, "pmquiz");
+  await page.waitForFunction(async () => (await navigator.serviceWorker.getRegistration("./"))?.active?.state === "activated");
+  expect(await page.evaluate(async () => (await caches.keys()).includes("r0-foreign-sentinel"))).toBe(true);
+});
+
+test("Noodle scoring preserves all canonical v1 outputs", async ({ page }) => {
+  const expected = JSON.parse(await readFile(join(root, "tests/fixtures/noodle-scoring-v1.json"), "utf8"));
+  await gotoApp(page, "noodle-nudge");
+  await page.waitForFunction(() => Object.keys(NoodleNudge.State.get().assessments || {}).length === 10);
+  const actual = await page.evaluate(() => {
+    const output = {};
+    for (const assessment of Object.values(NoodleNudge.State.get().assessments)) {
+      const answers = {};
+      assessment.questions?.forEach((question, index) => { answers[question.id] = assessment.responseScale[index % assessment.responseScale.length].value; });
+      assessment.sections?.forEach((section) => {
+        answers[section.id] = {};
+        section.categories.forEach((category, index) => {
+          const limit = category.limit == null ? section.items.length : category.limit;
+          answers[section.id][category.id] = section.items.filter((_, itemIndex) => itemIndex % section.categories.length === index).slice(0, limit).map((item) => item.id);
+        });
+      });
+      output[assessment.id] = NoodleNudge.Scoring.calculateResults(assessment, answers).scores.map(({ id, value }) => ({ id, value }));
+    }
+    return output;
+  });
+  expect(actual).toEqual(expected);
+});
+
+test("Noodle PWA is fail-closed, explicit, recoverable, and foreign-cache safe", async ({ page, context }) => {
+  await page.goto(baseUrl);
+  await page.evaluate(async () => (await caches.open("r0-foreign-sentinel")).put("/r0-foreign-proof", new Response("keep")));
+  await gotoApp(page, "noodle-nudge");
+  await page.waitForFunction(() => Boolean(navigator.serviceWorker?.controller));
+  await page.waitForFunction(() => Object.keys(NoodleNudge.State.get().assessments || {}).length === 10);
+  await page.evaluate(() => NoodleNudge.State.set({ appConfig: { ...NoodleNudge.State.get().appConfig, r0Proof: "kept" } }));
+  expect(await page.evaluate(async () => (await caches.keys()).includes("r0-foreign-sentinel"))).toBe(true);
+
+  await context.setOffline(true);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { name: "Discover Your Core Profile" })).toBeVisible();
+  await context.setOffline(false);
+
+  await page.evaluate(() => fetch("/__test__/noodle-worker-update", { method: "POST" }));
+  await page.evaluate(async () => (await navigator.serviceWorker.getRegistration("./")).update());
+  await expect(page.getByText("A verified Noodle Nudge update is ready.")).toBeVisible();
+  expect(await page.evaluate(async () => Boolean((await navigator.serviceWorker.getRegistration("./")).waiting))).toBe(true);
+  await Promise.all([page.waitForEvent("load"), page.getByRole("button", { name: "Reload to update" }).click()]);
+  await expect(page.getByRole("heading", { name: "Discover Your Core Profile" })).toBeVisible();
+
+  const status = async () => page.evaluate(async () => {
+    const { workerStatus } = await import("../../shared/pwa-assurance.js");
+    return workerStatus(navigator.serviceWorker.controller);
+  });
+  const activeShell = (await status()).shellVersion;
+  for (const mode of ["missing", "corrupt"]) {
+    await page.evaluate(([target, fault]) => fetch(`/__test__/pwa-fault?target=${encodeURIComponent(target)}&mode=${fault}`, { method: "POST" }), ["/apps/noodle-nudge/scoring.js", mode]);
+    await page.evaluate(() => fetch("/__test__/noodle-worker-update", { method: "POST" }));
+    const settled = await page.evaluate(async () => {
+      const registration = await navigator.serviceWorker.getRegistration("./");
+      return new Promise(async (resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error("Candidate did not settle.")), 10000);
+        const observe = (worker) => {
+          if (!worker) return;
+          const finish = () => {
+            if (["redundant", "installed"].includes(worker.state)) { clearTimeout(timer); resolve(worker.state); }
+          };
+          worker.addEventListener("statechange", finish);
+          finish();
+        };
+        registration.addEventListener("updatefound", () => observe(registration.installing), { once: true });
+        try { await registration.update(); observe(registration.installing); } catch (error) { clearTimeout(timer); reject(error); }
+      });
+    });
+    expect(settled).toBe("redundant");
+    expect((await status()).shellVersion).toBe(activeShell);
+    expect(await page.evaluate(async () => (await caches.keys()).includes("r0-foreign-sentinel"))).toBe(true);
+    await page.evaluate((target) => fetch(`/__test__/pwa-fault?target=${encodeURIComponent(target)}&mode=clear`, { method: "POST" }), "/apps/noodle-nudge/scoring.js");
+  }
+
+  const damaged = await page.evaluate(async () => {
+    const { workerStatus } = await import("../../shared/pwa-assurance.js");
+    const worker = await workerStatus(navigator.serviceWorker.controller);
+    return { deleted: await (await caches.open(worker.currentCacheName)).delete(new URL("./index.html", location.href).href), previous: worker.previousCacheName };
+  });
+  expect(damaged).toEqual({ deleted: true, previous: expect.any(String) });
+  await context.setOffline(true);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { name: "Discover Your Core Profile" })).toBeVisible();
+  const recovered = await status();
+  expect(recovered.currentComplete).toBe(false);
+  expect(recovered.recoveredFromPrevious).toBe(true);
+  expect(await page.evaluate(() => NoodleNudge.State.get().appConfig?.r0Proof)).toBe("kept");
+  await context.setOffline(false);
 });
 
 test("Flexx Files exposes touch-safe backup/restore UI and rejects corrupt restore data", async ({ page }) => {
