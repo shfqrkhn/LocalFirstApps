@@ -10,8 +10,8 @@ Users should run the live GitHub Pages suite or download the repository through 
 
 ## Forbidden
 
-- `node_modules/`, `test-results/`, private planning notes, backups, exports, PII, credentials, API keys, OAuth flows, telemetry, accounts, silent upload paths, JS popup APIs, and source-only maintenance files that `.gitattributes` excludes from generated archives.
-- Standalone redirect folders or URLs for retired apps. The sole temporary exception is the unlisted `apps/ledgersuite` migration redirect in `v0.2.0`; `.gitattributes` must exclude it from generated repository archives, and the next genuine feature release must remove it.
+- `node_modules/`, `test-results/`, `archive/`, private planning notes, backups, exports, PII, credentials, API keys, OAuth flows, telemetry, accounts, silent upload paths, JS popup APIs, and source-only maintenance files that `.gitattributes` excludes from generated archives.
+- Standalone redirect folders or URLs for retired apps. The sole exception is the unlisted, archive-excluded `apps/ledgersuite` migration redirect. Preserve it until explicit owner-approved deprecation has migration evidence, a rollback plan, and a verified replacement path.
 - CommonGround BYOAI/provider overlays or any suite app behavior that requires OAuth, API keys, or remote AI providers.
 
 ## Public Claims

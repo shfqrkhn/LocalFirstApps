@@ -39,7 +39,7 @@ function walk(dir) {
   const out = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
-    if (entry.name === ".git" || entry.name === "node_modules") continue;
+    if (entry.name === ".git" || entry.name === "archive" || entry.name === "node_modules") continue;
     if (entry.isDirectory()) out.push(...walk(full));
     else out.push(full);
   }
@@ -185,7 +185,7 @@ for (const phrase of ["mpes_authority: prime", "M1-shared-interchange-and-recove
 for (const phrase of ["prime human-readable project authority", "Consolidate LedgerSuite into CommonGround", "owner explicitly directed their consolidation", "Stage PWA updates", "Reuse assurance, not runtime state", "Add an isolated HealthOS focus surface"]) {
   assert(decisions.includes(phrase), `DECISIONS.md missing required decision evidence: ${phrase}`);
 }
-for (const phrase of ["Universal Packet Contract", "M1 — Shared interchange", "M3 — HealthOS", "M9 — Release", "Completion Definition", "Consolidated `/goal` Prompts"]) {
+for (const phrase of ["Non-Negotiable Architecture", "R0 — Contain confirmed safety defects", "R3 — Complete CommonGround LifeOS", "R4 — Complete CommonGround WorkOS", "Definition of 100%", "Next `/goal` Prompt"]) {
   assert(mpesPlan.includes(phrase), `MPES implementation plan missing required section: ${phrase}`);
 }
 assert(pkg.scripts?.["test:local"]?.includes("test:behavior"), "local gate must include app behavior coverage.");
@@ -270,6 +270,7 @@ for (const phrase of ["Doctrine Delta Decision", "promote", "reject", "quarantin
 assert(!handoff.includes("ahead of origin before this handoff pass"), "Handoff must not preserve stale ahead/behind state.");
 for (const exportIgnored of [
   "tests export-ignore",
+  "archive export-ignore",
   "package.json export-ignore",
   "package-lock.json export-ignore",
   "apps/flexx-files/tests export-ignore",
@@ -280,6 +281,7 @@ for (const exportIgnored of [
   assert(exportAttrs.includes(exportIgnored), `Repository ZIP/source archives must exclude non-runtime file: ${exportIgnored}`);
 }
 const exportIgnoredPaths = [
+  "archive",
   "tests",
   "package.json",
   "package-lock.json",

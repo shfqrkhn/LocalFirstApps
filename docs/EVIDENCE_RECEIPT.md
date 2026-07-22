@@ -184,3 +184,18 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `git diff --check`
 - protected-path scan
 - live Pages check after runtime or public-surface changes
+
+## 2026-07-22 Adversarial Takeover Audit
+
+**State:** audit/governance/archive packet implemented locally; **release `NO-GO`**; runtime blockers are planned, not fixed.
+
+- `PASS`: all 220 tracked paths were inventoried; authored runtime, data, tests, configuration, and documentation received manual structural review, while binary/generated/vendor material received dimension/hash/provenance/reproducibility/license review appropriate to its form.
+- `PASS`: the pre-audit `npm run test:local` baseline passed. This characterizes current behavior but did not detect the blockers below.
+- `FAIL`: PMQuiz and Noodle service-worker activation can delete caches owned by other apps on the shared origin.
+- `FAIL`: Noodle scoring uses dynamically compiled configuration with `unsafe-eval`; imported/config content must remain inert.
+- `FAIL`: Noodle installation can survive incomplete shell caching rather than fail closed.
+- `FAIL`: Flexx manifest icon declarations do not match the two byte-identical 480×480 files.
+- `PASS_WITH_LIMITATIONS`: 42 inactive paths were moved—not deleted—to export-excluded `archive/`; `archive/README.md` records provenance and restoration. Compatibility code, schemas, canonical fixtures, active tests, vendors/licenses, and opaque TS-Dash runtime artifacts remain in place.
+- `PASS_WITH_LIMITATIONS`: `docs/DOCUMENT_AUTHORITY.md`, `DECISIONS.md`, `PROJECT_STATE.yaml`, `docs/CODEBASE_ADVERSARIAL_AUDIT.md`, `docs/FILE_DISPOSITION.md`, and the revised implementation plan now separate authority, observed truth, evidence, source content, archive, and derived plans.
+- `NOT_RUN`: no fix for R0, commit, push, deployment, release, or remote mutation is claimed by this audit packet.
+- **Next exact action:** execute R0 from `docs/MPES_IMPLEMENTATION_PLAN.md`; do not begin M3B or another feature packet first.

@@ -8,6 +8,7 @@ Treat this as a public-safe continuation map. Re-read current files before editi
 ## Authority And State
 
 - Prime human-readable authority: owner-controlled `MPES-LocalFirstApps-Unified-v1.1.0.md` in the approved workspace reference area. It remains private unless publication is separately approved.
+- Authority hierarchy and conflict protocol: `docs/DOCUMENT_AUTHORITY.md`.
 - Canonical observed execution state: `PROJECT_STATE.yaml`.
 - Accepted amendments and visible conflicts: `DECISIONS.md`.
 - Bounded implementation sequence and reusable goal prompts: `docs/MPES_IMPLEMENTATION_PLAN.md`.
@@ -15,7 +16,7 @@ Treat this as a public-safe continuation map. Re-read current files before editi
 
 ## Mission
 
-Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser utilities. It exists to reduce repo sprawl while preserving each migrated app as a native suite module.
+Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS and WorkOS—over an invisible OmniCore source layer. Reduce user-facing sprawl while preserving isolated data/cache ownership, explicit transfer, compatibility, and independently reversible delivery.
 
 ## Product Contract
 
@@ -56,11 +57,19 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 
 `apps/ledgersuite` is an unlisted compatibility redirect, not an active app. Preserve its URL and CommonGround LedgerSuite v1/v2 import support unless the owner separately approves deprecation with migration evidence and rollback planning.
 
+## Current Release Status
+
+**NO-GO.** The 2026-07-22 adversarial audit found three R0 blockers: cross-app cache deletion by PMQuiz and Noodle workers, executable Noodle scoring configuration under `unsafe-eval`, and non-fail-closed Noodle shell installation. M3A remains locally verified characterization evidence, but do not start M3B or publish until R0 passes and the owner accepts M3A.
+
 ## Key Files
 
 - `PROJECT_STATE.yaml`: current machine-readable milestone, requirements, risks, evidence, and next action.
 - `DECISIONS.md`: accepted architectural decisions and MPES amendments.
-- `docs/MPES_IMPLEMENTATION_PLAN.md`: M0–M9 packet sequence and completion definition.
+- `docs/DOCUMENT_AUTHORITY.md`: authoritative source levels and conflict protocol.
+- `docs/CODEBASE_ADVERSARIAL_AUDIT.md`: skeptical architecture, code, content, CI, and risk findings.
+- `docs/FILE_DISPOSITION.md`: coverage and disposition for every tracked file family.
+- `docs/MPES_IMPLEMENTATION_PLAN.md`: R0–R6 risk-first sequence and completion definition.
+- `archive/README.md`: excluded historical-file manifest and restoration rules.
 - `shared/interchange.js` and `docs/INTERCHANGE_CONTRACT.md`: M1 portable-record implementation and public contract.
 - `shared/pwa-worker.js`, `shared/pwa-assurance.js`, and `docs/PWA_ASSURANCE_CONTRACT.md`: M2 complete-shell staging, activation, health, scoped reset, and last-known-good contract.
 - `shared/healthos.js`, `shared/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: M3A observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract.
@@ -85,6 +94,8 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
+- Execute only the R0 safety-containment goal in `docs/MPES_IMPLEMENTATION_PLAN.md` next. Feature work cannot overtake open isolation/code-execution blockers.
+- Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
 - If the Pages API summary reports `errored`, compare the latest current-head `Deploy GitHub Pages` workflow, deployments API SHA, and live HTTP 200 before editing source; treat a contradictory API summary as stale residue and report it with limitations.
 - Use `docs/future-app-intake.md` before adding any new module.

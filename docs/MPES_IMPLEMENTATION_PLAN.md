@@ -1,73 +1,63 @@
-# MPES v1.1.0 Implementation Plan
+# MPES Implementation Plan
 
-`MPES-LocalFirstApps-Unified-v1.1.0.md` is the prime human-readable authority. `PROJECT_STATE.yaml` is the machine-readable observed state. Owner-approved amendments belong in `DECISIONS.md`; neither state nor implementation may silently override the MPES.
+Status: revised 2026-07-22 after full adversarial audit. This is an A6 execution plan. The private `MPES-LocalFirstApps-Unified-v1.1.0.md` is the A1 prime product authority; explicit owner amendments in `DECISIONS.md` govern final CommonGround-branded LifeOS/WorkOS convergence.
 
-## Analysis
+## Non-Negotiable Architecture
 
-The MPES is a portfolio architecture and assurance contract, not permission for a monolith. It requires two user-facing groupings—LifeOS and WorkOS—under an invisible OmniCore assurance layer, with Insight, Knowledge, and Learning engines. Focused apps stay independently usable; integration uses narrow schemas and explicit user-reviewed transfer. Core workflows must remain local, offline after installation, no-AI, portable, recoverable, accessible, and static-hostable.
+- Two primary product shells: CommonGround LifeOS and CommonGround WorkOS.
+- One invisible OmniCore source layer for design primitives, validation, explicit interchange, app-scoped PWA/storage/recovery, time, errors, and test utilities.
+- No suite database, hidden cross-app reads/writes, universal service worker, implicit sync, backend, telemetry, account, provider key, or remote AI dependency.
+- Preserve every current route, store, export/import, migration, and compatibility path until its replacement passes parity, recovery, rollback, accessibility, offline, and owner-acceptance gates.
+- Ship in independently reversible packets. No feature packet may bypass an open safety blocker.
 
-The observed repository provides six focused apps plus local verification infrastructure. CommonGround is the accepted WorkOS consolidation surface and the LedgerSuite URL remains an unlisted compatibility alias. M1 interchange and M2 reusable PWA assurance are complete locally. M3A adds only an independent HealthOS daily-state/focus surface, preserving Noodle Nudge and Flexx Files as canonical isolated modules. Broader HealthOS modules, Insight, Learning, Knowledge, PMOS, and optional AI remain inactive or incomplete and must not be implied by this packet.
+## Ordered Delivery
 
-## Universal Packet Contract
+### R0 — Contain confirmed safety defects
 
-Every packet starts from current files and records baseline HEAD/status, requirements, affected data and routes, fixtures, success evidence, rollback, risks, and authority. Implement the smallest reversible change with tests first or alongside it. Validate imports before preview; mutate only after confirmation and atomically where material. Preserve old URLs, data, and exports until migration and rollback pass. Update `PROJECT_STATE.yaml`, decisions, risks, evidence, screenshots, and handoff. Stop on failed gates, unsafe uncertainty, non-convergence, absent authority, or negligible value. No push, release, deployment, remote mutation, credential use, purchase, or external adapter activation without explicit owner approval.
+Scope: make PMQuiz and Noodle workers cache-prefix safe; replace Noodle `new Function` formulas with a schema-validated allowlisted interpreter; remove `unsafe-eval`; make Noodle shell staging fail closed. Add cross-app cache sentinels, formula positive/negative vectors, CSP checks, and offline/update/recovery browser tests.
 
-## Execution Order
+Gate: all foreign caches and stores survive every lifecycle/reset path; no executable imported/config content; incomplete candidates never activate; existing data and scoring fixtures remain compatible. Rollback is code-only and leaves app data untouched.
 
-### P0 — Close current packet and reconcile baseline
+### R1 — Establish trustworthy source, content, CI, and design foundations
 
-Finish CommonGround/LedgerSuite local verification; record the owner amendment, exact migration/rollback evidence, known limitations, and local commit. Then re-inventory all app routes, storage, exports, service workers, dependencies, accessibility, screenshots, and test gates against current HEAD. Gate: reproducible clean baseline, no unexplained conflict, no publication claim.
+Recover TS-Dash readable source and reproducible output or specify a behavior-first rewrite. Add third-party/license inventory. Correct Flexx icons and enforce manifest dimensions. Reconcile versions from one source. Split candidate checks from post-deploy checks and publish only a constructed runtime artifact. Create CommonGround tokens, typography, spacing, color, focus, form, dialog, status, navigation, responsive, reduced-motion, and error primitives without centralizing app data.
 
-### M1 — Shared interchange and recovery proof
+Create item-level provenance/review schemas for PMQuiz, Noodle assessments/content, and strength guidance. Remove/downgrade unsupported endorsement, psychometric, clinical, and prescriptive claims pending qualified review.
 
-Define the minimal semver portable-record envelope, data classifications, manifest, validation errors, unknown-field policy, provenance, revisions, IDs, timezone/unit rules, and fixtures. Add round-trip, unsupported-major, malformed, replay, atomicity, correction/deletion, quota, and rollback tests. Pilot in one app without replacing its prior export; document adapter/migration. Gate: no loss, no partial mutation, explicit preview/confirmation/receipt.
+Gate: reproducible clean build; deterministic artifact inventory; licenses complete; CSP/icon/version/artifact tests pass; WCAG-oriented keyboard/pointer/touch/zoom/reduced-motion checks plus a documented manual AT matrix; no visual parity regression.
 
-### M2 — PWA baseline proof
+### R2 — Build OmniCore by extraction
 
-Extract only a narrow reusable pattern for versioned manifests, complete shell staging, user-visible activation, offline fallback, scoped cache reset, storage health, subpaths, and reduced file mode. Pilot in CommonGround, then one contrasting app. Test first install, refresh, offline restart, update/stale/missing assets, interrupted update, old/new schema combinations, multiple tabs, user-data survival, quota/eviction. Gate: no mixed shell/schema and recoverable prior cache.
+Promote only already-proven pure contracts: schema validation, hashing/portable transfer, scoped PWA/cache ownership, storage transactions, timestamps, recovery receipts, error/result types, design primitives, and test fixtures. Version each public module and give each shell an adapter. Do not create a framework before a second real consumer proves the abstraction.
 
-### M3 — HealthOS convergence
+Gate: CommonGround and one second app consume each promoted contract; old formats round-trip byte/semantically as specified; fault injection proves atomicity, idempotency, stale-write rejection, and foreign-scope preservation.
 
-M3A is locally implemented: Noodle Nudge and Flexx Files remain recognizable canonical modules; versioned daily-state/focus-session schemas use explicit user-reviewed transfer; and a small independent HealthOS navigation/focus app owns its own storage. Its Pomodoro/minimum/custom/open timer derives duration from timestamps and covers reload/sleep/duplicate-tab/manual-correction/degraded-mode/recovery paths, with non-diagnostic language and deterministic TS-Dash CSV. After owner acceptance, separately consider M3B meditation/breathing, then data-driven C25K, mobility/recovery, sleep and distraction records. Gate each module independently.
+### R3 — Complete CommonGround LifeOS
 
-### M4 — WorkOS integration
+Use HealthOS Focus as the shell seed. Fix preference restore atomicity. Rewrite Noodle as Reflection using inert validated assessment definitions and pure scoring. Extract Flexx domain math/storage into Strength modules, then replace its global UI/controller incrementally. Add meditation/breathing only after M3A owner acceptance; keep C25K, mobility, sleep, and later modules inactive until separately accepted.
 
-Close the CommonGround Decision Analysis proof with personal/professional/shared context, evidence/assumptions/options, hard constraints separate from scoring, authority/dissent/invalidation, outcome review, export, migration, accessibility, offline update, stale-writer and recovery evidence. Then build the smallest PMOS Basic console only if a recurring need is demonstrated; Managed, Assured, and Advanced remain progressive opt-ins. Gate: no professional approval implied and full manual/no-AI fallback.
+Gate per migrated module: exact data inventory; dual-read/verified-write or explicit previewed file migration; backup before mutation; replay-safe receipt and rollback; route/store/export parity; offline/PWA isolation; non-diagnostic language; one-input and AT evidence. Keep the old surface available until owner acceptance.
 
-### M5 — Insight Engine adapter
+### R4 — Complete CommonGround WorkOS
 
-Keep TS-Dash generic and source-app records canonical. Import explicit HealthOS and CommonGround envelopes, preview transformations, label missingness and correlation limits, preserve precision/timezone/units, and export reproducible derived data plus chart configuration. Gate: deterministic fixtures and no hidden cross-app reads.
+Refactor CommonGround facilitation/Decision Analysis into the WorkOS shell without changing matter-type boundaries, hard constraints, revisions, imports, or Ledger compatibility. Rebuild TS-Dash as Insights from recovered source/behavior contracts. Move PMQuiz into Learning only after content governance, deduplication, provenance, and deterministic session/recovery design. Add Knowledge as an explicit user-controlled source library, not hidden aggregation.
 
-### M6 — Learning Engine
+Gate per module: behavioral and format parity, exact-preview transfer, scoped storage/reset/PWA, accessibility, offline recovery, content provenance, and owner acceptance. Generic analysis must never infer causality or professional advice.
 
-Preserve PMQuiz, add local Course Pack folder/file inventory and module mapping, then integrate question-bank candidates, confidence-before-answer, calibration, spaced review, weak-area selection, delayed retest, and explicit Knowledge export. Exclude authenticated scraping, submission, grading, proctoring, bypass, and required large-media transcoding. Gate: offline/no-AI completion and portable progress.
+### R5 — Converge and retire safely
 
-### M7 — Knowledge Engine decision and proof
+Make LifeOS and WorkOS the only primary launcher cards after every module reaches parity. Compatibility URLs remain lightweight redirects/migration surfaces. Deprecation requires usage/migration evidence, complete export, tested restore and rollback, owner approval, and a dated removal decision. Archive source only after the final supported release window; never archive required migrations or format readers.
 
-Evaluate the supplied Zettelkasten artifact against retain, wrap, modularize, or keep-separate options. Select only after migration, import security, performance, deterministic manifest, ID/link/backlink, snapshot, correction/deletion, and recovery evidence. Transactional app data becomes knowledge only through explicit user selection.
+Gate: no stranded data, broken bookmarks, duplicate authority, foreign-cache mutation, or unowned content; repository ZIP contains only curated runtime; archive manifest is complete.
 
-### M8 — Optional enterprise AI modules
+### R6 — Release and operational closure
 
-Only after M1–M7 are stable, implement deterministic Enterprise AI Workflow Lab and manual AI Factory Router modes. Start with no-provider and manual copy/paste packets. Any future adapter is optional, capability/freshness declared, previews exact data, marks candidate output, requires explicit acceptance, and never directly mutates canonical records or causes external effects. Gate unavailable/refusal/timeout/malformed tests and owner approval for any network or credential behavior.
+Run the full local suite, independent security/privacy/license/accessibility/content review, clean-install/upgrade/rollback/offline/quota/multi-tab tests, `git diff --check`, and protected PR checks. Publish only with explicit authority. Verify the exact deployed commit and all routes from a fresh and an upgraded profile. Record limitations and recovery drills; keep GitHub Releases absent unless separately approved.
 
-### M9 — Release and operating assurance
+Definition of 100%: all MPES requirements are mapped to passing evidence or an owner-accepted explicit non-goal; no P0/P1 defect is open; source is readable/reproducible; two coherent shells replace primary app sprawl; all retained data/contracts/routes recover; content and third-party provenance are reviewable; accessibility and offline behavior have both automated and manual evidence; documentation authority/state match the deployed commit.
 
-Run full static, component, integration, browser-target, accessibility, keyboard/touch, offline, CSP/security, dependency/license, migration, portability, deletion-closure, concurrency, locale/timezone/unit, and no-network/no-AI gates. Conduct a fresh critic/diff/rollback pass. Release only with explicit authority through protected checks; verify exact deployed SHA and routes. Continue controlled-operation and longitudinal evidence before claiming `OPERATING_ASSURED`.
+## Next `/goal` Prompt
 
-## Completion Definition
+`/goal Execute LocalFirstApps R0 safety containment under MPES v1.1.0 and D-008–D-010. Start from current branch/HEAD/status and preserve all routes, stores, formats, user data, and unrelated changes. Fix PMQuiz and Noodle Nudge service workers so activate/update/reset delete only their own cache prefixes; add foreign-cache sentinel tests across app lifecycles. Replace Noodle new Function scoring with a dependency-free, schema-validated allowlisted interpreter supporting only the currently evidenced functions/operators; reject unknown syntax and non-finite results; remove unsafe-eval and prevent imported/config content from becoming executable. Make Noodle PWA installation fail closed with content-addressed complete staging and retained last-known-good behavior. Add deterministic unit/worker/browser tests for valid legacy scoring, malicious/malformed rules, offline restart, interrupted/corrupt/quota staging, update activation, and cross-app isolation. Update contracts/state/decisions/evidence/handoff only to proven facts. Run all project-native local gates, syntax/JSON checks, git diff --check, and final status. Do not begin M3B, migrate data, publish, push, deploy, or mutate remotes. Stop and report if compatibility cannot be preserved.`
 
-Completion means every accepted MPES requirement is traceable to implementation and current evidence, or is explicitly owner-accepted as retired/not applicable with rationale. All preserved URLs/data/formats have tested compatibility or approved deprecation; recovery and manual fallback remain reachable; critical workflows pass claimed accessibility/offline/no-AI modes; project state, decisions, risks, evidence, release notes, and handoff agree; the exact released configuration is observed. Code existence alone is never completion.
-
-## Consolidated `/goal` Prompts
-
-Use one prompt at a time. Each inherits the prime MPES and Universal Packet Contract above.
-
-1. `/goal Reconcile and close P0: inspect current LocalFirstApps HEAD, worktree, instructions, five active apps plus LedgerSuite compatibility alias, routes, storage, exports, service workers, dependencies, screenshots, docs, and tests. Finish the bounded CommonGround consolidation verification without broadening scope; prove legacy migration/import/reset/offline/update/decision-context compatibility and rollback. Update PROJECT_STATE, decisions, risks, evidence, and handoff; commit locally only if all local gates pass. Do not publish or mutate remotes.`
-2. `/goal Implement M1 shared interchange and recovery proof from the prime MPES. Create the smallest semver envelope, manifest, validator, fixtures, provenance/revision/timezone/unit rules, and explicit preview-confirm-atomic-apply-receipt flow. Pilot in one existing app while preserving prior exports. Test round trip, unknown fields, unsupported major, corrupt/oversize/replayed input, stale writer, quota, correction/deletion closure, rollback, and no external transmission. Update project evidence; stop at the verified local gate.`
-3. `/goal Implement M2 reusable PWA baseline proof. Pilot a narrow versioned shell/update/reset/storage-health contract in CommonGround and one contrasting app without central runtime coupling. Test install, refresh, offline restart, staged update, stale/missing assets, interruption, old/new schemas, multiple tabs, eviction/quota, subpaths, file fallback, and user-data survival. Preserve last-known-good recovery; update state/evidence; no deployment.`
-4. `/goal Close M3A HealthOS foundation and focus proof from the current checkout. Preserve Noodle Nudge and Flexx Files as canonical isolated apps; keep every existing URL/data/format. Verify the independent HealthOS daily-state/focus schemas, exact file transfer, complete backup/scoped reset, deterministic TS-Dash CSV, and timestamp-derived 25/5, 50/10, minimum, custom and open timer. Adversarially test reload/sleep/clock/timezone, pause/resume/restart/skip/cancel/correction, duplicate tabs/completion, interrupted writes, PWA update/offline/LKG, old data, capabilities, keyboard/pointer/touch and accessibility. Reconcile state/evidence/handoff, run full QA, commit locally with a clean tracked tree; no push/deploy/release. Keep all later modules inactive.`
-5. `/goal Complete M4 WorkOS proof under the owner-approved CommonGround amendment. Verify personal/professional/shared Decision Analysis, hard constraints versus scoring, evidence, authority, dissent, invalidation, governance, outcome review, migration, exports, concurrency, accessibility, offline and recovery. Then implement only PMOS Basic if evidence demonstrates need; keep higher modes inactive. No implied professional approval, AI dependency, or publication.`
-6. `/goal Implement M5 Insight Engine adapters. Keep TS-Dash generic and source records canonical; import explicit HealthOS and CommonGround envelopes with preview, deterministic transforms, missingness/correlation labels, precision/timezone/unit preservation, and derived-data/chart-config export. Add fixtures and regression tests; forbid hidden storage reads or cross-app mutation.`
-7. `/goal Implement M6 Learning Engine locally: preserve PMQuiz; add Course Pack folder/file inventory and module mapping; integrate question candidates, confidence, calibration, spaced review, weak-area selection, delayed retest, progress portability, and explicit Knowledge export. Exclude authenticated scraping, submissions, grading, proctoring, bypass, and mandatory transcoding. Prove offline/no-AI and recovery gates.`
-8. `/goal Execute M7 Knowledge Engine decision. Inspect the Zettelkasten source and compare retain, wrap, modularize, and keep-separate options using migration, import security, performance, stable IDs, Markdown, links/backlinks, manifests, snapshots, deletion/correction, and recovery evidence. Implement only the lowest-complexity accepted option; require explicit user selection before transactional records become knowledge.`
-9. `/goal Execute M8 then M9 only after prior gates pass. Build deterministic no-provider Enterprise AI Workflow Lab and manual AI Router first; keep adapters optional, freshness-scoped, previewed, human-accepted, and unable to cause side effects. Run full release assurance, fresh critic and rollback review. Publish only with explicit owner authority and verify the exact deployed SHA; gather controlled and longitudinal evidence before OPERATING_ASSURED.`
+Do not start R1 until R0 is locally verified and reviewed. Later packets should be generated from the then-current state rather than copying stale prompts.

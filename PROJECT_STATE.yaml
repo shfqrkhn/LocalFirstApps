@@ -1,11 +1,12 @@
 project:
   id: localfirstapps-unified-suite
   version: 0.3.0
-  phase: mpes_m3a_healthos_focus_proof
-  status: m3a_verified_local_pending_owner_acceptance_and_release
+  phase: adversarial_takeover_and_r0_safety_planning
+  status: m3a_verified_local_release_blocked_by_adversarial_p0_findings
   repository: https://github.com/shfqrkhn/LocalFirstApps
-  git_head: dd9a5879fadda8d63930a00e08c9c7c0e779e20e
-  git_head_role: clean_local_m2_baseline_before_m3a_packet
+  git_head: 68076b3997294b7f3199c0b44677b921bf073a3d
+  git_head_role: clean_local_m3a_baseline_before_adversarial_takeover_packet
+  m2_baseline_head: dd9a5879fadda8d63930a00e08c9c7c0e779e20e
   branch: agent/commonground-consolidation
   mpes_version: 1.1.0-draft
   mpes_authority: prime
@@ -50,12 +51,16 @@ project:
   active_milestone: M3A
   active_packet: M3A-healthos-foundation-and-focus-timer
   active_packet_state: VERIFIED
+  active_governance_packet: adversarial-audit-and-r0-plan
+  active_governance_packet_state: VERIFIED_LOCAL
   completed_packets:
     - M1-shared-interchange-and-recovery
     - M2-reusable-pwa-baseline
     - M3A-healthos-foundation-and-focus-timer
+  completed_governance_packets:
+    - adversarial-audit-and-r0-plan
   baseline_reconciliation: VERIFIED
-  next_milestone: M3B-meditation-and-breathing_only_after_owner_acceptance
+  next_milestone: R0-safety-containment_before_any_new_feature_packet
   requirements:
     - id: CG-MERGE
       state: IMPLEMENTED
@@ -90,6 +95,12 @@ project:
     - id: RELEASE
       state: NOT_RUN
       evidence: no publication authority granted
+    - id: ADVERSARIAL-AUDIT
+      state: IMPLEMENTED
+      evidence: document authority, full file disposition, codebase audit, reversible archive manifest, and revised MPES implementation plan
+    - id: R0-SAFETY-CONTAINMENT
+      state: NOT_STARTED
+      evidence: PMQuiz and Noodle cross-app cache deletion plus Noodle executable scoring and incomplete shell installation remain open release blockers
   decisions:
     - id: D-001
       state: ACCEPTED
@@ -109,6 +120,15 @@ project:
     - id: D-007
       state: ACCEPTED
       decision: M3A adds an independent HealthOS Focus app and narrow portable schema; Noodle Nudge and Flexx Files remain canonical isolated modules, later HealthOS modules remain inactive, and the LedgerSuite compatibility URL remains preserved pending explicit deprecation authority.
+    - id: D-008
+      state: ACCEPTED
+      decision: Explicit document authority makes the MPES prime product authority beneath external constraints and later owner instructions; source content and archives are non-authoritative.
+    - id: D-009
+      state: ACCEPTED
+      decision: Converge primary user surfaces into CommonGround LifeOS and WorkOS while preserving isolated data, explicit transfer, compatibility routes, and reversible migration.
+    - id: D-010
+      state: ACCEPTED
+      decision: Archive only proven-inactive material with export exclusion, provenance, and restoration instructions; never archive required compatibility or recovery paths.
   risks:
     - id: R-001
       status: controlled
@@ -138,6 +158,26 @@ project:
       status: controlled
       risk: healthos_scope_creep_or_health_claims
       control: distinct observational fields, no combined score/diagnosis/streak pressure, independently owned modules, and later modules inactive until separate acceptance
+    - id: R-008
+      status: open_release_blocker
+      risk: cross_app_cache_deletion_by_pmquiz_and_noodle_workers
+      control: R0 must enforce app-owned cache prefixes and prove foreign-cache survival across lifecycle and reset paths
+    - id: R-009
+      status: open_release_blocker
+      risk: executable_noodle_scoring_configuration_and_unsafe_eval
+      control: R0 must replace dynamic compilation with a schema-validated allowlisted interpreter and restrictive CSP
+    - id: R-010
+      status: open_release_blocker
+      risk: noodle_incomplete_pwa_candidate_can_install
+      control: R0 must adopt fail-closed complete staging and last-known-good recovery
+    - id: R-011
+      status: open
+      risk: opaque_tsdash_build_and_incomplete_third_party_provenance
+      control: recover reproducible source or behavior-first rewrite before integration into WorkOS Insights
+    - id: R-012
+      status: open
+      risk: ungoverned_exam_psychometric_and_health_content_claims
+      control: establish item-level source, license, version, review, claim, and retirement ledgers before stronger claims or consolidated release
   evidence:
     - path: docs/EVIDENCE_RECEIPT.md
       state: VERIFIED_LOCAL
@@ -150,7 +190,10 @@ project:
     - background_notification_audio_vibration_and_wake_lock_delivery_varies_by_browser
     - screen_reader_and_longitudinal_operational_evidence_not_yet_demonstrated
     - exact_consolidation_deployment_is_not_run
-  blockers: []
+  blockers:
+    - R-008_cross_app_cache_deletion
+    - R-009_executable_scoring_configuration
+    - R-010_incomplete_noodle_shell_installation
   implementation_plan: docs/MPES_IMPLEMENTATION_PLAN.md
-  next_action: Obtain owner acceptance of M3A before separately considering M3B meditation and breathing. Keep C25K and all later HealthOS modules inactive. Do not publish absent explicit authority.
+  next_action: Execute the R0 safety-containment goal in docs/MPES_IMPLEMENTATION_PLAN.md. Do not start M3B or another feature packet, publish, or mutate remotes until R0 is verified and M3A is owner-accepted.
   updated_at: 2026-07-22

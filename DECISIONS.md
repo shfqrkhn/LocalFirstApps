@@ -59,3 +59,24 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Safety:** Keep observations distinct with no aggregate score. Timer completion is user-reviewed, stale-tab-safe and idempotent. Device cues are detected, opt-in and degradable; health language is non-diagnostic and pressure-free. Meditation, breathing, C25K, mobility, sleep and later modules stay inactive pending separate acceptance.
 - **Compatibility amendment:** Preserve every existing URL during this unpublished M3A packet, including the LedgerSuite migration alias. Its earlier one-release removal note is superseded by the MPES deprecation rule: removal requires explicit approval, migration evidence, and rollback planning.
 - **Rollback:** Revert the M3A commit. Existing app data and code were not migrated; HealthOS complete backup restores its own v1 records/runtime, and the pre-M3A suite remains independently usable.
+
+## D-008 — Establish explicit document authority
+
+- **State:** Accepted under the owner's instruction to assess and set authority.
+- **Decision:** Use `docs/DOCUMENT_AUTHORITY.md`. Applicable external constraints and the latest explicit owner instruction are A0; the private MPES is A1 prime product authority; accepted decisions are A2; bounded contracts are A3; repository/runtime evidence is observed truth at A4 and cannot redefine requirements.
+- **Content boundary:** Question banks, assessments, wellness/training prose, screenshots, and app READMEs are descriptive/source material only. They cannot establish professional guidance, licensing, endorsement, or product authority.
+- **Conflict rule:** Preserve data and compatibility, record the conflict, and resolve it across decision, contract, implementation, tests, evidence, and handoff—not in code alone.
+
+## D-009 — Converge primary surfaces under CommonGround
+
+- **State:** Accepted owner amendment to D-002.
+- **Decision:** The target is two CommonGround-branded primary shells, LifeOS and WorkOS, supported by an invisible OmniCore source layer. This reduces user-facing app sprawl while retaining domain modules and independent safety boundaries.
+- **Boundary:** D-002 remains binding during migration: app-owned stores/caches, explicit reviewed file transfer, independently reversible packets, and no shared runtime database, hidden synchronization, universal worker, or cross-app mutation.
+- **Retirement:** Existing focused routes remain supported until parity, backup/restore, migration receipt/rollback, offline, accessibility, and owner acceptance pass. LedgerSuite keeps its stricter explicit deprecation gate.
+
+## D-010 — Archive only proven-inactive material
+
+- **State:** Accepted under the owner's archive instruction.
+- **Decision:** Move unreferenced assets and non-gating archaeology to export-excluded `archive/` with a restoration manifest. Archived paths are historical evidence, not runtime, authority, or test coverage.
+- **Exclusions:** Never archive a compatibility route, migration/format reader, user-data recovery path, canonical fixture, current test, license notice, or source required for reproducibility merely because it is old.
+- **Current application:** The 2026-07-22 archive set and reasons are recorded in `archive/README.md`; no material was deleted.

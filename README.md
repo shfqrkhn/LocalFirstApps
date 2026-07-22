@@ -9,6 +9,8 @@ A focused suite of small, privacy-first browser apps that run as static local-fi
 - **License:** MIT
 - **Runtime model:** static files, browser storage, no server-side processing
 - **Maintainer handoff:** [`docs/AI_MAINTAINER_HANDOFF.md`](./docs/AI_MAINTAINER_HANDOFF.md)
+- **Document authority:** [`docs/DOCUMENT_AUTHORITY.md`](./docs/DOCUMENT_AUTHORITY.md)
+- **Current engineering audit:** [`docs/CODEBASE_ADVERSARIAL_AUDIT.md`](./docs/CODEBASE_ADVERSARIAL_AUDIT.md)
 - **Capability/recovery matrix:** [`docs/CAPABILITY_RECOVERY_MATRIX.md`](./docs/CAPABILITY_RECOVERY_MATRIX.md)
 - **Future app intake:** [`docs/future-app-intake.md`](./docs/future-app-intake.md)
 - **Repository ZIP policy:** [`docs/REPO_ZIP_POLICY.md`](./docs/REPO_ZIP_POLICY.md)
@@ -62,6 +64,8 @@ python -m http.server 8080
 ```
 
 ## Development
+
+The 2026-07-22 adversarial audit found release-blocking cache-isolation and executable-scoring defects in PMQuiz/Noodle Nudge. The current local M3A baseline remains useful characterization evidence, but no new release should be cut until the R0 containment packet passes.
 
 From a git checkout:
 
