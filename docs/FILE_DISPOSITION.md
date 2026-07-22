@@ -13,20 +13,20 @@ This ledger covers every tracked path at the 2026-07-22 audit. A glob is used on
 | `index.html`, `styles.css`, `suite-shell.css`, `suite-shell.js`, root `screenshot.png` | 5 | REFACTOR into the CommonGround launcher/design foundation; preserve file-mode behavior. |
 | `docs/AI_MAINTAINER_HANDOFF.md`, `CAPABILITY_RECOVERY_MATRIX.md`, `EVIDENCE_RECEIPT.md` | 3 | KEEP/UPDATE as evidence and operational truth. |
 | `docs/INTERCHANGE_CONTRACT.md`, `PWA_ASSURANCE_CONTRACT.md`, `HEALTHOS_CONTRACT.md`, `REPO_ZIP_POLICY.md`, `future-app-intake.md` | 5 | KEEP as bounded A3 contracts; revise only with implementation, tests, and decisions. |
-| `docs/MPES_IMPLEMENTATION_PLAN.md` | 1 | REPLACE with current risk-first execution plan; A6 derived. |
+| `docs/MPES_IMPLEMENTATION_PLAN.md` | 1 | KEEP/UPDATE as the current risk-first execution plan; A6 derived. |
 | `docs/DOCUMENT_AUTHORITY.md`, `CODEBASE_ADVERSARIAL_AUDIT.md`, `FILE_DISPOSITION.md` | 3 | KEEP/UPDATE; governance, audit, and coverage ledger. |
 | `shared/interchange.js`, `pwa-assurance.js`, `pwa-worker.js`, `healthos.js`, `focus-timer.js` | 5 | KEEP/HARDEN as pure OmniCore candidates; preserve narrow contracts and app ownership. |
 | `shared/fixtures/commonground-matter-record-v1.json` | 1 | KEEP as canonical compatibility fixture. |
 | `vendor/*` | 6 | KEEP temporarily; consolidate duplicate Bootstrap versions only after visual/behavior parity and preserve notices. |
-| `tests/*.mjs`, `tests/*.spec.mjs`, `tests/fixtures/*` | 13 | KEEP/EXTEND; add missing isolation, CSP/formula, icon, reproducibility, artifact, and AT gates. |
+| `tests/*.mjs`, `tests/*.spec.mjs`, `tests/fixtures/*` | 16 | KEEP/EXTEND; R0 isolation/scoring/PWA gates are present; add icon, reproducibility, artifact, and AT gates in later packets. |
 | `apps/commonground/README.md`, `index.html`, `styles.css`, manifest, PWA shell, worker, screenshot, 9 active icons | 16 | KEEP/REFACTOR; WorkOS shell and unified design migration. |
 | `apps/commonground/app.js`, `modules/*.js` | 6 | REFACTOR behind preserved v1/v2/Ledger/interchange/storage contracts. |
 | `apps/healthos/*` | 10 | KEEP/REFACTOR as LifeOS seed; fix restore atomicity and unify design. |
 | `apps/ledgersuite/*` | 3 | COMPATIBILITY; never archive/remove without explicit deprecation gates. |
 | `apps/noodle-nudge/JSON/Content_*.json` | 4 | REVIEW/SCHEMA; retain as inert content with provenance and claim controls. |
 | `apps/noodle-nudge/JSON/Q*.json` | 10 | REVIEW/SCHEMA; validate scoring, licensing, versions, and interpretations. |
-| Noodle README, icons, favicon, screenshot, manifest | 6 | KEEP/UPDATE with rewritten runtime. |
-| `apps/noodle-nudge/index.html`, `service-worker.js` | 2 | REWRITE; remove executable config/unsafe CSP and adopt scoped fail-closed PWA. |
+| Noodle README, icons, favicon, screenshot, manifest, PWA shell | 7 | KEEP/UPDATE; R0 shell definition is app-owned and fail closed. |
+| `apps/noodle-nudge/index.html`, `service-worker.js`, `scoring.js` | 3 | KEEP/REFACTOR; R0 removed executable scoring and adopted scoped fail-closed PWA; later LifeOS migration must preserve parity. |
 | `apps/pmquiz/QuestionBanks/*.json` | 8 | QUARANTINE CONTENT CLAIMS; provenance, license, deduplication, versioning, and review required. |
 | PMQuiz README, icons, screenshot, manifest, favicon-equivalent assets | 5 | KEEP/UPDATE with Learning migration. |
 | `apps/pmquiz/app.js`, `index.html`, `style.css`, `theme.js`, `json-worker.js`, `service-worker.js` | 6 | REFACTOR; immediately fix cache ownership, then extract content/session/view boundaries. |
@@ -41,4 +41,4 @@ This ledger covers every tracked path at the 2026-07-22 audit. A glob is used on
 | `archive/flexx-files-legacy-tests/*` | 25 | ARCHIVE; non-gating experiments/manual harnesses, excluded from runtime and authority. |
 | `archive/README.md` | 1 | KEEP as recovery manifest. |
 
-Counts reflect the post-move tracked layout plus the three new audit documents and archive manifest when added. Before any later deletion, prove no route, manifest, worker shell, import, migration, test, license, or user recovery path depends on the target.
+Counts reflect the current 229-file tracked layout after the audit/archive and five R0 additions. Before any later deletion, prove no route, manifest, worker shell, import, migration, test, license, or user recovery path depends on the target.

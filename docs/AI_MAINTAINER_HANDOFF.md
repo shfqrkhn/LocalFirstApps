@@ -59,7 +59,7 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**NO-GO.** The 2026-07-22 adversarial audit found three R0 blockers: cross-app cache deletion by PMQuiz and Noodle workers, executable Noodle scoring configuration under `unsafe-eval`, and non-fail-closed Noodle shell installation. M3A remains locally verified characterization evidence, but do not start M3B or publish until R0 passes and the owner accepts M3A.
+**R0 VERIFIED_LOCAL; publication NOT_RUN.** The cache-isolation, executable-scoring, and incomplete-shell blockers found by the 2026-07-22 audit are contained and covered by deterministic local tests. R1 foundations are next after owner review. M3A remains locally verified characterization evidence; do not start M3B unless the owner separately accepts it.
 
 ## Key Files
 
@@ -72,6 +72,7 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 - `archive/README.md`: excluded historical-file manifest and restoration rules.
 - `shared/interchange.js` and `docs/INTERCHANGE_CONTRACT.md`: M1 portable-record implementation and public contract.
 - `shared/pwa-worker.js`, `shared/pwa-assurance.js`, and `docs/PWA_ASSURANCE_CONTRACT.md`: M2 complete-shell staging, activation, health, scoped reset, and last-known-good contract.
+- `apps/noodle-nudge/scoring.js` and `apps/noodle-nudge/pwa-shell.json`: inert bounded scoring and app-owned complete-shell definition.
 - `shared/healthos.js`, `shared/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: M3A observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
@@ -94,7 +95,7 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- Execute only the R0 safety-containment goal in `docs/MPES_IMPLEMENTATION_PLAN.md` next. Feature work cannot overtake open isolation/code-execution blockers.
+- After owner review of verified R0, execute only the R1 engineering-foundations goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not let feature migration overtake source, content, CI, provenance, and design-system foundations.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
 - If the Pages API summary reports `errored`, compare the latest current-head `Deploy GitHub Pages` workflow, deployments API SHA, and live HTTP 200 before editing source; treat a contradictory API summary as stale residue and report it with limitations.
@@ -105,7 +106,7 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 - Preserve CommonGround export v2 plus CommonGround v1 and LedgerSuite v1/v2 import compatibility. Legacy database migration must stay previewed, atomic, idempotent, and source-preserving.
 - Keep portable transfer file-only and explicit: select, exact preview, confirm, validate, atomic app-owned apply, unique receipt and rollback. Accept compatible `1.x` conservatively, preserve unknown record/payload fields, reject other majors, and never add hidden shared storage or synchronization.
 - Keep decision hard constraints distinct from comparative scores. Preserve revision checks on singleton writes and portable conflict metadata so stale or duplicate tabs fail visibly instead of overwriting newer records.
-- CommonGround and Flexx worker updates must remain content-addressed, completely staged, schema-compatible, and user-activated. First install must not reload; later activation reloads each open tab once. Missing/corrupt/quota-failed candidates must delete only their incomplete cache, and a corrupt/evicted current shell must select the retained complete prior shell.
+- CommonGround, Flexx, HealthOS, and Noodle worker updates must remain app-owned, content-addressed, completely staged, schema-compatible, and user-activated. PMQuiz's legacy worker must remain cache-prefix and named-cache scoped. First install must not reload; later activation reloads each open tab once. Missing/corrupt/quota-failed candidates must delete only their incomplete cache, and a corrupt/evicted current shell must select the retained complete prior shell.
 - Preserve app ownership boundaries: cache prefixes, registrations, data stores, health UI and reset remain scoped. Health checks must not request persistence or imply that browser quota/eviction is controllable. Keep hosted subpaths and safe `file://` fallback covered.
 - HealthOS is the bounded M3A navigation/daily-state/focus surface only. Noodle Nudge remains canonical for reflection and Flexx Files for strength; HealthOS must not read either store. Keep meditation, breathing, C25K, mobility, sleep and later modules inactive until separately accepted.
 - Persist focus timestamps and derive duration from instants. Preserve reload/sleep reconciliation, clock/timezone anomaly visibility, manual correction, explicit pause/resume/restart/skip/cancel/review, stale-tab rejection and idempotent completion. Device cues remain detected, opt-in and visibly degradable.

@@ -80,3 +80,12 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Decision:** Move unreferenced assets and non-gating archaeology to export-excluded `archive/` with a restoration manifest. Archived paths are historical evidence, not runtime, authority, or test coverage.
 - **Exclusions:** Never archive a compatibility route, migration/format reader, user-data recovery path, canonical fixture, current test, license notice, or source required for reproducibility merely because it is old.
 - **Current application:** The 2026-07-22 archive set and reasons are recorded in `archive/README.md`; no material was deleted.
+
+## D-011 — Contain shared-origin workers and executable scoring
+
+- **State:** Accepted and verified locally for R0.
+- **Decision:** PMQuiz retains its existing worker only with `selfquiz-`-scoped cleanup and named-cache matching. Noodle Nudge adopts the shared app-owned PWA assurance contract with a `noodle-nudge-` prefix, content-addressed complete staging, explicit schema-compatible activation, and one last-known-good shell.
+- **Scoring:** Noodle formulas are inert data evaluated by a dependency-free, bounded tokenizer/parser/evaluator. Only the functions and operators used by canonical content are accepted; unknown syntax, identifiers, excessive complexity, division by zero, and non-finite results fail closed. Dynamic compilation and `unsafe-eval` are prohibited.
+- **Compatibility:** All ten canonical assessments and 42 rule outputs match the captured v1 fixture. Routes, IndexedDB schema, backup/import formats, stored answers/results/history, and PMQuiz behavior are unchanged.
+- **Evidence:** Static guards, manifest/hash validation, malicious-expression unit tests, quota/missing/corrupt worker faults, browser update/offline/last-known-good flows, and foreign-cache sentinels pass locally.
+- **Rollback:** Revert the R0 runtime commit. No data migration or destructive store mutation occurs; the legacy Noodle cache can be adopted by the new worker but is not required to restore browser data.

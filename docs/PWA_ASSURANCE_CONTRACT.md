@@ -2,6 +2,8 @@
 
 Version `1.0.0` is a narrow, dependency-free assurance layer for independently owned static apps. It shares shell staging, integrity checks, update coordination and read-only health reporting—not application storage, migrations, business state, synchronization, telemetry or network services.
 
+Current adopters are CommonGround, Flexx Files, HealthOS Focus, and Noodle Nudge. Each has a distinct cache prefix, worker scope, shell manifest, data-schema declaration, update UI, and compatibility policy.
+
 ## App-owned shell manifest
 
 Each pilot app owns a `pwa-shell.json` declaring its app ID, shell version, data-schema version, compatible prior schemas, navigation fallback and every required asset with a SHA-256 digest. Paths must stay inside that app's scope or an exact shared-asset allowlist.
@@ -19,3 +21,5 @@ Activation retains the newest complete prior cache as last-known-good and remove
 Health reporting reads the browser's origin estimate, persistence status, app-prefixed cache list and worker recovery status. It does not request persistence or write application data. Missing APIs and browser-controlled quota/eviction are reported as unknown or degraded, never as guaranteed durability.
 
 Application data remains app-owned. Cache reset uses an explicit app prefix. Data reset retains each app's existing validated backup/confirmation requirements and must never delete another app's storage, cache or worker. File mode remains a reduced, clearly labeled launcher/fallback mode; it does not claim module or worker support.
+
+PMQuiz does not yet use the complete-shell contract, but its legacy worker is bound by the same ownership invariant: cleanup may inspect/delete only `selfquiz-` caches, and fetch matching may search only its named shell/data/font caches. Foreign-cache sentinel tests enforce both implementations.

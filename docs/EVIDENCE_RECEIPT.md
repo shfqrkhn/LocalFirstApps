@@ -199,3 +199,18 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `PASS_WITH_LIMITATIONS`: `docs/DOCUMENT_AUTHORITY.md`, `DECISIONS.md`, `PROJECT_STATE.yaml`, `docs/CODEBASE_ADVERSARIAL_AUDIT.md`, `docs/FILE_DISPOSITION.md`, and the revised implementation plan now separate authority, observed truth, evidence, source content, archive, and derived plans.
 - `NOT_RUN`: no fix for R0, commit, push, deployment, release, or remote mutation is claimed by this audit packet.
 - **Next exact action:** execute R0 from `docs/MPES_IMPLEMENTATION_PLAN.md`; do not begin M3B or another feature packet first.
+
+## 2026-07-22 R0 Safety Containment Packet
+
+**State:** `VERIFIED_LOCAL`; owner review and publication remain separate and `NOT_RUN`.
+
+- `PASS`: takeover/governance/archive changes were verified and committed atomically as `ff25f15`; runtime containment was committed as `6301bc2`.
+- `PASS`: PMQuiz and Noodle worker lifecycles read and delete only app-owned named caches/prefixes. VM and browser sentinels prove foreign caches survive; the Noodle lifecycle also preserves its foreign store sentinel and existing app configuration.
+- `PASS`: Noodle scoring is a dependency-free schema-validated interpreter limited to 13 evidenced functions and the observed operators. Exact fixtures preserve all 42 outputs across all 10 assessments; malicious, malformed, unknown, over-complex, divide-by-zero, and non-finite rules fail closed. `new Function` and `unsafe-eval` are absent.
+- `PASS`: Noodle stages a content-addressed complete shell, waits for explicit compatible activation, restarts offline, rejects missing/corrupt/quota-failed candidates, and recovers a retained last-known-good shell without deleting sibling caches.
+- `PASS`: no route, store, export/import format, migration path, user record, or compatibility alias was migrated or removed.
+- `PASS`: `npm run test:local` passed static, interchange, four-adopter PWA assurance, fail-closed worker, R0 ownership/scoring and HealthOS gates; five Flexx native checks; 35 visual, seven file-mode, and 34 browser-behavior cases.
+- `PASS_WITH_LIMITATIONS`: deterministic fault injection does not certify every browser's real quota/eviction behavior. Automated accessibility does not certify every assistive technology. Noodle's monolithic UI and `unsafe-inline` remain bounded refactoring debt; neither permits executable assessment configuration.
+- `NOT_RUN`: no push, deployment, release, live mutation, data migration, or feature packet was authorized.
+- **Rollback:** revert the bounded runtime commit; app data is unchanged. The prior shell remains a recovery source.
+- **Next exact action:** obtain owner review, then execute R1 engineering foundations from `docs/MPES_IMPLEMENTATION_PLAN.md`; do not begin R2 or M3B first.

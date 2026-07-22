@@ -49,7 +49,7 @@ The apps are static browser apps. Data stays in the browser unless a specific ap
 
 Cross-app integration uses explicit local files, not shared hidden storage. The versioned portable-record contract validates and previews exact selected content before any app-owned atomic import; no transfer is sent externally.
 
-CommonGround and Flexx Files share only a narrow PWA assurance contract. Each app still owns its worker, versioned content-addressed shell, data schema, caches, update controls, health display, and reset boundary. A failed candidate cannot replace the active shell; compatible updates require explicit activation and retain one last-known-good shell.
+CommonGround, Flexx Files, HealthOS Focus, and Noodle Nudge share only a narrow PWA assurance contract. Each app still owns its worker, versioned content-addressed shell, data schema, caches, update controls, and reset boundary. A failed candidate cannot replace the active shell; compatible updates require explicit activation and retain one last-known-good shell.
 
 HealthOS Focus is the bounded M3A focus module and HealthOS navigation surface. Noodle Nudge and Flexx Files remain independent canonical apps. HealthOS records use explicit portable files rather than hidden cross-app storage, and its timestamp-reconciled timer writes a session only after user review. Meditation, breathing, C25K, and later HealthOS modules remain inactive pending separate acceptance.
 
@@ -65,7 +65,7 @@ python -m http.server 8080
 
 ## Development
 
-The 2026-07-22 adversarial audit found release-blocking cache-isolation and executable-scoring defects in PMQuiz/Noodle Nudge. The current local M3A baseline remains useful characterization evidence, but no new release should be cut until the R0 containment packet passes.
+The 2026-07-22 adversarial audit found cache-isolation and executable-scoring defects in PMQuiz/Noodle Nudge. R0 now contains those defects locally with app-scoped caches, inert scoring, fail-closed staging, and regression evidence. Publication remains separate and `NOT_RUN`.
 
 From a git checkout:
 
