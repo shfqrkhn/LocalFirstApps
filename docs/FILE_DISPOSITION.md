@@ -18,15 +18,17 @@ This ledger covers every tracked path at the 2026-07-22 audit. A glob is used on
 | `docs/ACCESSIBILITY_TEST_MATRIX.md`, `DESIGN_LANGUAGE.md`, `OMNICORE_BOUNDARIES.md`, `THIRD_PARTY.md`, `TS_DASH_REWRITE_CONTRACT.md` | 5 | KEEP/UPDATE as R1 foundations; limitations and adoption gates are binding. |
 | `config/deliverables.json`, `dependencies.json`, `runtime-artifact.json`, `ts-dash-legacy.json` | 4 | KEEP as canonical deterministic build/version/provenance/frozen-artifact inputs. |
 | `governance/CONTENT_POLICY.md`, `content-review.schema.json`, `content-review-ledger.json` | 3 | KEEP/REGENERATE; all content remains quarantined until accountable review. |
-| `shared/interchange.js`, `pwa-assurance.js`, `pwa-worker.js`, `healthos.js`, `focus-timer.js` | 5 | KEEP/HARDEN as pure OmniCore candidates; preserve narrow contracts and app ownership. |
+| `shared/interchange.js`, `pwa-assurance.js`, `pwa-worker.js` | 3 | KEEP as proven pure OmniCore contracts; preserve narrow contracts and app ownership. |
+| `shared/healthos.js`, `shared/focus-timer.js` | 2 | COMPATIBILITY RE-EXPORTS; canonical domain implementations are HealthOS-owned and URLs remain supported. |
+| `shared/omnicore/*` | 6 | KEEP/HARDEN only with semver, two real consumers, app-owned adapters, explicit failures, deterministic faults, and code-only rollback. |
 | `shared/fixtures/commonground-matter-record-v1.json` | 1 | KEEP as canonical compatibility fixture. |
 | `shared/design-tokens.css`, `design-primitives.css` | 2 | KEEP/ADOPT IN BOUNDED PACKETS; no mass migration without parity evidence. |
 | `tools/*.mjs`, `tools/generate-flexx-icons.ps1`, `tools/assets/flexx-icon-source.png` | 6 | KEEP as deterministic generators/verifiers and their canonical icon source; excluded from runtime. |
 | `vendor/*` | 6 | KEEP temporarily; consolidate duplicate Bootstrap versions only after visual/behavior parity and preserve notices. |
-| `tests/*.mjs`, `tests/*.spec.mjs`, `tests/fixtures/*` | 17 | KEEP/EXTEND; R0/R1 isolation, scoring, PWA, icon, artifact, provenance, responsive, and automated accessibility gates are present. |
+| `tests/*.mjs`, `tests/*.spec.mjs`, `tests/fixtures/*` | 19 | KEEP/EXTEND; R0–R2 isolation, scoring, PWA, OmniCore, icon, artifact, provenance, responsive, and automated accessibility gates are present. |
 | `apps/commonground/README.md`, `index.html`, `styles.css`, manifest, PWA shell, worker, screenshot, 9 active icons | 16 | KEEP/REFACTOR; WorkOS shell and unified design migration. |
-| `apps/commonground/app.js`, `modules/*.js` | 6 | REFACTOR behind preserved v1/v2/Ledger/interchange/storage contracts. |
-| `apps/healthos/*` | 10 | KEEP/REFACTOR as LifeOS seed; fix restore atomicity and unify design. |
+| `apps/commonground/app.js`, `modules/*.js` | 7 | REFACTOR behind preserved v1/v2/Ledger/interchange/storage contracts; keep the OmniCore adapter app-owned. |
+| `apps/healthos/*`, `apps/healthos/modules/*` | 13 | KEEP/REFACTOR as LifeOS seed; domain/timer modules and OmniCore adapter are app-owned; fix restore atomicity before migration. |
 | `apps/ledgersuite/*` | 3 | COMPATIBILITY; never archive/remove without explicit deprecation gates. |
 | `apps/noodle-nudge/JSON/Content_*.json` | 4 | REVIEW/SCHEMA; retain as inert content with provenance and claim controls. |
 | `apps/noodle-nudge/JSON/Q*.json` | 10 | REVIEW/SCHEMA; validate scoring, licensing, versions, and interpretations. |

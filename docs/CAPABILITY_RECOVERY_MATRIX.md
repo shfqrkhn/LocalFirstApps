@@ -13,6 +13,7 @@ Last verified: 2026-07-22. Status terms: **PASS** is covered by a local automate
 
 ## Gate Boundaries
 
+- R2 shares only pure completion/validation/integrity/time/receipt/design contracts. CommonGround and HealthOS still own separate stores, transactions, workers, cache prefixes, formats, and recovery; no data was migrated.
 - `npm run test:local` is the deterministic local closure gate. It does not contact Pages.
 - `npm run test:live` is a read-only deployment check and remains a separate external gate.
 - File-mode tests prove a safe, usable fallback notice and return link; they do not claim that module/worker/PWA runtimes work under `file://`.

@@ -59,7 +59,7 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**R1 VERIFIED_LOCAL_WITH_LIMITATIONS; publication NOT_RUN.** Commit `620dbdd` establishes deterministic build/release, dependency/SBOM, canonical version, content-quarantine, TS-Dash rewrite, CommonGround design, OmniCore boundary, icon, and automated accessibility foundations. Manual AT and qualified content/domain review remain `NOT_RUN`. R2 extraction is next only after owner review; app migrations and M3B remain inactive.
+**R2 VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `1db2892` extracts only proven OmniCore `1.0.0` seams and wires CommonGround plus HealthOS through app-owned adapters without changing stores, schemas, formats, routes, worker scopes, or user data. The full candidate gate and moderate audit pass. Manual AT, real browser quota/eviction, qualified content/domain review, owner acceptance, deployment, and publication remain `NOT_RUN`. R3A is next only after owner review; TS-Dash/WorkOS migration and later HealthOS modules remain inactive.
 
 ## Key Files
 
@@ -73,14 +73,15 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 - `shared/interchange.js` and `docs/INTERCHANGE_CONTRACT.md`: M1 portable-record implementation and public contract.
 - `shared/pwa-worker.js`, `shared/pwa-assurance.js`, and `docs/PWA_ASSURANCE_CONTRACT.md`: M2 complete-shell staging, activation, health, scoped reset, and last-known-good contract.
 - `apps/noodle-nudge/scoring.js` and `apps/noodle-nudge/pwa-shell.json`: inert bounded scoring and app-owned complete-shell definition.
-- `shared/healthos.js`, `shared/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: M3A observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract.
+- `apps/healthos/modules/healthos.js`, `apps/healthos/modules/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: HealthOS-owned observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract. The former `shared/` URLs are compatibility re-exports.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
 - `docs/future-app-intake.md`: required intake contract for new modules.
 - `config/deliverables.json`, `config/dependencies.json`, and `config/runtime-artifact.json`: canonical versions, dependency provenance, and curated artifact policy.
 - `governance/content-review-ledger.json`: deterministic quarantined content inventory; null provenance is unresolved, never approval.
-- `shared/design-tokens.css`, `docs/DESIGN_LANGUAGE.md`, and `docs/OMNICORE_BOUNDARIES.md`: R1 visual and architecture boundaries, not permission for mass migration.
+- `shared/omnicore/manifest.json`, `shared/omnicore/*.js`, `tests/omnicore-regression.mjs`, and `docs/OMNICORE_BOUNDARIES.md`: R2 semver inventory, pure contracts, two-consumer/fault proof, ownership exclusions, and rollback.
+- `shared/design-tokens.css`, `shared/design-primitives.css`, and `docs/DESIGN_LANGUAGE.md`: shared visual semantics consumed by CommonGround and HealthOS without surrendering app palette/layout ownership.
 - `docs/TS_DASH_REWRITE_CONTRACT.md`: frozen opaque runtime disposition and readable-rewrite parity gate.
 - `docs/CAPABILITY_RECOVERY_MATRIX.md`: per-app storage, recovery, input, and test boundaries.
 - `tests/static-regression.mjs`: canonical app list and static guardrails.
@@ -100,7 +101,8 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- After owner review of verified R1, execute only the R2 OmniCore extraction goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Require a second consumer for every extracted abstraction; do not begin app migration, TS-Dash rewrite, M3B, content approval, retirement, or publication.
+- After owner review of verified R2, execute only the bounded R3A LifeOS foundation goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin UI/data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, retirement, or publication.
+- Keep OmniCore pure and dependency-free. Every promoted contract requires a minimal semver API, two real consumers, app-owned adapters, explicit failure behavior, deterministic faults, and code-only rollback. Never move app transaction scope, stores, workers, routes, or domain records into OmniCore.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
 - If the Pages API summary reports `errored`, compare the latest current-head `Deploy GitHub Pages` workflow, deployments API SHA, and live HTTP 200 before editing source; treat a contradictory API summary as stale residue and report it with limitations.

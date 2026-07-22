@@ -97,3 +97,12 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Foundations:** `config/deliverables.json` is the canonical version source. Dependency/SBOM, curated artifact, content governance, CommonGround design, OmniCore boundary, accessibility, and candidate/deploy/postdeploy contracts are independently testable and introduce no shared app data or migration.
 - **Content:** All inventoried PMQuiz, Noodle, and Flexx content remains quarantined until accountable source/license/domain review. User-facing language cannot imply endorsement, validation, diagnosis, treatment, safety clearance, or guaranteed outcomes.
 - **Rollback:** Revert commit `620dbdd`. No store, user record, route, import/export format, or compatibility path was migrated.
+
+## D-013 — Extract OmniCore only at proven seams
+
+- **State:** Accepted and verified locally for R2.
+- **Decision:** OmniCore `1.0.0` contains only dependency-free pure error/result, canonical integrity, time, IndexedDB completion, recovery-receipt, portable-transfer, app-scoped PWA, design, and fixture contracts with at least two real consumers. CommonGround and HealthOS own adapters and all mutation scope.
+- **Exclusions:** No shared database, transaction policy, route, domain record, global bus, universal worker, background synchronization, hidden cross-app access, or framework wrapper. HealthOS records and timer logic are app-owned; their former shared URLs remain compatibility re-exports.
+- **Compatibility:** R2 changes no database version, store, record schema, route, cache prefix, worker registration, transfer/export/import format, or user-data migration. Existing formats and URLs remain tested.
+- **Evidence:** `shared/omnicore/manifest.json`, `tests/omnicore-regression.mjs`, existing browser fault/recovery suites, and the deterministic offline shell manifests. Full candidate and moderate dependency audit pass locally.
+- **Rollback:** Revert implementation commit `1db2892`. R2 performed no data mutation or schema upgrade, so rollback is code-only.

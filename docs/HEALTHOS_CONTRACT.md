@@ -8,6 +8,8 @@ HealthOS Focus is an independently launchable static app and a minimal navigatio
 
 HealthOS owns only IndexedDB `healthos-focus` v1, the `healthos.preferences.v1` localStorage key, `healthos-` caches, and the exact worker scope under `apps/healthos/`. Cross-app movement uses explicit portable files.
 
+HealthOS also owns the canonical record and timer modules under `apps/healthos/modules/`. The prior `shared/healthos.js` and `shared/focus-timer.js` URLs remain compatibility re-exports, not OmniCore domain contracts. HealthOS consumes only pure OmniCore completion, error, integrity, time, receipt, and design seams through its app-owned adapter; transaction scope and mutations remain here.
+
 ## Typed portable records
 
 Both record types are dependency-free M1-compatible portable records with semantic version, namespaced type, collision-resistant ID, provenance/truth class, revision, ISO instants, IANA timezone, explicit units, assumptions, conflicts, relationships, tags, idempotency, and SHA-256 manifests.

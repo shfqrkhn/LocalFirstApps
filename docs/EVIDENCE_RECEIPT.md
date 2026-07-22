@@ -230,3 +230,19 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `PASS_WITH_LIMITATIONS`: automated checks do not certify screen readers, switch control, cognition, real eviction/quota, or professional content validity. `docs/ACCESSIBILITY_TEST_MATRIX.md` truthfully records manual AT rows as `NOT_RUN`.
 - **Rollback:** revert `620dbdd`. The packet performs no data migration; prior app data and compatibility readers remain unchanged.
 - **Next exact action:** obtain owner review, then execute only R2 OmniCore extraction from the current plan. Keep TS-Dash rewrite, R3/R4 app migrations, M3B, route retirement, and publication inactive.
+
+## 2026-07-22 R2 OmniCore Extraction
+
+**State:** `VERIFIED_LOCAL`; owner acceptance, deployment, and publication remain `NOT_RUN`.
+
+- `PASS`: implementation commit `1db2892` adds the dependency-free OmniCore `1.0.0` manifest plus pure error/result, canonical integrity, time, IndexedDB completion/fault, and recovery-receipt modules. Existing portable transfer, app-scoped PWA assurance, design primitives, and fixtures are inventoried under the same strict boundary.
+- `PASS`: CommonGround and HealthOS consume the promoted seams through explicit app-owned adapters. Each app retains its database, transaction/mutation scope, records, routes, worker, cache prefix, error language, recovery UI, and reset behavior.
+- `PASS`: HealthOS-only record and timer implementations are now owned under `apps/healthos/modules/`; the old `shared/healthos.js` and `shared/focus-timer.js` URLs remain tested compatibility re-exports.
+- `PASS`: no database version, store, persisted record, schema, route, import/export/backup/CSV format, worker registration, cache prefix, or user-data migration changed. CommonGround v1/v2, LedgerSuite v1/v2, portable `1.x`, and HealthOS v1 compatibility paths still pass.
+- `PASS`: `tests/omnicore-regression.mjs` proves both adapters have identical canonical/hash/time results, typed validation/revision/receipt failures, IndexedDB request-fault propagation, safe abort, semver/license metadata, and complete hashed offline shells.
+- `PASS`: browser evidence proves atomic partial/quota failure, replay rejection, stale-tab rejection, preserved legacy data, app-scoped reset/recovery, offline/subpath operation, and foreign cache/store survival. Design adoption passes 35 responsive visual cases and seven automated accessibility routes.
+- `PASS`: `npm run ci:candidate` built a deterministic 133-file runtime; `npm audit --audit-level=moderate` found zero vulnerabilities; `git diff --check` passed.
+- `PASS_WITH_LIMITATIONS`: deterministic faults do not predict every browser's real eviction/quota behavior; automated accessibility does not certify every assistive technology. Manual AT and qualified content/domain review remain `NOT_RUN` from R1.
+- `NOT_RUN`: no push, remote mutation, deployment, live-route validation of this commit, release, route retirement, app data migration, or owner acceptance occurred.
+- **Rollback:** revert `1db2892`. R2 is code-only and requires no data downgrade or recovery migration.
+- **Next exact action:** obtain owner review, then execute only the bounded R3A LifeOS foundation prompt in `docs/MPES_IMPLEMENTATION_PLAN.md`.

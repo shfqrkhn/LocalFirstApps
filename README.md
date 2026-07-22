@@ -65,7 +65,7 @@ python -m http.server 8080
 
 ## Development
 
-R1 engineering foundations are verified locally. Versions, dependency provenance/SBOM, content quarantine, icon dimensions, the curated runtime artifact, TS-Dash rewrite constraints, and CommonGround design/OmniCore boundaries are deterministic and gated. Manual assistive-technology and qualified content/domain review remain `NOT_RUN`; publication is separate.
+R2 OmniCore extraction is verified locally. CommonGround and HealthOS share only versioned pure error, integrity, time, transaction-completion, receipt, portable-transfer, PWA-assurance, and design contracts through app-owned adapters. Their data, mutations, routes, workers, caches, and recovery remain isolated; no user data or format was migrated. Manual assistive-technology and qualified content/domain review remain `NOT_RUN`; publication is separate.
 
 From a git checkout:
 
