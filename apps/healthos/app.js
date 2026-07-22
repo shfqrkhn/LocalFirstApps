@@ -7,7 +7,7 @@ import {
   healthRecordsToTsDashCsv,
   healthStateGuidance,
   parseHealthPackageText
-} from "../../shared/healthos.js";
+} from "./modules/healthos.js";
 import {
   FOCUS_MODES,
   applyFocusTimerAction,
@@ -16,8 +16,9 @@ import {
   formatTimerDuration,
   plannedMs,
   reconcileFocusTimer
-} from "../../shared/focus-timer.js";
+} from "./modules/focus-timer.js";
 import { splitRecordExtensions } from "../../shared/interchange.js";
+import { errorMessage } from "./omnicore-adapter.js";
 import {
   activatePwaUpdate,
   clearOwnedPwaCaches,
@@ -470,12 +471,12 @@ root.addEventListener("click", async (event) => {
   try {
     if (button.dataset.route) { state.route = button.dataset.route; state.notice = null; render(); }
     else if (button.dataset.action) await handleAction(button.dataset.action, button);
-  } catch (error) { announce(error instanceof Error ? error.message : "Action failed.", "error"); render(); }
+  } catch (error) { announce(errorMessage(error, "Action failed."), "error"); render(); }
 });
 
-root.addEventListener("submit", (event) => handleSubmit(event).catch((error) => { announce(error.message, "error"); render(); }));
+root.addEventListener("submit", (event) => handleSubmit(event).catch((error) => { announce(errorMessage(error), "error"); render(); }));
 root.addEventListener("change", (event) => {
-  if (["portable-import", "backup-import"].includes(event.target.id)) handleFile(event.target).catch((error) => { announce(error.message, "error"); render(); });
+  if (["portable-import", "backup-import"].includes(event.target.id)) handleFile(event.target).catch((error) => { announce(errorMessage(error), "error"); render(); });
   if (["focus-life-state", "daily-life-state"].includes(event.target.id)) {
     const target = document.querySelector(event.target.id === "focus-life-state" ? "#focus-guidance" : "#daily-guidance");
     if (target) { target.textContent = healthStateGuidance(event.target.value); target.classList.toggle("crisis", event.target.value === "CRISIS"); }
@@ -519,7 +520,7 @@ async function start() {
     render();
     tickHandle = setInterval(updateTimerDisplay, 1000);
   } catch (error) {
-    root.innerHTML = `<main class="center-shell"><section class="panel narrow" role="alert"><h1>HealthOS could not start.</h1><p>${escapeHtml(error.message)}</p><p>No local data was deleted or uploaded.</p></section></main>`;
+    root.innerHTML = `<main class="center-shell"><section class="panel narrow" role="alert"><h1>HealthOS could not start.</h1><p>${escapeHtml(errorMessage(error))}</p><p>No local data was deleted or uploaded.</p></section></main>`;
   }
 }
 

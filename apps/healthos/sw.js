@@ -12,6 +12,13 @@ self.LFAPwaWorker.register({
     "../../shared/interchange.js",
     "../../shared/healthos.js",
     "../../shared/focus-timer.js",
+    "../../shared/omnicore/errors.js",
+    "../../shared/omnicore/indexeddb.js",
+    "../../shared/omnicore/integrity.js",
+    "../../shared/omnicore/receipts.js",
+    "../../shared/omnicore/time.js",
+    "../../shared/design-primitives.css",
+    "../../shared/design-tokens.css",
     "../../shared/pwa-assurance.js",
     "../../suite-shell.css",
     "../../suite-shell.js"

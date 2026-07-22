@@ -37,6 +37,7 @@ import {
   stageCommonGroundInterchange
 } from "./modules/interchange-adapter.js";
 import { MATTER_TYPES, matterRoutes, matterType, nextMatterStep } from "./modules/matter-types.js";
+import { errorMessage } from "./modules/omnicore-adapter.js";
 import {
   activatePwaUpdate,
   clearOwnedPwaCaches,
@@ -649,7 +650,7 @@ async function handleClick(event) {
       render();
     } else if (button.dataset.action) await handleAction(button.dataset.action, button);
   } catch (error) {
-    announce(error instanceof Error ? error.message : "Action failed.", "error");
+    announce(errorMessage(error, "Action failed."), "error");
     render();
   }
 }
@@ -683,7 +684,7 @@ async function handleChange(event) {
     if (input.id === "bundle-file") state.pendingBundle = null;
     else if (input.id === "interchange-file") state.pendingInterchange = null;
     else state.pendingLegacy = null;
-    announce(error instanceof Error ? error.message : "Import failed.", "error");
+    announce(errorMessage(error, "Import failed."), "error");
   }
   input.value = "";
   render();
@@ -715,7 +716,7 @@ async function registerServiceWorker() {
 
 async function start() {
   root.addEventListener("submit", (event) => handleSubmit(event).catch((error) => {
-    announce(error instanceof Error ? error.message : "Save failed.", "error");
+    announce(errorMessage(error, "Save failed."), "error");
     render();
   }));
   root.addEventListener("click", handleClick);
@@ -728,7 +729,7 @@ async function start() {
     render();
     await registerServiceWorker();
   } catch (error) {
-    root.innerHTML = `<main class="center-shell"><section class="card"><h1>CommonGround could not start</h1><p>${escapeHtml(error instanceof Error ? error.message : "Unknown storage error")}</p><p>Close other tabs and reload. Your local data has not been changed.</p></section></main>`;
+    root.innerHTML = `<main class="center-shell"><section class="card"><h1>CommonGround could not start</h1><p>${escapeHtml(errorMessage(error, "Unknown storage error"))}</p><p>Close other tabs and reload. Your local data has not been changed.</p></section></main>`;
   }
 }
 

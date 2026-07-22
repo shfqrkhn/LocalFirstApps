@@ -1,3 +1,15 @@
+import {
+  assertExpectedRevision,
+  assertReceiptCanRollback,
+  nowIso,
+  requestResult,
+  rolledBackReceipt,
+  trackTransactionRequest,
+  transactionDone
+} from "./omnicore-adapter.js";
+
+export { nowIso };
+
 export const DB_NAME = "commonground-suite";
 export const DB_VERSION = 4;
 export const SCHEMA_VERSION = 4;
@@ -32,39 +44,14 @@ export const MATTER_CHILD_STORES = [
 ];
 
 let databasePromise;
-const transactionRequestErrors = new WeakMap();
 
 export function uid(prefix = "cg") {
   return `${prefix}-${crypto.randomUUID()}`;
 }
 
-export function nowIso() {
-  return new Date().toISOString();
-}
-
 export function baseRecord(prefix) {
   const timestamp = nowIso();
   return { id: uid(prefix), createdAt: timestamp, updatedAt: timestamp, schemaVersion: SCHEMA_VERSION, revision: 0 };
-}
-
-function requestResult(request) {
-  return new Promise((resolve, reject) => {
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error || new Error("IndexedDB request failed."));
-  });
-}
-
-function transactionDone(transaction) {
-  return new Promise((resolve, reject) => {
-    transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error || transactionRequestErrors.get(transaction) || new Error("IndexedDB transaction failed."));
-    transaction.onabort = () => reject(transaction.error || transactionRequestErrors.get(transaction) || new Error("IndexedDB transaction aborted."));
-  });
-}
-
-function trackTransactionRequest(transaction, request) {
-  request.addEventListener("error", () => transactionRequestErrors.set(transaction, request.error), { once: true });
-  return request;
 }
 
 function ensureIndex(store, name, keyPath, unique = false) {
@@ -133,12 +120,10 @@ export async function put(storeName, value, { expectedRevision } = {}) {
   const tx = db.transaction(storeName, "readwrite");
   const store = tx.objectStore(storeName);
   const current = value.id ? await requestResult(store.get(value.id)) : null;
-  if (expectedRevision !== undefined) {
-    if (!current) throw new Error("This record was deleted in another tab. Reload before continuing.");
-    if (Number(current.revision || 0) !== Number(expectedRevision)) {
-      throw new Error("This record changed in another tab. Reload before saving so the newer version is preserved.");
-    }
-  }
+  assertExpectedRevision(current, expectedRevision, {
+    missingMessage: "This record was deleted in another tab. Reload before continuing.",
+    conflictMessage: "This record changed in another tab. Reload before saving so the newer version is preserved."
+  });
   const record = {
     schemaVersion: SCHEMA_VERSION,
     createdAt: value.createdAt || nowIso(),
@@ -225,8 +210,10 @@ export async function rollbackInterchangeReceipt(receiptId) {
   const tx = db.transaction(["workspaces", "matters", ...MATTER_CHILD_STORES, "transferReceipts"], "readwrite");
   const receiptStore = tx.objectStore("transferReceipts");
   const receipt = await requestResult(receiptStore.get(receiptId));
-  if (!receipt) throw new Error("Interchange receipt not found.");
-  if (receipt.status === "rolled-back") throw new Error("This interchange import was already rolled back.");
+  assertReceiptCanRollback(receipt, {
+    missingMessage: "Interchange receipt not found.",
+    alreadyRolledBackMessage: "This interchange import was already rolled back."
+  });
   const matterIds = new Set(receipt.createdIds?.matters || []);
   for (const matterId of matterIds) {
     for (const storeName of MATTER_CHILD_STORES) {
@@ -240,7 +227,7 @@ export async function rollbackInterchangeReceipt(receiptId) {
     const workspaceMatterKeys = await requestResult(tx.objectStore("matters").index("workspaceId").getAllKeys(workspaceId));
     if (workspaceMatterKeys.every((id) => matterIds.has(id))) tx.objectStore("workspaces").delete(workspaceId);
   }
-  receiptStore.put({ ...receipt, status: "rolled-back", rolledBackAt: nowIso(), updatedAt: nowIso(), revision: Number(receipt.revision || 0) + 1 });
+  receiptStore.put({ ...rolledBackReceipt(receipt), updatedAt: nowIso(), revision: Number(receipt.revision || 0) + 1 });
   await transactionDone(tx);
   return { ...receipt, status: "rolled-back" };
 }

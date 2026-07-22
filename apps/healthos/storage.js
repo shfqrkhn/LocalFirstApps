@@ -1,6 +1,16 @@
-import { createHealthPackage, validateHealthPackage, validateHealthRecord } from "../../shared/healthos.js";
-import { canonicalJson, sha256 } from "../../shared/interchange.js";
-import { validateFocusTimer } from "../../shared/focus-timer.js";
+import { createHealthPackage, validateHealthPackage, validateHealthRecord } from "./modules/healthos.js";
+import { validateFocusTimer } from "./modules/focus-timer.js";
+import {
+  abortTransaction,
+  assertExpectedRevision,
+  assertReceiptCanRollback,
+  nowIso,
+  requestResult,
+  rolledBackReceipt,
+  sha256,
+  trackTransactionRequest,
+  transactionDone
+} from "./omnicore-adapter.js";
 
 export const HEALTHOS_DB_NAME = "healthos-focus";
 export const HEALTHOS_DB_VERSION = 1;
@@ -8,21 +18,6 @@ export const HEALTHOS_TIMER_ID = "active-focus-timer";
 export const HEALTHOS_PREFERENCES_KEY = "healthos.preferences.v1";
 
 let databasePromise;
-
-function requestResult(request) {
-  return new Promise((resolve, reject) => {
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error || new Error("HealthOS storage request failed."));
-  });
-}
-
-function transactionDone(transaction) {
-  return new Promise((resolve, reject) => {
-    transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error || new Error("HealthOS storage transaction failed."));
-    transaction.onabort = () => reject(transaction.error || new Error("HealthOS storage transaction was aborted."));
-  });
-}
 
 export function openHealthDatabase() {
   if (databasePromise) return databasePromise;
@@ -70,7 +65,7 @@ export async function createHealthBackup() {
   const value = {
     format: "healthos-complete-backup",
     formatVersion: "1.0.0",
-    exportedAt: new Date().toISOString(),
+    exportedAt: nowIso(),
     records,
     receipts,
     activeTimer,
@@ -99,13 +94,9 @@ export async function restoreHealthBackupAtomic(value, { failureMode } = {}) {
   for (const record of value.records) tx.objectStore("records").add(record);
   for (const receipt of value.receipts) tx.objectStore("receipts").add(receipt);
   if (value.activeTimer) tx.objectStore("runtime").put({ id: HEALTHOS_TIMER_ID, value: value.activeTimer });
-  if (failureMode === "partial") tx.abort();
-  try {
-    await transactionDone(tx);
-    saveHealthPreferences(value.preferences || {});
-  } catch (error) {
-    throw error;
-  }
+  if (failureMode === "partial") abortTransaction(tx);
+  await transactionDone(tx);
+  saveHealthPreferences(value.preferences || {});
 }
 
 export async function putHealthRecord(record, { expectedRevision } = {}) {
@@ -114,11 +105,15 @@ export async function putHealthRecord(record, { expectedRevision } = {}) {
   const tx = db.transaction("records", "readwrite");
   const store = tx.objectStore("records");
   const current = await requestResult(store.get(record.id));
-  if (expectedRevision !== undefined && Number(current?.revision) !== Number(expectedRevision)) {
-    tx.abort();
-    throw new Error("This HealthOS record changed in another tab. Reload before saving.");
+  try {
+    assertExpectedRevision(current, expectedRevision, {
+      conflictMessage: "This HealthOS record changed in another tab. Reload before saving."
+    });
+  } catch (error) {
+    abortTransaction(tx);
+    throw error;
   }
-  const next = { ...structuredClone(record), revision: Number(current?.revision ?? record.revision ?? -1) + 1, updatedAt: new Date().toISOString() };
+  const next = { ...structuredClone(record), revision: Number(current?.revision ?? record.revision ?? -1) + 1, updatedAt: nowIso() };
   store.put(next);
   await transactionDone(tx);
   return next;
@@ -140,14 +135,18 @@ export async function saveActiveTimer(timer, { expectedRevision } = {}) {
   const row = await requestResult(store.get(HEALTHOS_TIMER_ID));
   const current = row?.value || null;
   if (expectedRevision === undefined && current) {
-    tx.abort();
+    abortTransaction(tx);
     throw new Error("A HealthOS timer is already active. Reload instead of starting a duplicate.");
   }
-  if (expectedRevision !== undefined && Number(current?.revision) !== Number(expectedRevision)) {
-    tx.abort();
-    throw new Error("The timer changed in another tab. Reload before changing it.");
+  try {
+    assertExpectedRevision(current, expectedRevision, {
+      conflictMessage: "The timer changed in another tab. Reload before changing it."
+    });
+  } catch (error) {
+    abortTransaction(tx);
+    throw error;
   }
-  const next = { ...structuredClone(timer), revision: Number(current?.revision ?? -1) + 1, updatedAt: new Date().toISOString() };
+  const next = { ...structuredClone(timer), revision: Number(current?.revision ?? -1) + 1, updatedAt: nowIso() };
   store.put({ id: HEALTHOS_TIMER_ID, value: next });
   await transactionDone(tx);
   return next;
@@ -158,9 +157,13 @@ export async function discardActiveTimer({ expectedRevision } = {}) {
   const tx = db.transaction("runtime", "readwrite");
   const store = tx.objectStore("runtime");
   const row = await requestResult(store.get(HEALTHOS_TIMER_ID));
-  if (expectedRevision !== undefined && Number(row?.value?.revision) !== Number(expectedRevision)) {
-    tx.abort();
-    throw new Error("The timer changed in another tab. Reload before changing it.");
+  try {
+    assertExpectedRevision(row?.value || null, expectedRevision, {
+      conflictMessage: "The timer changed in another tab. Reload before changing it."
+    });
+  } catch (error) {
+    abortTransaction(tx);
+    throw error;
   }
   store.delete(HEALTHOS_TIMER_ID);
   await transactionDone(tx);
@@ -178,9 +181,13 @@ export async function completeActiveTimer(sessionRecord, { expectedRevision, nex
     return { record: existing, duplicate: true };
   }
   const row = await requestResult(runtime.get(HEALTHOS_TIMER_ID));
-  if (expectedRevision !== undefined && Number(row?.value?.revision) !== Number(expectedRevision)) {
-    tx.abort();
-    throw new Error("The timer changed in another tab. Reload before completing it.");
+  try {
+    assertExpectedRevision(row?.value || null, expectedRevision, {
+      conflictMessage: "The timer changed in another tab. Reload before completing it."
+    });
+  } catch (error) {
+    abortTransaction(tx);
+    throw error;
   }
   records.add(sessionRecord);
   if (nextTimer) runtime.put({ id: HEALTHOS_TIMER_ID, value: { ...nextTimer, revision: 0 } });
@@ -196,7 +203,7 @@ export async function applyHealthPackageAtomic(packageValue, { failureMode } = {
   const existingReceipt = await requestResult(checkTx.objectStore("receipts").index("idempotencyKey").get(packageValue.manifest.idempotencyKey));
   await transactionDone(checkTx);
   if (existingReceipt) throw new Error("This HealthOS transfer was already applied.");
-  const importedAt = new Date().toISOString();
+  const importedAt = nowIso();
   const remapped = packageValue.records.map((record) => ({
     ...structuredClone(record),
     id: `healthos-import-${crypto.randomUUID()}`,
@@ -222,14 +229,15 @@ export async function applyHealthPackageAtomic(packageValue, { failureMode } = {
   const tx = db.transaction(["records", "receipts"], "readwrite");
   let requestError;
   try {
-    for (const record of normalized) tx.objectStore("records").add(record);
-    tx.objectStore("receipts").add(receipt).addEventListener("error", (event) => { requestError = event.target.error; }, { once: true });
-    if (failureMode === "partial") tx.abort();
+    for (const record of normalized) trackTransactionRequest(tx, tx.objectStore("records").add(record));
+    const receiptRequest = trackTransactionRequest(tx, tx.objectStore("receipts").add(receipt));
+    receiptRequest.addEventListener("error", (event) => { requestError = event.target.error; }, { once: true });
+    if (failureMode === "partial") abortTransaction(tx);
     if (failureMode === "quota") throw new DOMException("Synthetic HealthOS quota failure.", "QuotaExceededError");
     await transactionDone(tx);
     return receipt;
   } catch (error) {
-    if (tx.readyState !== "done") try { tx.abort(); } catch {}
+    abortTransaction(tx);
     if (error?.name === "ConstraintError" || requestError?.name === "ConstraintError") throw new Error("This HealthOS transfer was already applied.");
     throw error;
   }
@@ -240,10 +248,17 @@ export async function rollbackHealthReceipt(receiptId) {
   const tx = db.transaction(["records", "receipts"], "readwrite");
   const receipts = tx.objectStore("receipts");
   const receipt = await requestResult(receipts.get(receiptId));
-  if (!receipt) { tx.abort(); throw new Error("HealthOS import receipt not found."); }
-  if (receipt.status !== "applied") { tx.abort(); throw new Error("This HealthOS import was already rolled back."); }
+  try {
+    assertReceiptCanRollback(receipt, {
+      missingMessage: "HealthOS import receipt not found.",
+      alreadyRolledBackMessage: "This HealthOS import was already rolled back."
+    });
+  } catch (error) {
+    abortTransaction(tx);
+    throw error;
+  }
   for (const id of receipt.createdIds || []) tx.objectStore("records").delete(id);
-  receipts.put({ ...receipt, status: "rolled-back", rolledBackAt: new Date().toISOString() });
+  receipts.put(rolledBackReceipt(receipt));
   await transactionDone(tx);
 }
 

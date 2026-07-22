@@ -115,8 +115,10 @@ const pmQuizWorker = readFileSync(join(root, "apps", "pmquiz", "service-worker.j
 const noodleIndex = readFileSync(join(root, "apps", "noodle-nudge", "index.html"), "utf8");
 const noodleScoring = readFileSync(join(root, "apps", "noodle-nudge", "scoring.js"), "utf8");
 const noodleWorker = readFileSync(join(root, "apps", "noodle-nudge", "service-worker.js"), "utf8");
-const sharedHealth = readFileSync(join(root, "shared", "healthos.js"), "utf8");
-const sharedFocusTimer = readFileSync(join(root, "shared", "focus-timer.js"), "utf8");
+const healthDomain = readFileSync(join(root, "apps", "healthos", "modules", "healthos.js"), "utf8");
+const healthFocusTimer = readFileSync(join(root, "apps", "healthos", "modules", "focus-timer.js"), "utf8");
+const sharedHealthShim = readFileSync(join(root, "shared", "healthos.js"), "utf8");
+const sharedFocusTimerShim = readFileSync(join(root, "shared", "focus-timer.js"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
 const codeqlConfig = readFileSync(join(root, ".github", "codeql", "codeql-config.yml"), "utf8");
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
@@ -401,11 +403,13 @@ for (const phrase of ["contractVersion", "compatibleDataSchemas", "navigationFal
   assert(healthPwaShell.includes(phrase), `HealthOS shell manifest missing: ${phrase}`);
 }
 for (const phrase of ["healthos/daily_state", "healthos/focus_session", "LIFE_STATES", "healthRecordsToTsDashCsv", "correlation does not establish causation"]) {
-  assert(sharedHealth.includes(phrase), `HealthOS shared schema missing: ${phrase}`);
+  assert(healthDomain.includes(phrase), `HealthOS-owned schema missing: ${phrase}`);
 }
 for (const phrase of ["FOCUS_MODES", "segmentStartedAt", "reconcileFocusTimer", "clockAnomaly", "createBreakTimer"]) {
-  assert(sharedFocusTimer.includes(phrase), `Trustworthy focus timer missing: ${phrase}`);
+  assert(healthFocusTimer.includes(phrase), `Trustworthy HealthOS-owned focus timer missing: ${phrase}`);
 }
+assert(sharedHealthShim.includes("../apps/healthos/modules/healthos.js"), "Legacy HealthOS module URL must remain a compatibility shim.");
+assert(sharedFocusTimerShim.includes("../apps/healthos/modules/focus-timer.js"), "Legacy timer module URL must remain a compatibility shim.");
 for (const phrase of ["Noodle Nudge", "Flexx Files", "Start focus", "Manual correction", "Optional device cues", "Prepare factory reset"]) {
   assert(healthApp.includes(phrase), `HealthOS app surface missing: ${phrase}`);
 }

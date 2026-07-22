@@ -9,20 +9,13 @@ import {
   uid,
   writeGraphAtomic
 } from "./db.js";
+import { assertNoIssues, sha256 } from "./omnicore-adapter.js";
 
 export const EXPORT_VERSION = 2;
 export const MAX_IMPORT_BYTES = 25 * 1024 * 1024;
 
-function stable(value) {
-  if (Array.isArray(value)) return value.map(stable);
-  if (value && typeof value === "object") return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stable(value[key])]));
-  return value;
-}
-
 async function digestPayload(value) {
-  const bytes = new TextEncoder().encode(JSON.stringify(stable(value)));
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+  return sha256(value);
 }
 
 async function finalizeBundle(bundle) {
@@ -198,7 +191,7 @@ export async function validateBundle(bundle) {
     const { integrity, ...payload } = bundle;
     if (await digestPayload(payload) !== integrity.value) errors.push("Bundle integrity checksum failed.");
   }
-  if (errors.length) throw new Error(errors.join(" "));
+  assertNoIssues(errors, { code: "COMMONGROUND_BUNDLE_INVALID" });
   return true;
 }
 

@@ -1,4 +1,5 @@
 import { SCHEMA_VERSION, baseRecord, getByIndex, nowIso, uid, writeGraphAtomic } from "./db.js";
+import { requestResult as coreRequestResult, sha256, transactionDone as coreTransactionDone } from "./omnicore-adapter.js";
 
 const LEGACY_DB_NAME = "ledger-suite";
 const LEGACY_MAX_BYTES = 5 * 1024 * 1024;
@@ -18,17 +19,13 @@ const LEGACY_STORES = [
 ];
 
 function requestResult(request) {
-  return new Promise((resolve, reject) => {
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error || new Error("Legacy storage read failed."));
-  });
+  return coreRequestResult(request, "Legacy storage read failed.");
 }
 
 function transactionDone(transaction) {
-  return new Promise((resolve, reject) => {
-    transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error || new Error("Legacy storage transaction failed."));
-    transaction.onabort = () => reject(transaction.error || new Error("Legacy storage transaction aborted."));
+  return coreTransactionDone(transaction, {
+    failureMessage: "Legacy storage transaction failed.",
+    abortMessage: "Legacy storage transaction aborted."
   });
 }
 
@@ -63,20 +60,6 @@ export async function exportLegacyDatabaseSnapshot() {
   const snapshot = await readLegacyDatabase();
   if (!snapshot) throw new Error("No same-origin LedgerSuite database is available.");
   return snapshot;
-}
-
-function stable(value) {
-  if (Array.isArray(value)) return value.map(stable);
-  if (value && typeof value === "object") {
-    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stable(value[key])]));
-  }
-  return value;
-}
-
-async function sha256(value) {
-  const bytes = new TextEncoder().encode(JSON.stringify(stable(value)));
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
 function fnv1a32(text) {

@@ -1,0 +1,91 @@
+{
+  "contractVersion": "1.0.0",
+  "name": "OmniCore",
+  "license": "MIT",
+  "ownership": "Pure contracts only; every database, worker, cache, route, adapter, and domain record remains app-owned.",
+  "nonGoals": [
+    "suite database",
+    "global event bus",
+    "universal service worker",
+    "hidden cross-app reads or writes",
+    "background synchronization",
+    "framework wrapper"
+  ],
+  "modules": [
+    {
+      "id": "errors",
+      "path": "shared/omnicore/errors.js",
+      "version": "1.0.0",
+      "consumers": ["commonground", "healthos"],
+      "adapters": ["apps/commonground/modules/omnicore-adapter.js", "apps/healthos/omnicore-adapter.js"],
+      "failureContract": "Typed local errors preserve user-facing messages and revision conflicts fail closed."
+    },
+    {
+      "id": "integrity",
+      "path": "shared/omnicore/integrity.js",
+      "version": "1.0.0",
+      "consumers": ["commonground", "healthos", "portable-transfer"],
+      "adapters": ["apps/commonground/modules/omnicore-adapter.js", "apps/healthos/omnicore-adapter.js"],
+      "failureContract": "Canonical JSON is deterministic and SHA-256 failures reject without mutation."
+    },
+    {
+      "id": "time",
+      "path": "shared/omnicore/time.js",
+      "version": "1.0.0",
+      "consumers": ["commonground", "healthos", "portable-transfer"],
+      "adapters": ["apps/commonground/modules/omnicore-adapter.js", "apps/healthos/omnicore-adapter.js"],
+      "failureContract": "Invalid instants fail explicitly; no clock or timezone is persisted globally."
+    },
+    {
+      "id": "indexeddb",
+      "path": "shared/omnicore/indexeddb.js",
+      "version": "1.0.0",
+      "consumers": ["commonground", "healthos"],
+      "adapters": ["apps/commonground/modules/omnicore-adapter.js", "apps/healthos/omnicore-adapter.js"],
+      "failureContract": "Only request/transaction completion is shared; transaction scope and mutations remain app-owned and failures reject."
+    },
+    {
+      "id": "receipts",
+      "path": "shared/omnicore/receipts.js",
+      "version": "1.0.0",
+      "consumers": ["commonground", "healthos"],
+      "adapters": ["apps/commonground/modules/omnicore-adapter.js", "apps/healthos/omnicore-adapter.js"],
+      "failureContract": "Missing and repeated rollback fail closed; apps own atomic deletion and receipt persistence."
+    },
+    {
+      "id": "portable-transfer",
+      "path": "shared/interchange.js",
+      "version": "1.0.0",
+      "consumers": ["commonground", "healthos"],
+      "adapters": ["apps/commonground/modules/interchange-adapter.js", "apps/healthos/storage.js"],
+      "failureContract": "Malformed, incompatible, oversized, duplicate, or integrity-invalid packages fail before app-owned mutation."
+    },
+    {
+      "id": "pwa-assurance",
+      "path": "shared/pwa-assurance.js",
+      "workerPath": "shared/pwa-worker.js",
+      "version": "1.0.0",
+      "consumers": ["commonground", "healthos", "flexx-files", "noodle-nudge"],
+      "adapters": [
+        "apps/commonground/sw.js + apps/commonground/pwa-shell.json",
+        "apps/healthos/sw.js + apps/healthos/pwa-shell.json",
+        "apps/flexx-files/sw.js + apps/flexx-files/pwa-shell.json",
+        "apps/noodle-nudge/service-worker.js + apps/noodle-nudge/pwa-shell.json"
+      ],
+      "failureContract": "Incomplete or corrupt candidates fail closed; foreign caches and app data remain untouched."
+    },
+    {
+      "id": "design",
+      "path": "shared/design-tokens.css",
+      "primitivePath": "shared/design-primitives.css",
+      "version": "1.0.0",
+      "consumers": ["commonground", "healthos"],
+      "adapters": ["apps/commonground/styles.css", "apps/healthos/styles.css"],
+      "failureContract": "Apps retain palette and layout ownership; adoption requires visual, responsive, keyboard, and reduced-motion parity."
+    }
+  ],
+  "excludedDomainModules": [
+    "apps/healthos/modules/healthos.js",
+    "apps/healthos/modules/focus-timer.js"
+  ]
+}

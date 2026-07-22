@@ -11,15 +11,15 @@
   "assets": [
     {
       "url": "./index.html",
-      "sha256": "5baa8d156eb182c3e32d11eb9173ba5541ae3a1df4c49d7c6d78e7380da033cc"
+      "sha256": "fb03ab3bd52608219362791ce7447b7aaef60075d7876de0c939358064e7ec8f"
     },
     {
       "url": "./styles.css",
-      "sha256": "1995cfb1501ddfc11aa8dea6cae8d5e6b70f88452524c3e6ed328d63b737cfc0"
+      "sha256": "02e04718877c9dc2479db1d3f1881d90e8d3d7c0d8febf9f17f2e67e8e3829aa"
     },
     {
       "url": "./app.js",
-      "sha256": "abbbd8fb16a6db9a80d9c8af65ff56d977473e75049eae28c6f377db485fd4db"
+      "sha256": "7c0b162a50155091d84656f83ec30a66070b417b8d5054039f762017f1fe330d"
     },
     {
       "url": "./manifest.webmanifest",
@@ -27,15 +27,15 @@
     },
     {
       "url": "./modules/db.js",
-      "sha256": "61d6b14b52e864258f242d082efb32efb2633f7036f403cc50036d60a065f38a"
+      "sha256": "fe8a39aff2a83ca4ee14b9d199d53d843af5e56a510d9b2debadeb3cc3fc8aa3"
     },
     {
       "url": "./modules/exports.js",
-      "sha256": "7ee5e96cb3646d3ebd6a575c551a4efdc4bbdce174123ad67395df6996719059"
+      "sha256": "8d7453e339d3bdd9f6ebbc44ee7f87f9b5a3a67a781e70b22c92354f60ad1e30"
     },
     {
       "url": "./modules/legacy.js",
-      "sha256": "1d5363fd5684ed0138a0d68c295ed85235596b6c80db8a610856047143270092"
+      "sha256": "0113aa4c3f5b3aec4d64dca52127d16559b6c9989b040cebfb28c638d797540e"
     },
     {
       "url": "./modules/matter-types.js",
@@ -44,6 +44,10 @@
     {
       "url": "./modules/interchange-adapter.js",
       "sha256": "8180ade001153d29edc8c5f636096f290c2e450f6fca40791cd143e6313fa8fe"
+    },
+    {
+      "url": "./modules/omnicore-adapter.js",
+      "sha256": "f94cd87073580428a7fddf341c178bd1e7b50162383296dc9a02783115e6fdfd"
     },
     {
       "url": "./icons/icon-32.png",
@@ -63,7 +67,35 @@
     },
     {
       "url": "../../shared/interchange.js",
-      "sha256": "f84c0e706cc7c83ed80c3824270458245696fb8382c69fb94cc782cc53a92cc0"
+      "sha256": "a92a9abbece5edd228d04ce4c61af1f6e8368f400d7b43f5a40a583119bec13b"
+    },
+    {
+      "url": "../../shared/omnicore/errors.js",
+      "sha256": "0e8ada82c53c795a8e1029855f46f4fc50d7a8d15b27036623da4882a9b5d382"
+    },
+    {
+      "url": "../../shared/omnicore/indexeddb.js",
+      "sha256": "afa20c4cafacd3144db0284edca5a48148b6ae4648c84f5c3e8b8499d4e22cab"
+    },
+    {
+      "url": "../../shared/omnicore/integrity.js",
+      "sha256": "5b6b41a160495a86b2f59d16b2626a6db08116ee07f01f73cca4bbec3311a917"
+    },
+    {
+      "url": "../../shared/omnicore/receipts.js",
+      "sha256": "d3a6d564b2f0dd5fdd672a9117c90aa1cddd4665ac48a8a701bbd0e4c03deb9c"
+    },
+    {
+      "url": "../../shared/omnicore/time.js",
+      "sha256": "286254c149eaccfe153c1aa6653e464dbb26be18a934e8f5c9993600c307ead0"
+    },
+    {
+      "url": "../../shared/design-primitives.css",
+      "sha256": "71bd7a301b24871a81c187a6d956b36f63b482c1587d75c3ca96e95b7d98d182"
+    },
+    {
+      "url": "../../shared/design-tokens.css",
+      "sha256": "1adb4cb665be53693f29d72ee832df9d411019f124a4b69e795584106ab00047"
     },
     {
       "url": "../../shared/pwa-assurance.js",

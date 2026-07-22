@@ -1,3 +1,8 @@
+import { canonicalJson, sha256 } from "./omnicore/integrity.js";
+import { isIsoInstant, nowIso } from "./omnicore/time.js";
+
+export { canonicalJson, sha256 };
+
 export const INTERCHANGE_FORMAT = "localfirstapps-portable-records";
 export const INTERCHANGE_VERSION = "1.0.0";
 export const INTERCHANGE_MAJOR = 1;
@@ -12,24 +17,6 @@ const REQUIRED_RECORD_FIELDS = [
 
 function plainObject(value) {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
-}
-
-function canonical(value) {
-  if (Array.isArray(value)) return value.map(canonical);
-  if (plainObject(value)) {
-    return Object.fromEntries(Object.keys(value).sort().filter((key) => value[key] !== undefined).map((key) => [key, canonical(value[key])]));
-  }
-  return value;
-}
-
-export function canonicalJson(value) {
-  return JSON.stringify(canonical(value));
-}
-
-export async function sha256(value) {
-  const bytes = new TextEncoder().encode(typeof value === "string" ? value : canonicalJson(value));
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
 export function parseSemver(value) {
@@ -50,10 +37,6 @@ function assertSafeShape(value) {
     else if (item !== null && !["string", "number", "boolean"].includes(typeof item)) throw new Error("Interchange package contains an unsupported value.");
   };
   visit(value, 0);
-}
-
-function validInstant(value) {
-  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}T.*(?:Z|[+-]\d{2}:\d{2})$/.test(value) && Number.isFinite(Date.parse(value));
 }
 
 function validTimezone(value) {
@@ -77,7 +60,7 @@ function validateRecord(record, errors, index) {
   }
   if (!validTimezone(record.timezone)) errors.push(`Record ${index + 1} has invalid timezone.`);
   if (record.confidence !== null && (typeof record.confidence !== "number" || record.confidence < 0 || record.confidence > 1)) errors.push(`Record ${index + 1} confidence must be null or 0 through 1.`);
-  if (!validInstant(record.createdAt) || !validInstant(record.updatedAt)) errors.push(`Record ${index + 1} requires ISO date-time instants.`);
+  if (!isIsoInstant(record.createdAt) || !isIsoInstant(record.updatedAt)) errors.push(`Record ${index + 1} requires ISO date-time instants.`);
   if (!plainObject(record.units) || !plainObject(record.payload)) errors.push(`Record ${index + 1} units and payload must be objects.`);
   for (const field of ["assumptions", "conflicts", "relationships", "tags"]) if (!Array.isArray(record[field])) errors.push(`Record ${index + 1} ${field} must be an array.`);
   if (!Number.isInteger(record.revision) || record.revision < 0) errors.push(`Record ${index + 1} revision must be a non-negative integer.`);
@@ -112,7 +95,7 @@ export async function createInterchangePackage({ sourceApp, timezone, records, s
     format: INTERCHANGE_FORMAT,
     formatVersion: INTERCHANGE_VERSION,
     transferId: `lfa-transfer-${crypto.randomUUID()}`,
-    exportedAt: new Date().toISOString(),
+    exportedAt: nowIso(),
     sourceApp,
     timezone,
     selection: { mode: "explicit", recordIds: normalized.map((record) => record.id), ...structuredClone(selection) },
@@ -132,7 +115,7 @@ export async function validateInterchangePackage(value) {
   let version;
   try { version = parseSemver(value?.formatVersion); } catch (error) { errors.push(error.message); }
   if (version?.major !== INTERCHANGE_MAJOR) errors.push(`Unsupported interchange major version ${version?.major}; this app accepts 1.x only.`);
-  if (!validInstant(value?.exportedAt)) errors.push("Interchange exportedAt must be an ISO date-time instant.");
+  if (!isIsoInstant(value?.exportedAt)) errors.push("Interchange exportedAt must be an ISO date-time instant.");
   for (const field of ["transferId", "sourceApp"]) if (typeof value?.[field] !== "string" || !value[field]) errors.push(`Interchange ${field} is required.`);
   if (!validTimezone(value?.timezone)) errors.push("Interchange timezone must be a valid IANA timezone.");
   if (!plainObject(value?.selection) || value.selection.mode !== "explicit" || !Array.isArray(value.selection.recordIds)) errors.push("Interchange selection must list explicit record IDs.");

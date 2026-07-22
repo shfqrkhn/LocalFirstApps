@@ -10,6 +10,13 @@ self.LFAPwaWorker.register({
   legacyCacheNames: ["commonground-shell-v0.2.1"],
   allowedSharedAssets: [
     "../../shared/interchange.js",
+    "../../shared/omnicore/errors.js",
+    "../../shared/omnicore/indexeddb.js",
+    "../../shared/omnicore/integrity.js",
+    "../../shared/omnicore/receipts.js",
+    "../../shared/omnicore/time.js",
+    "../../shared/design-primitives.css",
+    "../../shared/design-tokens.css",
     "../../shared/pwa-assurance.js",
     "../../suite-shell.css",
     "../../suite-shell.js"
