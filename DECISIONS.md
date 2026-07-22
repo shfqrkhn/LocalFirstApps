@@ -89,3 +89,11 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Compatibility:** All ten canonical assessments and 42 rule outputs match the captured v1 fixture. Routes, IndexedDB schema, backup/import formats, stored answers/results/history, and PMQuiz behavior are unchanged.
 - **Evidence:** Static guards, manifest/hash validation, malicious-expression unit tests, quota/missing/corrupt worker faults, browser update/offline/last-known-good flows, and foreign-cache sentinels pass locally.
 - **Rollback:** Revert the R0 runtime commit. No data migration or destructive store mutation occurs; the legacy Noodle cache can be adopted by the new worker but is not required to restore browser data.
+
+## D-012 — Freeze opaque TS-Dash and establish R1 contracts
+
+- **State:** Accepted and verified locally for R1.
+- **Decision:** Readable TS-Dash source recovery was exhausted across the checkout, local Git history/objects, and workspace. Freeze the four generated runtime artifacts by hash and permit changes only through the behavior-first readable rewrite contract; never treat the bundle as source.
+- **Foundations:** `config/deliverables.json` is the canonical version source. Dependency/SBOM, curated artifact, content governance, CommonGround design, OmniCore boundary, accessibility, and candidate/deploy/postdeploy contracts are independently testable and introduce no shared app data or migration.
+- **Content:** All inventoried PMQuiz, Noodle, and Flexx content remains quarantined until accountable source/license/domain review. User-facing language cannot imply endorsement, validation, diagnosis, treatment, safety clearance, or guaranteed outcomes.
+- **Rollback:** Revert commit `620dbdd`. No store, user record, route, import/export format, or compatibility path was migrated.

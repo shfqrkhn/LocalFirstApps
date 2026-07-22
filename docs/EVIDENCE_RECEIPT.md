@@ -214,3 +214,19 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `NOT_RUN`: no push, deployment, release, live mutation, data migration, or feature packet was authorized.
 - **Rollback:** revert the bounded runtime commit; app data is unchanged. The prior shell remains a recovery source.
 - **Next exact action:** obtain owner review, then execute R1 engineering foundations from `docs/MPES_IMPLEMENTATION_PLAN.md`; do not begin R2 or M3B first.
+
+## 2026-07-22 R1 Engineering Foundations Packet
+
+**State:** `VERIFIED_LOCAL_WITH_LIMITATIONS`; owner review, manual AT/domain review, postdeploy execution, and publication remain `NOT_RUN`.
+
+- `PASS`: commit `620dbdd` preserves every app route, store, schema, import/export format, user record, worker scope, and LedgerSuite compatibility path; no application migration or remote mutation occurred.
+- `PASS_WITH_LIMITATIONS`: exhaustive local checkout/Git-object/workspace recovery found no readable TS-Dash source or source map. Four generated artifacts are hash-frozen; behavioral/import/export/offline/accessibility parity and cutover/rollback requirements are explicit. Generated bundles are not edited as source.
+- `PASS_WITH_LIMITATIONS`: 12 identified dependency components have local evidence, source, license, review date, provenance confidence, bundle role, replacement path, and generated CycloneDX/notices. Opaque TS-Dash signature-only versions remain unknown and are disclosed; completeness cannot be proven without source.
+- `PASS`: `config/deliverables.json` projects suite/app/shell versions and content-addressed PWA manifests. Flexx icon source deterministically generates truthful 192×192 and 512×512 assets; all 18 PNG manifest descriptors pass dimension checks.
+- `PASS`: the runtime builder includes only configured roots, preserves `apps/ledgersuite/index.html`, excludes repository/docs/tests/tools/config/archive/runtime output, and produced two byte-identical 123-file inventories. Pages now uploads `dist`; PR candidate and read-only postdeploy workflows are separated.
+- `PASS_WITH_LIMITATIONS`: the deterministic ledger inventories 3,868 PMQuiz/Noodle/Flexx records and 41 PMQuiz duplicate groups. All remain quarantined with unresolved values left null; unsupported PMI endorsement/readiness, psychometric-validation, diagnostic, safety-clearance, and prescriptive claims were removed or softened. Qualified review remains `NOT_RUN`.
+- `PASS`: CommonGround tokens/primitives define light/dark semantic color, type, spacing, radii, elevation, motion, focus, forms, status, touch, responsive, and reduced-motion foundations. OmniCore explicitly excludes shared stores, hidden synchronization, universal workers, and speculative framework extraction.
+- `PASS`: `npm run ci:candidate` passed static/interchange/PWA/worker/scoring/HealthOS contracts, five native Flexx checks, R1 foundation checks, 35 responsive visual cases, seven file-mode cases, 34 browser-behavior cases, seven route-level accessibility baselines, and deterministic build. `npm audit --audit-level=moderate` found zero vulnerabilities; `git diff --check` passed.
+- `PASS_WITH_LIMITATIONS`: automated checks do not certify screen readers, switch control, cognition, real eviction/quota, or professional content validity. `docs/ACCESSIBILITY_TEST_MATRIX.md` truthfully records manual AT rows as `NOT_RUN`.
+- **Rollback:** revert `620dbdd`. The packet performs no data migration; prior app data and compatibility readers remain unchanged.
+- **Next exact action:** obtain owner review, then execute only R2 OmniCore extraction from the current plan. Keep TS-Dash rewrite, R3/R4 app migrations, M3B, route retirement, and publication inactive.

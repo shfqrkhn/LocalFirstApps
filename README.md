@@ -65,16 +65,17 @@ python -m http.server 8080
 
 ## Development
 
-The 2026-07-22 adversarial audit found cache-isolation and executable-scoring defects in PMQuiz/Noodle Nudge. R0 now contains those defects locally with app-scoped caches, inert scoring, fail-closed staging, and regression evidence. Publication remains separate and `NOT_RUN`.
+R1 engineering foundations are verified locally. Versions, dependency provenance/SBOM, content quarantine, icon dimensions, the curated runtime artifact, TS-Dash rewrite constraints, and CommonGround design/OmniCore boundaries are deterministic and gated. Manual assistive-technology and qualified content/domain review remain `NOT_RUN`; publication is separate.
 
 From a git checkout:
 
 ```bash
 npm run test:local
+npm run ci:candidate
 npm run qa
 ```
 
-`test:local` covers the deterministic static, app-specific behavior/recovery, responsive, local-file, and native Flexx checks. `qa` additionally checks the deployed Pages routes and is the pre-publication gate.
+`test:local` covers deterministic contracts, app behavior/recovery, content/build foundations, accessibility baselines, responsive layouts, local-file mode, and native Flexx checks. `ci:candidate` also constructs the curated `dist` artifact. `qa` additionally checks deployed Pages routes and remains a pre-publication gate.
 
 The repository ZIP omits source-only test and package-management files where `.gitattributes` marks them `export-ignore`, so downloaded copies stay focused on running the apps.
 

@@ -59,7 +59,7 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**R0 VERIFIED_LOCAL; publication NOT_RUN.** The cache-isolation, executable-scoring, and incomplete-shell blockers found by the 2026-07-22 audit are contained and covered by deterministic local tests. R1 foundations are next after owner review. M3A remains locally verified characterization evidence; do not start M3B unless the owner separately accepts it.
+**R1 VERIFIED_LOCAL_WITH_LIMITATIONS; publication NOT_RUN.** Commit `620dbdd` establishes deterministic build/release, dependency/SBOM, canonical version, content-quarantine, TS-Dash rewrite, CommonGround design, OmniCore boundary, icon, and automated accessibility foundations. Manual AT and qualified content/domain review remain `NOT_RUN`. R2 extraction is next only after owner review; app migrations and M3B remain inactive.
 
 ## Key Files
 
@@ -78,6 +78,10 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
 - `docs/future-app-intake.md`: required intake contract for new modules.
+- `config/deliverables.json`, `config/dependencies.json`, and `config/runtime-artifact.json`: canonical versions, dependency provenance, and curated artifact policy.
+- `governance/content-review-ledger.json`: deterministic quarantined content inventory; null provenance is unresolved, never approval.
+- `shared/design-tokens.css`, `docs/DESIGN_LANGUAGE.md`, and `docs/OMNICORE_BOUNDARIES.md`: R1 visual and architecture boundaries, not permission for mass migration.
+- `docs/TS_DASH_REWRITE_CONTRACT.md`: frozen opaque runtime disposition and readable-rewrite parity gate.
 - `docs/CAPABILITY_RECOVERY_MATRIX.md`: per-app storage, recovery, input, and test boundaries.
 - `tests/static-regression.mjs`: canonical app list and static guardrails.
 - `tests/app-behavior-regression.spec.mjs`: isolated synthetic-data import/export/reset/recovery flows.
@@ -88,6 +92,7 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ```bash
 npm run test:local
+npm run ci:candidate
 npm run qa
 ```
 
@@ -95,7 +100,7 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- After owner review of verified R0, execute only the R1 engineering-foundations goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not let feature migration overtake source, content, CI, provenance, and design-system foundations.
+- After owner review of verified R1, execute only the R2 OmniCore extraction goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Require a second consumer for every extracted abstraction; do not begin app migration, TS-Dash rewrite, M3B, content approval, retirement, or publication.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
 - If the Pages API summary reports `errored`, compare the latest current-head `Deploy GitHub Pages` workflow, deployments API SHA, and live HTTP 200 before editing source; treat a contradictory API summary as stale residue and report it with limitations.

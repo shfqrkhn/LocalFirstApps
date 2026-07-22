@@ -4,7 +4,7 @@ Date: 2026-07-22
 
 Baseline: `68076b3997294b7f3199c0b44677b921bf073a3d` on `agent/commonground-consolidation`
 
-Current verdict: **R0 containment is verified locally; publication remains `NOT_RUN`, and R1 source/content/CI/design debt remains open.**
+Current verdict: **R1 engineering foundations are verified locally with declared review limitations; publication remains `NOT_RUN`, and app migrations remain blocked pending R2 extraction.**
 
 ## Scope And Method
 
@@ -62,6 +62,12 @@ Moved, not deleted: 16 unused CommonGround splash images, one unused CommonGroun
 This audit does not certify clinical/psychometric/exam content, copyright provenance, every assistive technology, real browser eviction, or the inaccessible TS-Dash source. Minified/vendor/generated code was not falsely represented as line-by-line maintainable authorship. Those limitations are explicit work items, not inferred passes.
 
 The exact ordered remediation and acceptance gates are in `docs/MPES_IMPLEMENTATION_PLAN.md`; per-file disposition is in `docs/FILE_DISPOSITION.md`.
+
+## R1 Resolution
+
+Commit `620dbdd` closes the structural R1 packet locally. TS-Dash source recovery was exhausted and its four generated artifacts are hash-frozen behind a behavior-first rewrite contract. Twelve identified dependencies have provenance/license/replacement decisions and generate deterministic notices/SBOM. Pages builds a curated 123-file artifact; candidate and postdeploy checks are separated. Flexx icons now match 192/512 declarations. One deliverables contract projects versions and PWA hashes. CommonGround design and OmniCore boundaries are explicit but not yet imposed on apps.
+
+The content ledger inventories and quarantines 3,868 PMQuiz/Noodle/Flexx records and reports 41 PMQuiz duplicate groups; unsupported public claims were softened without inventing provenance. Automated route-level accessibility, responsive, behavior, local-file, CSP, icon, version, artifact, and visual gates pass. Qualified content/domain review, manual AT testing, postdeploy execution, and publication remain `NOT_RUN` and must not be represented as passes.
 
 ## R0 Resolution
 
