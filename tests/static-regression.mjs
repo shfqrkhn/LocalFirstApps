@@ -111,9 +111,11 @@ const healthSw = readFileSync(join(root, "apps", "healthos", "sw.js"), "utf8");
 const healthPwaShell = readFileSync(join(root, "apps", "healthos", "pwa-shell.json"), "utf8");
 const healthApp = readFileSync(join(root, "apps", "healthos", "app.js"), "utf8");
 const healthStorage = readFileSync(join(root, "apps", "healthos", "storage.js"), "utf8");
+const lifeOsShell = readFileSync(join(root, "apps", "healthos", "modules", "lifeos-shell.js"), "utf8");
 const pmQuizWorker = readFileSync(join(root, "apps", "pmquiz", "service-worker.js"), "utf8");
 const noodleIndex = readFileSync(join(root, "apps", "noodle-nudge", "index.html"), "utf8");
-const noodleScoring = readFileSync(join(root, "apps", "noodle-nudge", "scoring.js"), "utf8");
+const noodleScoring = readFileSync(join(root, "apps", "noodle-nudge", "reflection", "scoring.js"), "utf8");
+const noodleScoringShim = readFileSync(join(root, "apps", "noodle-nudge", "scoring.js"), "utf8");
 const noodleWorker = readFileSync(join(root, "apps", "noodle-nudge", "service-worker.js"), "utf8");
 const healthDomain = readFileSync(join(root, "apps", "healthos", "modules", "healthos.js"), "utf8");
 const healthFocusTimer = readFileSync(join(root, "apps", "healthos", "modules", "focus-timer.js"), "utf8");
@@ -411,7 +413,7 @@ for (const phrase of ["FOCUS_MODES", "segmentStartedAt", "reconcileFocusTimer", 
 assert(sharedHealthShim.includes("../apps/healthos/modules/healthos.js"), "Legacy HealthOS module URL must remain a compatibility shim.");
 assert(sharedFocusTimerShim.includes("../apps/healthos/modules/focus-timer.js"), "Legacy timer module URL must remain a compatibility shim.");
 for (const phrase of ["Noodle Nudge", "Flexx Files", "Start focus", "Manual correction", "Optional device cues", "Prepare factory reset"]) {
-  assert(healthApp.includes(phrase), `HealthOS app surface missing: ${phrase}`);
+  assert(`${healthApp}\n${lifeOsShell}`.includes(phrase), `HealthOS/LifeOS surface missing: ${phrase}`);
 }
 for (const phrase of ["healthos-focus", "expectedRevision", "idempotencyKey", "applyHealthPackageAtomic", "rollbackHealthReceipt", "createHealthBackup"]) {
   assert(healthStorage.includes(phrase), `HealthOS app-owned storage missing: ${phrase}`);
@@ -434,6 +436,7 @@ assert(!pmQuizWorker.includes("caches.match("), "PMQuiz must not search sibling 
 assert(!noodleIndex.includes("unsafe-eval") && !noodleIndex.includes("new Function"), "Noodle scoring content must remain inert.");
 assert(noodleIndex.includes("activatePwaUpdate") && noodleIndex.includes("registerPwaAssurance"), "Noodle updates must be explicitly activated through PWA assurance.");
 assert(noodleScoring.includes("ALLOWED_FUNCTIONS") && noodleScoring.includes("LIMITS"), "Noodle scoring must use an allowlisted bounded interpreter.");
+assert(noodleScoringShim.includes("./reflection/scoring.js"), "The old Noodle scoring URL must remain a compatibility re-export.");
 assert(noodleWorker.includes('cachePrefix: "noodle-nudge-"') && noodleWorker.includes("LFAPwaWorker.register"), "Noodle worker must use the app-owned PWA contract.");
 assert(!existsSync(join(root, "apps", "commonground", "assets")) || readdirSync(join(root, "apps", "commonground", "assets")).length === 0, "Opaque CommonGround generated assets must be removed.");
 assert(!existsSync(join(root, "apps", "commonground", "workbox-8c29f6e4.js")), "Duplicate CommonGround Workbox runtime must be removed.");

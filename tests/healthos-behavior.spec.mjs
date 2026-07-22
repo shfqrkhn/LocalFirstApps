@@ -211,8 +211,42 @@ test("HealthOS complete backup gates scoped reset and restores canonical records
   }, await readFile(backupPath, "utf8"));
   expect(interruptedRestore.rejected).toBe(true);
   expect(interruptedRestore.after).toEqual(interruptedRestore.before);
+  const preferenceFailure = await page.evaluate(async (backupText) => {
+    const storage = await import("./storage.js");
+    const { sha256 } = await import("./omnicore-adapter.js");
+    const value = JSON.parse(backupText);
+    value.preferences = { audio: true, vibration: false, notifications: false, wakeLock: false };
+    delete value.sha256;
+    value.sha256 = await sha256(value);
+    let error;
+    try { await storage.restoreHealthBackupAtomic(value, { failureMode: "preferences" }); }
+    catch (caught) { error = { code: caught.code, message: caught.message }; }
+    return {
+      error,
+      records: (await storage.getAllHealthRecords()).length,
+      pending: await storage.getPendingPreferenceRestore(),
+      preferences: storage.loadHealthPreferences()
+    };
+  }, await readFile(backupPath, "utf8"));
+  expect(preferenceFailure.error).toEqual({
+    code: "HEALTHOS_PREFERENCES_PENDING",
+    message: "Health records were restored, but cue preferences could not be saved. Retry preference recovery to finish."
+  });
+  expect(preferenceFailure.records).toBe(1);
+  expect(preferenceFailure.pending.preferences.audio).toBe(true);
+  expect(preferenceFailure.preferences.audio).toBe(false);
+  await page.reload();
+  await expect(page.getByText("cue preferences are still pending", { exact: false })).toBeVisible();
+  await page.getByRole("button", { name: "Retry preference recovery" }).first().click();
+  await expect(page.locator(".notice-success")).toContainText("preference recovery completed");
+  expect(await page.evaluate(async () => ({
+    pending: await (await import("./storage.js")).getPendingPreferenceRestore(),
+    preferences: (await import("./storage.js")).loadHealthPreferences()
+  }))).toEqual({ pending: null, preferences: { audio: true, vibration: false, notifications: false, wakeLock: false } });
+  await page.getByRole("button", { name: "Transfer & recovery" }).click();
+  await page.locator("#backup-import").setInputFiles(backupPath);
   await page.getByRole("button", { name: "Confirm complete restore" }).click();
-  await expect(page.locator(".notice-success")).toContainText("restored atomically");
+  await expect(page.locator(".notice-success")).toContainText("backup restored");
   expect(await page.evaluate(async () => (await (await import("./storage.js")).getAllHealthRecords()).length)).toBe(1);
 });
 

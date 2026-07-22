@@ -10,11 +10,27 @@
   "assets": [
     {
       "url": "./index.html",
-      "sha256": "e68011302d7f22ae661ae25723e8b0db21389f86d24ad186fa0e4794754e9562"
+      "sha256": "f15e19928a4385a550c81c52e4acae6dfae344c09ca438edf219de9d21e203ec"
     },
     {
       "url": "./scoring.js",
+      "sha256": "e4a6aa95a92e788c5df14cc946cf3e663ff2b958ec565a81b695c8b14abfad12"
+    },
+    {
+      "url": "./reflection-adapter.js",
+      "sha256": "c7e068206f28176149c3d583888bbf87ed1986f8d6028c27ec4fb5a7e9feaae1"
+    },
+    {
+      "url": "./reflection/scoring.js",
       "sha256": "960adedb511ee22e477c3d94d7a1bf559b0d977de68c0a9e3709752ffd83f9a2"
+    },
+    {
+      "url": "./reflection/definitions.js",
+      "sha256": "9de6bd13d378670f09dbcda3fa5f703070320914b434769dbf29c1cb02d6ed98"
+    },
+    {
+      "url": "./reflection/backup.js",
+      "sha256": "2639a1c5a84699890494af937473f644a98c59f5c4e3efb8ebfe9ce0c76b4a1d"
     },
     {
       "url": "./manifest.json",

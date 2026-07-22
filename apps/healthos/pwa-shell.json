@@ -18,15 +18,19 @@
     },
     {
       "url": "./app.js",
-      "sha256": "0fd30ab738f08c2cc7bcf61d9c0ba2425cf6088159dcb943dce18d137326c6ab"
+      "sha256": "447247009afec7784b85d294ffc90e81b2c8cb109a35d146afee0cc95367fde5"
     },
     {
       "url": "./storage.js",
-      "sha256": "411d1fc660b5ed9f164b5de9e52b11a53f7016b274a5bf4f83d81bf8cad882ba"
+      "sha256": "47e8645a57a7919a55a17afe119e9ed156e19a011d4003187890f0f5ad70f688"
     },
     {
       "url": "./omnicore-adapter.js",
       "sha256": "10870da23c42fbe8373acd68d22be1cb8e67d04331e2aaff8e2fde3c155dcdaf"
+    },
+    {
+      "url": "./lifeos-adapter.js",
+      "sha256": "a900fcd69472bb3bd83e62ce2f2e23cfc0a6594ad2049ea087a8fc495a2a8861"
     },
     {
       "url": "./modules/healthos.js",
@@ -35,6 +39,10 @@
     {
       "url": "./modules/focus-timer.js",
       "sha256": "19c4b167b73a50f0cd64e9b0d82409bfdc823d01a94f853b4453757d85fbfbb5"
+    },
+    {
+      "url": "./modules/lifeos-shell.js",
+      "sha256": "98e0c44243b42821e3fd0779f4de89347f2e842f340601b565a9836670e2bf64"
     },
     {
       "url": "./manifest.webmanifest",

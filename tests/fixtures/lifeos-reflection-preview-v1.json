@@ -1,0 +1,60 @@
+{
+  "legacyBackup": {
+    "assessments": {
+      "core_profile_v1.0.0": {
+        "id": "core_profile_v1.0.0"
+      }
+    },
+    "dailyContent": {},
+    "userAnswers": {
+      "core_profile_v1.0.0": {
+        "q1": 4
+      }
+    },
+    "userResults": {
+      "core_profile_v1.0.0": {
+        "timestamp": "2024-02-29T12:00:00.000Z"
+      }
+    },
+    "appConfig": {
+      "version": "1.2.30",
+      "lastVisit": "2024-02-29T12:00:00.000Z"
+    },
+    "viewDate": "2024-02-29T12:00:00.000Z"
+  },
+  "preview": {
+    "format": "commonground-lifeos-reflection-preview",
+    "formatVersion": "1.0.0",
+    "previewOnly": true,
+    "mutationAllowed": false,
+    "generatedAt": "2024-02-29T12:00:00.000Z",
+    "source": {
+      "app": "noodle-nudge",
+      "database": "NoodleNudgeDB",
+      "schemaVersion": 1,
+      "appVersion": "1.2.30"
+    },
+    "selection": {
+      "mode": "explicit",
+      "assessmentIds": [
+        "core_profile_v1.0.0"
+      ]
+    },
+    "summary": {
+      "assessmentDefinitions": 1,
+      "answerSets": 1,
+      "resultSets": 1,
+      "historySets": 0
+    },
+    "proposedRecords": [
+      {
+        "proposedType": "lifeos/reflection_assessment",
+        "sourceAssessmentId": "core_profile_v1.0.0",
+        "mappingStatus": "preview-only",
+        "hasAnswers": true,
+        "hasResult": true,
+        "hasHistory": false
+      }
+    ]
+  }
+}

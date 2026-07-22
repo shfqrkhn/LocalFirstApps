@@ -19,6 +19,7 @@ import {
 } from "./modules/focus-timer.js";
 import { splitRecordExtensions } from "../../shared/interchange.js";
 import { errorMessage } from "./omnicore-adapter.js";
+import { LIFEOS_MODULES, LIFEOS_SHELL_NAME } from "./lifeos-adapter.js";
 import {
   activatePwaUpdate,
   clearOwnedPwaCaches,
@@ -36,9 +37,11 @@ import {
   getActiveTimer,
   getAllHealthReceipts,
   getAllHealthRecords,
+  getPendingPreferenceRestore,
   loadHealthPreferences,
   putHealthRecord,
   restoreHealthBackupAtomic,
+  retryPendingPreferenceRestore,
   rollbackHealthReceipt,
   saveActiveTimer,
   saveHealthPreferences,
@@ -64,7 +67,8 @@ const state = {
   updateRegistration: null,
   updateCompatible: true,
   pwaRegistration: null,
-  pwaHealth: null
+  pwaHealth: null,
+  pendingPreferenceRestore: null
 };
 
 let tickHandle;
@@ -105,6 +109,7 @@ function navMarkup() {
 function noticeMarkup() {
   const notices = [];
   if (state.notice) notices.push(`<div class="notice notice-${escapeHtml(state.notice.tone)}" role="status">${escapeHtml(state.notice.message)}</div>`);
+  if (state.pendingPreferenceRestore) notices.push('<div class="notice notice-warning" role="status">Health records were restored, but cue preferences are still pending. Records remain available. <button class="secondary" data-action="retry-preference-restore">Retry preference recovery</button></div>');
   if (state.externalChange) notices.push('<div class="notice notice-warning" role="status">Another HealthOS tab changed the timer or records. Your current screen was not overwritten. <button class="secondary" data-action="reload-state">Reload current state</button></div>');
   if (state.updateRegistration) notices.push(state.updateCompatible
     ? '<div class="notice notice-update" role="status"><span>A verified HealthOS update is ready.</span><button class="secondary" data-action="activate-update">Reload to update</button></div>'
@@ -113,11 +118,10 @@ function noticeMarkup() {
 }
 
 function moduleCards() {
-  return `<section class="module-grid" aria-label="HealthOS modules">
-    <a class="module-card" href="../noodle-nudge/"><strong>Noodle Nudge</strong><small>Reflection and self-inquiry stays independently owned.</small></a>
-    <a class="module-card" href="../flexx-files/"><strong>Flexx Files</strong><small>Strength, readiness, and progression stays independently owned.</small></a>
-    <button class="module-card" data-route="focus"><strong>Focus timer</strong><small>Timestamp-reconciled local focus sessions.</small></button>
-  </section>`;
+  const card = (module) => module.href
+    ? `<a class="module-card" href="${escapeHtml(module.href)}"><strong>${escapeHtml(module.label)}</strong><small>${escapeHtml(module.description)}</small></a>`
+    : `<button class="module-card" data-route="${escapeHtml(module.route)}"><strong>${escapeHtml(module.label)}</strong><small>${escapeHtml(module.description)}</small></button>`;
+  return `<section class="module-grid" aria-label="${escapeHtml(LIFEOS_SHELL_NAME)} modules">${LIFEOS_MODULES.map(card).join("")}</section>`;
 }
 
 function focusSetupView() {
@@ -229,7 +233,7 @@ function transferView() {
     <div class="grid">
       <section class="panel"><h2>Portable HealthOS records</h2><div class="actions"><button class="secondary" data-action="prepare-export">Prepare JSON export</button><label>Choose portable JSON<input id="portable-import" type="file" accept=".json,.lfa.json,application/json"></label></div>${state.pendingExport ? `<h3>Exact export preview</h3><pre class="preview" tabindex="0">${escapeHtml(state.pendingExport)}</pre><button class="primary" data-action="download-export">Confirm download</button>` : ""}${state.pendingImport ? `<h3>Validated import preview</h3><pre class="preview" tabindex="0">${escapeHtml(state.pendingImport.exact)}</pre><div class="actions"><button class="primary" data-action="confirm-import">Confirm atomic import</button><button class="secondary" data-action="cancel-import">Cancel</button></div>` : ""}</section>
       <section class="panel"><h2>TS-Dash CSV</h2><p>Deterministic rows retain units, provenance, derivation labels, and the limit that correlation does not establish causation.</p><button class="secondary" data-action="prepare-csv">Prepare TS-Dash CSV</button>${state.pendingCsv ? `<pre class="preview" tabindex="0">${escapeHtml(state.pendingCsv)}</pre><button class="primary" data-action="download-csv">Confirm CSV download</button>` : ""}</section>
-      <section class="panel"><h2>Complete backup and restore</h2><button class="secondary" data-action="download-backup">Download complete backup</button><label>Restore complete backup<input id="backup-import" type="file" accept=".json,.healthos-backup.json,application/json"></label>${state.pendingBackup ? `<pre class="preview" tabindex="0">${escapeHtml(state.pendingBackup.exact)}</pre><button class="primary" data-action="confirm-backup">Confirm complete restore</button>` : ""}</section>
+      <section class="panel"><h2>Complete backup and restore</h2><button class="secondary" data-action="download-backup">Download complete backup</button><label>Restore complete backup<input id="backup-import" type="file" accept=".json,.healthos-backup.json,application/json"></label>${state.pendingBackup ? `<pre class="preview" tabindex="0">${escapeHtml(state.pendingBackup.exact)}</pre><button class="primary" data-action="confirm-backup">Confirm complete restore</button>` : ""}${state.pendingPreferenceRestore ? '<p class="notice notice-warning">Record restore completed; cue preferences still require recovery.</p><button class="secondary" data-action="retry-preference-restore">Retry preference recovery</button>' : ""}</section>
       <section class="panel"><h2>Import receipts</h2><ul class="record-list">${state.receipts.length ? state.receipts.map((receipt) => `<li><strong>${escapeHtml(receipt.status)}</strong><small>${escapeHtml(receipt.idempotencyKey.slice(0, 16))}</small>${receipt.status === "applied" ? `<button class="secondary" data-action="rollback-import" data-receipt="${escapeHtml(receipt.id)}">Roll back imported records</button>` : ""}</li>`).join("") : "<li>No portable imports yet.</li>"}</ul></section>
       <section class="panel"><h2>Storage and offline health</h2><p>${escapeHtml(storageText)}</p><p>${escapeHtml(shellText)}</p><p>Health checks are read-only and never request persistence. Quota and eviction remain browser-controlled.</p><div class="actions"><button class="secondary" data-action="refresh-health">Refresh health</button><button class="secondary" data-action="open-clear-cache">Clear HealthOS cache</button></div></section>
       <section class="panel"><h2>Factory reset</h2><p>A complete integrity-protected backup downloads first. Only HealthOS storage, preferences, caches, and its exact worker scope are cleared.</p><button class="danger" data-action="open-reset">Prepare factory reset</button></section>
@@ -250,13 +254,13 @@ function viewMarkup() {
 }
 
 function render() {
-  root.innerHTML = `<header class="app-header"><div class="brand"><strong>HealthOS Focus</strong><small>Local observations, no pressure score</small></div><nav class="app-nav" aria-label="HealthOS">${navMarkup()}</nav></header><main id="main-content" class="app-main" tabindex="-1">${noticeMarkup()}${viewMarkup()}</main>${modalMarkup()}`;
+  root.innerHTML = `<header class="app-header"><div class="brand"><strong>${escapeHtml(LIFEOS_SHELL_NAME)}</strong><small>HealthOS Focus · local observations, no pressure score</small></div><nav class="app-nav" aria-label="HealthOS Focus">${navMarkup()}</nav></header><main id="main-content" class="app-main" tabindex="-1">${noticeMarkup()}${viewMarkup()}</main>${modalMarkup()}`;
   document.documentElement.dataset.appReady = "true";
   updateTimerDisplay();
 }
 
 async function refreshState() {
-  [state.records, state.receipts, state.timer] = await Promise.all([getAllHealthRecords(), getAllHealthReceipts(), getActiveTimer()]);
+  [state.records, state.receipts, state.timer, state.pendingPreferenceRestore] = await Promise.all([getAllHealthRecords(), getAllHealthReceipts(), getActiveTimer(), getPendingPreferenceRestore()]);
   state.preferences = loadHealthPreferences();
   state.externalChange = false;
 }
@@ -373,7 +377,9 @@ async function handleAction(action, button) {
   } else if (action === "download-backup") {
     downloadText(`healthos-complete-backup-${Date.now()}.json`, JSON.stringify(await createHealthBackup(), null, 2)); announce("Complete HealthOS backup downloaded.", "success");
   } else if (action === "confirm-backup") {
-    await restoreHealthBackupAtomic(state.pendingBackup.value); state.pendingBackup = null; await refreshState(); broadcastChange("records"); announce("Complete HealthOS backup restored atomically.", "success");
+    await restoreHealthBackupAtomic(state.pendingBackup.value); state.pendingBackup = null; await refreshState(); broadcastChange("records"); announce("Complete HealthOS backup restored.", "success");
+  } else if (action === "retry-preference-restore") {
+    await retryPendingPreferenceRestore(); await refreshState(); announce("HealthOS cue preference recovery completed.", "success");
   } else if (action === "refresh-health") {
     state.pwaHealth = await getPwaHealth({ cachePrefix: "healthos-", registration: state.pwaRegistration }); announce("Read-only storage and shell health refreshed.", "success");
   } else if (action === "open-clear-cache") state.modal = "clear-cache";

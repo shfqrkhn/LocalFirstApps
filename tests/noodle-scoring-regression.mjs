@@ -6,7 +6,7 @@ import {
   evaluateScoringExpression,
   validateAssessmentScoring,
   validateScoringExpression
-} from "../apps/noodle-nudge/scoring.js";
+} from "../apps/noodle-nudge/reflection-adapter.js";
 
 const root = process.cwd();
 const dataDir = resolve(root, "apps/noodle-nudge/JSON");
