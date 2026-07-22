@@ -33,3 +33,11 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Decision:** Decision Analysis stores non-negotiable constraints as distinct records; comparative option scores cannot offset them. Mutable singleton records carry revisions, and a stale tab must reload instead of overwriting a newer saved revision.
 - **Limit:** Independent list-item additions remain separate records, but semantic reconciliation across different records is deferred to the shared M1 conflict contract.
 - **Rollback:** Export the current workspace, revert the consolidation commit, and restore the preserved LedgerSuite source or CommonGround backup as applicable.
+
+## D-005 — Integrate through explicit portable files
+
+- **State:** Accepted
+- **Decision:** The shared M1 surface is a dependency-free semver `1.x` portable-record package and validator. Apps keep isolated storage and own narrowly scoped adapters; there is no suite database, hidden cross-app read, synchronization, background mutation, or network transport.
+- **Safety:** A transfer must select, show exact serialized content, require confirmation, validate size/shape/version/hashes, apply records plus a unique idempotency receipt atomically, and expose rollback. Unknown record and payload fields stay inert and survive the CommonGround pilot round trip. Unsupported majors fail visibly.
+- **Compatibility:** CommonGround portable records are additive. CommonGround export v2, CommonGround v1 import, LedgerSuite v1/v2 import, existing routes, data and source-preserving migration remain unchanged.
+- **Rollback:** Roll back an individual applied receipt in Settings, or revert the M1 commit. Receipts remain after rollback as replay protection; pre-M1 data is untouched by the v4 additive store upgrade.

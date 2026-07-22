@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/static-regression.mjs",
+    "test": "node tests/static-regression.mjs && node tests/interchange-regression.mjs",
     "test:visual": "playwright test tests/visual-regression.spec.mjs --reporter=line",
     "test:file": "playwright test tests/local-file-regression.spec.mjs --reporter=line",
     "test:behavior": "playwright test tests/app-behavior-regression.spec.mjs --reporter=line",

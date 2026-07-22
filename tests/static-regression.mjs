@@ -96,6 +96,9 @@ const commonGroundApp = readFileSync(join(root, "apps", "commonground", "app.js"
 const commonGroundDb = readFileSync(join(root, "apps", "commonground", "modules", "db.js"), "utf8");
 const commonGroundLegacy = readFileSync(join(root, "apps", "commonground", "modules", "legacy.js"), "utf8");
 const commonGroundMatterTypes = readFileSync(join(root, "apps", "commonground", "modules", "matter-types.js"), "utf8");
+const commonGroundInterchange = readFileSync(join(root, "apps", "commonground", "modules", "interchange-adapter.js"), "utf8");
+const sharedInterchange = readFileSync(join(root, "shared", "interchange.js"), "utf8");
+const interchangeContract = readFileSync(join(root, "docs", "INTERCHANGE_CONTRACT.md"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
 const codeqlConfig = readFileSync(join(root, ".github", "codeql", "codeql-config.yml"), "utf8");
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
@@ -155,7 +158,7 @@ assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screensh
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(pkg.scripts?.qa === "npm run test:all", "package must expose the full QA gate.");
 assert(pkg.version === "0.2.0", "suite version must identify the unified CommonGround cutover.");
-for (const phrase of ["mpes_authority: prime", "M4-P1-commonground-ledgersuite-consolidation", "D-001", "NOT_RUN", "no publication authority granted"]) {
+for (const phrase of ["mpes_authority: prime", "M1-shared-interchange-and-recovery", "D-001", "D-005", "NOT_RUN", "no publication authority granted"]) {
   assert(projectState.includes(phrase), `PROJECT_STATE.yaml missing required state: ${phrase}`);
 }
 for (const phrase of ["prime human-readable project authority", "Consolidate LedgerSuite into CommonGround", "owner explicitly directed their consolidation", "Stage PWA updates"]) {
@@ -336,16 +339,25 @@ assert(commonGroundIndex.toString("utf8").includes('type="module" src="./app.js"
 for (const phrase of ["decision-analysis", "suitability not applicable", "Decision context", "Hard constraints", "expectedRevision", "activate-update", "backup", "migration"]) {
   assert(`${commonGroundApp}\n${commonGroundMatterTypes}`.includes(phrase), `CommonGround app source missing unified contract: ${phrase}`);
 }
-for (const phrase of ['DB_VERSION = 3', 'decisionBriefs', 'decisionItems', 'migrationReceipts', 'record changed in another tab']) {
+for (const phrase of ['DB_VERSION = 4', 'decisionBriefs', 'decisionItems', 'migrationReceipts', 'transferReceipts', 'record changed in another tab']) {
   assert(commonGroundDb.includes(phrase), `CommonGround database source missing v3 contract: ${phrase}`);
 }
 for (const phrase of ['ledger-suite', 'sourceFingerprint', 'alreadyMigrated', 'writeGraphAtomic']) {
   assert(commonGroundLegacy.includes(phrase), `CommonGround legacy migration source missing: ${phrase}`);
 }
-for (const runtimePath of ["./index.html", "./app.js", "./styles.css", "./modules/db.js", "./modules/exports.js", "./modules/legacy.js", "./modules/matter-types.js"]) {
+for (const phrase of ["INTERCHANGE_VERSION", "formatVersion", "idempotencyKey", "recordHashes", "packageHash", "Unsupported interchange major version", "unknownFieldsPreserved"]) {
+  assert(sharedInterchange.includes(phrase), `Shared interchange contract missing: ${phrase}`);
+}
+for (const phrase of ["createCommonGroundInterchange", "applyCommonGroundInterchange", "rollbackCommonGroundInterchange", "writeInterchangeAtomic"]) {
+  assert(commonGroundInterchange.includes(phrase), `CommonGround interchange adapter missing: ${phrase}`);
+}
+for (const phrase of ["Data classification", "Required transfer sequence", "shared database", "unknown fields", "rollback"]) {
+  assert(interchangeContract.includes(phrase), `Interchange documentation missing: ${phrase}`);
+}
+for (const runtimePath of ["./index.html", "./app.js", "./styles.css", "./modules/db.js", "./modules/exports.js", "./modules/legacy.js", "./modules/matter-types.js", "./modules/interchange-adapter.js", "../../shared/interchange.js"]) {
   assert(commonGroundSw.includes(`"${runtimePath}"`), `CommonGround service worker must precache ${runtimePath}.`);
 }
-assert(commonGroundSw.includes('commonground-shell-v0.2.0'), "CommonGround cache must match the v0.2.0 cutover.");
+assert(commonGroundSw.includes('commonground-shell-v0.2.1'), "CommonGround cache must identify the M1 shell revision.");
 assert(!/install[\s\S]{0,240}skipWaiting/.test(commonGroundSw), "CommonGround updates must not skip waiting during install.");
 assert(commonGroundSw.includes('event.data?.type === "SKIP_WAITING"'), "CommonGround must activate a staged update only after an explicit message.");
 assert(!existsSync(join(root, "apps", "commonground", "assets")) || readdirSync(join(root, "apps", "commonground", "assets")).length === 0, "Opaque CommonGround generated assets must be removed.");

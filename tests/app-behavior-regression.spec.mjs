@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createStoredZip } from "../apps/commonground/modules/exports.js";
+import { createInterchangePackage } from "../shared/interchange.js";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 let server;
@@ -378,6 +379,9 @@ test("CommonGround migrates LedgerSuite once and leaves the source intact", asyn
 test("CommonGround rejects malformed imports and backs up before scoped reset", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await createCommonGroundWorkspace(page);
+  await page.getByRole("button", { name: "New Matter" }).click();
+  await page.getByLabel("Matter title").fill("Reset recovery matter");
+  await page.getByRole("button", { name: "Create Matter" }).click();
   await page.evaluate(async () => {
     localStorage.setItem("flexx_unrelated", "keep");
     await caches.open("other-app-cache");
@@ -395,7 +399,8 @@ test("CommonGround rejects malformed imports and backs up before scoped reset", 
   await page.locator("#modal-phrase").fill("DELETE");
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Back Up and Reset" }).click();
-  expect((await downloadPromise).suggestedFilename()).toMatch(/^commonground-pre-reset-backup-.*\.json$/);
+  const resetBackup = await downloadPromise;
+  expect(resetBackup.suggestedFilename()).toMatch(/^commonground-pre-reset-backup-.*\.json$/);
   await expect(page.getByRole("heading", { name: "Welcome to CommonGround" })).toBeVisible();
   const unrelated = await page.evaluate(async () => ({
     value: localStorage.getItem("flexx_unrelated"),
@@ -403,6 +408,16 @@ test("CommonGround rejects malformed imports and backs up before scoped reset", 
     commonGroundOpfsRemoved: await navigator.storage.getDirectory().then((root) => root.getDirectoryHandle("commonground")).then(() => false).catch(() => true)
   }));
   expect(unrelated).toEqual({ value: "keep", cache: true, commonGroundOpfsRemoved: true });
+  await page.getByLabel("Workspace name").fill("Recovery shell");
+  await page.getByLabel("Workspace owner").fill("Local owner");
+  await page.getByRole("button", { name: "Create Workspace" }).click();
+  await page.getByRole("button", { name: "Settings" }).click();
+  await page.locator("#bundle-file").setInputFiles(await resetBackup.path());
+  await page.getByRole("button", { name: "Import as a copy" }).click();
+  await expect(page.locator("#workspace-switcher option")).toHaveCount(2);
+  await page.locator("#workspace-switcher").selectOption({ label: "Regression Workspace" });
+  await page.getByRole("button", { name: "Matters" }).click();
+  await expect(page.getByRole("button", { name: /Reset recovery matter/ })).toBeVisible();
 });
 
 test("CommonGround export v2 round-trips as an integrity-protected copy", async ({ page }) => {
@@ -416,7 +431,7 @@ test("CommonGround export v2 round-trips as an integrity-protected copy", async 
   const download = await downloadPromise;
   const path = await download.path();
   const bundle = JSON.parse(await readFile(path, "utf8"));
-  expect(bundle).toMatchObject({ app: "commonground", bundleKind: "workspace", exportVersion: 2, schemaVersion: 3 });
+  expect(bundle).toMatchObject({ app: "commonground", bundleKind: "workspace", exportVersion: 2, schemaVersion: 4 });
   expect(bundle.integrity.algorithm).toBe("SHA-256");
   await page.locator("#bundle-file").setInputFiles(path);
   await expect(page.getByText("Validated workspace bundle")).toBeVisible();
@@ -502,6 +517,135 @@ test("CommonGround accepts v1 matter packets and LedgerSuite v1 files but reject
   await expect(page.locator(".notice-error")).toContainText("integrity checksum");
 });
 
+test("CommonGround portable records require preview, import once, preserve extensions, and roll back", async ({ page, context }) => {
+  await createCommonGroundWorkspace(page, "Portable Source");
+  await page.getByRole("button", { name: "New Matter" }).click();
+  await page.getByLabel("Matter title").fill("Portable decision");
+  await page.getByLabel("Matter type").selectOption("decision-analysis");
+  await page.getByRole("button", { name: "Create Matter" }).click();
+  await page.getByRole("button", { name: "Evidence & assumptions" }).click();
+  await page.getByLabel("Statement").fill("Portable assumption");
+  await page.getByRole("button", { name: "Add Assumption" }).click();
+  await page.getByRole("button", { name: "Decision brief" }).click();
+
+  await page.getByRole("button", { name: "Export portable record" }).click();
+  await expect(page.getByLabel("Portable record export preview")).toContainText("Portable decision");
+  await page.getByRole("button", { name: "Cancel" }).click();
+  await expect(page.getByLabel("Portable record export preview")).toHaveCount(0);
+
+  await page.getByRole("button", { name: "Export portable record" }).click();
+  const downloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Confirm and download" }).click();
+  const portableDownload = await downloadPromise;
+  expect(portableDownload.suggestedFilename()).toMatch(/\.lfa\.json$/);
+  const original = JSON.parse(await readFile(await portableDownload.path(), "utf8"));
+  original.records[0].futureRecordField = { preserve: "record" };
+  original.records[0].payload.futurePayloadField = { preserve: "payload" };
+  const portable = await createInterchangePackage({
+    sourceApp: original.sourceApp,
+    timezone: original.timezone,
+    records: original.records,
+    selection: original.selection,
+    extensions: { futurePackageField: { inert: "<script>not executable</script>" } }
+  });
+  const portableFile = { name: "portable.lfa.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(portable)) };
+
+  await page.getByRole("button", { name: "Settings" }).click();
+  await page.locator("#interchange-file").setInputFiles(portableFile);
+  await expect(page.getByText(/Validated 1 portable record/)).toBeVisible();
+  await expect(page.getByText("Preview exact selected content")).toBeVisible();
+  await page.getByRole("button", { name: "Cancel" }).click();
+  await expect(page.locator("#workspace-switcher option")).toHaveCount(1);
+
+  await page.locator("#interchange-file").setInputFiles(portableFile);
+  const duplicatePage = await context.newPage();
+  await gotoApp(duplicatePage, "commonground");
+  await duplicatePage.getByRole("button", { name: "Settings" }).click();
+  await duplicatePage.locator("#interchange-file").setInputFiles(portableFile);
+  await page.getByRole("button", { name: "Confirm atomic import" }).click();
+  await expect(page.locator(".notice-success")).toContainText("Imported 1 portable matter");
+  await duplicatePage.getByRole("button", { name: "Confirm atomic import" }).click();
+  await expect(duplicatePage.locator(".notice-error")).toContainText("already imported");
+  await duplicatePage.close();
+  await expect(page.locator("#workspace-switcher option")).toHaveCount(2);
+
+  await page.getByRole("button", { name: "Matters" }).click();
+  await page.getByRole("button", { name: /Portable decision \(Imported\)/ }).click();
+  await page.getByRole("button", { name: "Decision brief" }).click();
+  await page.getByRole("button", { name: "Export portable record" }).click();
+  const reexportPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Confirm and download" }).click();
+  const reexport = JSON.parse(await readFile(await (await reexportPromise).path(), "utf8"));
+  expect(reexport.records[0]).toMatchObject({
+    id: portable.records[0].id,
+    sourceApp: portable.records[0].sourceApp,
+    createdAt: portable.records[0].createdAt,
+    truthClass: portable.records[0].truthClass,
+    timezone: portable.records[0].timezone,
+    revision: portable.records[0].revision
+  });
+  expect(reexport.records[0].futureRecordField).toEqual({ preserve: "record" });
+  expect(reexport.records[0].payload.futurePayloadField).toEqual({ preserve: "payload" });
+
+  await page.getByRole("button", { name: "Evidence & assumptions" }).click();
+  await page.locator('[data-delete-store="decisionItems"]').first().click();
+  await expect(page.getByText("Portable assumption")).toHaveCount(0);
+  await page.getByLabel("Statement").fill("Corrected after import");
+  await page.getByRole("button", { name: "Add Assumption" }).click();
+  const importedMatterId = await page.evaluate(async () => (await (await import("./modules/db.js")).getAll("matters")).find((row) => row.title === "Portable decision (Imported)").id);
+  await page.getByRole("button", { name: "Matters" }).click();
+  await page.getByRole("button", { name: "New Matter" }).click();
+  await page.getByLabel("Matter title").fill("Independent work after import");
+  await page.getByRole("button", { name: "Create Matter" }).click();
+  await page.getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Roll back import" }).click();
+  await expect(page.locator(".notice-success")).toContainText("rolled back");
+  await expect(page.locator("#workspace-switcher option")).toHaveCount(2);
+  await expect(page.getByText("rolled-back", { exact: true })).toBeVisible();
+  const rollbackState = await page.evaluate(async (removedMatterId) => {
+    const db = await import("./modules/db.js");
+    return {
+      removed: (await db.getAll("matters")).some((row) => row.id === removedMatterId),
+      orphanedCorrections: (await db.getAll("decisionItems")).filter((row) => row.matterId === removedMatterId).length,
+      independent: (await db.getAll("matters")).some((row) => row.title === "Independent work after import")
+    };
+  }, importedMatterId);
+  expect(rollbackState).toEqual({ removed: false, orphanedCorrections: 0, independent: true });
+
+  await page.locator("#interchange-file").setInputFiles(portableFile);
+  await page.getByRole("button", { name: "Confirm atomic import" }).click();
+  await expect(page.locator(".notice-error")).toContainText("already imported");
+  await expect(page.locator("#workspace-switcher option")).toHaveCount(2);
+});
+
+test("CommonGround portable import aborts partial and quota failures without mutation", async ({ page }) => {
+  await createCommonGroundWorkspace(page, "Atomic Source");
+  await page.getByRole("button", { name: "New Matter" }).click();
+  await page.getByLabel("Matter title").fill("Atomic matter");
+  await page.getByRole("button", { name: "Create Matter" }).click();
+  const result = await page.evaluate(async () => {
+    const db = await import("./modules/db.js");
+    const adapter = await import("./modules/interchange-adapter.js");
+    const matter = (await db.getAll("matters"))[0];
+    const portable = await adapter.createCommonGroundInterchange(matter.id);
+    const counts = async () => ({
+      workspaces: (await db.getAll("workspaces")).length,
+      matters: (await db.getAll("matters")).length,
+      receipts: (await db.getAll("transferReceipts")).length
+    });
+    const before = await counts();
+    const errors = [];
+    for (const failureMode of ["partial", "quota"]) {
+      try { await adapter.applyCommonGroundInterchange(portable, { failureMode }); }
+      catch (error) { errors.push({ failureMode, name: error.name, message: error.message }); }
+    }
+    return { before, after: await counts(), errors };
+  });
+  expect(result.after).toEqual(result.before);
+  expect(result.errors).toHaveLength(2);
+  expect(result.errors.map((entry) => entry.failureMode)).toEqual(["partial", "quota"]);
+});
+
 test("CommonGround first install stays stable and its scoped shell reloads offline", async ({ page, context }) => {
   let mainFrameNavigations = 0;
   page.on("framenavigated", (frame) => {
@@ -512,7 +656,7 @@ test("CommonGround first install stays stable and its scoped shell reloads offli
   await page.waitForTimeout(100);
   expect(mainFrameNavigations).toBe(1);
   const cacheKeys = await page.evaluate(() => caches.keys());
-  expect(cacheKeys.some((key) => key === "commonground-shell-v0.2.0")).toBe(true);
+  expect(cacheKeys.some((key) => key === "commonground-shell-v0.2.1")).toBe(true);
   await context.setOffline(true);
   await page.reload({ waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "Shared work, clear next steps" })).toBeVisible();

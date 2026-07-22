@@ -2,7 +2,7 @@ project:
   id: localfirstapps-unified-suite
   version: 0.2.0
   phase: mpes_authority_transition_and_implementation
-  status: verified_local_pending_owner_acceptance_and_release
+  status: m1_verified_local_pending_owner_acceptance_and_release
   repository: https://github.com/shfqrkhn/LocalFirstApps
   git_head: 96ff1cd16baef338b74cd55899cb7d184bc44868
   git_head_role: clean_main_baseline_before_current_packet
@@ -31,7 +31,7 @@ project:
     - app: flexx-files
       store: scoped_localStorage
     - app: commonground
-      store: IndexedDB_commonground-suite_v3
+      store: IndexedDB_commonground-suite_v4_with_transfer_receipts
     - compatibility_source: ledgersuite
       store: IndexedDB_ledger-suite_read_only_until_explicit_backup_gated_deletion
   architecture:
@@ -44,11 +44,11 @@ project:
       - Knowledge Engine
       - Learning Engine
     implementation: isolated_static_apps_with_explicit_file_transfer
-  active_milestone: M4
-  active_packet: M4-P1-commonground-ledgersuite-consolidation
+  active_milestone: M1
+  active_packet: M1-shared-interchange-and-recovery
   active_packet_state: VERIFIED
   baseline_reconciliation: VERIFIED
-  next_milestone: M1-shared-interchange-and-recovery
+  next_milestone: M2-reusable-pwa-baseline
   requirements:
     - id: CG-MERGE
       state: IMPLEMENTED
@@ -62,9 +62,15 @@ project:
     - id: OFFLINE-PWA
       state: IMPLEMENTED
       evidence: versioned shell, offline fallback, user-activated staged update
+    - id: SHARED-INTERCHANGE
+      state: IMPLEMENTED
+      evidence: shared/interchange.js, docs/INTERCHANGE_CONTRACT.md, CommonGround adapter, portable fixture, contract and browser tests
+    - id: INTERCHANGE-RECOVERY
+      state: IMPLEMENTED
+      evidence: exact preview and confirmation, atomic new-ID import, unique persistent receipt, correction/deletion closure, rollback and replay protection
     - id: FULL-LOCAL-VERIFICATION
       state: VERIFIED
-      evidence: npm run qa passed static, native, 30 visual, 6 file, 15 behavior, and 6 read-only live route cases on 2026-07-21
+      evidence: npm run qa passed static and interchange contracts, 4 native Flexx checks, 30 visual, 6 file, 17 behavior, and 6 read-only live route cases on 2026-07-21
     - id: RELEASE
       state: NOT_RUN
       evidence: no publication authority granted
@@ -78,6 +84,9 @@ project:
     - id: D-003
       state: ACCEPTED
       decision: Preserve focused app isolation; do not interpret conceptual LifeOS and WorkOS groupings as permission for a repository-wide monolith.
+    - id: D-005
+      state: ACCEPTED
+      decision: Shared integration is a dependency-free semver file contract with app-owned adapters, explicit preview and atomic receipt-backed mutation; it creates no shared runtime storage or synchronization.
   risks:
     - id: R-001
       status: controlled
@@ -92,9 +101,13 @@ project:
       risk: broader MPES milestones are not implemented by this packet
       control: keep deferred modules inactive and sequence them through bounded future packets
     - id: R-004
-      status: controlled_with_limitations
+      status: controlled
       risk: concurrent_edits
-      control: revision checks reject stale singleton writes; independent list items remain separate; semantic conflict resolution across separate records is deferred to M1
+      control: revision checks reject stale singleton writes; portable records carry explicit conflicts and revisions; transfer receipt uniqueness rejects duplicate-tab replay
+    - id: R-005
+      status: controlled_with_limitations
+      risk: interchange_forward_compatibility_and_browser_quota
+      control: accept 1.x conservatively, preserve unknown record/payload fields, reject other majors, validate size/shape/hashes before mutation, abort atomically; real eviction behavior remains browser-controlled
   evidence:
     - path: docs/EVIDENCE_RECEIPT.md
       state: VERIFIED_LOCAL
@@ -108,5 +121,5 @@ project:
     - exact_consolidation_deployment_is_not_run
   blockers: []
   implementation_plan: docs/MPES_IMPLEMENTATION_PLAN.md
-  next_action: Begin M1 shared interchange and recovery only after this verified local packet is reviewed; do not publish absent explicit authority.
+  next_action: Commit the verified M1 packet locally and begin M2 only after owner review. Do not publish absent explicit authority.
   updated_at: 2026-07-21

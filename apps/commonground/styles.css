@@ -95,6 +95,9 @@ footer { padding: 1.5rem max(1rem, 5vw) 5rem; color: var(--muted); text-align: c
 .notice-update { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-color: #3976a8; background: rgba(57, 118, 168, .16); }
 .notice-update button { flex: 0 0 auto; }
 .preview { margin-top: 1rem; border: 1px solid #347b68; border-radius: 10px; padding: 1rem; background: rgba(52, 123, 104, .12); }
+.preview pre { max-height: 20rem; overflow: auto; padding: .75rem; border-radius: 8px; background: #101914; color: #f4fbf7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.receipt-list { padding-left: 1.2rem; }
+.receipt-list li { margin-block: .65rem; }
 .muted { color: var(--muted); }
 .danger-zone { border-color: #713044; }
 details { margin-top: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; }

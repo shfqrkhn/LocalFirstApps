@@ -60,6 +60,7 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - `PROJECT_STATE.yaml`: current machine-readable milestone, requirements, risks, evidence, and next action.
 - `DECISIONS.md`: accepted architectural decisions and MPES amendments.
 - `docs/MPES_IMPLEMENTATION_PLAN.md`: M0–M9 packet sequence and completion definition.
+- `shared/interchange.js` and `docs/INTERCHANGE_CONTRACT.md`: M1 portable-record implementation and public contract.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
@@ -88,7 +89,8 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 - Keep each app README explicit about its data/recovery boundary; document export/import/reset support or state the limitation when no separate recovery workflow exists.
 - Keep CommonGround's matter-type registry authoritative. Facilitation matters retain suitability and route-out behavior; Decision Analysis matters use the shared workspace/storage/export shell but never inherit facilitation-only gates.
 - Preserve CommonGround export v2 plus CommonGround v1 and LedgerSuite v1/v2 import compatibility. Legacy database migration must stay previewed, atomic, idempotent, and source-preserving.
-- Keep decision hard constraints distinct from comparative scores. Preserve revision checks on singleton writes so stale tabs fail visibly instead of overwriting newer records; broader semantic conflict handling belongs to M1.
+- Keep portable transfer file-only and explicit: select, exact preview, confirm, validate, atomic app-owned apply, unique receipt and rollback. Accept compatible `1.x` conservatively, preserve unknown record/payload fields, reject other majors, and never add hidden shared storage or synchronization.
+- Keep decision hard constraints distinct from comparative scores. Preserve revision checks on singleton writes and portable conflict metadata so stale or duplicate tabs fail visibly instead of overwriting newer records.
 - CommonGround worker updates must remain fully staged and user-activated. First install must not reload, and explicit activation must reload even when installation and update occur in the same page session.
 - Keep `docs/CAPABILITY_RECOVERY_MATRIX.md`, the behavior suite, and package gates aligned whenever a recovery or input contract changes.
 - Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.

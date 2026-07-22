@@ -1,4 +1,4 @@
-const CACHE_NAME = "commonground-shell-v0.2.0";
+const CACHE_NAME = "commonground-shell-v0.2.1";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -9,6 +9,8 @@ const APP_SHELL = [
   "./modules/exports.js",
   "./modules/legacy.js",
   "./modules/matter-types.js",
+  "./modules/interchange-adapter.js",
+  "../../shared/interchange.js",
   "./icons/icon-32.png",
   "./icons/icon-180.png",
   "./icons/icon-512.png",
@@ -30,7 +32,8 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
-  if (url.origin !== location.origin || !url.pathname.includes("/apps/commonground/")) return;
+  const commonGroundResource = url.pathname.includes("/apps/commonground/") || url.pathname.endsWith("/shared/interchange.js");
+  if (url.origin !== location.origin || !commonGroundResource) return;
   if (event.request.mode === "navigate") {
     event.respondWith(
       fetch(event.request)

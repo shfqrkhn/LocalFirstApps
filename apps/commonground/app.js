@@ -30,6 +30,12 @@ import {
   parseLegacyFile,
   prepareLegacyMigration
 } from "./modules/legacy.js";
+import {
+  applyCommonGroundInterchange,
+  createCommonGroundInterchange,
+  rollbackCommonGroundInterchange,
+  stageCommonGroundInterchange
+} from "./modules/interchange-adapter.js";
 import { MATTER_TYPES, matterRoutes, matterType, nextMatterStep } from "./modules/matter-types.js";
 
 const APP_VERSION = "0.2.0";
@@ -45,6 +51,9 @@ const state = {
   route: "dashboard",
   notice: null,
   pendingBundle: null,
+  pendingInterchange: null,
+  pendingInterchangeExport: null,
+  transferReceipts: [],
   pendingLegacy: null,
   legacyBackupDownloaded: false,
   updateRegistration: null,
@@ -99,6 +108,7 @@ async function refreshWorkspace(preferredId = state.workspace?.id) {
     state.matter = null;
     state.graph = null;
   }
+  state.transferReceipts = (await getAll("transferReceipts")).sort((a, b) => String(b.appliedAt).localeCompare(String(a.appliedAt)));
 }
 
 async function refreshMatter(matterId = state.matter?.id) {
@@ -294,13 +304,20 @@ function packView() {
   const content = config.family === "decision"
     ? `<dl class="brief-grid"><div><dt>Context</dt><dd>${escapeHtml(brief.memo.context || "shared")}</dd></div><div><dt>Question</dt><dd>${escapeHtml(brief.memo.question || "Not framed")}</dd></div><div><dt>Decision</dt><dd>${escapeHtml(brief.decision.choice || brief.memo.choice || "Not recorded")}</dd></div><div><dt>Evidence</dt><dd>${decisionItems("evidence").length}</dd></div><div><dt>Hard constraints</dt><dd>${decisionItems("constraint").length}</dd></div><div><dt>Options</dt><dd>${decisionItems("option").length}</dd></div><div><dt>Risk</dt><dd>${escapeHtml(brief.governance.riskNote || "Not recorded")}</dd></div><div><dt>Lessons</dt><dd>${escapeHtml(brief.outcome.lessons || "Not reviewed")}</dd></div></dl>`
     : `<dl class="brief-grid"><div><dt>Suitability</dt><dd>${escapeHtml(state.matter.suitabilityState)}</dd></div><div><dt>Participants</dt><dd>${graph.participants.length}</dd></div><div><dt>Issues</dt><dd>${graph.issueNodes.length}</dd></div><div><dt>Sessions</dt><dd>${graph.sessions.length}</dd></div><div><dt>Open commitments</dt><dd>${graph.commitments.filter((row) => row.status !== "complete").length}</dd></div><div><dt>Follow-ups</dt><dd>${graph.followUps.length}</dd></div></dl>`;
-  return matterShell(`<section class="card printable"><p class="eyebrow">${escapeHtml(config.pack || "Briefing Pack")}</p><h2>${escapeHtml(state.matter.title)}</h2>${content}<div class="form-actions no-print"><button class="primary" data-action="export-matter">Export JSON</button><button class="secondary" data-action="export-matter-zip">Export ZIP</button><button class="secondary" data-action="export-markdown">Export Markdown</button><button class="secondary" data-action="print">Print</button></div></section>`);
+  const portablePreview = state.pendingInterchangeExport
+    ? `<section class="preview no-print" aria-label="Portable record export preview"><strong>Exact selected content: 1 matter</strong><pre tabindex="0">${escapeHtml(JSON.stringify(state.pendingInterchangeExport, null, 2))}</pre><div class="form-actions"><button class="primary" data-action="confirm-interchange-export">Confirm and download</button><button class="secondary" data-action="cancel-interchange-export">Cancel</button></div></section>`
+    : "";
+  return matterShell(`<section class="card printable"><p class="eyebrow">${escapeHtml(config.pack || "Briefing Pack")}</p><h2>${escapeHtml(state.matter.title)}</h2>${content}<div class="form-actions no-print"><button class="primary" data-action="export-matter">Export JSON</button><button class="secondary" data-action="export-matter-zip">Export ZIP</button><button class="secondary" data-action="prepare-interchange-export">Export portable record</button><button class="secondary" data-action="export-markdown">Export Markdown</button><button class="secondary" data-action="print">Print</button></div>${portablePreview}</section>`);
 }
 
 function settingsView() {
   const legacy = state.pendingLegacy;
+  const transfer = state.pendingInterchange;
+  const transferPreview = transfer ? `<div class="preview"><strong>Validated ${transfer.recordCount} portable record(s)${transfer.forwardMinor ? " from a newer compatible minor version" : ""}</strong><p>IDs: ${escapeHtml(transfer.recordIds.join(", "))}</p><details><summary>Preview exact selected content</summary><pre tabindex="0">${escapeHtml(transfer.exactJson)}</pre></details><div class="form-actions"><button class="primary" data-action="commit-interchange">Confirm atomic import</button><button class="secondary" data-action="cancel-interchange">Cancel</button></div></div>` : "";
+  const receiptList = state.transferReceipts.length ? `<ul class="receipt-list">${state.transferReceipts.map((receipt) => `<li><strong>${escapeHtml(receipt.status)}</strong> · ${escapeHtml(receipt.recordIds?.length || 0)} record(s) · <code>${escapeHtml(String(receipt.idempotencyKey).slice(0, 12))}</code>${receipt.status === "applied" ? ` <button class="secondary" data-action="rollback-interchange" data-receipt-id="${escapeHtml(receipt.id)}">Roll back import</button>` : ""}</li>`).join("")}</ul>` : '<p class="muted">No portable-record imports yet.</p>';
   return `<section class="page-header"><div><p class="eyebrow">Data control</p><h1>Settings</h1><p>Backups, migration, integrity, and app-scoped recovery.</p></div></section>
     <div class="settings-grid">
+      <section class="card"><h2>Portable records</h2><p>Import a LocalFirstApps 1.x package only after exact preview and confirmation. Validation and all writes are local.</p><label>Choose portable-record JSON<input id="interchange-file" type="file" accept=".json,.lfa.json,application/json"></label>${transferPreview}<h3>Import receipts</h3>${receiptList}</section>
       <section class="card"><h2>Workspace backup</h2><p>Export a complete integrity-protected CommonGround backup.</p><div class="form-actions"><button class="primary" data-action="export-workspace">Export JSON</button><button class="secondary" data-action="export-workspace-zip">Export ZIP</button></div><label>Restore CommonGround backup<input id="bundle-file" type="file" accept=".json,.zip,application/json,application/zip"></label>${state.pendingBundle ? `<div class="preview"><strong>Validated ${escapeHtml(state.pendingBundle.bundleKind)} bundle</strong><button class="primary" data-action="commit-bundle">Import as a copy</button></div>` : ""}</section>
       <section class="card"><h2>LedgerSuite migration</h2><p>Legacy data is validated and copied atomically. The source remains untouched.</p>${legacy ? `<div class="preview"><strong>${legacy.alreadyMigrated ? "Already migrated" : "Ready to migrate"}</strong><p>${legacy.counts.workspaces} workspace(s), ${legacy.counts.cases} decision case(s).</p>${legacy.alreadyMigrated ? "" : '<button class="primary" data-action="commit-legacy">Migrate into CommonGround</button>'}</div>` : `<p class="muted">No same-origin LedgerSuite database detected.</p>`}<label>Import LedgerSuite JSON or ZIP<input id="legacy-file" type="file" accept=".json,.zip,application/json,application/zip"></label>${legacy?.source === "file" && !legacy.alreadyMigrated ? '<button class="primary" data-action="commit-legacy">Migrate staged file</button>' : ""}${legacy?.source === "indexeddb" ? `<details><summary>Delete legacy source after migration</summary><p>Download a complete source backup, then type <strong>DELETE LEDGER</strong>.</p><button class="secondary" data-action="export-legacy">Download Legacy Backup</button>${state.legacyBackupDownloaded ? '<p class="notice notice-success">Legacy backup downloaded for this session.</p>' : ""}<label>Confirmation<input id="legacy-delete-phrase" autocomplete="off"></label><button class="danger" data-action="delete-legacy">Delete legacy database</button></details>` : ""}</section>
       <section class="card"><h2>Integrity and cache</h2><p>Remove malformed or orphaned CommonGround records without touching valid data.</p><div class="form-actions"><button class="secondary" data-action="repair">Run Integrity Repair</button><button class="secondary" data-action="clear-cache">Clear CommonGround Cache</button></div></section>
@@ -507,7 +524,22 @@ async function handleAction(action, button) {
     announce("Matter deleted.", "success");
   } else if (action === "export-matter") await exportMatter(false);
   else if (action === "export-matter-zip") await exportMatter(true);
-  else if (action === "export-markdown") {
+  else if (action === "prepare-interchange-export") {
+    state.pendingInterchangeExport = await createCommonGroundInterchange(state.matter.id);
+    announce("Portable record selected and staged for exact preview.", "success");
+  } else if (action === "cancel-interchange-export") {
+    state.pendingInterchangeExport = null;
+    announce("Portable record export cancelled; nothing was downloaded.", "info");
+  } else if (action === "confirm-interchange-export") {
+    if (!state.pendingInterchangeExport) throw new Error("Prepare the portable record again before export.");
+    const filename = `commonground-portable-${state.matter.id}-${Date.now()}.lfa.json`;
+    const exported = state.pendingInterchangeExport;
+    downloadJson(filename, exported);
+    await saveOptionalOpfs(filename, JSON.stringify(exported, null, 2));
+    await put("exportArtifacts", { ...baseRecord("export"), matterId: state.matter.id, filename, format: "localfirstapps-interchange-1" });
+    state.pendingInterchangeExport = null;
+    announce("Portable record exported after confirmation.", "success");
+  } else if (action === "export-markdown") {
     const markdown = matterMarkdown(state.graph);
     const filename = `commonground-${state.matter.id}-${Date.now()}.md`;
     downloadBlob(filename, new Blob([markdown], { type: "text/markdown" }));
@@ -523,6 +555,21 @@ async function handleAction(action, button) {
     state.pendingBundle = null;
     await refreshWorkspace();
     announce(`Imported ${result.matters} matter(s) as a safe copy.`, "success");
+  } else if (action === "cancel-interchange") {
+    state.pendingInterchange = null;
+    announce("Portable-record import cancelled; no data was written.", "info");
+  } else if (action === "commit-interchange") {
+    if (!state.pendingInterchange) throw new Error("Choose and validate a portable-record file first.");
+    const result = await applyCommonGroundInterchange(state.pendingInterchange);
+    state.pendingInterchange = null;
+    await refreshWorkspace(result.receipt.createdIds.workspaces[0]);
+    announce(`Imported ${result.matters} portable matter(s) atomically. Receipt ${result.receipt.id} created.`, "success");
+  } else if (action === "rollback-interchange") {
+    const receiptId = button?.dataset.receiptId;
+    if (!receiptId) throw new Error("Interchange receipt not found.");
+    await rollbackCommonGroundInterchange(receiptId);
+    await refreshWorkspace();
+    announce("Portable-record import rolled back. Its receipt remains as replay protection.", "success");
   } else if (action === "commit-legacy") {
     const result = await commitLegacyMigration(state.pendingLegacy);
     state.pendingLegacy = await detectLegacyMigration();
@@ -603,6 +650,9 @@ async function handleChange(event) {
     if (input.id === "bundle-file") {
       state.pendingBundle = await parseBundleFile(file);
       announce("CommonGround backup validated and staged.", "success");
+    } else if (input.id === "interchange-file") {
+      state.pendingInterchange = await stageCommonGroundInterchange(file);
+      announce("Portable records validated and staged. Review exact content before confirming.", "success");
     } else if (input.id === "legacy-file") {
       const snapshot = await parseLegacyFile(file);
       state.pendingLegacy = await prepareLegacyMigration(snapshot, "file");
@@ -610,6 +660,7 @@ async function handleChange(event) {
     }
   } catch (error) {
     if (input.id === "bundle-file") state.pendingBundle = null;
+    else if (input.id === "interchange-file") state.pendingInterchange = null;
     else state.pendingLegacy = null;
     announce(error instanceof Error ? error.message : "Import failed.", "error");
   }

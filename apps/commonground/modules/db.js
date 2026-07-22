@@ -1,6 +1,6 @@
 export const DB_NAME = "commonground-suite";
-export const DB_VERSION = 3;
-export const SCHEMA_VERSION = 3;
+export const DB_VERSION = 4;
+export const SCHEMA_VERSION = 4;
 
 export const STORE_DEFINITIONS = [
   ["workspaces", []],
@@ -14,7 +14,8 @@ export const STORE_DEFINITIONS = [
   ["exportArtifacts", [["matterId", "matterId"]]],
   ["decisionBriefs", [["matterId", "matterId", true]]],
   ["decisionItems", [["matterId", "matterId"], ["matterKind", ["matterId", "kind"]]]],
-  ["migrationReceipts", [["sourceFingerprint", "sourceFingerprint", true]]]
+  ["migrationReceipts", [["sourceFingerprint", "sourceFingerprint", true]]],
+  ["transferReceipts", [["idempotencyKey", "idempotencyKey", true], ["status", "status"]]]
 ];
 
 export const STORE_NAMES = STORE_DEFINITIONS.map(([name]) => name);
@@ -31,6 +32,7 @@ export const MATTER_CHILD_STORES = [
 ];
 
 let databasePromise;
+const transactionRequestErrors = new WeakMap();
 
 export function uid(prefix = "cg") {
   return `${prefix}-${crypto.randomUUID()}`;
@@ -55,9 +57,14 @@ function requestResult(request) {
 function transactionDone(transaction) {
   return new Promise((resolve, reject) => {
     transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error || new Error("IndexedDB transaction failed."));
-    transaction.onabort = () => reject(transaction.error || new Error("IndexedDB transaction aborted."));
+    transaction.onerror = () => reject(transaction.error || transactionRequestErrors.get(transaction) || new Error("IndexedDB transaction failed."));
+    transaction.onabort = () => reject(transaction.error || transactionRequestErrors.get(transaction) || new Error("IndexedDB transaction aborted."));
   });
+}
+
+function trackTransactionRequest(transaction, request) {
+  request.addEventListener("error", () => transactionRequestErrors.set(transaction, request.error), { once: true });
+  return request;
 }
 
 function ensureIndex(store, name, keyPath, unique = false) {
@@ -197,6 +204,47 @@ export async function writeGraphAtomic({ workspaces = [], matters = [], children
   await transactionDone(tx);
 }
 
+export async function writeInterchangeAtomic({ workspaces = [], matters = [], children = {}, receipt, failureMode } = {}) {
+  if (!receipt) throw new Error("An interchange receipt is required.");
+  if (failureMode === "quota") throw new DOMException("Simulated storage quota failure.", "QuotaExceededError");
+  const names = new Set(["workspaces", "matters", "transferReceipts"]);
+  for (const [name, rows] of Object.entries(children)) if (rows.length) names.add(name);
+  const db = await openDatabase();
+  const tx = db.transaction([...names], "readwrite");
+  for (const row of workspaces) trackTransactionRequest(tx, tx.objectStore("workspaces").add(row));
+  for (const row of matters) trackTransactionRequest(tx, tx.objectStore("matters").add(row));
+  for (const [name, rows] of Object.entries(children)) for (const row of rows) trackTransactionRequest(tx, tx.objectStore(name).add(row));
+  trackTransactionRequest(tx, tx.objectStore("transferReceipts").add(receipt));
+  if (failureMode === "partial") tx.abort();
+  await transactionDone(tx);
+  return receipt;
+}
+
+export async function rollbackInterchangeReceipt(receiptId) {
+  const db = await openDatabase();
+  const tx = db.transaction(["workspaces", "matters", ...MATTER_CHILD_STORES, "transferReceipts"], "readwrite");
+  const receiptStore = tx.objectStore("transferReceipts");
+  const receipt = await requestResult(receiptStore.get(receiptId));
+  if (!receipt) throw new Error("Interchange receipt not found.");
+  if (receipt.status === "rolled-back") throw new Error("This interchange import was already rolled back.");
+  const matterIds = new Set(receipt.createdIds?.matters || []);
+  for (const matterId of matterIds) {
+    for (const storeName of MATTER_CHILD_STORES) {
+      const store = tx.objectStore(storeName);
+      const keys = await requestResult(store.index("matterId").getAllKeys(matterId));
+      for (const key of keys) store.delete(key);
+    }
+    tx.objectStore("matters").delete(matterId);
+  }
+  for (const workspaceId of receipt.createdIds?.workspaces || []) {
+    const workspaceMatterKeys = await requestResult(tx.objectStore("matters").index("workspaceId").getAllKeys(workspaceId));
+    if (workspaceMatterKeys.every((id) => matterIds.has(id))) tx.objectStore("workspaces").delete(workspaceId);
+  }
+  receiptStore.put({ ...receipt, status: "rolled-back", rolledBackAt: nowIso(), updatedAt: nowIso(), revision: Number(receipt.revision || 0) + 1 });
+  await transactionDone(tx);
+  return { ...receipt, status: "rolled-back" };
+}
+
 function validBase(row) {
   return row && typeof row.id === "string" && row.id.length > 0;
 }
@@ -206,6 +254,7 @@ function validRecord(name, row) {
   if (name === "workspaces") return typeof row.name === "string";
   if (name === "matters") return typeof row.workspaceId === "string" && typeof row.title === "string" && typeof row.type === "string";
   if (name === "migrationReceipts") return typeof row.sourceFingerprint === "string";
+  if (name === "transferReceipts") return typeof row.idempotencyKey === "string" && ["applied", "rolled-back"].includes(row.status);
   if (MATTER_CHILD_STORES.includes(name)) return typeof row.matterId === "string";
   return true;
 }

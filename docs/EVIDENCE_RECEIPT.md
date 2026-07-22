@@ -128,6 +128,22 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - **Rollback:** revert the local consolidation commit; LedgerSuite source storage remains preserved by default, and CommonGround pre-reset/exported bundles restore as validated copies.
 - **Next exact action:** begin M1 shared interchange/recovery after owner review, or request separate publication authority for this verified packet.
 
+## 2026-07-21 M1 Shared Interchange Packet
+
+**State:** `VERIFIED` locally; publication remains `NOT_RUN`.
+
+- `PASS`: `shared/interchange.js` defines dependency-free semver `1.x` portable packages with collision-resistant IDs, namespaced types, provenance/truth class, confidence, owner/source, ISO instants plus IANA timezone, units, assumptions, conflicts, relationships, tags, app payload, revisions, idempotency and SHA-256 record/package hashes.
+- `PASS`: compatible future `1.x` minors are accepted conservatively, unknown record/payload fields are preserved as inert data, and other majors fail visibly. Malformed JSON, oversize/deep/complex data, duplicate IDs and hash mismatches fail before mutation.
+- `PASS`: CommonGround adds portable export/import without replacing v2, v1 or LedgerSuite compatibility. Both directions show exact selected JSON and require confirmation.
+- `PASS`: IndexedDB v4 adds only `transferReceipts`. Import maps to new IDs and commits the complete graph plus a unique receipt in one transaction; cancellation, simulated partial failure, deterministic quota failure, replay and a second staged tab write no partial or duplicate records.
+- `PASS`: imported content can be corrected/deleted normally. Receipt rollback removes only receipt-owned IDs, retains replay protection, and leaves original workspaces intact. A real matter survives backup-before-reset and validated restore.
+- `PASS`: stale singleton writes remain rejected, the updated shell caches the shared validator, and CommonGround restarts offline with the portable module available.
+- `PASS`: `npm run qa` passed the static and interchange contract gates, four native Flexx checks, 30 responsive cases, six file-mode cases, 17 behavior cases and six read-only live route cases.
+- `PASS`: `npm audit --audit-level=high` found zero vulnerabilities; the only direct dependency remains the development-only Playwright test runner.
+- `PASS_WITH_LIMITATIONS`: deterministic quota fault injection proves atomic failure handling; it does not predict each browser's eviction policy. Automated semantics/input/viewport checks do not certify every assistive technology.
+- `NOT_RUN`: no push, deployment, remote mutation or release was authorized. Read-only live checks do not prove this local M1 runtime is deployed.
+- **Rollback:** use the per-receipt Settings control for an import, or revert the bounded M1 commit. The additive database upgrade does not rewrite pre-existing records.
+
 ## Required Before Public-Facing Change
 
 - `git status --short --ignored`
