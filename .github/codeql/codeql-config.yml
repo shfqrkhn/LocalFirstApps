@@ -5,5 +5,3 @@ paths-ignore:
   - test-results/**
   - playwright-report/**
   - tests/**
-  - apps/commonground/assets/**
-  - apps/commonground/workbox-*.js

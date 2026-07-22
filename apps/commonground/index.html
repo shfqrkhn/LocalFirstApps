@@ -1,162 +1,51 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; child-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests;" />
-    <meta name="description" content="Facilitator-first human-systems resolution suite. Resolve clearly." />
-    <link rel="canonical" href="https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/" />
-    <meta property="og:title" content="CommonGround Suite" />
-    <meta property="og:description" content="Private facilitation workspace for conflict resolution and structured team conversations." />
-    <meta property="og:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/screenshot-app.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CommonGround Suite" />
-    <meta name="twitter:description" content="Private facilitation workspace for conflict resolution and structured team conversations." />
-    <meta name="twitter:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/screenshot-app.png" />
-    <meta name="referrer" content="no-referrer" />
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), fullscreen=(self)" />
-    <meta name="theme-color" content="#1a1f2e" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="CommonGround" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="application-name" content="CommonGround" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./icons/icon-16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png" />
-    <meta name="msapplication-TileImage" content="./icons/icon-256.png" />
-    <meta name="msapplication-TileColor" content="#0f1117" />
-    <!-- iOS splash screens -->
-    <link rel="apple-touch-startup-image" media="screen and (device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="./icons/splash/apple-splash-750-1334.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="./icons/splash/apple-splash-828-1792.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="./icons/splash/apple-splash-1125-2436.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="./icons/splash/apple-splash-1170-2532.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="./icons/splash/apple-splash-1179-2556.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:402px) and (device-height:874px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="./icons/splash/apple-splash-1206-2622.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="./icons/splash/apple-splash-1242-2688.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:428px) and (device-height:926px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="./icons/splash/apple-splash-1284-2778.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="./icons/splash/apple-splash-1290-2796.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:440px) and (device-height:956px) and (-webkit-device-pixel-ratio:3) and (orientation:portrait)" href="./icons/splash/apple-splash-1320-2868.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:768px) and (device-height:1024px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="./icons/splash/apple-splash-1536-2048.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:744px) and (device-height:1133px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="./icons/splash/apple-splash-1488-2266.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:820px) and (device-height:1180px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="./icons/splash/apple-splash-1640-2360.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:834px) and (device-height:1194px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="./icons/splash/apple-splash-1668-2388.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="./icons/splash/apple-splash-2048-2732.png" />
-    <link rel="apple-touch-startup-image" media="screen and (device-width:1032px) and (device-height:1376px) and (-webkit-device-pixel-ratio:2) and (orientation:portrait)" href="./icons/splash/apple-splash-2064-2752.png" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <title>CommonGround Suite</title>
-    <style>
-      /* Global Mobile Interaction Base */
-      button, [role="button"], [type="button"], [type="submit"], [type="reset"], a, summary, .btn, .chip, .list-item.clickable, .step, label, input[type="radio"] {
-        touch-action: manipulation;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      }
-      
-      /* Premium Background & Foundation */
-      html {
-        background-color: #0f111a !important;
-        scroll-behavior: smooth !important;
-      }
-      body {
-        background-color: transparent !important;
-        background-image: none !important;
-        color: #f8f9fc !important;
-        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-        -webkit-font-smoothing: antialiased;
-        min-height: 100vh;
-      }
-      
-      /* Dynamic Orb Animation */
-      @keyframes orbFloat1 {
-        0% { transform: translate(0, 0) scale(1); }
-        100% { transform: translate(8vw, 12vh) scale(1.15); }
-      }
-      @keyframes orbFloat2 {
-        0% { transform: translate(0, 0) scale(1); }
-        100% { transform: translate(-10vw, -8vh) scale(1.2); }
-      }
-      @keyframes orbPulse {
-        0%, 100% { opacity: 0.5; }
-        50% { opacity: 0.8; }
-      }
-      
-      /* Joyful Interactive Elements */
-      @media (hover: hover) {
-        button:hover, [role="button"]:hover, a.button:hover {
-          transform: translateY(-2px) !important;
-          filter: brightness(1.15) !important;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 0 12px rgba(79, 142, 247, 0.15) !important;
-        }
-        a:hover { filter: brightness(1.2) !important; }
-      }
-      button:active, [role="button"]:active, a.button:active {
-        transform: translateY(1px) !important;
-        box-shadow: none !important;
-        filter: brightness(0.95) !important;
-      }
-      a { transition: color 0.2s ease !important; }
-      
-      /* Input & Form Styling (Responsive & Intuitive) */
-      input, textarea, select {
-        background: rgba(0,0,0,0.25) !important;
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        border-radius: 10px !important;
-        color: #ffffff !important;
-        transition: border-color 0.25s, box-shadow 0.25s !important;
-        backdrop-filter: blur(8px) !important;
-        -webkit-backdrop-filter: blur(8px) !important;
-      }
-      input:focus, textarea:focus, select:focus {
-        border-color: #4f8ef7 !important;
-        box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.25) !important;
-        outline: none !important;
-      }
-      input::placeholder, textarea::placeholder {
-        color: rgba(255,255,255,0.4) !important;
-      }
-      
-      /* Glassmorphic Surfaces (Useful & Joyful) */
-      article, section, .card, [role="dialog"], [role="region"], .noscript-card, header, nav, dialog {
-        background: rgba(30, 35, 50, 0.4) !important;
-        backdrop-filter: blur(24px) !important;
-        -webkit-backdrop-filter: blur(24px) !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
-        border-radius: 14px !important;
-      }
-      
-      /* Micro-animations */
-      @keyframes floatInGlass {
-        from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
-        to { opacity: 1; transform: translateY(0); filter: blur(0); }
-      }
-      #app {
-        animation: floatInGlass 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-      }
-    </style>
-    <script type="module" crossorigin src="./assets/index-DQPX2SFP.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BKn_KlXK.css">
-    <link rel="stylesheet" href="../../suite-shell.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'">
+    <meta name="description" content="CommonGround: a local-first facilitation and decision workspace.">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    <meta name="theme-color" content="#111827">
+    <meta name="application-name" content="CommonGround">
+    <meta name="apple-mobile-web-app-title" content="CommonGround">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="canonical" href="https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/">
+    <meta property="og:title" content="CommonGround">
+    <meta property="og:description" content="Local-first facilitation and decision workspace.">
+    <meta property="og:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/screenshot-app.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CommonGround">
+    <meta name="twitter:description" content="Local-first facilitation and decision workspace.">
+    <meta name="twitter:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/screenshot-app.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/icon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="../../suite-shell.css">
     <script src="../../suite-shell.js" defer></script>
+    <script type="module" src="./app.js"></script>
+    <title>CommonGround</title>
   </head>
   <body>
     <a class="lfa-suite-home" href="../../" aria-label="Back to LocalFirstApps">LocalFirstApps</a>
-    <div class="lfa-file-notice" role="status">Local file mode: this app uses browser modules and works best from localhost or GitHub Pages. Use the LocalFirstApps launcher to switch apps.</div>
-    <a href="https://github.com/sponsors/shfqrkhn?o=esb" target="_blank" rel="noopener noreferrer" style="position:fixed;bottom:max(12px, env(safe-area-inset-bottom));right:max(12px, env(safe-area-inset-right));z-index:90;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(15,17,26,.9);color:#fff;font:700 13px/1 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.24);">Sponsor</a>
-    <!-- Joyful Animated Ambient Background -->
-    <div id="joyful-ambient-bg" aria-hidden="true" style="position:fixed;inset:0;z-index:-1;overflow:hidden;background-color:#0f111a;pointer-events:none;">
-      <div style="position:absolute;top:-15%;left:-10%;width:55vw;height:55vw;background:radial-gradient(circle, rgba(79, 142, 247, 0.18) 0%, rgba(79, 142, 247, 0) 70%);border-radius:50%;filter:blur(60px);animation:orbFloat1 22s infinite alternate ease-in-out, orbPulse 15s infinite ease-in-out;"></div>
-      <div style="position:absolute;bottom:-15%;right:-10%;width:65vw;height:65vw;background:radial-gradient(circle, rgba(123, 94, 167, 0.15) 0%, rgba(123, 94, 167, 0) 70%);border-radius:50%;filter:blur(80px);animation:orbFloat2 28s infinite alternate ease-in-out, orbPulse 18s infinite ease-in-out;animation-delay:-5s;"></div>
-      <div style="position:absolute;top:40%;left:50%;width:40vw;height:40vw;transform:translate(-50%, -50%);background:radial-gradient(circle, rgba(46, 204, 113, 0.08) 0%, rgba(46, 204, 113, 0) 60%);border-radius:50%;filter:blur(100px);animation:orbPulse 20s infinite ease-in-out;animation-delay:-10s;"></div>
+    <div class="lfa-file-notice" role="status">Local file mode: CommonGround uses browser modules and requires localhost or GitHub Pages for its full storage and PWA workflow.</div>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="app">
+      <main id="main-content" class="center-shell">
+        <section class="card">
+          <h1>CommonGround</h1>
+          <p>Loading the local-first facilitation and decision workspace…</p>
+          <p>If this remains visible, open the app from localhost or GitHub Pages.</p>
+        </section>
+      </main>
     </div>
-    <div id="app"></div>
-    <noscript>
-      <div class="noscript-card">
-        <h1>COMMONGROUND Suite</h1>
-        <p>JavaScript is required to run this application.</p>
-      </div>
-    </noscript>
+    <p id="app-status" class="sr-only" aria-live="polite"></p>
+    <a class="sponsor-link" href="https://github.com/sponsors/shfqrkhn?o=esb" target="_blank" rel="noopener noreferrer">Sponsor</a>
+    <noscript><p class="noscript">JavaScript is required. No data has been changed.</p></noscript>
   </body>
 </html>

@@ -2,69 +2,45 @@
 
 <p><a href="https://github.com/sponsors/shfqrkhn?o=esb"><strong>Sponsor this project</strong></a></p>
 
-Private facilitation workspace for conflict resolution and structured team conversations.
+Local-first facilitation and decision workspace.
 
-- **Status:** Stable companion
+- **Status:** Stable unified utility
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/commonground](https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/)
-- **Portfolio Role:** Facilitation companion to LedgerSuite.
+- **Portfolio Role:** Private human-systems and accountable-decision workspace
 
-CommonGround helps facilitators organize difficult human-systems work: intake, suitability screening, issue mapping, session notes, commitments, and briefing packs.
+CommonGround keeps facilitation cases and structured decision analysis in one browser-local workspace without accounts, telemetry, external provider credentials, or silent upload.
 
 ## Screenshot
 
-![CommonGround facilitation workspace](./screenshot-app.png)
+![CommonGround unified workspace](./screenshot-app.png)
 
-## Why This Exists
+## Workflows
 
-Conflict-resolution and team-conversation work is high-context and easy to lose in loose notes. CommonGround gives facilitators a structured workspace for moving from ambiguity to accountable next steps.
+Facilitation matter types preserve suitability screening, route-out handling, participants and consent, intake, issue mapping, sessions, commitments, follow-ups, and briefing packs.
 
-## What It Does
+Decision Analysis matters provide personal, professional, and shared decision contexts; decision memos; evidence; assumptions; hard constraints kept separate from comparative option scores; review matrices; governance; outcome reviews; and printable or Markdown briefs. Decision matters bypass facilitation suitability without exposing facilitation-only fields.
 
-- Creates workspaces and matters for facilitation cases.
-- Provides suitability screening and route-out prompts.
-- Maps issues, stakeholders, commitments, and sessions.
-- Generates structured briefing material.
-- Runs offline-first as a PWA.
+## Storage And Recovery
 
-## Quick Start
+- CommonGround uses the versioned `commonground-suite` IndexedDB database.
+- Matter and workspace backups use integrity-protected CommonGround export v2 JSON; ZIP is a stored wrapper around the same validated JSON.
+- CommonGround v1 matter packets and LedgerSuite JSON/ZIP schema v1/v2 remain importable.
+- Same-origin LedgerSuite data can be validated, previewed, and copied atomically through guided migration. Migration is idempotent and never deletes the source automatically.
+- A pre-deletion same-origin source backup includes LedgerSuite recovery logs; those operational logs are counted in the migration receipt but are not copied into decision records.
+- Factory reset first downloads a complete workspace backup and clears only CommonGround-owned storage, caches, and service workers.
+- Optional OPFS copies are best-effort; browser downloads remain the primary recovery path.
+- Mutable singleton records use revision checks. If another tab saved first, CommonGround rejects the stale write and asks the user to reload instead of silently overwriting newer data. Concurrent edits to independent list items remain separate records.
 
-1. Open the live demo.
-2. Create or open a workspace.
-3. Start a matter.
-4. Complete suitability screening before facilitation work.
-5. Map issues, sessions, commitments, and next actions.
-6. Export a backup before clearing browser storage.
+## Privacy And Limits
 
-## Privacy And Data Model
-
-- No account or backend is required for normal use.
-- Data is stored locally in the browser.
-- No external identity, credential, AI-provider, telemetry, or silent upload path is bundled in this LocalFirstApps module.
-- Sensitive facilitation data should be exported and stored according to the user's own security rules.
-- The app does not replace professional, legal, medical, or safety escalation judgment.
-
-## Relationship To Other Projects
-
-CommonGround stays focused on facilitation. Broader decision memos, operational analysis, and executive judgment workflows belong in `LedgerSuite`.
-
-## Repository Layout
-
-```text
-.
-├── index.html
-├── manifest.webmanifest
-├── sw.js
-├── icons/
-└── assets/
-```
-
-## Deployment
-
-Host this app folder under the LocalFirstApps GitHub Pages site or another static host.
+- Static browser files only; no account, backend, provider integration, telemetry, or cloud recovery.
+- Data remains on the device unless the user explicitly exports a file.
+- Full module, IndexedDB migration, worker, and PWA behavior requires localhost or GitHub Pages; `file://` provides a safe explanatory fallback.
+- CommonGround does not replace legal, medical, safety, mediation, governance, or other professional judgment.
 
 ## Maintenance
 
-Keep this repo stable and focused. Avoid growing it into a general management suite; cross-link to LedgerSuite for broader operator workflows.
+Runtime source is composed of readable native ES modules. Keep the matter-type registry authoritative, preserve workflow isolation, and run `npm run qa` from the repository root before publication.
 
 ## License
 

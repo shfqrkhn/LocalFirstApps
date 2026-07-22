@@ -24,9 +24,8 @@ A focused suite of small, privacy-first browser apps that run as static local-fi
 | TS-Dash | CSV-based time-series analysis | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/ts-dash/) |
 | PMQuiz | Project-management certification practice | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/pmquiz/) |
 | Noodle Nudge | Private reflection and self-inquiry | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/noodle-nudge/) |
-| LedgerSuite | Managerial judgment and decision workspace | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/ledgersuite/) |
 | Flexx Files | Offline strength protocol tracker | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/) |
-| CommonGround | Private facilitation and conflict-resolution workspace | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/) |
+| CommonGround | Local-first facilitation and decision workspace | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/) |
 
 ## Why This Exists
 
@@ -70,3 +69,5 @@ Before adding a new module under `apps/<slug>/`, apply the intake contract in [`
 ## Migration
 
 The original standalone repo surfaces have been retired. Canonical links, screenshots, and future development now live in this consolidated suite.
+
+LedgerSuite decision work is now a first-class CommonGround matter type. The former suite URL temporarily redirects to CommonGround's guided migration, which validates and previews browser-local LedgerSuite data before copying it. The legacy database is never deleted automatically; LedgerSuite JSON and ZIP backups remain importable.

@@ -1,0 +1,112 @@
+project:
+  id: localfirstapps-unified-suite
+  version: 0.2.0
+  phase: mpes_authority_transition_and_implementation
+  status: verified_local_pending_owner_acceptance_and_release
+  repository: https://github.com/shfqrkhn/LocalFirstApps
+  git_head: 96ff1cd16baef338b74cd55899cb7d184bc44868
+  git_head_role: clean_main_baseline_before_current_packet
+  branch: agent/commonground-consolidation
+  mpes_version: 1.1.0-draft
+  mpes_authority: prime
+  canonical_human_authority: MPES-LocalFirstApps-Unified-v1.1.0.md
+  canonical_machine_state: PROJECT_STATE.yaml
+  authority: mpes_v1.1.0_draft_with_explicit_owner_amendments
+  objective: Build the smallest coherent LifeOS and WorkOS local-first suite under OmniCore while preserving focused apps, user data, offline independence, portability, recovery, and human authority.
+  observed_apps:
+    - ts-dash
+    - pmquiz
+    - noodle-nudge
+    - flexx-files
+    - commonground
+  compatibility_aliases:
+    - ledgersuite
+  storage_inventory:
+    - app: ts-dash
+      store: IndexedDB
+    - app: pmquiz
+      store: memory_and_localStorage_theme
+    - app: noodle-nudge
+      store: IndexedDB
+    - app: flexx-files
+      store: scoped_localStorage
+    - app: commonground
+      store: IndexedDB_commonground-suite_v3
+    - compatibility_source: ledgersuite
+      store: IndexedDB_ledger-suite_read_only_until_explicit_backup_gated_deletion
+  architecture:
+    product_groupings:
+      - LifeOS
+      - WorkOS
+    assurance_layer: OmniCore
+    shared_engines:
+      - Insight Engine
+      - Knowledge Engine
+      - Learning Engine
+    implementation: isolated_static_apps_with_explicit_file_transfer
+  active_milestone: M4
+  active_packet: M4-P1-commonground-ledgersuite-consolidation
+  active_packet_state: VERIFIED
+  baseline_reconciliation: VERIFIED
+  next_milestone: M1-shared-interchange-and-recovery
+  requirements:
+    - id: CG-MERGE
+      state: IMPLEMENTED
+      evidence: CommonGround native modules, IndexedDB v3, five-app registry
+    - id: LEGACY-MIGRATION
+      state: IMPLEMENTED
+      evidence: validated preview, atomic copy, idempotency receipt, source preservation, v1-v2 import
+    - id: DECISION-MODES
+      state: IMPLEMENTED
+      evidence: personal, professional, and shared decision context
+    - id: OFFLINE-PWA
+      state: IMPLEMENTED
+      evidence: versioned shell, offline fallback, user-activated staged update
+    - id: FULL-LOCAL-VERIFICATION
+      state: VERIFIED
+      evidence: npm run qa passed static, native, 30 visual, 6 file, 15 behavior, and 6 read-only live route cases on 2026-07-21
+    - id: RELEASE
+      state: NOT_RUN
+      evidence: no publication authority granted
+  decisions:
+    - id: D-001
+      state: ACCEPTED
+      decision: The prime MPES is amended by explicit owner direction to merge LedgerSuite into CommonGround while retaining compatibility and all MPES safety invariants.
+    - id: D-002
+      state: ACCEPTED
+      decision: Keep LedgerSuite as an archive-excluded compatibility redirect for v0.2.0 and keep legacy import support indefinitely.
+    - id: D-003
+      state: ACCEPTED
+      decision: Preserve focused app isolation; do not interpret conceptual LifeOS and WorkOS groupings as permission for a repository-wide monolith.
+  risks:
+    - id: R-001
+      status: controlled
+      risk: legacy_data_loss
+      control: export, validation, atomic copy, new IDs, receipt, source preservation
+    - id: R-002
+      status: controlled
+      risk: stale_or_mixed_pwa_shell
+      control: exact cache version, complete precache before install, explicit staged activation, scoped reset
+    - id: R-003
+      status: open
+      risk: broader MPES milestones are not implemented by this packet
+      control: keep deferred modules inactive and sequence them through bounded future packets
+    - id: R-004
+      status: controlled_with_limitations
+      risk: concurrent_edits
+      control: revision checks reject stale singleton writes; independent list items remain separate; semantic conflict resolution across separate records is deferred to M1
+  evidence:
+    - path: docs/EVIDENCE_RECEIPT.md
+      state: VERIFIED_LOCAL
+    - path: docs/CAPABILITY_RECOVERY_MATRIX.md
+      state: IMPLEMENTED
+    - path: tests/app-behavior-regression.spec.mjs
+      state: VERIFIED
+  unknowns:
+    - storage_quota_and_eviction_behavior_varies_by_browser
+    - screen_reader_and_longitudinal_operational_evidence_not_yet_demonstrated
+    - exact_consolidation_deployment_is_not_run
+  blockers: []
+  implementation_plan: docs/MPES_IMPLEMENTATION_PLAN.md
+  next_action: Begin M1 shared interchange and recovery only after this verified local packet is reviewed; do not publish absent explicit authority.
+  updated_at: 2026-07-21

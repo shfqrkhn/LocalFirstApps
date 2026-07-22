@@ -90,12 +90,43 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 
 ## 2026-07-21 Local Hardening Evidence
 
-- `PASS`: six canonical apps remain in launcher/README/folder parity with protected-path, privacy, dependency, and archive guardrails.
-- `PASS`: six isolated browser flows cover valid or invalid import, export/reset where supported, persistence/repair, keyboard, pointer, and touch behavior.
+- `PASS`: at that checkpoint, six canonical apps remained in launcher/README/folder parity with protected-path, privacy, dependency, and archive guardrails.
+- `PASS`: at that checkpoint, six isolated browser flows covered valid or invalid import, export/reset where supported, persistence/repair, keyboard, pointer, and touch behavior.
 - `PASS`: Flexx native checks cover plate math, last non-deload selection, draft persistence, and app-scoped reset that preserves unrelated storage.
 - `PASS`: CommonGround's Sponsor control no longer occludes Settings; its index precache revision was updated with the runtime fix.
 - `PASS_WITH_LIMITATIONS`: file mode provides a safe fallback, not full module/worker/PWA execution; PMQuiz has no progress backup; TS-Dash recovery relies on source/export files.
 - `NOT_RUN`: live Pages validation is deliberately separate until a publication pass; no deployment is implied by local evidence.
+
+## CommonGround v0.2.0 Consolidation Contract
+
+- Active membership becomes five apps: TS-Dash, PMQuiz, Noodle Nudge, Flexx Files, and CommonGround. LedgerSuite is not an active app; its one-release path is an archive-excluded migration redirect.
+- CommonGround owns one native-module shell, IndexedDB v3 repository, matter-type registry, export/recovery layer, and scoped PWA lifecycle for both facilitation and Decision Analysis.
+- Existing facilitation records and suitability/route-out behavior remain compatible. Decision Analysis preserves LedgerSuite memo, evidence, assumptions, options, matrix, governance, outcome, pack, and recovery responsibilities without inheriting facilitation gates.
+- Guided LedgerSuite migration must validate and preview before one atomic target transaction, write nothing on cancel/failure, prevent duplicate fingerprints, and never delete the source automatically.
+- CommonGround export v2 uses SHA-256 integrity for matter/workspace JSON and ZIP. CommonGround v1 plus LedgerSuite v1/v2 imports remain compatibility requirements.
+- Factory reset must first produce a complete backup and may clear only CommonGround-owned storage, caches, and registrations.
+- Publication remains `NOT_RUN` until the full local gate, protected PR checks, exact Pages SHA, five canonical routes, and temporary redirect are independently verified.
+
+## 2026-07-21 P0 / M4-P1 Packet Result
+
+**Packet:** CommonGround and LedgerSuite consolidation on `agent/commonground-consolidation`
+**State:** `VERIFIED` locally; owner acceptance and release are separate states.
+
+- `PASS`: five active apps plus one unlisted, archive-excluded LedgerSuite compatibility alias are in registry/launcher/README parity.
+- `PASS`: CommonGround uses readable native modules, IndexedDB v3, isolated facilitation and Decision Analysis routes, and shared/personal/professional decision contexts.
+- `PASS`: hard constraints are stored and rendered separately from comparative option scores.
+- `PASS`: CommonGround v2 JSON/ZIP round-trip uses SHA-256 integrity; CommonGround v1 and LedgerSuite v1 JSON/ZIP remain accepted; corrupt ZIP and bad LedgerSuite v2 integrity fail closed.
+- `PASS`: same-origin LedgerSuite migration is previewed, atomic, idempotent, new-ID, and source-preserving. Its backup includes recovery logs before optional typed deletion.
+- `PASS`: selected-matter deletion removes linked children without touching other matters. Factory reset downloads a valid backup and removes only CommonGround IndexedDB, scoped keys, caches, worker registrations, and OPFS data.
+- `PASS`: singleton revisions reject a stale decision write rather than overwriting newer tab data. Semantic reconciliation across independent records remains an M1 limitation.
+- `PASS`: first install does not reload-loop; the shell restarts offline; an updated worker waits while the old controller remains active and reloads only after explicit user activation.
+- `PASS`: `npm run qa` passed static membership/security/link/archive guards, four native Flexx checks, 30 responsive cases, six file-mode cases, 15 behavior cases, and six read-only live route cases.
+- `PASS`: deterministic CommonGround and five-card launcher screenshots were regenerated and visually inspected; `git diff --check`, dependency inventory, export attributes, secret-pattern, popup-API, and external-runtime scans passed.
+- `PASS_WITH_LIMITATIONS`: automated accessibility evidence covers semantics, labels, visible focus, target sizes, keyboard, pointer/touch, reduced motion, responsive overflow, and modal behavior; it does not certify every screen reader or assistive technology.
+- `PASS_WITH_LIMITATIONS`: browser-specific quota/eviction and longitudinal operation are not demonstrated by this bounded packet.
+- `NOT_RUN`: the unpushed consolidation is not deployed. Live tests prove only that the existing six public routes respond without overflow; they do not prove the new runtime or redirect is live.
+- **Rollback:** revert the local consolidation commit; LedgerSuite source storage remains preserved by default, and CommonGround pre-reset/exported bundles restore as validated copies.
+- **Next exact action:** begin M1 shared interchange/recovery after owner review, or request separate publication authority for this verified packet.
 
 ## Required Before Public-Facing Change
 

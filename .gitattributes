@@ -9,3 +9,4 @@ tests export-ignore
 apps/flexx-files/package-lock.json export-ignore
 apps/flexx-files/package.json export-ignore
 apps/flexx-files/tests export-ignore
+apps/ledgersuite export-ignore

@@ -5,6 +5,14 @@ Repo: `D:\VSCode\GH\LocalFirstApps`.
 
 Treat this as a public-safe continuation map. Re-read current files before editing.
 
+## Authority And State
+
+- Prime human-readable authority: owner-controlled `MPES-LocalFirstApps-Unified-v1.1.0.md` in the approved workspace reference area. It remains private unless publication is separately approved.
+- Canonical observed execution state: `PROJECT_STATE.yaml`.
+- Accepted amendments and visible conflicts: `DECISIONS.md`.
+- Bounded implementation sequence and reusable goal prompts: `docs/MPES_IMPLEMENTATION_PLAN.md`.
+- The MPES governs requirements; project state reports observations. Neither may silently override the other.
+
 ## Mission
 
 Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser utilities. It exists to reduce repo sprawl while preserving each migrated app as a native suite module.
@@ -42,12 +50,16 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - `apps/ts-dash`
 - `apps/pmquiz`
 - `apps/noodle-nudge`
-- `apps/ledgersuite`
 - `apps/flexx-files`
 - `apps/commonground`
 
+`apps/ledgersuite` is a temporary, unlisted `v0.2.0` compatibility redirect and is not an active app. Remove the shim during the next genuine feature release after `v0.2.0`; retain LedgerSuite JSON/ZIP import support in CommonGround indefinitely.
+
 ## Key Files
 
+- `PROJECT_STATE.yaml`: current machine-readable milestone, requirements, risks, evidence, and next action.
+- `DECISIONS.md`: accepted architectural decisions and MPES amendments.
+- `docs/MPES_IMPLEMENTATION_PLAN.md`: M0–M9 packet sequence and completion definition.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
@@ -74,6 +86,10 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 - Use `docs/future-app-intake.md` before adding any new module.
 - Keep `tests/static-regression.mjs`, the actual `apps/` directories, launcher cards, and README app links in exact membership parity; an unregistered app folder is a repo-sprawl blocker, not an implicit new app.
 - Keep each app README explicit about its data/recovery boundary; document export/import/reset support or state the limitation when no separate recovery workflow exists.
+- Keep CommonGround's matter-type registry authoritative. Facilitation matters retain suitability and route-out behavior; Decision Analysis matters use the shared workspace/storage/export shell but never inherit facilitation-only gates.
+- Preserve CommonGround export v2 plus CommonGround v1 and LedgerSuite v1/v2 import compatibility. Legacy database migration must stay previewed, atomic, idempotent, and source-preserving.
+- Keep decision hard constraints distinct from comparative scores. Preserve revision checks on singleton writes so stale tabs fail visibly instead of overwriting newer records; broader semantic conflict handling belongs to M1.
+- CommonGround worker updates must remain fully staged and user-activated. First install must not reload, and explicit activation must reload even when installation and update occur in the same page session.
 - Keep `docs/CAPABILITY_RECOVERY_MATRIX.md`, the behavior suite, and package gates aligned whenever a recovery or input contract changes.
 - Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.
 - Future userscripts belong in a separate userscripts repo by default, not LocalFirstApps.
