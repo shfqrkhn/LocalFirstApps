@@ -2,10 +2,10 @@
 
 <p><a href="https://github.com/sponsors/shfqrkhn?o=esb"><strong>Sponsor this project</strong></a></p>
 
-Offline-first strength protocol tracker.
+Offline-first strength training log and planning aid. Its suggestions are not medical advice or safety clearance; users remain responsible for choosing appropriate activity and seeking qualified guidance when needed.
 
 - **Status:** Stable maintenance app
-- **Version:** 3.9.74
+- **Version:** 3.9.75
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/flexx-files](https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/)
 - **Portfolio Role:** Fitness and personal-systems experiment.
 
@@ -32,7 +32,7 @@ Training adherence improves when the tracker removes decisions instead of adding
 
 1. Open the live demo.
 2. Start or continue the training workflow.
-3. Follow the prescribed movements and timers.
+3. Review the planned movements and timers; adjust them to your circumstances.
 4. Record work sets.
 5. Let progression logic handle next-session targets.
 

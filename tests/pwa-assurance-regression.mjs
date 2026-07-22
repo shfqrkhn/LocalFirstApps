@@ -6,11 +6,13 @@ import { fileURLToPath } from "node:url";
 import { PWA_ASSURANCE_VERSION, classifyStorageEstimate, schemaCompatible } from "../shared/pwa-assurance.js";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
+const deliverables = JSON.parse(await readFile(resolve(root, "config/deliverables.json"), "utf8"));
+const versions = new Map(deliverables.deliverables.map((item) => [item.id, item]));
 const pilots = [
-  { app: "commonground", manifest: "apps/commonground/pwa-shell.json", shell: "0.2.2-m2", schema: 4 },
-  { app: "flexx-files", manifest: "apps/flexx-files/pwa-shell.json", shell: "3.9.74", schema: "v3" },
-  { app: "healthos", manifest: "apps/healthos/pwa-shell.json", shell: "0.1.0-m3a", schema: 1 },
-  { app: "noodle-nudge", manifest: "apps/noodle-nudge/pwa-shell.json", shell: "1.2.30-r0", schema: 1 }
+  { app: "commonground", manifest: "apps/commonground/pwa-shell.json" },
+  { app: "flexx-files", manifest: "apps/flexx-files/pwa-shell.json" },
+  { app: "healthos", manifest: "apps/healthos/pwa-shell.json" },
+  { app: "noodle-nudge", manifest: "apps/noodle-nudge/pwa-shell.json" }
 ];
 
 for (const pilot of pilots) {
@@ -18,9 +20,9 @@ for (const pilot of pilots) {
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   assert.equal(manifest.contractVersion, PWA_ASSURANCE_VERSION);
   assert.equal(manifest.appId, pilot.app);
-  assert.equal(manifest.shellVersion, pilot.shell);
-  assert.equal(manifest.dataSchemaVersion, pilot.schema);
-  assert.equal(schemaCompatible(manifest, pilot.schema), true);
+  assert.equal(manifest.shellVersion, versions.get(pilot.app).shellVersion);
+  assert.equal(manifest.dataSchemaVersion, versions.get(pilot.app).dataSchemaVersion);
+  assert.equal(schemaCompatible(manifest, versions.get(pilot.app).dataSchemaVersion), true);
   assert.ok(manifest.assets.length >= 10, `${pilot.app} shell is unexpectedly incomplete.`);
   assert.equal(new Set(manifest.assets.map((asset) => asset.url)).size, manifest.assets.length);
   assert.ok(manifest.assets.some((asset) => asset.url === manifest.navigationFallback));

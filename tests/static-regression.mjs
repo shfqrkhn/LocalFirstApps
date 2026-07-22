@@ -389,7 +389,7 @@ for (const phrase of ["Data classification", "Required transfer sequence", "shar
 for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "0.2.2-m2"', "dataSchemaVersion: 4", "legacyCacheNames"]) {
   assert(commonGroundSw.includes(phrase), `CommonGround service worker missing M2 contract: ${phrase}`);
 }
-for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "3.9.74"', 'dataSchemaVersion: "v3"', "legacyCacheNames"]) {
+for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "3.9.75"', 'dataSchemaVersion: "v3"', "legacyCacheNames"]) {
   assert(flexxSw.includes(phrase), `Flexx service worker missing M2 contract: ${phrase}`);
 }
 for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "0.1.0-m3a"', "dataSchemaVersion: 1", 'cachePrefix: "healthos-"']) {

@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "components": [
+    {
+      "name": "@playwright/test",
+      "version": "1.61.1",
+      "scope": "development",
+      "license": "Apache-2.0",
+      "sourceUrl": "https://github.com/microsoft/playwright",
+      "provenanceStatus": "locked-package",
+      "checkedAt": "2026-07-22",
+      "evidence": ["package-lock.json"],
+      "runtime": false,
+      "replacement": "Browser-target checks may be replaced by another maintained local browser harness."
+    },
+    {
+      "name": "Bootstrap",
+      "version": "5.3.0",
+      "scope": "vendored-runtime",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/twbs/bootstrap",
+      "provenanceStatus": "vendored-with-license",
+      "checkedAt": "2026-07-22",
+      "evidence": ["vendor/bootstrap-5.3.0.min.css", "vendor/bootstrap-LICENSE.txt"],
+      "runtime": true,
+      "replacement": "Replace with CommonGround primitives after visual and behavioral parity."
+    },
+    {
+      "name": "Bootstrap",
+      "version": "5.3.3",
+      "scope": "vendored-runtime",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/twbs/bootstrap",
+      "provenanceStatus": "vendored-with-license",
+      "checkedAt": "2026-07-22",
+      "evidence": ["vendor/bootstrap-5.3.3.min.css", "vendor/bootstrap-5.3.3.bundle.min.js", "vendor/bootstrap-LICENSE.txt"],
+      "runtime": true,
+      "replacement": "Replace with CommonGround primitives after visual and behavioral parity."
+    },
+    {
+      "name": "Chart.js",
+      "version": "4.4.2",
+      "scope": "vendored-runtime",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/chartjs/Chart.js",
+      "provenanceStatus": "vendored-with-license",
+      "checkedAt": "2026-07-22",
+      "evidence": ["vendor/chart-4.4.2.umd.js", "vendor/chartjs-LICENSE.md"],
+      "runtime": true,
+      "replacement": "Retain only while Reflection needs a tested local chart; prefer accessible native summaries."
+    },
+    {
+      "name": "React and React DOM",
+      "version": "19.2.5",
+      "scope": "ts-dash-opaque-bundle",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/facebook/react",
+      "provenanceStatus": "version-observed-in-opaque-bundle",
+      "checkedAt": "2026-07-22",
+      "evidence": ["apps/ts-dash/assets/index-Bu3OO-ZO.js"],
+      "runtime": true,
+      "replacement": "Behavior-first readable TS-Dash rewrite; do not edit the bundle."
+    },
+    {
+      "name": "Dexie",
+      "version": "4.4.2",
+      "scope": "ts-dash-opaque-bundle",
+      "license": "Apache-2.0",
+      "sourceUrl": "https://github.com/dexie/Dexie.js",
+      "provenanceStatus": "version-observed-in-opaque-bundle",
+      "checkedAt": "2026-07-22",
+      "evidence": ["apps/ts-dash/assets/index-Bu3OO-ZO.js"],
+      "runtime": true,
+      "replacement": "Readable IndexedDB adapter preserving TSDashDB v1/v2 behavior."
+    },
+    {
+      "name": "Papa Parse",
+      "version": "5.5.3",
+      "scope": "ts-dash-opaque-bundle",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/mholt/PapaParse",
+      "provenanceStatus": "version-observed-in-opaque-bundle",
+      "checkedAt": "2026-07-22",
+      "evidence": ["apps/ts-dash/assets/index-Bu3OO-ZO.js"],
+      "runtime": true,
+      "replacement": "Dependency-free bounded CSV parser or separately reviewed maintained parser."
+    },
+    {
+      "name": "Workbox",
+      "version": "7.3.0",
+      "scope": "ts-dash-generated-worker",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/GoogleChrome/workbox",
+      "provenanceStatus": "version-observed-in-generated-worker",
+      "checkedAt": "2026-07-22",
+      "evidence": ["apps/ts-dash/workbox-8c29f6e4.js", "apps/ts-dash/assets/workbox-window.prod.es5-vqzQaGvo.js"],
+      "runtime": true,
+      "replacement": "App-owned dependency-free PWA assurance after TS-Dash rewrite parity."
+    },
+    {
+      "name": "uPlot",
+      "version": "unknown-from-opaque-bundle",
+      "scope": "ts-dash-opaque-bundle",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/leeoniya/uPlot",
+      "provenanceStatus": "signature-only-version-unknown",
+      "checkedAt": "2026-07-22",
+      "evidence": ["apps/ts-dash/assets/index-Bu3OO-ZO.js"],
+      "runtime": true,
+      "replacement": "Accessible native summaries or a separately reviewed local chart implementation."
+    },
+    {
+      "name": "Zustand",
+      "version": "unknown-from-opaque-bundle",
+      "scope": "ts-dash-opaque-bundle",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/pmndrs/zustand",
+      "provenanceStatus": "signature-only-version-unknown",
+      "checkedAt": "2026-07-22",
+      "evidence": ["apps/ts-dash/assets/index-Bu3OO-ZO.js"],
+      "runtime": true,
+      "replacement": "Readable app-local state with explicit persistence boundaries."
+    },
+    {
+      "name": "nanoid",
+      "version": "unknown-from-opaque-bundle",
+      "scope": "ts-dash-opaque-bundle",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/ai/nanoid",
+      "provenanceStatus": "signature-only-version-unknown",
+      "checkedAt": "2026-07-22",
+      "evidence": ["apps/ts-dash/assets/index-Bu3OO-ZO.js"],
+      "runtime": true,
+      "replacement": "Use Web Crypto UUIDs if the rewrite does not require compatible nanoid identifiers."
+    },
+    {
+      "name": "dexie-react-hooks",
+      "version": "unknown-from-opaque-bundle",
+      "scope": "ts-dash-opaque-bundle",
+      "license": "Apache-2.0",
+      "sourceUrl": "https://github.com/dexie/Dexie.js",
+      "provenanceStatus": "signature-only-version-unknown",
+      "checkedAt": "2026-07-22",
+      "evidence": ["apps/ts-dash/assets/index-Bu3OO-ZO.js"],
+      "runtime": true,
+      "replacement": "Readable IndexedDB subscriptions with explicit reconciliation tests."
+    }
+  ]
+}

@@ -6,8 +6,8 @@
   "description": "This assessment helps you discover what makes an activity truly engaging and motivating for you. The insights apply not just to your job, but also to hobbies, projects, and personal pursuits.",
   "instructions": "Think about the activities where you feel most engaged and effective. Please rate how much each of the following characteristics is present in those activities.",
   "scientificBasis": {
-    "summary": "This assessment is based on the Job Characteristics Model by Hackman & Oldham, a cornerstone of organizational psychology. It measures five core job dimensions that are proven to increase motivation, performance, and satisfaction. The final Motivating Potential Score (MPS) is a powerful, validated indicator of an individual's fit with a given role or task.",
-    "citation": "Model based on 'Work Redesign' (1980) by J.R. Hackman and G.R. Oldham. Questions are standard representations of the core dimensions."
+    "summary": "This self-reflection activity draws on job-characteristics concepts. Its Motivating Potential Score is an app-specific calculation, not a validated measure of performance, satisfaction, or role fit.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "responseScale": [
     { "text": "Very Little", "value": 1 },

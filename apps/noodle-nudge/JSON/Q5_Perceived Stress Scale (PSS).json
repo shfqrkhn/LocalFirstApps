@@ -6,8 +6,8 @@
   "description": "This assessment is a snapshot of your thoughts and feelings over the last month. It helps measure the degree to which you've perceived your life as unpredictable, uncontrollable, and overwhelming.",
   "instructions": "In the last month, how often have you felt or thought a certain way? Please answer honestly.",
   "scientificBasis": {
-    "summary": "This assessment uses the Perceived Stress Scale (PSS-10), one of the most widely used and validated psychological instruments for measuring subjective stress. It is a powerful indicator of how life's demands are impacting your sense of well-being.",
-    "citation": "The Perceived Stress Scale is in the public domain. Content based on the PSS-10 by Cohen, S., Kamarck, T., & Mermelstein, R. (1983)."
+    "summary": "This self-reflection activity draws on perceived-stress concepts. It has not been independently validated for this app and is not a clinical screening or diagnostic instrument.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "responseScale": [
     { "text": "Never", "value": 1 },

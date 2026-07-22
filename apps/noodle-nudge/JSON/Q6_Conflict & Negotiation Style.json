@@ -6,8 +6,8 @@
   "description": "Disagreements are a natural part of life and work. This assessment helps you understand your instinctive approach to conflict, providing a foundation for handling disagreements more effectively.",
   "instructions": "When your wishes differ from those of another person, how typical is each of these responses for you? Please answer honestly.",
   "scientificBasis": {
-    "summary": "This assessment is based on the Thomas-Kilmann Conflict Mode Instrument (TKI), a leading model that maps conflict styles onto two dimensions: assertiveness and cooperativeness. Understanding your dominant style is the first step toward choosing the most effective approach for any given situation.",
-    "citation": "Items are adapted from the public domain International Personality Item Pool (ipip.ori.org) scales representing the five conflict handling modes. Conceptual model based on K.W. Thomas, 'Conflict and Conflict Management' (1976)."
+    "summary": "This self-reflection activity groups conflict responses by assertiveness and cooperativeness concepts. It has not been independently validated and cannot identify an effective approach for every situation.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "responseScale": [
     { "text": "Very Untypical", "value": 1 },

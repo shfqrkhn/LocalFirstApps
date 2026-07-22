@@ -10,6 +10,8 @@ Private reflection and self-inquiry app.
 
 Noodle Nudge is a browser-based reflection tool for prompts, assessments, journaling, and self-discovery workflows.
 
+Its assessments and daily content are unverified self-reflection aids, not validated psychological tests, diagnosis, treatment, or professional advice.
+
 ## Screenshot
 
 ![Noodle Nudge reflection app](./images/screenshot.jpeg)

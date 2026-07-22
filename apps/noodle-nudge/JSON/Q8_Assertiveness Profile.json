@@ -6,8 +6,8 @@
   "description": "This assessment helps you understand your natural tendency to express your opinions, needs, and desires confidently and directly. Developing your assertiveness skills can enhance your communication and relationships.",
   "instructions": "This questionnaire contains items about different aspects of assertiveness. There are no right or wrong responses, so please answer honestly. Use the following scale when responding to each statement by writing the number from the scale below that you feel most accurately characterizes your response to the statement.",
   "scientificBasis": {
-    "summary": "This assessment measures assertiveness, a key component of effective communication, characterized by the ability to express one's thoughts and feelings openly while respecting others. The items are derived from the International Personality Item Pool (IPIP) to ensure public domain status and scientific credibility.",
-    "citation": "Assertiveness items are based on the 'Assertiveness' facet of Extraversion from the International Personality Item Pool (ipip.ori.org). This is a public domain resource. Concepts from the Rathus Assertiveness Schedule (Rathus, 1973) are also incorporated for a comprehensive profile of assertiveness."
+    "summary": "This self-reflection activity draws on assertiveness concepts. It has not been independently validated for this app and does not provide a comprehensive psychological profile.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "responseScale": [
     { "text": "Very Inaccurate", "value": 1 },

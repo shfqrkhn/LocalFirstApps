@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'selfquiz-';
-const CACHE_NAME = 'selfquiz-cache-v1.3.61';
+const CACHE_NAME = 'selfquiz-cache-v1.3.62';
 const DATA_CACHE_NAME = 'selfquiz-data-v1';
 const FONT_CACHE_NAME = 'selfquiz-fonts-v1';
 const ASSETS = [

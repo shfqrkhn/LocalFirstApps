@@ -3,20 +3,58 @@
   "appId": "healthos",
   "shellVersion": "0.1.0-m3a",
   "dataSchemaVersion": 1,
-  "compatibleDataSchemas": [1],
+  "compatibleDataSchemas": [
+    1
+  ],
   "navigationFallback": "./index.html",
   "assets": [
-    { "url": "./index.html", "sha256": "1ebb55a3174d7ff2a2969654aa3905d537b2f4d53d9ef0d9d6cce501b3bf063c" },
-    { "url": "./styles.css", "sha256": "7c58c1527e321b4bcd8ff0593affb0f3c523029f04b16495e8434f9f15ed9f86" },
-    { "url": "./app.js", "sha256": "83edaca71a75f3f77fd9bbf0e15fcca69f9eeb403b670a37af49f107249f5094" },
-    { "url": "./storage.js", "sha256": "233cd4da452310dc870d35f4c223c6b00d3258a2cc3ac4506d27833f8faecd90" },
-    { "url": "./manifest.webmanifest", "sha256": "bac87de479a90f631af16e33bc8bc514c182b52a71fdee759fd267f386c47f81" },
-    { "url": "./icon.svg", "sha256": "5f6befc6a6444335e87520385fb82d39b35fe295cf1b5445e56d7320949d8ff9" },
-    { "url": "../../shared/interchange.js", "sha256": "f84c0e706cc7c83ed80c3824270458245696fb8382c69fb94cc782cc53a92cc0" },
-    { "url": "../../shared/healthos.js", "sha256": "7aeccef2232d83418a1962a93664a285a66fa486ec4e948fed9755f010179ce2" },
-    { "url": "../../shared/focus-timer.js", "sha256": "19c4b167b73a50f0cd64e9b0d82409bfdc823d01a94f853b4453757d85fbfbb5" },
-    { "url": "../../shared/pwa-assurance.js", "sha256": "87b34cd917cd780089ba6bec9e3c6bc77eb5c498682db34cae4ff174cd0dacdf" },
-    { "url": "../../suite-shell.css", "sha256": "d63e05f0610260d3872f7e924ac08778037537cff1f23f116e7b7ca1551c33d3" },
-    { "url": "../../suite-shell.js", "sha256": "63bdda790a2c19ad9795a72e9642183118351ab6625a270b1400298f86b42618" }
+    {
+      "url": "./index.html",
+      "sha256": "1ebb55a3174d7ff2a2969654aa3905d537b2f4d53d9ef0d9d6cce501b3bf063c"
+    },
+    {
+      "url": "./styles.css",
+      "sha256": "7c58c1527e321b4bcd8ff0593affb0f3c523029f04b16495e8434f9f15ed9f86"
+    },
+    {
+      "url": "./app.js",
+      "sha256": "a2d8af0953aa3c924d841ae65190d1681f2aa3fca097334620febffc167786ba"
+    },
+    {
+      "url": "./storage.js",
+      "sha256": "233cd4da452310dc870d35f4c223c6b00d3258a2cc3ac4506d27833f8faecd90"
+    },
+    {
+      "url": "./manifest.webmanifest",
+      "sha256": "bac87de479a90f631af16e33bc8bc514c182b52a71fdee759fd267f386c47f81"
+    },
+    {
+      "url": "./icon.svg",
+      "sha256": "5f6befc6a6444335e87520385fb82d39b35fe295cf1b5445e56d7320949d8ff9"
+    },
+    {
+      "url": "../../shared/interchange.js",
+      "sha256": "f84c0e706cc7c83ed80c3824270458245696fb8382c69fb94cc782cc53a92cc0"
+    },
+    {
+      "url": "../../shared/healthos.js",
+      "sha256": "7aeccef2232d83418a1962a93664a285a66fa486ec4e948fed9755f010179ce2"
+    },
+    {
+      "url": "../../shared/focus-timer.js",
+      "sha256": "19c4b167b73a50f0cd64e9b0d82409bfdc823d01a94f853b4453757d85fbfbb5"
+    },
+    {
+      "url": "../../shared/pwa-assurance.js",
+      "sha256": "87b34cd917cd780089ba6bec9e3c6bc77eb5c498682db34cae4ff174cd0dacdf"
+    },
+    {
+      "url": "../../suite-shell.css",
+      "sha256": "d63e05f0610260d3872f7e924ac08778037537cff1f23f116e7b7ca1551c33d3"
+    },
+    {
+      "url": "../../suite-shell.js",
+      "sha256": "63bdda790a2c19ad9795a72e9642183118351ab6625a270b1400298f86b42618"
+    }
   ]
 }

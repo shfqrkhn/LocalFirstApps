@@ -3,11 +3,11 @@ importScripts("../../shared/pwa-worker.js");
 self.LFAPwaWorker.register({
   appId: "noodle-nudge",
   cachePrefix: "noodle-nudge-",
-  shellVersion: "1.2.30-r0",
+  shellVersion: "1.2.31-r1",
   dataSchemaVersion: 1,
   compatibleDataSchemas: [1],
   manifestUrl: "./pwa-shell.json",
-  legacyCacheNames: ["noodle-nudge-cache-v1.2.29"],
+  legacyCacheNames: ["noodle-nudge-cache-v1.2.29", "noodle-nudge-cache-v1.2.30-r0"],
   allowedSharedAssets: [
     "../../shared/pwa-assurance.js",
     "../../suite-shell.css",

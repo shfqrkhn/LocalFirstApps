@@ -125,7 +125,7 @@ function focusSetupView() {
   return `${moduleCards()}
     <section class="grid">
       <form class="panel" id="focus-start-form">
-        <p class="eyebrow">New session</p><h2>Choose a bounded focus mode</h2>
+        <p class="eyebrow">New session</p><h1>Choose a bounded focus mode</h1>
         <div class="form-grid">
           <label>Mode<select id="focus-mode">${Object.entries(FOCUS_MODES).map(([value, mode]) => `<option value="${value}">${escapeHtml(mode.label)}</option>`).join("")}</select></label>
           <label>Observed life state<select id="focus-life-state">${LIFE_STATES.map((value) => `<option value="${value}"${value === lifeState ? " selected" : ""}>${value}</option>`).join("")}</select></label>

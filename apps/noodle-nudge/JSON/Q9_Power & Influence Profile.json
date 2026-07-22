@@ -6,8 +6,8 @@
   "description": "This assessment explores your natural tendencies in influencing others and your comfort with different forms of power. Understanding these aspects can help you navigate social and organizational dynamics more effectively.",
   "instructions": "Please rate how accurately each statement describes your typical behavior or beliefs. There are no right or wrong answers. Use the following scale for your responses.",
   "scientificBasis": {
-    "summary": "This assessment integrates two key psychological constructs: Machiavellianism, which describes a pragmatic, manipulative, and self-interested approach to power, and French and Raven's Five Bases of Power, which categorizes the sources of influence (Reward, Coercive, Legitimate, Expert, and Referent). The items are developed to align with public domain concepts and IPIP principles, ensuring scientific credibility and legal safety.",
-    "citation": "Machiavellianism concepts are based on the work of Christie & Geis (1970) and subsequent Five Factor Machiavellianism Inventory (FFMI) research. The Five Bases of Power are derived from French and Raven (1959). All specific items are adapted from or inspired by general public domain personality item pools (e.g., IPIP) to ensure copyright safety."
+    "summary": "This self-reflection activity draws on power, influence, and Machiavellianism concepts. It has not been independently validated and does not establish scientific credibility or legal reuse rights.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "responseScale": [
     { "text": "Very Inaccurate", "value": 1 },

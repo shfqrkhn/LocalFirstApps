@@ -1,0 +1,46 @@
+@import url("./design-tokens.css");
+
+.cg-focus-ring:focus-visible,
+.cg-button:focus-visible,
+.cg-field:focus-visible {
+  outline: 3px solid var(--cg-focus);
+  outline-offset: 3px;
+}
+
+.cg-button,
+.cg-field {
+  box-sizing: border-box;
+  min-block-size: var(--cg-touch-target);
+  border: 1px solid var(--cg-border);
+  border-radius: var(--cg-radius-sm);
+  font: inherit;
+}
+
+.cg-button {
+  padding: var(--cg-space-2) var(--cg-space-4);
+  color: var(--cg-accent-contrast);
+  background: var(--cg-accent);
+  cursor: pointer;
+}
+
+.cg-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cg-status {
+  border-inline-start: 0.25rem solid currentColor;
+  padding: var(--cg-space-3) var(--cg-space-4);
+}
+
+.cg-sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

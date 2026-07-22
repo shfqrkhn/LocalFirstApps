@@ -79,19 +79,19 @@ test.beforeAll(async () => {
       }
       if (url.pathname === "/apps/flexx-files/sw.js") {
         headers["cache-control"] = "no-store";
-        const shell = flexxWorkerRevision === 1 ? "3.9.74" : `3.9.74-test-${flexxWorkerRevision}`;
-        body = Buffer.from(body.toString("utf8").replace('shellVersion: "3.9.74"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${flexxWorkerRevision}\n`);
+        const shell = flexxWorkerRevision === 1 ? "3.9.75" : `3.9.75-test-${flexxWorkerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace('shellVersion: "3.9.75"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${flexxWorkerRevision}\n`);
       }
       if (url.pathname === "/apps/flexx-files/pwa-shell.json" && flexxWorkerRevision > 1) {
-        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "3.9.74"', `"shellVersion": "3.9.74-test-${flexxWorkerRevision}"`));
+        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "3.9.75"', `"shellVersion": "3.9.75-test-${flexxWorkerRevision}"`));
       }
       if (url.pathname === "/apps/noodle-nudge/service-worker.js") {
         headers["cache-control"] = "no-store";
-        const shell = noodleWorkerRevision === 1 ? "1.2.30-r0" : `1.2.30-r0-test-${noodleWorkerRevision}`;
-        body = Buffer.from(body.toString("utf8").replace('shellVersion: "1.2.30-r0"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${noodleWorkerRevision}\n`);
+        const shell = noodleWorkerRevision === 1 ? "1.2.31-r1" : `1.2.31-r1-test-${noodleWorkerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace('shellVersion: "1.2.31-r1"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${noodleWorkerRevision}\n`);
       }
       if (url.pathname === "/apps/noodle-nudge/pwa-shell.json" && noodleWorkerRevision > 1) {
-        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "1.2.30-r0"', `"shellVersion": "1.2.30-r0-test-${noodleWorkerRevision}"`));
+        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "1.2.31-r1"', `"shellVersion": "1.2.31-r1-test-${noodleWorkerRevision}"`));
       }
       if (fault === "corrupt") body = Buffer.concat([body, Buffer.from("\n/* deterministic-corruption */\n")]);
       response.writeHead(200, headers);

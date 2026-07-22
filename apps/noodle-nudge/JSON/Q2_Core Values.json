@@ -6,8 +6,8 @@
   "description": "This exercise helps you identify your most deeply held principles and life priorities. Understanding what truly matters to you is the key to setting meaningful goals. There are two sets of values: desired end-states (goals in life) and modes of behavior (guiding principles).",
   "instructions": "For each set of values below (Goals and Principles), drag and drop the cards into the columns that best represent their importance to you. You can only place 5 cards in the 'Most Important' column for each set.",
   "scientificBasis": {
-    "summary": "This assessment is based on the foundational framework of the Rokeach Value Survey, a classic and highly influential model in social psychology for understanding human values. It helps differentiate between terminal values (desirable end-states) and instrumental values (modes of behavior).",
-    "citation": "Conceptual model based on 'The Nature of Human Values' (1973) by Milton Rokeach. Value list is a standard representation used in public domain research."
+    "summary": "This self-reflection activity draws on terminal and instrumental value concepts. It has not been independently validated for this app.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "interactionType": "cardSort",
   "sections": [

@@ -6,8 +6,8 @@
   "description": "This foundational assessment helps you understand your core personality—the stable patterns of how you tend to think, feel, and behave. Your honest responses will provide the most valuable insights for your personal growth journey.",
   "instructions": "Please rate how accurately each statement describes you. There are no right or wrong answers.",
   "scientificBasis": {
-    "summary": "This assessment is built using items from the International Personality Item Pool (IPIP), a public domain scientific collaboration. The items are designed to measure the Five-Factor Model of personality, the most empirically validated model in modern psychology. This ensures your results are based on credible, open-source science and are safe for all uses.",
-    "citation": "Items were selected from the International Personality Item Pool (ipip.ori.org), developed by L. R. Goldberg, et al. This is a public domain resource."
+    "summary": "This self-reflection activity draws on Five-Factor personality concepts. It has not been independently validated for this app and is not a diagnostic instrument.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "responseScale": [
     { "text": "Very Inaccurate", "value": 1 },
