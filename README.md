@@ -52,7 +52,7 @@ Cross-app integration uses explicit local files, not shared hidden storage. The 
 
 CommonGround, Flexx Files, HealthOS Focus, and Noodle Nudge share only a narrow PWA assurance contract. Each app still owns its worker, versioned content-addressed shell, data schema, caches, update controls, and reset boundary. A failed candidate cannot replace the active shell; compatible updates require explicit activation and retain one last-known-good shell.
 
-CommonGround LifeOS `1.0.0` is the bounded shell label seeded by HealthOS Focus. Reflection remains Noodle-owned and adapter-only; Strength links to canonical Flexx Files. No shell module reads another app's storage. HealthOS records use explicit portable files, and its timestamp-reconciled timer writes a session only after user review. Meditation, breathing, C25K, and later HealthOS modules remain inactive pending separate acceptance.
+CommonGround LifeOS `1.0.0` is the bounded shell label seeded by HealthOS Focus. Reflection remains Noodle-owned and adapter-only. Strength links to canonical Flexx Files, whose characterized calculation, readiness, recovery, and storage contracts are now versioned behind an app-owned adapter. No shell module reads another app's storage. HealthOS records use explicit portable files, and its timestamp-reconciled timer writes a session only after user review. Meditation, breathing, C25K, and later HealthOS modules remain inactive pending separate acceptance.
 
 ## Local Use
 
@@ -66,7 +66,7 @@ python -m http.server 8080
 
 ## Development
 
-R3A CommonGround LifeOS foundation is verified locally. HealthOS preference restore is failure-visible and resumable; Noodle exposes only versioned, pure Reflection definitions/scoring/backup-preview seams; Flexx remains an independent linked app. Stores, formats, routes, workers, caches, and user data remain isolated and unmigrated. Manual assistive-technology and qualified content/domain review remain `NOT_RUN`; publication is separate.
+R3B CommonGround LifeOS Strength foundation is verified locally. HealthOS preference restore remains failure-visible and resumable; Noodle exposes versioned pure Reflection seams; Flexx remains independent and exposes versioned pure Strength seams without granting LifeOS storage access. Stores, formats, routes, workers, caches, UI outputs, and user data remain isolated and unmigrated. Manual assistive-technology and qualified content/domain review remain `NOT_RUN`; publication is separate.
 
 From a git checkout:
 

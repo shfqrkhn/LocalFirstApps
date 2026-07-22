@@ -115,3 +115,11 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Reflection boundary:** Ten local assessment definitions and the bounded 42-rule scorer are versioned behind a Noodle-owned adapter. Structural/scoring validation is not content approval. The only LifeOS mapping is an exact preview fixture with mutation explicitly forbidden.
 - **Compatibility:** HealthOS/Noodle/Flexx routes, stores, records, formats, worker/cache scopes, scoring outputs, UI workflows, and legacy module URLs remain supported without migration.
 - **Rollback:** Revert implementation commit `17863b9`; no data downgrade or migration reversal is required.
+
+## D-015 — Extract Strength without transferring ownership
+
+- **State:** Accepted and verified locally for R3B.
+- **Decision:** Flexx Files owns versioned Strength calculation, readiness, recovery, storage-contract, and adapter seams. Its UI consumes the adapter, while CommonGround LifeOS receives only module metadata and an exact non-mutating preview contract.
+- **Compatibility:** Preserve the seven `flexx_` keys, v3 session/draft shapes, legacy/current backups, output formats, route, worker/cache scope, independent reset, and all 20 existing global UI handlers. No migration, dual-write, foreign-store read, shared runtime, or content approval occurs.
+- **Evidence:** The frozen characterization hash covers 250 deterministic histories, every public progression/lookup method, and 1,041 plate inputs. Unit/browser gates cover readiness, recovery, malformed/quota faults, draft retention, foreign storage/cache survival, complete offline staging, responsive/file/accessibility behavior, and preview no-mutation.
+- **Rollback:** Revert implementation commit `097822a`; R3B changes no persisted schema or user data, so rollback is code-only.

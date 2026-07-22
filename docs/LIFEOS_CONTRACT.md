@@ -1,4 +1,4 @@
-# CommonGround LifeOS R3A Contract
+# CommonGround LifeOS R3A–R3B Contract
 
 Version `1.0.0` defines the bounded CommonGround LifeOS foundation. The private MPES remains prime authority. This packet does not authorize data migration, route retirement, content approval, later HealthOS modules, or a shared runtime.
 
@@ -10,7 +10,7 @@ CommonGround LifeOS is the product shell label seeded by the existing `apps/heal
 
 - **Focus:** active seed owned by HealthOS with app-owned data access.
 - **Reflection:** adapter-only preparation owned by Noodle Nudge; LifeOS has no data access.
-- **Strength:** link to the canonical Flexx Files surface; LifeOS has no data access.
+- **Strength:** foundation-ready link to canonical Flexx Files; LifeOS has no data access.
 
 There is no suite database, hidden cross-app read/write, global bus, universal worker, implicit synchronization, backend, account, provider, or remote AI dependency.
 
@@ -26,8 +26,12 @@ The catalog fixes the ten canonical local assessment paths and validates identit
 
 Legacy Noodle backups, including backups without `userHistory`, remain accepted by the extracted compatibility validator. `createLifeOsReflectionPreview` produces only a deterministic, explicit, non-mutating proposed mapping. It cannot write any app store and is not a migration receipt or authorization.
 
+## Strength extraction
+
+Flexx Files owns `strength/calculations.js`, `strength/readiness.js`, `strength/recovery.js`, `strength/storage-contract.js`, and `strength-adapter.js`. The adapter preserves the existing calculator/readiness/storage identities and exposes only pure seams, exact boundary metadata, and a future LifeOS preview that cannot mutate storage. The seven `flexx_` keys, v3 session/draft records, legacy/current backup shapes, route, UI, worker/cache scope, and reset boundary remain unchanged. Structural validation is not professional training, health, provenance, license, or content approval.
+
 ## Verification and rollback
 
-`tests/r3a-lifeos-regression.mjs` proves module boundaries, versioned adapters, ten-definition/42-rule coverage, hostile definition/expression/backup rejection, old scoring URL compatibility, old backup compatibility, exact preview mapping, no mutation authority, and complete offline shells. Browser tests prove preference failure/retry, existing format/recovery behavior, stale/replay/atomic faults, independent Noodle/Flexx surfaces, foreign cache/store survival, responsive/file/offline operation, and automated accessibility.
+`tests/r3a-lifeos-regression.mjs` and `tests/r3b-strength-regression.mjs` prove module boundaries, versioned adapters, Reflection ten-definition/42-rule coverage, Strength calculation parity, hostile backup/draft rejection, old format compatibility, exact previews, no mutation authority, and complete offline shells. Browser tests prove preference failure/retry, quota visibility, existing recovery behavior, stale/replay/atomic faults, independent Noodle/Flexx surfaces, foreign cache/store survival, responsive/file/offline operation, and automated accessibility.
 
-Rollback is code-only: revert implementation commit `17863b9`. No database version, persistent schema, route, compatibility URL, format, cache prefix, worker scope, or user data was migrated.
+Rollback is code-only: revert R3A commit `17863b9` and/or R3B commit `097822a`. No database version, persistent schema, route, compatibility URL, format, cache prefix, worker scope, or user data was migrated.

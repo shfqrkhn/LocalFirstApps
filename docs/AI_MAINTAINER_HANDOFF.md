@@ -59,7 +59,7 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**R3A VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `17863b9` seeds CommonGround LifeOS `1.0.0` over the unchanged HealthOS Focus runtime, makes cross-storage preference restore failure-visible and resumable, and versions Noodle-owned pure Reflection seams with exact ten-definition/42-rule parity. Flexx remains a canonical linked app; no route, store, schema, format, worker/cache scope, UI data model, or user data migrated. The full candidate gate and moderate audit pass. Manual AT, real browser quota/eviction, qualified content/domain review, owner acceptance, deployment, and publication remain `NOT_RUN`. R3B is next only after owner review; TS-Dash/WorkOS migration and later HealthOS modules remain inactive.
+**R3B VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `097822a` adds Flexx-owned versioned Strength calculation, readiness, recovery, storage-contract, and adapter seams after exact characterization; the existing UI consumes that adapter. All seven `flexx_` keys, v3 records/drafts, legacy/current backups, calculations, outputs, route, worker/cache scope, reset boundary, and 20 global UI handlers remain compatible. LifeOS has no Flexx storage access; its only future mapping is preview-only and non-mutating. The full candidate gate and moderate audit pass. Manual AT, real browser quota/eviction, qualified content/domain review, owner acceptance, deployment, and publication remain `NOT_RUN`. R3C controller modularization is next only after owner review; TS-Dash/WorkOS migration and later HealthOS modules remain inactive.
 
 ## Key Files
 
@@ -74,8 +74,9 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 - `shared/pwa-worker.js`, `shared/pwa-assurance.js`, and `docs/PWA_ASSURANCE_CONTRACT.md`: M2 complete-shell staging, activation, health, scoped reset, and last-known-good contract.
 - `apps/noodle-nudge/scoring.js` and `apps/noodle-nudge/pwa-shell.json`: inert bounded scoring and app-owned complete-shell definition.
 - `apps/healthos/modules/healthos.js`, `apps/healthos/modules/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: HealthOS-owned observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract. The former `shared/` URLs are compatibility re-exports.
-- `apps/healthos/modules/lifeos-shell.js`, `apps/healthos/lifeos-adapter.js`, and `docs/LIFEOS_CONTRACT.md`: R3A shell membership, isolation, recovery, Reflection-preview, and rollback contract.
+- `apps/healthos/modules/lifeos-shell.js`, `apps/healthos/lifeos-adapter.js`, and `docs/LIFEOS_CONTRACT.md`: R3A–R3B shell membership, isolation, recovery, Reflection/Strength preview, and rollback contract.
 - `apps/noodle-nudge/reflection/*`, `apps/noodle-nudge/reflection-adapter.js`, and `tests/r3a-lifeos-regression.mjs`: Noodle-owned definitions/scoring/backup-preview seams, exact parity, hostile bounds, and compatibility evidence.
+- `apps/flexx-files/strength/*`, `apps/flexx-files/strength-adapter.js`, `docs/STRENGTH_CONTRACT.md`, and `tests/r3b-strength-regression.mjs`: Flexx-owned domain/recovery/storage seams, exact parity, failure bounds, and non-mutating preview evidence.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
@@ -103,7 +104,7 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- After owner review of verified R3A, execute only the bounded R3B Strength foundation goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin data/UI migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, retirement, or publication.
+- After owner review of verified R3B, execute only the bounded R3C Flexx Strength controller modularization goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, retirement, or publication.
 - Keep OmniCore pure and dependency-free. Every promoted contract requires a minimal semver API, two real consumers, app-owned adapters, explicit failure behavior, deterministic faults, and code-only rollback. Never move app transaction scope, stores, workers, routes, or domain records into OmniCore.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
@@ -117,7 +118,7 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 - Keep decision hard constraints distinct from comparative scores. Preserve revision checks on singleton writes and portable conflict metadata so stale or duplicate tabs fail visibly instead of overwriting newer records.
 - CommonGround, Flexx, HealthOS, and Noodle worker updates must remain app-owned, content-addressed, completely staged, schema-compatible, and user-activated. PMQuiz's legacy worker must remain cache-prefix and named-cache scoped. First install must not reload; later activation reloads each open tab once. Missing/corrupt/quota-failed candidates must delete only their incomplete cache, and a corrupt/evicted current shell must select the retained complete prior shell.
 - Preserve app ownership boundaries: cache prefixes, registrations, data stores, health UI and reset remain scoped. Health checks must not request persistence or imply that browser quota/eviction is controllable. Keep hosted subpaths and safe `file://` fallback covered.
-- HealthOS is the bounded M3A navigation/daily-state/focus surface only. Noodle Nudge remains canonical for reflection and Flexx Files for strength; HealthOS must not read either store. Keep meditation, breathing, C25K, mobility, sleep and later modules inactive until separately accepted.
+- CommonGround LifeOS currently uses the bounded HealthOS navigation/daily-state/focus surface only. Noodle Nudge remains canonical for Reflection and Flexx Files for Strength; HealthOS/LifeOS must not read either store. Keep meditation, breathing, C25K, mobility, sleep and later modules inactive until separately accepted.
 - Persist focus timestamps and derive duration from instants. Preserve reload/sleep reconciliation, clock/timezone anomaly visibility, manual correction, explicit pause/resume/restart/skip/cancel/review, stale-tab rejection and idempotent completion. Device cues remain detected, opt-in and visibly degradable.
 - Keep HealthOS transfer explicit and file-based: exact preview, confirm, atomic app-owned apply, durable replay receipt and rollback. TS-Dash stays generic and receives only deterministic user-exported CSV; correlation language must remain non-causal.
 - The local M3A route is not deployed. Existing live-route checks do not prove HealthOS publication.
