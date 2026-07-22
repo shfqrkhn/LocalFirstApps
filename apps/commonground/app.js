@@ -37,6 +37,13 @@ import {
   stageCommonGroundInterchange
 } from "./modules/interchange-adapter.js";
 import { MATTER_TYPES, matterRoutes, matterType, nextMatterStep } from "./modules/matter-types.js";
+import {
+  activatePwaUpdate,
+  clearOwnedPwaCaches,
+  formatBytes,
+  getPwaHealth,
+  registerPwaAssurance
+} from "../../shared/pwa-assurance.js";
 
 const APP_VERSION = "0.2.0";
 const root = document.querySelector("#app");
@@ -57,7 +64,10 @@ const state = {
   pendingLegacy: null,
   legacyBackupDownloaded: false,
   updateRegistration: null,
-  activatingUpdate: false,
+  updateStatus: null,
+  updateCompatible: true,
+  pwaRegistration: null,
+  pwaHealth: null,
   modal: null
 };
 
@@ -82,7 +92,9 @@ function announce(message, tone = "info") {
 function noticeMarkup() {
   const notice = state.notice ? `<div class="notice notice-${state.notice.tone}" role="status">${escapeHtml(state.notice.message)}</div>` : "";
   const update = state.updateRegistration
-    ? '<div class="notice notice-update" role="status"><span>A verified CommonGround update is ready.</span><button class="secondary" data-action="activate-update">Reload to update</button></div>'
+    ? state.updateCompatible
+      ? '<div class="notice notice-update" role="status"><span>A verified CommonGround update is ready.</span><button class="secondary" data-action="activate-update">Reload to update</button></div>'
+      : '<div class="notice notice-warning" role="status">A staged CommonGround shell is incompatible with this data schema and was not activated.</div>'
     : "";
   return notice + update;
 }
@@ -315,12 +327,22 @@ function settingsView() {
   const transfer = state.pendingInterchange;
   const transferPreview = transfer ? `<div class="preview"><strong>Validated ${transfer.recordCount} portable record(s)${transfer.forwardMinor ? " from a newer compatible minor version" : ""}</strong><p>IDs: ${escapeHtml(transfer.recordIds.join(", "))}</p><details><summary>Preview exact selected content</summary><pre tabindex="0">${escapeHtml(transfer.exactJson)}</pre></details><div class="form-actions"><button class="primary" data-action="commit-interchange">Confirm atomic import</button><button class="secondary" data-action="cancel-interchange">Cancel</button></div></div>` : "";
   const receiptList = state.transferReceipts.length ? `<ul class="receipt-list">${state.transferReceipts.map((receipt) => `<li><strong>${escapeHtml(receipt.status)}</strong> · ${escapeHtml(receipt.recordIds?.length || 0)} record(s) · <code>${escapeHtml(String(receipt.idempotencyKey).slice(0, 12))}</code>${receipt.status === "applied" ? ` <button class="secondary" data-action="rollback-interchange" data-receipt-id="${escapeHtml(receipt.id)}">Roll back import</button>` : ""}</li>`).join("")}</ul>` : '<p class="muted">No portable-record imports yet.</p>';
+  const health = state.pwaHealth;
+  const healthText = !health
+    ? "Health has not been checked yet."
+    : health.estimateAvailable
+      ? `${formatBytes(health.usage)} used of ${formatBytes(health.quota)} origin quota. Persistence: ${health.persisted === true ? "granted" : health.persisted === false ? "not granted" : "unknown"}.`
+      : "Browser storage estimate is unavailable; durability and remaining quota are unknown.";
+  const shellText = health?.worker
+    ? `Shell ${health.worker.shellVersion}; ${health.worker.currentComplete ? "current cache complete" : health.worker.recoveredFromPrevious ? "recovered from last-known-good cache" : "current cache incomplete"}. Data schema ${health.worker.dataSchemaVersion}.`
+    : "Worker shell status is unavailable.";
   return `<section class="page-header"><div><p class="eyebrow">Data control</p><h1>Settings</h1><p>Backups, migration, integrity, and app-scoped recovery.</p></div></section>
     <div class="settings-grid">
       <section class="card"><h2>Portable records</h2><p>Import a LocalFirstApps 1.x package only after exact preview and confirmation. Validation and all writes are local.</p><label>Choose portable-record JSON<input id="interchange-file" type="file" accept=".json,.lfa.json,application/json"></label>${transferPreview}<h3>Import receipts</h3>${receiptList}</section>
       <section class="card"><h2>Workspace backup</h2><p>Export a complete integrity-protected CommonGround backup.</p><div class="form-actions"><button class="primary" data-action="export-workspace">Export JSON</button><button class="secondary" data-action="export-workspace-zip">Export ZIP</button></div><label>Restore CommonGround backup<input id="bundle-file" type="file" accept=".json,.zip,application/json,application/zip"></label>${state.pendingBundle ? `<div class="preview"><strong>Validated ${escapeHtml(state.pendingBundle.bundleKind)} bundle</strong><button class="primary" data-action="commit-bundle">Import as a copy</button></div>` : ""}</section>
       <section class="card"><h2>LedgerSuite migration</h2><p>Legacy data is validated and copied atomically. The source remains untouched.</p>${legacy ? `<div class="preview"><strong>${legacy.alreadyMigrated ? "Already migrated" : "Ready to migrate"}</strong><p>${legacy.counts.workspaces} workspace(s), ${legacy.counts.cases} decision case(s).</p>${legacy.alreadyMigrated ? "" : '<button class="primary" data-action="commit-legacy">Migrate into CommonGround</button>'}</div>` : `<p class="muted">No same-origin LedgerSuite database detected.</p>`}<label>Import LedgerSuite JSON or ZIP<input id="legacy-file" type="file" accept=".json,.zip,application/json,application/zip"></label>${legacy?.source === "file" && !legacy.alreadyMigrated ? '<button class="primary" data-action="commit-legacy">Migrate staged file</button>' : ""}${legacy?.source === "indexeddb" ? `<details><summary>Delete legacy source after migration</summary><p>Download a complete source backup, then type <strong>DELETE LEDGER</strong>.</p><button class="secondary" data-action="export-legacy">Download Legacy Backup</button>${state.legacyBackupDownloaded ? '<p class="notice notice-success">Legacy backup downloaded for this session.</p>' : ""}<label>Confirmation<input id="legacy-delete-phrase" autocomplete="off"></label><button class="danger" data-action="delete-legacy">Delete legacy database</button></details>` : ""}</section>
-      <section class="card"><h2>Integrity and cache</h2><p>Remove malformed or orphaned CommonGround records without touching valid data.</p><div class="form-actions"><button class="secondary" data-action="repair">Run Integrity Repair</button><button class="secondary" data-action="clear-cache">Clear CommonGround Cache</button></div></section>
+      <section class="card" aria-labelledby="pwa-health-title"><h2 id="pwa-health-title">Storage and offline health</h2><p>${escapeHtml(healthText)}</p><p>${escapeHtml(shellText)}</p><p class="muted">Quota and eviction remain browser-controlled. Health checks are read-only and do not request durable storage.</p><div class="form-actions"><button class="secondary" data-action="refresh-pwa-health">Refresh health</button><button class="secondary" data-action="clear-cache">Clear CommonGround Cache</button></div></section>
+      <section class="card"><h2>Integrity</h2><p>Remove malformed or orphaned CommonGround records without touching valid data.</p><button class="secondary" data-action="repair">Run Integrity Repair</button></section>
       <section class="card danger-zone"><h2>Factory reset</h2><p>A valid workspace backup is downloaded first. Only CommonGround-owned storage, caches, and workers are cleared.</p><button class="danger" data-action="open-reset">Prepare Factory Reset</button></section>
     </div>`;
 }
@@ -487,7 +509,8 @@ async function exportMatter(zip = false) {
 async function clearScopedRuntime() {
   if ("serviceWorker" in navigator) {
     const registrations = await navigator.serviceWorker.getRegistrations();
-    await Promise.all(registrations.filter((registration) => new URL(registration.scope).pathname.includes("/apps/commonground/")).map((registration) => registration.unregister()));
+    const appScope = new URL("./", location.href).pathname;
+    await Promise.all(registrations.filter((registration) => new URL(registration.scope).pathname === appScope).map((registration) => registration.unregister()));
   }
   if ("caches" in window) {
     const keys = await caches.keys();
@@ -592,16 +615,14 @@ async function handleAction(action, button) {
     await refreshMatter();
     announce(`Integrity repair complete. Removed ${count} invalid record(s).`, "success");
   } else if (action === "clear-cache") {
-    if ("caches" in window) {
-      const keys = await caches.keys();
-      await Promise.all(keys.filter((key) => key.startsWith("commonground-")).map((key) => caches.delete(key)));
-    }
-    announce("CommonGround cache cleared.", "success");
+    const count = await clearOwnedPwaCaches("commonground-");
+    await refreshPwaHealth();
+    announce(`Cleared ${count} CommonGround cache(s). Local records were not changed.`, "success");
+  } else if (action === "refresh-pwa-health") {
+    await refreshPwaHealth();
+    announce("Storage and offline health refreshed without changing data.", "success");
   } else if (action === "activate-update") {
-    const worker = state.updateRegistration?.waiting;
-    if (!worker) throw new Error("The staged update is no longer available. Reload to check again.");
-    state.activatingUpdate = true;
-    worker.postMessage({ type: "SKIP_WAITING" });
+    await activatePwaUpdate(state.updateRegistration, 4);
   } else if (action === "confirm-reset") {
     if (root.querySelector("#modal-phrase")?.value !== "DELETE") throw new Error("Type DELETE exactly to confirm.");
     await downloadWorkspaceBackup(state.workspace.id, "commonground-pre-reset-backup");
@@ -668,34 +689,28 @@ async function handleChange(event) {
   render();
 }
 
+async function refreshPwaHealth() {
+  state.pwaHealth = await getPwaHealth({ cachePrefix: "commonground-", registration: state.pwaRegistration });
+}
+
 async function registerServiceWorker() {
-  if (!("serviceWorker" in navigator) || location.protocol === "file:") return;
-  const wasControlled = Boolean(navigator.serviceWorker.controller);
-  try {
-    const registration = await navigator.serviceWorker.register("./sw.js", { scope: "./" });
-    const stageUpdate = () => {
-      if (!registration.waiting || !navigator.serviceWorker.controller) return;
+  const result = await registerPwaAssurance({
+    appId: "commonground",
+    scriptUrl: "./sw.js",
+    scope: "./",
+    currentDataSchema: 4,
+    onUpdate: ({ registration, status, compatible }) => {
       state.updateRegistration = registration;
-      announce("A CommonGround update is ready and will apply only when you choose.", "info");
+      state.updateStatus = status;
+      state.updateCompatible = compatible;
+      announce(compatible ? "A CommonGround update is ready and will apply only when you choose." : "A CommonGround update was staged but is incompatible with this data schema.", compatible ? "info" : "warning");
       render();
-    };
-    stageUpdate();
-    registration.addEventListener("updatefound", () => {
-      const installing = registration.installing;
-      installing?.addEventListener("statechange", () => {
-        if (installing.state === "installed") stageUpdate();
-      });
-    });
-    let reloading = false;
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if ((wasControlled || state.activatingUpdate) && !reloading) {
-        reloading = true;
-        location.reload();
-      }
-    });
-  } catch {
-    announce("Offline installation is unavailable; local data features still work.", "warning");
-  }
+    },
+    onControllerChange: () => location.reload(),
+    onError: () => announce("Offline installation is unavailable; local data features still work.", "warning")
+  });
+  state.pwaRegistration = result?.registration || null;
+  await refreshPwaHealth();
 }
 
 async function start() {

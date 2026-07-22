@@ -10,6 +10,8 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 let server;
 let baseUrl;
 let commonGroundWorkerRevision;
+let flexxWorkerRevision;
+const pwaFaults = new Map();
 
 const mime = new Map([
   [".css", "text/css"],
@@ -34,6 +36,7 @@ test.use({ hasTouch: true });
 
 test.beforeAll(async () => {
   commonGroundWorkerRevision = 1;
+  flexxWorkerRevision = 1;
   server = createServer(async (request, response) => {
     try {
       const url = new URL(request.url || "/", "http://127.0.0.1");
@@ -41,15 +44,42 @@ test.beforeAll(async () => {
         commonGroundWorkerRevision += 1;
         return response.writeHead(204, { "cache-control": "no-store" }).end();
       }
-      const rawPath = url.pathname.endsWith("/") ? `${url.pathname}index.html` : url.pathname;
+      if (url.pathname === "/__test__/flexx-worker-update") {
+        flexxWorkerRevision += 1;
+        return response.writeHead(204, { "cache-control": "no-store" }).end();
+      }
+      if (url.pathname === "/__test__/pwa-fault") {
+        const target = url.searchParams.get("target");
+        const mode = url.searchParams.get("mode");
+        if (target && mode) pwaFaults.set(target, mode);
+        if (target && mode === "clear") pwaFaults.delete(target);
+        return response.writeHead(204, { "cache-control": "no-store" }).end();
+      }
+      const mountedPath = url.pathname.startsWith("/subpath/LocalFirstApps/") ? url.pathname.slice("/subpath/LocalFirstApps".length) : url.pathname;
+      const rawPath = mountedPath.endsWith("/") ? `${mountedPath}index.html` : mountedPath;
+      const fault = pwaFaults.get(mountedPath);
+      if (fault === "missing") return response.writeHead(404, { "cache-control": "no-store" }).end("Missing test asset");
       const filePath = normalize(join(root, decodeURIComponent(rawPath)));
       if (!filePath.startsWith(normalize(root))) return response.writeHead(403).end("Forbidden");
       const headers = { "content-type": mime.get(extname(filePath)) || "application/octet-stream" };
       let body = await readFile(filePath);
       if (url.pathname === "/apps/commonground/sw.js") {
         headers["cache-control"] = "no-store";
-        body = Buffer.concat([body, Buffer.from(`\n// test-worker-revision:${commonGroundWorkerRevision}\n`)]);
+        const shell = commonGroundWorkerRevision === 1 ? "0.2.2-m2" : `0.2.2-m2-test-${commonGroundWorkerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace('shellVersion: "0.2.2-m2"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${commonGroundWorkerRevision}\n`);
       }
+      if (url.pathname === "/apps/commonground/pwa-shell.json" && commonGroundWorkerRevision > 1) {
+        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "0.2.2-m2"', `"shellVersion": "0.2.2-m2-test-${commonGroundWorkerRevision}"`));
+      }
+      if (url.pathname === "/apps/flexx-files/sw.js") {
+        headers["cache-control"] = "no-store";
+        const shell = flexxWorkerRevision === 1 ? "3.9.74" : `3.9.74-test-${flexxWorkerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace('shellVersion: "3.9.74"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${flexxWorkerRevision}\n`);
+      }
+      if (url.pathname === "/apps/flexx-files/pwa-shell.json" && flexxWorkerRevision > 1) {
+        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "3.9.74"', `"shellVersion": "3.9.74-test-${flexxWorkerRevision}"`));
+      }
+      if (fault === "corrupt") body = Buffer.concat([body, Buffer.from("\n/* deterministic-corruption */\n")]);
       response.writeHead(200, headers);
       response.end(body);
     } catch {
@@ -656,16 +686,19 @@ test("CommonGround first install stays stable and its scoped shell reloads offli
   await page.waitForTimeout(100);
   expect(mainFrameNavigations).toBe(1);
   const cacheKeys = await page.evaluate(() => caches.keys());
-  expect(cacheKeys.some((key) => key === "commonground-shell-v0.2.1")).toBe(true);
+  expect(cacheKeys.some((key) => key.startsWith("commonground-shell-0.2.2-m2"))).toBe(true);
   await context.setOffline(true);
   await page.reload({ waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "Shared work, clear next steps" })).toBeVisible();
   await context.setOffline(false);
 });
 
-test("CommonGround stages an updated worker until the user activates it", async ({ page }) => {
+test("CommonGround stages an updated worker until the user activates it across tabs", async ({ page, context }) => {
   await createCommonGroundWorkspace(page, "Update Workspace");
   await page.waitForFunction(() => Boolean(navigator.serviceWorker?.controller));
+  const duplicatePage = await context.newPage();
+  await gotoApp(duplicatePage, "commonground");
+  await duplicatePage.waitForFunction(() => Boolean(navigator.serviceWorker?.controller));
   const controllerBefore = await page.evaluate(() => navigator.serviceWorker.controller?.scriptURL);
   await page.evaluate(() => fetch("/__test__/commonground-worker-update", { method: "POST" }));
   await page.evaluate(async () => {
@@ -673,6 +706,7 @@ test("CommonGround stages an updated worker until the user activates it", async 
     await registration.update();
   });
   await expect(page.getByText("A verified CommonGround update is ready.")).toBeVisible();
+  await expect(duplicatePage.getByText("A verified CommonGround update is ready.")).toBeVisible();
   const staged = await page.evaluate(async () => {
     const registration = await navigator.serviceWorker.getRegistration("./");
     return { waiting: Boolean(registration.waiting), controller: navigator.serviceWorker.controller?.scriptURL };
@@ -680,10 +714,156 @@ test("CommonGround stages an updated worker until the user activates it", async 
   expect(staged).toEqual({ waiting: true, controller: controllerBefore });
   await Promise.all([
     page.waitForEvent("load"),
+    duplicatePage.waitForEvent("load"),
     page.getByRole("button", { name: "Reload to update" }).click()
   ]);
   await expect(page.getByRole("heading", { name: "Shared work, clear next steps" })).toBeVisible();
+  await expect(duplicatePage.getByRole("heading", { name: "Shared work, clear next steps" })).toBeVisible();
   await expect(page.getByText("A verified CommonGround update is ready.")).toHaveCount(0);
+  const workspaceCount = await page.evaluate(async () => (await (await import("./modules/db.js")).getAll("workspaces")).length);
+  expect(workspaceCount).toBe(1);
+});
+
+test("CommonGround rejects missing and corrupt candidate shells without displacing data", async ({ page }) => {
+  await createCommonGroundWorkspace(page, "Fail-closed Workspace");
+  await page.waitForFunction(() => Boolean(navigator.serviceWorker?.controller));
+  const status = async () => page.evaluate(async () => {
+    const { workerStatus } = await import("../../shared/pwa-assurance.js");
+    return workerStatus(navigator.serviceWorker.controller);
+  });
+  const shellBefore = (await status()).shellVersion;
+  for (const mode of ["missing", "corrupt"]) {
+    await page.evaluate(([target, fault]) => fetch(`/__test__/pwa-fault?target=${encodeURIComponent(target)}&mode=${fault}`, { method: "POST" }), ["/apps/commonground/app.js", mode]);
+    await page.evaluate(() => fetch("/__test__/commonground-worker-update", { method: "POST" }));
+    const finalState = await page.evaluate(async () => {
+      const registration = await navigator.serviceWorker.getRegistration("./");
+      return new Promise(async (resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error("Candidate did not settle.")), 10000);
+        const observe = (worker) => {
+          if (!worker) return;
+          const finish = () => {
+            if (["redundant", "installed"].includes(worker.state)) {
+              clearTimeout(timer);
+              resolve(worker.state);
+            }
+          };
+          worker.addEventListener("statechange", finish);
+          finish();
+        };
+        registration.addEventListener("updatefound", () => observe(registration.installing), { once: true });
+        try { await registration.update(); observe(registration.installing); } catch (error) { clearTimeout(timer); reject(error); }
+      });
+    });
+    expect(finalState).toBe("redundant");
+    const registrationState = await page.evaluate(async () => {
+      const registration = await navigator.serviceWorker.getRegistration("./");
+      return { waiting: Boolean(registration.waiting), workspaces: (await (await import("./modules/db.js")).getAll("workspaces")).length };
+    });
+    expect(registrationState).toEqual({ waiting: false, workspaces: 1 });
+    expect((await status()).shellVersion).toBe(shellBefore);
+    await page.evaluate((target) => fetch(`/__test__/pwa-fault?target=${encodeURIComponent(target)}&mode=clear`, { method: "POST" }), "/apps/commonground/app.js");
+  }
+});
+
+test("CommonGround recovers an evicted current asset from its last-known-good shell", async ({ page, context }) => {
+  await createCommonGroundWorkspace(page, "Recovery Workspace");
+  await page.waitForFunction(() => Boolean(navigator.serviceWorker?.controller));
+  await page.evaluate(() => fetch("/__test__/commonground-worker-update", { method: "POST" }));
+  await page.evaluate(async () => (await navigator.serviceWorker.getRegistration("./")).update());
+  await expect(page.getByText("A verified CommonGround update is ready.")).toBeVisible();
+  await Promise.all([page.waitForEvent("load"), page.getByRole("button", { name: "Reload to update" }).click()]);
+  const damaged = await page.evaluate(async () => {
+    const { workerStatus } = await import("../../shared/pwa-assurance.js");
+    const before = await workerStatus(navigator.serviceWorker.controller);
+    const cache = await caches.open(before.currentCacheName);
+    const deleted = await cache.delete(new URL("./index.html", location.href).href);
+    return { deleted, previous: before.previousCacheName };
+  });
+  expect(damaged.deleted).toBe(true);
+  expect(damaged.previous).toBeTruthy();
+  await context.setOffline(true);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { name: "Shared work, clear next steps" })).toBeVisible();
+  const recovered = await page.evaluate(async () => {
+    const { workerStatus } = await import("../../shared/pwa-assurance.js");
+    const worker = await workerStatus(navigator.serviceWorker.controller);
+    return { worker, workspaces: (await (await import("./modules/db.js")).getAll("workspaces")).length };
+  });
+  expect(recovered.worker.currentComplete).toBe(false);
+  expect(recovered.worker.recoveredFromPrevious).toBe(true);
+  expect(recovered.workspaces).toBe(1);
+  await context.setOffline(false);
+});
+
+test("CommonGround upgrades a version 3 database additively", async ({ page }) => {
+  await page.goto(baseUrl);
+  await page.evaluate(async () => {
+    await new Promise((resolve) => { const request = indexedDB.deleteDatabase("commonground-suite"); request.onsuccess = request.onerror = request.onblocked = resolve; });
+    await new Promise((resolve, reject) => {
+      const request = indexedDB.open("commonground-suite", 3);
+      request.onupgradeneeded = () => {
+        const store = request.result.createObjectStore("workspaces", { keyPath: "id" });
+        store.add({ id: "workspace-v3", name: "Version 3 Workspace", owner: "Prior owner", schemaVersion: 3, revision: 1, createdAt: "2025-01-01T00:00:00.000Z", updatedAt: "2025-01-01T00:00:00.000Z" });
+      };
+      request.onsuccess = () => { request.result.close(); resolve(); };
+      request.onerror = () => reject(request.error);
+    });
+  });
+  await gotoApp(page, "commonground");
+  await expect(page.locator("#main-content").getByText("Version 3 Workspace", { exact: true })).toBeVisible();
+  const upgraded = await page.evaluate(async () => {
+    const db = await (await import("./modules/db.js")).openDatabase();
+    return { version: db.version, stores: [...db.objectStoreNames] };
+  });
+  expect(upgraded.version).toBe(4);
+  expect(upgraded.stores).toContain("transferReceipts");
+});
+
+test("CommonGround and Flexx Files install and restart offline below a repository subpath", async ({ page, context }) => {
+  for (const slug of ["commonground", "flexx-files"]) {
+    await page.goto(`${baseUrl}subpath/LocalFirstApps/apps/${slug}/`, { waitUntil: "domcontentloaded" });
+    await expect(page.locator("body")).toBeVisible();
+    await page.waitForFunction(() => Boolean(navigator.serviceWorker?.controller));
+    await context.setOffline(true);
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(page.locator("body")).toBeVisible();
+    await context.setOffline(false);
+  }
+});
+
+test("Flexx Files stages explicit updates and preserves app data", async ({ page }) => {
+  await gotoApp(page, "flexx-files");
+  await page.waitForFunction(() => Boolean(navigator.serviceWorker?.controller));
+  await page.evaluate(() => localStorage.setItem("flexx_m2_survival", "kept"));
+  await page.evaluate(() => fetch("/__test__/flexx-worker-update", { method: "POST" }));
+  await page.evaluate(async () => (await navigator.serviceWorker.getRegistration("./")).update());
+  await expect(page.locator("#modal-layer")).toHaveAttribute("aria-hidden", "false");
+  const staged = await page.evaluate(async () => Boolean((await navigator.serviceWorker.getRegistration("./")).waiting));
+  expect(staged).toBe(true);
+  await Promise.all([page.waitForEvent("load"), page.getByRole("button", { name: /Reload Now and close dialog/ }).click()]);
+  expect(await page.evaluate(() => localStorage.getItem("flexx_m2_survival"))).toBe("kept");
+});
+
+test("Flexx Files backup-gated reset remains app-scoped", async ({ page }) => {
+  await gotoApp(page, "flexx-files");
+  await page.evaluate(async () => {
+    localStorage.setItem("flexx_m2_reset", "remove");
+    localStorage.setItem("other_app_data", "keep");
+    await (await caches.open("other-app-shell")).put("/other-app-proof", new Response("keep"));
+  });
+  await page.getByLabel("Navigate to system settings").tap();
+  const downloadPromise = page.waitForEvent("download");
+  const reloadPromise = page.waitForEvent("load");
+  await page.getByLabel("Factory Reset").click();
+  await page.getByRole("button", { name: "Confirm and close dialog" }).click();
+  expect((await downloadPromise).suggestedFilename()).toMatch(/^flexx-files-backup-.*\.json$/);
+  await reloadPromise;
+  const remaining = await page.evaluate(async () => ({
+    owned: localStorage.getItem("flexx_m2_reset"),
+    other: localStorage.getItem("other_app_data"),
+    otherCache: (await caches.keys()).includes("other-app-shell")
+  }));
+  expect(remaining).toEqual({ owned: null, other: "keep", otherCache: true });
 });
 
 test("CommonGround rejects a stale decision write from another tab", async ({ page, context }) => {

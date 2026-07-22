@@ -5,7 +5,7 @@
 Offline-first strength protocol tracker.
 
 - **Status:** Stable maintenance app
-- **Version:** 3.9.73
+- **Version:** 3.9.74
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/flexx-files](https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/)
 - **Portfolio Role:** Fitness and personal-systems experiment.
 
@@ -25,6 +25,7 @@ Training adherence improves when the tracker removes decisions instead of adding
 - Calculates plate math and micro-loading.
 - Handles rest timers, progression, stalls, and deloads.
 - Runs offline as a PWA.
+- Stages a content-addressed complete shell, requires explicit compatible update activation, and retains one last-known-good shell.
 - Includes debug and verification support for maintenance.
 
 ## Quick Start
@@ -39,7 +40,9 @@ Training adherence improves when the tracker removes decisions instead of adding
 
 - No account or backend is required for normal use.
 - Training data stays local to the browser.
-- Export or back up data before clearing browser storage.
+- JSON backup and validated restore preserve training sessions; malformed restores fail closed.
+- Factory reset downloads a complete backup first, then clears only `flexx_` data, Flexx caches, and its worker registration. Unrelated origin data is preserved.
+- Settings exposes read-only quota/persistence/offline-shell health. Browser quota and eviction remain outside the app's control.
 
 ## Relationship To Other Projects
 

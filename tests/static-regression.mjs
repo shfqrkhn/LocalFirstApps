@@ -91,6 +91,7 @@ const mpesPlan = readFileSync(join(root, "docs", "MPES_IMPLEMENTATION_PLAN.md"),
 const suiteShellCss = readFileSync(join(root, "suite-shell.css"), "utf8");
 const commonGroundIndex = readFileSync(join(root, "apps", "commonground", "index.html"));
 const commonGroundSw = readFileSync(join(root, "apps", "commonground", "sw.js"), "utf8");
+const commonGroundPwaShell = readFileSync(join(root, "apps", "commonground", "pwa-shell.json"), "utf8");
 const commonGroundManifest = JSON.parse(readFileSync(join(root, "apps", "commonground", "manifest.webmanifest"), "utf8"));
 const commonGroundApp = readFileSync(join(root, "apps", "commonground", "app.js"), "utf8");
 const commonGroundDb = readFileSync(join(root, "apps", "commonground", "modules", "db.js"), "utf8");
@@ -98,7 +99,12 @@ const commonGroundLegacy = readFileSync(join(root, "apps", "commonground", "modu
 const commonGroundMatterTypes = readFileSync(join(root, "apps", "commonground", "modules", "matter-types.js"), "utf8");
 const commonGroundInterchange = readFileSync(join(root, "apps", "commonground", "modules", "interchange-adapter.js"), "utf8");
 const sharedInterchange = readFileSync(join(root, "shared", "interchange.js"), "utf8");
+const sharedPwaClient = readFileSync(join(root, "shared", "pwa-assurance.js"), "utf8");
+const sharedPwaWorker = readFileSync(join(root, "shared", "pwa-worker.js"), "utf8");
 const interchangeContract = readFileSync(join(root, "docs", "INTERCHANGE_CONTRACT.md"), "utf8");
+const pwaContract = readFileSync(join(root, "docs", "PWA_ASSURANCE_CONTRACT.md"), "utf8");
+const flexxSw = readFileSync(join(root, "apps", "flexx-files", "sw.js"), "utf8");
+const flexxPwaShell = readFileSync(join(root, "apps", "flexx-files", "pwa-shell.json"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
 const codeqlConfig = readFileSync(join(root, ".github", "codeql", "codeql-config.yml"), "utf8");
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
@@ -158,10 +164,10 @@ assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screensh
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(pkg.scripts?.qa === "npm run test:all", "package must expose the full QA gate.");
 assert(pkg.version === "0.2.0", "suite version must identify the unified CommonGround cutover.");
-for (const phrase of ["mpes_authority: prime", "M1-shared-interchange-and-recovery", "D-001", "D-005", "NOT_RUN", "no publication authority granted"]) {
+for (const phrase of ["mpes_authority: prime", "M1-shared-interchange-and-recovery", "M2-reusable-pwa-baseline", "D-001", "D-005", "D-006", "NOT_RUN", "no publication authority granted"]) {
   assert(projectState.includes(phrase), `PROJECT_STATE.yaml missing required state: ${phrase}`);
 }
-for (const phrase of ["prime human-readable project authority", "Consolidate LedgerSuite into CommonGround", "owner explicitly directed their consolidation", "Stage PWA updates"]) {
+for (const phrase of ["prime human-readable project authority", "Consolidate LedgerSuite into CommonGround", "owner explicitly directed their consolidation", "Stage PWA updates", "Reuse assurance, not runtime state"]) {
   assert(decisions.includes(phrase), `DECISIONS.md missing required decision evidence: ${phrase}`);
 }
 for (const phrase of ["Universal Packet Contract", "M1 — Shared interchange", "M3 — HealthOS", "M9 — Release", "Completion Definition", "Consolidated `/goal` Prompts"]) {
@@ -354,12 +360,26 @@ for (const phrase of ["createCommonGroundInterchange", "applyCommonGroundInterch
 for (const phrase of ["Data classification", "Required transfer sequence", "shared database", "unknown fields", "rollback"]) {
   assert(interchangeContract.includes(phrase), `Interchange documentation missing: ${phrase}`);
 }
-for (const runtimePath of ["./index.html", "./app.js", "./styles.css", "./modules/db.js", "./modules/exports.js", "./modules/legacy.js", "./modules/matter-types.js", "./modules/interchange-adapter.js", "../../shared/interchange.js"]) {
-  assert(commonGroundSw.includes(`"${runtimePath}"`), `CommonGround service worker must precache ${runtimePath}.`);
+for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "0.2.2-m2"', "dataSchemaVersion: 4", "legacyCacheNames"]) {
+  assert(commonGroundSw.includes(phrase), `CommonGround service worker missing M2 contract: ${phrase}`);
 }
-assert(commonGroundSw.includes('commonground-shell-v0.2.1'), "CommonGround cache must identify the M1 shell revision.");
-assert(!/install[\s\S]{0,240}skipWaiting/.test(commonGroundSw), "CommonGround updates must not skip waiting during install.");
-assert(commonGroundSw.includes('event.data?.type === "SKIP_WAITING"'), "CommonGround must activate a staged update only after an explicit message.");
+for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "3.9.74"', 'dataSchemaVersion: "v3"', "legacyCacheNames"]) {
+  assert(flexxSw.includes(phrase), `Flexx service worker missing M2 contract: ${phrase}`);
+}
+for (const phrase of ["contractVersion", "compatibleDataSchemas", "navigationFallback", "sha256", "../../shared/pwa-assurance.js"]) {
+  assert(commonGroundPwaShell.includes(phrase), `CommonGround shell manifest missing: ${phrase}`);
+  assert(flexxPwaShell.includes(phrase), `Flexx shell manifest missing: ${phrase}`);
+}
+for (const phrase of ["registerPwaAssurance", "activatePwaUpdate", "getPwaHealth", "clearOwnedPwaCaches", "schemaCompatible"]) {
+  assert(sharedPwaClient.includes(phrase), `PWA client assurance missing: ${phrase}`);
+}
+for (const phrase of ["stageCandidate", "cacheComplete", "adoptLegacyCaches", "selectedShell", "LFA_ACTIVATE_UPDATE"]) {
+  assert(sharedPwaWorker.includes(phrase), `PWA worker assurance missing: ${phrase}`);
+}
+for (const phrase of ["App-owned shell manifest", "Activation and recovery", "last-known-good", "app-prefixed", "File mode"]) {
+  assert(pwaContract.includes(phrase), `PWA assurance documentation missing: ${phrase}`);
+}
+assert(!/install[\s\S]{0,300}skipWaiting/.test(sharedPwaWorker), "PWA updates must not skip waiting during install.");
 assert(!existsSync(join(root, "apps", "commonground", "assets")) || readdirSync(join(root, "apps", "commonground", "assets")).length === 0, "Opaque CommonGround generated assets must be removed.");
 assert(!existsSync(join(root, "apps", "commonground", "workbox-8c29f6e4.js")), "Duplicate CommonGround Workbox runtime must be removed.");
 const bootstrapLicense = readFileSync(join(root, "vendor", "bootstrap-LICENSE.txt"), "utf8");

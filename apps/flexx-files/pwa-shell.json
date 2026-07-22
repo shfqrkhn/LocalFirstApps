@@ -1,0 +1,26 @@
+{
+  "contractVersion": "1.0.0",
+  "appId": "flexx-files",
+  "shellVersion": "3.9.74",
+  "dataSchemaVersion": "v3",
+  "compatibleDataSchemas": ["v3"],
+  "navigationFallback": "./index.html",
+  "assets": [
+    { "url": "./index.html", "sha256": "94e70c674b6f9a53b1e43975bd32dc57d0e5eda776ad24c48566870321621e85" },
+    { "url": "./css/styles.css", "sha256": "0ec749d9ea83f15e896a8685a78a2e1e3551e87083c0d669e497a4e015553662" },
+    { "url": "./js/app.js", "sha256": "12c2320892d9b3a2b192c092edaea1c2c28db41951ff9e4a0acb99763f1d577a" },
+    { "url": "./js/core.js", "sha256": "d04fc15535fccd4e6e4cbe2621e94c82cfc406455a12c1fe94b0e033f1b33b56" },
+    { "url": "./js/config.js", "sha256": "f36c297445ade5470934fd1168e0a75efa3d09c2cfe85f4a1975e765c7274cfa" },
+    { "url": "./js/accessibility.js", "sha256": "2e2b068bde2746218dec833a265355c6acf420290bb74b9771fd9f6e62059477" },
+    { "url": "./js/constants.js", "sha256": "d91d31c7915cdfdf21a9c15b9525007b6c7832a97e9b4541d09088b0f3fde07c" },
+    { "url": "./js/i18n.js", "sha256": "02971cf1eaeb047f39f96b426c88cbb59850805ae4a205b2dfa72a6a08fa3d5f" },
+    { "url": "./js/observability.js", "sha256": "3158fd903963e66fb4c7f0d8365a96ce8f2b65ac3bf5023ae37f7f2734a578ef" },
+    { "url": "./js/security.js", "sha256": "95d890d34ebe72625561db4be6c33deaa50b971d7648d08a2bc52d6837f2f091" },
+    { "url": "./manifest.json", "sha256": "ad55e441ec50104c860f7162745706b8415fcb28c45016100d28d2cb07941cd4" },
+    { "url": "./assets/icon-192.png", "sha256": "7de5670dd7abdce9f685a9251fadc8c4823bb3385464e2ab685f19f1a395eb07" },
+    { "url": "./assets/icon-512.png", "sha256": "7de5670dd7abdce9f685a9251fadc8c4823bb3385464e2ab685f19f1a395eb07" },
+    { "url": "../../shared/pwa-assurance.js", "sha256": "87b34cd917cd780089ba6bec9e3c6bc77eb5c498682db34cae4ff174cd0dacdf" },
+    { "url": "../../suite-shell.css", "sha256": "d63e05f0610260d3872f7e924ac08778037537cff1f23f116e7b7ca1551c33d3" },
+    { "url": "../../suite-shell.js", "sha256": "63bdda790a2c19ad9795a72e9642183118351ab6625a270b1400298f86b42618" }
+  ]
+}

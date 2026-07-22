@@ -100,7 +100,7 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 ## CommonGround v0.2.0 Consolidation Contract
 
 - Active membership becomes five apps: TS-Dash, PMQuiz, Noodle Nudge, Flexx Files, and CommonGround. LedgerSuite is not an active app; its one-release path is an archive-excluded migration redirect.
-- CommonGround owns one native-module shell, IndexedDB v3 repository, matter-type registry, export/recovery layer, and scoped PWA lifecycle for both facilitation and Decision Analysis.
+- CommonGround owns one native-module shell, IndexedDB v4 repository, matter-type registry, export/recovery layer, and scoped PWA lifecycle for both facilitation and Decision Analysis.
 - Existing facilitation records and suitability/route-out behavior remain compatible. Decision Analysis preserves LedgerSuite memo, evidence, assumptions, options, matrix, governance, outcome, pack, and recovery responsibilities without inheriting facilitation gates.
 - Guided LedgerSuite migration must validate and preview before one atomic target transaction, write nothing on cancel/failure, prevent duplicate fingerprints, and never delete the source automatically.
 - CommonGround export v2 uses SHA-256 integrity for matter/workspace JSON and ZIP. CommonGround v1 plus LedgerSuite v1/v2 imports remain compatibility requirements.
@@ -143,6 +143,21 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `PASS_WITH_LIMITATIONS`: deterministic quota fault injection proves atomic failure handling; it does not predict each browser's eviction policy. Automated semantics/input/viewport checks do not certify every assistive technology.
 - `NOT_RUN`: no push, deployment, remote mutation or release was authorized. Read-only live checks do not prove this local M1 runtime is deployed.
 - **Rollback:** use the per-receipt Settings control for an import, or revert the bounded M1 commit. The additive database upgrade does not rewrite pre-existing records.
+
+## 2026-07-21 M2 Reusable PWA Baseline Packet
+
+**State:** `VERIFIED` locally; publication remains `NOT_RUN`.
+
+- `PASS`: dependency-free worker/client contracts keep each pilot's manifest, cache prefix, worker scope, data schema, update UI, storage and reset app-owned. No shared data store, synchronization, telemetry, external transmission or background business mutation was added.
+- `PASS`: CommonGround and Flexx Files stage content-addressed complete shells. Missing, corrupt and quota-interrupted candidates fail closed, delete only their incomplete cache, retain the active/prior shell and preserve user data. Runtime cache integrity is rechecked so simulated corruption/eviction selects one retained last-known-good shell.
+- `PASS`: first install claims without a reload loop; compatible updates wait for explicit accessible activation; incompatible schema declarations remain staged; later controller changes reload each open tab once without broadcast echo. CommonGround v3 upgrades additively to v4, and Flexx retains `v3` storage plus drafts/backups.
+- `PASS`: both pilots restart offline at normal and repository-subpath URLs. Existing six safe file-mode cases cover reduced `file://` fallback. Settings expose read-only estimate/persistence/shell health, report unavailable estimates honestly and make no persistence request.
+- `PASS`: CommonGround and Flexx cache clear/reset are prefix/scope limited. Both factory resets start a complete backup before deletion; Flexx browser evidence proves unrelated localStorage and cache data survive.
+- `PASS`: `npm run qa` passed static, interchange, PWA manifest/hash and fail-closed worker gates, five native Flexx checks, 30 responsive cases, six file-mode cases, 23 behavior cases and six read-only live route cases.
+- `PASS`: `npm audit --audit-level=high` found zero vulnerabilities; dependency/license, syntax, link/media, secret/protected-path, popup/external-runtime, archive and `git diff --check` gates passed.
+- `PASS_WITH_LIMITATIONS`: missing/corrupt/quota/eviction tests use deterministic synthetic faults. Storage estimates are advisory; real browser persistence, quota and eviction policy cannot be guaranteed. Automated accessibility evidence does not certify every assistive technology.
+- `NOT_RUN`: no push, deployment, release or remote mutation was authorized. Read-only live checks describe the pre-existing deployment, not this local M2 runtime.
+- **Rollback:** revert the bounded M2 commit. The packet performs no destructive data migration; existing app exports and the prior complete shell remain recovery sources.
 
 ## Required Before Public-Facing Change
 

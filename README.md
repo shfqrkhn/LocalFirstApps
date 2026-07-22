@@ -13,6 +13,7 @@ A focused suite of small, privacy-first browser apps that run as static local-fi
 - **Future app intake:** [`docs/future-app-intake.md`](./docs/future-app-intake.md)
 - **Repository ZIP policy:** [`docs/REPO_ZIP_POLICY.md`](./docs/REPO_ZIP_POLICY.md)
 - **Portable-record contract:** [`docs/INTERCHANGE_CONTRACT.md`](./docs/INTERCHANGE_CONTRACT.md)
+- **PWA assurance contract:** [`docs/PWA_ASSURANCE_CONTRACT.md`](./docs/PWA_ASSURANCE_CONTRACT.md)
 
 ## Screenshot
 
@@ -43,6 +44,8 @@ Flagship projects remain separate:
 The apps are static browser apps. Data stays in the browser unless a specific app export/import workflow is used by the user. There is no shared backend in this suite.
 
 Cross-app integration uses explicit local files, not shared hidden storage. The versioned portable-record contract validates and previews exact selected content before any app-owned atomic import; no transfer is sent externally.
+
+CommonGround and Flexx Files share only a narrow PWA assurance contract. Each app still owns its worker, versioned content-addressed shell, data schema, caches, update controls, health display, and reset boundary. A failed candidate cannot replace the active shell; compatible updates require explicit activation and retain one last-known-good shell.
 
 ## Local Use
 

@@ -5,6 +5,13 @@ import { Accessibility, ScreenReader } from './accessibility.js';
 import { Security, Sanitizer } from './security.js';
 import { I18n, DateFormatter } from './i18n.js';
 import * as CONST from './constants.js';
+import {
+    activatePwaUpdate,
+    clearOwnedPwaCaches,
+    formatBytes,
+    getPwaHealth,
+    registerPwaAssurance
+} from '../../../shared/pwa-assurance.js';
 
 // === MODAL SYSTEM ===
 const Modal = {
@@ -93,6 +100,7 @@ function preSanitizeConfig() {
 
 // === STATE & TOOLS ===
 const State = { view: 'today', phase: null, recovery: null, activeSession: null, historyLimit: CONST.HISTORY_PAGINATION_LIMIT };
+const PwaState = { registration: null, health: null, updatePrompting: false };
 let _navCache = null;
 let _lastNavView = null;
 // Optimization: Cache generated session cards to avoid repeated string generation/sanitization
@@ -564,6 +572,16 @@ function renderSettings(c) {
             <div class="card">
                 <button class="btn btn-secondary" onclick="window.viewProtocol()" aria-label="${I18n.t('settings.protocolGuide')}">${I18n.t('settings.protocolGuide')}</button>
             </div>
+            <div class="card" aria-labelledby="flexx-pwa-health-title">
+                <h3 id="flexx-pwa-health-title">Offline and origin storage health</h3>
+                <p class="text-xs" id="flexx-pwa-storage-health">Checking read-only browser storage status…</p>
+                <p class="text-xs" id="flexx-pwa-shell-health">Checking offline shell status…</p>
+                <p class="text-xs" style="opacity:0.7">Quota and eviction are browser-controlled. Flexx Files does not request persistence automatically.</p>
+                <div class="flex-row" style="margin-top:0.75rem">
+                    <button class="btn btn-secondary" id="refresh-pwa-health">Refresh Health</button>
+                    <button class="btn btn-secondary" id="clear-pwa-cache">Clear Flexx Cache</button>
+                </div>
+            </div>
             <div class="card">
                 <button class="btn btn-secondary" id="backup-btn">${I18n.t('settings.backupData')}</button>
                 <div style="position:relative; margin-top:0.5rem">
@@ -615,6 +633,31 @@ function renderSettings(c) {
                 Modal.show({ title: I18n.t('errors.exportFailed'), text: e.message });
             }
         });
+    }
+    c.querySelector('#refresh-pwa-health')?.addEventListener('click', () => refreshFlexxPwaHealth());
+    c.querySelector('#clear-pwa-cache')?.addEventListener('click', async () => {
+        if (!await Modal.show({ type: 'confirm', title: 'Clear Flexx offline cache?', text: 'Training data is not changed. Reconnect before reloading to install the shell again.' })) return;
+        const count = await clearOwnedPwaCaches('flexx-');
+        await refreshFlexxPwaHealth();
+        ScreenReader.announce(`Cleared ${count} Flexx cache${count === 1 ? '' : 's'}. Training data was preserved.`);
+    });
+    refreshFlexxPwaHealth();
+}
+
+async function refreshFlexxPwaHealth() {
+    PwaState.health = await getPwaHealth({ cachePrefix: 'flexx-', registration: PwaState.registration });
+    const storage = document.getElementById('flexx-pwa-storage-health');
+    const shell = document.getElementById('flexx-pwa-shell-health');
+    if (storage) {
+        storage.textContent = PwaState.health.estimateAvailable
+            ? `${formatBytes(PwaState.health.usage)} used of ${formatBytes(PwaState.health.quota)} origin quota. Persistence: ${PwaState.health.persisted === true ? 'granted' : PwaState.health.persisted === false ? 'not granted' : 'unknown'}.`
+            : 'Browser storage estimate is unavailable; durability and remaining quota are unknown.';
+    }
+    if (shell) {
+        const worker = PwaState.health.worker;
+        shell.textContent = worker
+            ? `Shell ${worker.shellVersion}; ${worker.currentComplete ? 'current cache complete' : worker.recoveredFromPrevious ? 'recovered from last-known-good cache' : 'current cache incomplete'}. Data schema ${worker.dataSchemaVersion}.`
+            : 'Worker shell status is unavailable.';
     }
 }
 
@@ -1124,7 +1167,23 @@ window.del = async (id) => {
         }
     }
 };
-window.wipe = async () => { if(await Modal.show({type:'confirm',title:I18n.t('modal.reset'),danger:true})) Storage.reset(); };
+window.wipe = async () => {
+    if (!await Modal.show({ type: 'confirm', title: I18n.t('modal.reset'), text: 'A complete Flexx backup will download before app-owned data, caches, and worker registration are cleared.', danger: true })) return;
+    try {
+        Storage.flushDraft();
+        Storage.flushPersistence();
+        Storage.exportData();
+        await clearOwnedPwaCaches('flexx-');
+        if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            const appScope = new URL('./', location.href).pathname;
+            await Promise.all(registrations.filter((registration) => new URL(registration.scope).pathname === appScope).map((registration) => registration.unregister()));
+        }
+        Storage.reset();
+    } catch (error) {
+        await Modal.show({ title: I18n.t('modal.error'), text: `Reset stopped before deletion: ${error.message}` });
+    }
+};
 window.imp = (el) => {
     const file = el.files[0];
     if (!file) return;
@@ -1413,48 +1472,44 @@ if (mainContent) {
         }
     }
 
-    // 7. Register service worker for offline capability with update detection
-    if ('serviceWorker' in navigator) {
-        try {
-            const registration = await navigator.serviceWorker.register('./sw.js');
-            Logger.info('Service worker registered');
-
-            // Listen for updates
-            registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                newWorker.addEventListener('statechange', () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                        // New service worker available - notify user
-                        showUpdateNotification(newWorker);
-                    }
-                });
-            });
-
-            // Detect controller change (update applied)
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                if (!window.__reloading) {
-                    window.__reloading = true;
-                    window.location.reload();
+    // 7. Register the app-owned worker through the shared assurance contract.
+    const pwa = await registerPwaAssurance({
+        appId: 'flexx-files',
+        scriptUrl: './sw.js',
+        scope: './',
+        currentDataSchema: CONST.STORAGE_VERSION,
+        onUpdate: async ({ registration, compatible }) => {
+            if (PwaState.updatePrompting) return;
+            PwaState.updatePrompting = true;
+            try {
+                if (!compatible) {
+                    await Modal.show({ title: 'Update held safely', text: 'The staged shell is not compatible with this Flexx data schema and was not activated.' });
+                    return;
                 }
-            });
-        } catch (e) {
-            Logger.warn('Service worker registration failed', { error: e.message });
-        }
-    }
-
-    // Update notification handler
-    function showUpdateNotification(worker) {
-        Modal.show({
-            title: I18n.t('modal.updateAvailable'),
-            text: I18n.t('modal.updateText'),
-            type: 'confirm',
-            okText: I18n.t('modal.reloadNow')
-        }).then(reload => {
-            if (reload) {
-                worker.postMessage({ type: 'SKIP_WAITING' });
+                const reload = await Modal.show({
+                    title: I18n.t('modal.updateAvailable'),
+                    text: `${I18n.t('modal.updateText')} Saved training data will be flushed before activation.`,
+                    type: 'confirm',
+                    okText: I18n.t('modal.reloadNow')
+                });
+                if (reload) {
+                    Storage.flushDraft();
+                    Storage.flushPersistence();
+                    await activatePwaUpdate(registration, CONST.STORAGE_VERSION);
+                }
+            } finally {
+                PwaState.updatePrompting = false;
             }
-        });
-    }
+        },
+        onControllerChange: () => {
+            Storage.flushDraft();
+            Storage.flushPersistence();
+            window.location.reload();
+        },
+        onError: (error) => Logger.warn('Service worker assurance unavailable', { error: error.message })
+    });
+    PwaState.registration = pwa?.registration || null;
+    await refreshFlexxPwaHealth();
 
     // 8. Track app startup
     Analytics.track('app_start', {

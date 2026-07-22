@@ -41,3 +41,12 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Safety:** A transfer must select, show exact serialized content, require confirmation, validate size/shape/version/hashes, apply records plus a unique idempotency receipt atomically, and expose rollback. Unknown record and payload fields stay inert and survive the CommonGround pilot round trip. Unsupported majors fail visibly.
 - **Compatibility:** CommonGround portable records are additive. CommonGround export v2, CommonGround v1 import, LedgerSuite v1/v2 import, existing routes, data and source-preserving migration remain unchanged.
 - **Rollback:** Roll back an individual applied receipt in Settings, or revert the M1 commit. Receipts remain after rollback as replay protection; pre-M1 data is untouched by the v4 additive store upgrade.
+
+## D-006 — Reuse assurance, not runtime state
+
+- **State:** Accepted
+- **Decision:** CommonGround and Flexx Files use one dependency-free PWA assurance contract while retaining app-owned workers, manifests, caches, schemas, data stores, update UI, and reset behavior. No shared data store, hidden synchronization, telemetry, external transmission, or background business mutation is introduced.
+- **Safety:** A content-addressed candidate must cache completely before install succeeds. Missing, corrupt, interrupted, or quota-failed candidates delete only their incomplete cache and cannot displace the active shell. Activation stays explicit and is blocked when the worker does not declare the current data schema compatible. Cache integrity is rechecked before use and one complete prior shell is retained for last-known-good recovery.
+- **Operations:** First install claims without a reload loop. Later controller changes reload each open tab once. Health is read-only and reports unavailable estimates honestly. Cache clear and factory reset remain app-scoped; Flexx and CommonGround reset only after a complete backup starts successfully.
+- **Compatibility:** CommonGround database v3 upgrades additively to v4; CommonGround/LedgerSuite formats, M1 receipts, Flexx `v3` storage, drafts and backups remain unchanged. Hosted repository subpaths work; `file://` remains a safe reduced fallback because browsers do not provide module/worker parity there.
+- **Rollback:** Revert the M2 commit. Existing user stores are not migrated or rewritten by this packet; the retained old worker/cache or an app export remains the recovery source.
