@@ -42,7 +42,7 @@ Small personal datasets often need quick, private inspection without a cloud acc
 
 ## Relationship To Other Projects
 
-TS-Dash remains a stable utility. Financial solvency planning belongs in `nFIRE`; general data-dashboard ideas can be reused here only when they keep the tool simple.
+TS-Dash remains a generic stable utility. HealthOS can explicitly export deterministic CSV for import through TS-Dash's normal mapping workflow; TS-Dash does not read HealthOS storage or mutate source records, and observations/correlations remain non-causal. Financial solvency planning belongs in `nFIRE`; general data-dashboard ideas can be reused here only when they keep the tool simple.
 
 ## Repository Layout
 

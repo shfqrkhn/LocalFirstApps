@@ -9,6 +9,7 @@ const pages = [
   ["pmquiz", "apps/pmquiz/"],
   ["noodle-nudge", "apps/noodle-nudge/"],
   ["flexx-files", "apps/flexx-files/"],
+  ["healthos", "apps/healthos/"],
   ["commonground", "apps/commonground/"]
 ];
 

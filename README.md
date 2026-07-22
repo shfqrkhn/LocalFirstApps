@@ -14,6 +14,7 @@ A focused suite of small, privacy-first browser apps that run as static local-fi
 - **Repository ZIP policy:** [`docs/REPO_ZIP_POLICY.md`](./docs/REPO_ZIP_POLICY.md)
 - **Portable-record contract:** [`docs/INTERCHANGE_CONTRACT.md`](./docs/INTERCHANGE_CONTRACT.md)
 - **PWA assurance contract:** [`docs/PWA_ASSURANCE_CONTRACT.md`](./docs/PWA_ASSURANCE_CONTRACT.md)
+- **HealthOS M3A contract:** [`docs/HEALTHOS_CONTRACT.md`](./docs/HEALTHOS_CONTRACT.md)
 
 ## Screenshot
 
@@ -27,6 +28,7 @@ A focused suite of small, privacy-first browser apps that run as static local-fi
 | PMQuiz | Project-management certification practice | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/pmquiz/) |
 | Noodle Nudge | Private reflection and self-inquiry | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/noodle-nudge/) |
 | Flexx Files | Offline strength protocol tracker | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/) |
+| HealthOS Focus | Daily-state records and trustworthy focus timing | [Open local files](./apps/healthos/) (not deployed) |
 | CommonGround | Local-first facilitation and decision workspace | [Open](https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/) |
 
 ## Why This Exists
@@ -46,6 +48,8 @@ The apps are static browser apps. Data stays in the browser unless a specific ap
 Cross-app integration uses explicit local files, not shared hidden storage. The versioned portable-record contract validates and previews exact selected content before any app-owned atomic import; no transfer is sent externally.
 
 CommonGround and Flexx Files share only a narrow PWA assurance contract. Each app still owns its worker, versioned content-addressed shell, data schema, caches, update controls, health display, and reset boundary. A failed candidate cannot replace the active shell; compatible updates require explicit activation and retain one last-known-good shell.
+
+HealthOS Focus is the bounded M3A focus module and HealthOS navigation surface. Noodle Nudge and Flexx Files remain independent canonical apps. HealthOS records use explicit portable files rather than hidden cross-app storage, and its timestamp-reconciled timer writes a session only after user review. Meditation, breathing, C25K, and later HealthOS modules remain inactive pending separate acceptance.
 
 ## Local Use
 

@@ -8,6 +8,7 @@ const apps = [
   ["pmquiz", "PMQuiz", "screenshot.png"],
   ["noodle-nudge", "Noodle Nudge", "images/screenshot.jpeg"],
   ["flexx-files", "Flexx Files", "screenshot.png"],
+  ["healthos", "HealthOS Focus", "screenshot.png"],
   ["commonground", "CommonGround", "screenshot-app.png"]
 ];
 const expectedAppSlugs = apps.map(([slug]) => slug).sort();
@@ -103,11 +104,22 @@ const sharedPwaClient = readFileSync(join(root, "shared", "pwa-assurance.js"), "
 const sharedPwaWorker = readFileSync(join(root, "shared", "pwa-worker.js"), "utf8");
 const interchangeContract = readFileSync(join(root, "docs", "INTERCHANGE_CONTRACT.md"), "utf8");
 const pwaContract = readFileSync(join(root, "docs", "PWA_ASSURANCE_CONTRACT.md"), "utf8");
+const healthContract = readFileSync(join(root, "docs", "HEALTHOS_CONTRACT.md"), "utf8");
 const flexxSw = readFileSync(join(root, "apps", "flexx-files", "sw.js"), "utf8");
 const flexxPwaShell = readFileSync(join(root, "apps", "flexx-files", "pwa-shell.json"), "utf8");
+const healthSw = readFileSync(join(root, "apps", "healthos", "sw.js"), "utf8");
+const healthPwaShell = readFileSync(join(root, "apps", "healthos", "pwa-shell.json"), "utf8");
+const healthApp = readFileSync(join(root, "apps", "healthos", "app.js"), "utf8");
+const healthStorage = readFileSync(join(root, "apps", "healthos", "storage.js"), "utf8");
+const sharedHealth = readFileSync(join(root, "shared", "healthos.js"), "utf8");
+const sharedFocusTimer = readFileSync(join(root, "shared", "focus-timer.js"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
 const codeqlConfig = readFileSync(join(root, ".github", "codeql", "codeql-config.yml"), "utf8");
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((file) => file.replace(/\\/g, "/"));
+const headTrackedFiles = execFileSync("git", ["ls-tree", "-r", "--name-only", "HEAD"], { cwd: root, encoding: "utf8" })
   .split(/\r?\n/)
   .filter(Boolean)
   .map((file) => file.replace(/\\/g, "/"));
@@ -118,7 +130,10 @@ const actualAppSlugs = readdirSync(join(root, "apps"), { withFileTypes: true })
   .map((entry) => entry.name)
   .sort();
 const launcherAppSlugs = uniqueSorted([...index.matchAll(/href=["']\.\/apps\/([^/"']+)\/["']/g)].map((match) => match[1]));
-const readmeAppSlugs = uniqueSorted([...readme.matchAll(/LocalFirstApps\/apps\/([^/)]+)\//g)].map((match) => match[1]));
+const readmeAppSlugs = uniqueSorted([
+  ...[...readme.matchAll(/LocalFirstApps\/apps\/([^/)]+)\//g)].map((match) => match[1]),
+  ...[...readme.matchAll(/\]\(\.\/apps\/([^/)]+)\//g)].map((match) => match[1])
+]);
 
 function exportIgnoreMap(paths) {
   const output = execFileSync("git", ["check-attr", "export-ignore", "--", ...paths], { cwd: root, encoding: "utf8" });
@@ -163,11 +178,11 @@ assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "R
 assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(pkg.scripts?.qa === "npm run test:all", "package must expose the full QA gate.");
-assert(pkg.version === "0.2.0", "suite version must identify the unified CommonGround cutover.");
-for (const phrase of ["mpes_authority: prime", "M1-shared-interchange-and-recovery", "M2-reusable-pwa-baseline", "D-001", "D-005", "D-006", "NOT_RUN", "no publication authority granted"]) {
+assert(pkg.version === "0.3.0", "suite version must identify the bounded HealthOS M3A packet.");
+for (const phrase of ["mpes_authority: prime", "M1-shared-interchange-and-recovery", "M2-reusable-pwa-baseline", "M3A-healthos-foundation-and-focus-timer", "D-001", "D-005", "D-006", "D-007", "NOT_RUN", "no publication authority granted"]) {
   assert(projectState.includes(phrase), `PROJECT_STATE.yaml missing required state: ${phrase}`);
 }
-for (const phrase of ["prime human-readable project authority", "Consolidate LedgerSuite into CommonGround", "owner explicitly directed their consolidation", "Stage PWA updates", "Reuse assurance, not runtime state"]) {
+for (const phrase of ["prime human-readable project authority", "Consolidate LedgerSuite into CommonGround", "owner explicitly directed their consolidation", "Stage PWA updates", "Reuse assurance, not runtime state", "Add an isolated HealthOS focus surface"]) {
   assert(decisions.includes(phrase), `DECISIONS.md missing required decision evidence: ${phrase}`);
 }
 for (const phrase of ["Universal Packet Contract", "M1 — Shared interchange", "M3 — HealthOS", "M9 — Release", "Completion Definition", "Consolidated `/goal` Prompts"]) {
@@ -285,6 +300,11 @@ const runtimeZipPaths = [
   "vendor/chart-4.4.2.umd.js",
   "vendor/chartjs-LICENSE.md",
   "apps/ts-dash/index.html",
+  "apps/healthos/index.html",
+  "apps/healthos/app.js",
+  "apps/healthos/screenshot.png",
+  "shared/healthos.js",
+  "shared/focus-timer.js",
   "apps/commonground/index.html"
 ];
 const exportAttrsResolved = exportIgnoreMap([...exportIgnoredPaths, ...runtimeZipPaths]);
@@ -300,7 +320,7 @@ for (const file of exportIgnoredPaths) {
 }
 for (const file of runtimeZipPaths) {
   assert(exportAttrsResolved.get(file) === "unspecified", `Runtime archive path must remain downloadable: ${file}`);
-  if (trackedFiles.includes(file)) {
+  if (headTrackedFiles.includes(file)) {
     assert(archiveEntries.includes(file), `Generated repository archive must include runtime path: ${file}`);
   } else {
     assert(existsSync(join(root, file)), `Pending runtime path must exist in the workspace before commit: ${file}`);
@@ -366,9 +386,28 @@ for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "0.2.2-m2"', "data
 for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "3.9.74"', 'dataSchemaVersion: "v3"', "legacyCacheNames"]) {
   assert(flexxSw.includes(phrase), `Flexx service worker missing M2 contract: ${phrase}`);
 }
+for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "0.1.0-m3a"', "dataSchemaVersion: 1", 'cachePrefix: "healthos-"']) {
+  assert(healthSw.includes(phrase), `HealthOS service worker missing M2 contract: ${phrase}`);
+}
 for (const phrase of ["contractVersion", "compatibleDataSchemas", "navigationFallback", "sha256", "../../shared/pwa-assurance.js"]) {
   assert(commonGroundPwaShell.includes(phrase), `CommonGround shell manifest missing: ${phrase}`);
   assert(flexxPwaShell.includes(phrase), `Flexx shell manifest missing: ${phrase}`);
+  assert(healthPwaShell.includes(phrase), `HealthOS shell manifest missing: ${phrase}`);
+}
+for (const phrase of ["healthos/daily_state", "healthos/focus_session", "LIFE_STATES", "healthRecordsToTsDashCsv", "correlation does not establish causation"]) {
+  assert(sharedHealth.includes(phrase), `HealthOS shared schema missing: ${phrase}`);
+}
+for (const phrase of ["FOCUS_MODES", "segmentStartedAt", "reconcileFocusTimer", "clockAnomaly", "createBreakTimer"]) {
+  assert(sharedFocusTimer.includes(phrase), `Trustworthy focus timer missing: ${phrase}`);
+}
+for (const phrase of ["Noodle Nudge", "Flexx Files", "Start focus", "Manual correction", "Optional device cues", "Prepare factory reset"]) {
+  assert(healthApp.includes(phrase), `HealthOS app surface missing: ${phrase}`);
+}
+for (const phrase of ["healthos-focus", "expectedRevision", "idempotencyKey", "applyHealthPackageAtomic", "rollbackHealthReceipt", "createHealthBackup"]) {
+  assert(healthStorage.includes(phrase), `HealthOS app-owned storage missing: ${phrase}`);
+}
+for (const phrase of ["Topology and ownership", "Typed portable records", "Trustworthy timer", "Observation and recovery boundaries", "Deferred modules"]) {
+  assert(healthContract.includes(phrase), `HealthOS contract missing: ${phrase}`);
 }
 for (const phrase of ["registerPwaAssurance", "activatePwaUpdate", "getPwaHealth", "clearOwnedPwaCaches", "schemaCompatible"]) {
   assert(sharedPwaClient.includes(phrase), `PWA client assurance missing: ${phrase}`);

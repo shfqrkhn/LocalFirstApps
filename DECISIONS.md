@@ -50,3 +50,12 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Operations:** First install claims without a reload loop. Later controller changes reload each open tab once. Health is read-only and reports unavailable estimates honestly. Cache clear and factory reset remain app-scoped; Flexx and CommonGround reset only after a complete backup starts successfully.
 - **Compatibility:** CommonGround database v3 upgrades additively to v4; CommonGround/LedgerSuite formats, M1 receipts, Flexx `v3` storage, drafts and backups remain unchanged. Hosted repository subpaths work; `file://` remains a safe reduced fallback because browsers do not provide module/worker parity there.
 - **Rollback:** Revert the M2 commit. Existing user stores are not migrated or rewritten by this packet; the retained old worker/cache or an app export remains the recovery source.
+
+## D-007 — Add an isolated HealthOS focus surface
+
+- **State:** Accepted for the bounded M3A packet
+- **Decision:** Add `apps/healthos` as the app-owned daily-state/focus surface and minimal HealthOS navigator. Noodle Nudge remains canonical for reflection/self-inquiry and Flexx Files remains canonical for strength/readiness/progression; neither runtime or store is merged or read by HealthOS.
+- **Integration:** Share only versioned M1-compatible `daily_state` and `focus_session` schemas plus pure timestamp math. Movement uses exact-preview portable files with atomic app-owned apply/receipt/rollback. TS-Dash receives explicit deterministic CSV and remains a generic source-data consumer.
+- **Safety:** Keep observations distinct with no aggregate score. Timer completion is user-reviewed, stale-tab-safe and idempotent. Device cues are detected, opt-in and degradable; health language is non-diagnostic and pressure-free. Meditation, breathing, C25K, mobility, sleep and later modules stay inactive pending separate acceptance.
+- **Compatibility amendment:** Preserve every existing URL during this unpublished M3A packet, including the LedgerSuite migration alias. Its earlier one-release removal note is superseded by the MPES deprecation rule: removal requires explicit approval, migration evidence, and rollback planning.
+- **Rollback:** Revert the M3A commit. Existing app data and code were not migrated; HealthOS complete backup restores its own v1 records/runtime, and the pre-M3A suite remains independently usable.

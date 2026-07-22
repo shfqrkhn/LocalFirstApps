@@ -159,6 +159,22 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `NOT_RUN`: no push, deployment, release or remote mutation was authorized. Read-only live checks describe the pre-existing deployment, not this local M2 runtime.
 - **Rollback:** revert the bounded M2 commit. The packet performs no destructive data migration; existing app exports and the prior complete shell remain recovery sources.
 
+## 2026-07-22 M3A HealthOS Foundation And Focus Packet
+
+**State:** `VERIFIED` locally; owner acceptance and publication remain separate and `NOT_RUN`.
+
+- `PASS`: HealthOS Focus is the sixth canonical app and owns only IndexedDB `healthos-focus` v1, scoped preferences, caches and worker registration. Noodle Nudge remains canonical for reflection and Flexx Files for strength; HealthOS links to both but reads or mutates neither store. Existing app URLs, records, formats, M1 interchange and M2 PWA contracts remain preserved; the unlisted LedgerSuite compatibility URL remains available.
+- `PASS`: M1-compatible `healthos/daily_state` and `healthos/focus_session` records preserve provenance, instants, IANA timezone, revision, hashes and inert compatible extensions. Mood, energy, sleep quality, stress, soreness, pain flags, intended focus, recovery need and notes stay separate; no aggregate score, diagnosis, treatment, streak pressure or forced advancement was added.
+- `PASS`: 25/5, 50/10, 5- and 10-minute minimum, custom and open focus modes derive elapsed time from persisted instants. Deterministic tests cover reload/suspension-style time jumps, pause/resume/restart/skip/cancel/finish, manual correction, leap-date/DST/clock rollback/timezone change, interruptions, distractions and breaks. Browser tests cover reload reconciliation, stale duplicate tabs and idempotent completion after explicit review.
+- `PASS`: portable JSON uses exact preview, confirmation, validation, atomic new-ID apply, unique durable replay receipt and rollback. Malformed/unsupported/replayed files, simulated partial/quota writes and interrupted complete restore fail closed without partial replacement. Integrity-protected complete backup restores records, receipts, active timer and preferences; factory reset begins the download and clears only HealthOS scopes.
+- `PASS`: deterministic TS-Dash CSV preserves source IDs, units, truth class, derivation and the non-causal correlation note. Integration is explicit file export only; there is no hidden cross-app read, synchronization or mutation.
+- `PASS`: HealthOS stages a content-addressed complete shell, requires explicit compatible activation, retains last-known-good recovery, works at root and repository subpaths, restarts offline, loads pre-existing v1 records, survives PWA update/recovery and preserves unrelated origin storage/cache data during reset. Capability detection keeps audio, vibration, notifications and wake lock opt-in with visible fallback.
+- `PASS`: `npm run qa` passed static/interchange/PWA/worker/HealthOS contract gates, five native Flexx checks, 35 responsive visual cases, seven safe file-mode cases, 31 behavior cases and six read-only pre-existing live route cases. Screenshots were regenerated; syntax, dependency, license, link/media, secret/protected-path, popup/external-runtime, archive and `git diff --check` gates passed.
+- `PASS_WITH_LIMITATIONS`: automated accessibility covers semantic labels/status, visible focus, keyboard start, pointer/touch actions, responsive overflow and reduced motion, not every screen reader or assistive technology. Browser/OS suspension, subtle clock changes, background cue delivery, quota and real eviction remain browser-controlled; persisted timestamps, visible anomaly state, manual correction and complete backup are the recovery paths.
+- `NOT_RUN`: HealthOS is not deployed. No push, release, deployment or other remote mutation was authorized. The six live-route checks cover the pre-existing public deployment and cannot prove this local route.
+- **Rollback:** revert the bounded M3A commit. No existing app store was migrated or rewritten; HealthOS's complete v1 backup restores only its own data, and the pre-M3A suite remains independently usable.
+- **Next exact action:** obtain owner acceptance of M3A. Only then consider a separately bounded M3B meditation/breathing packet; C25K, mobility, sleep, distraction and all later modules remain inactive.
+
 ## Required Before Public-Facing Change
 
 - `git status --short --ignored`

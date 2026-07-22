@@ -1,6 +1,6 @@
 # AI Maintainer Handoff
 
-Last updated: 2026-07-21.
+Last updated: 2026-07-22.
 Repo: `D:\VSCode\GH\LocalFirstApps`.
 
 Treat this as a public-safe continuation map. Re-read current files before editing.
@@ -51,9 +51,10 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - `apps/pmquiz`
 - `apps/noodle-nudge`
 - `apps/flexx-files`
+- `apps/healthos`
 - `apps/commonground`
 
-`apps/ledgersuite` is a temporary, unlisted `v0.2.0` compatibility redirect and is not an active app. Remove the shim during the next genuine feature release after `v0.2.0`; retain LedgerSuite JSON/ZIP import support in CommonGround indefinitely.
+`apps/ledgersuite` is an unlisted compatibility redirect, not an active app. Preserve its URL and CommonGround LedgerSuite v1/v2 import support unless the owner separately approves deprecation with migration evidence and rollback planning.
 
 ## Key Files
 
@@ -62,6 +63,7 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - `docs/MPES_IMPLEMENTATION_PLAN.md`: M0–M9 packet sequence and completion definition.
 - `shared/interchange.js` and `docs/INTERCHANGE_CONTRACT.md`: M1 portable-record implementation and public contract.
 - `shared/pwa-worker.js`, `shared/pwa-assurance.js`, and `docs/PWA_ASSURANCE_CONTRACT.md`: M2 complete-shell staging, activation, health, scoped reset, and last-known-good contract.
+- `shared/healthos.js`, `shared/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: M3A observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
@@ -94,6 +96,10 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 - Keep decision hard constraints distinct from comparative scores. Preserve revision checks on singleton writes and portable conflict metadata so stale or duplicate tabs fail visibly instead of overwriting newer records.
 - CommonGround and Flexx worker updates must remain content-addressed, completely staged, schema-compatible, and user-activated. First install must not reload; later activation reloads each open tab once. Missing/corrupt/quota-failed candidates must delete only their incomplete cache, and a corrupt/evicted current shell must select the retained complete prior shell.
 - Preserve app ownership boundaries: cache prefixes, registrations, data stores, health UI and reset remain scoped. Health checks must not request persistence or imply that browser quota/eviction is controllable. Keep hosted subpaths and safe `file://` fallback covered.
+- HealthOS is the bounded M3A navigation/daily-state/focus surface only. Noodle Nudge remains canonical for reflection and Flexx Files for strength; HealthOS must not read either store. Keep meditation, breathing, C25K, mobility, sleep and later modules inactive until separately accepted.
+- Persist focus timestamps and derive duration from instants. Preserve reload/sleep reconciliation, clock/timezone anomaly visibility, manual correction, explicit pause/resume/restart/skip/cancel/review, stale-tab rejection and idempotent completion. Device cues remain detected, opt-in and visibly degradable.
+- Keep HealthOS transfer explicit and file-based: exact preview, confirm, atomic app-owned apply, durable replay receipt and rollback. TS-Dash stays generic and receives only deterministic user-exported CSV; correlation language must remain non-causal.
+- The local M3A route is not deployed. Existing live-route checks do not prove HealthOS publication.
 - Keep `docs/CAPABILITY_RECOVERY_MATRIX.md`, the behavior suite, and package gates aligned whenever a recovery or input contract changes.
 - Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.
 - Future userscripts belong in a separate userscripts repo by default, not LocalFirstApps.

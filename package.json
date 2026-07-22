@@ -1,13 +1,13 @@
 {
   "name": "local-first-apps",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/static-regression.mjs && node tests/interchange-regression.mjs && node tests/pwa-assurance-regression.mjs && node tests/pwa-worker-regression.mjs",
+    "test": "node tests/static-regression.mjs && node tests/interchange-regression.mjs && node tests/pwa-assurance-regression.mjs && node tests/pwa-worker-regression.mjs && node tests/healthos-regression.mjs",
     "test:visual": "playwright test tests/visual-regression.spec.mjs --reporter=line",
     "test:file": "playwright test tests/local-file-regression.spec.mjs --reporter=line",
-    "test:behavior": "playwright test tests/app-behavior-regression.spec.mjs --reporter=line",
+    "test:behavior": "playwright test tests/app-behavior-regression.spec.mjs tests/healthos-behavior.spec.mjs --reporter=line",
     "test:flexx": "node apps/flexx-files/tests/verify_plate_load.mjs && node apps/flexx-files/tests/verify_get_last_non_deload.mjs && node apps/flexx-files/tests/verify_save_draft.mjs && node apps/flexx-files/tests/verify_storage_reset.mjs && node apps/flexx-files/tests/verify_version_consistency.mjs",
     "test:live": "playwright test tests/live-regression.spec.mjs --reporter=line",
     "test:local": "npm test && npm run test:flexx && npm run test:visual && npm run test:file && npm run test:behavior",

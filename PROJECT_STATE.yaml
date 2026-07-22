@@ -1,11 +1,11 @@
 project:
   id: localfirstapps-unified-suite
-  version: 0.2.0
-  phase: mpes_m2_reusable_pwa_assurance
-  status: m2_verified_local_pending_owner_acceptance_and_release
+  version: 0.3.0
+  phase: mpes_m3a_healthos_focus_proof
+  status: m3a_verified_local_pending_owner_acceptance_and_release
   repository: https://github.com/shfqrkhn/LocalFirstApps
-  git_head: 349ee021b43416650c464ae7018b574ee0402906
-  git_head_role: clean_local_m1_baseline_before_m2_packet
+  git_head: dd9a5879fadda8d63930a00e08c9c7c0e779e20e
+  git_head_role: clean_local_m2_baseline_before_m3a_packet
   branch: agent/commonground-consolidation
   mpes_version: 1.1.0-draft
   mpes_authority: prime
@@ -18,6 +18,7 @@ project:
     - pmquiz
     - noodle-nudge
     - flexx-files
+    - healthos
     - commonground
   compatibility_aliases:
     - ledgersuite
@@ -30,6 +31,8 @@ project:
       store: IndexedDB
     - app: flexx-files
       store: scoped_localStorage
+    - app: healthos
+      store: IndexedDB_healthos-focus_v1_plus_scoped_preferences
     - app: commonground
       store: IndexedDB_commonground-suite_v4_with_transfer_receipts
     - compatibility_source: ledgersuite
@@ -44,14 +47,15 @@ project:
       - Knowledge Engine
       - Learning Engine
     implementation: isolated_static_apps_with_explicit_file_transfer
-  active_milestone: M2
-  active_packet: M2-reusable-pwa-baseline
+  active_milestone: M3A
+  active_packet: M3A-healthos-foundation-and-focus-timer
   active_packet_state: VERIFIED
   completed_packets:
     - M1-shared-interchange-and-recovery
     - M2-reusable-pwa-baseline
+    - M3A-healthos-foundation-and-focus-timer
   baseline_reconciliation: VERIFIED
-  next_milestone: M3-healthos-convergence
+  next_milestone: M3B-meditation-and-breathing_only_after_owner_acceptance
   requirements:
     - id: CG-MERGE
       state: IMPLEMENTED
@@ -71,9 +75,18 @@ project:
     - id: INTERCHANGE-RECOVERY
       state: IMPLEMENTED
       evidence: exact preview and confirmation, atomic new-ID import, unique persistent receipt, correction/deletion closure, rollback and replay protection
+    - id: HEALTHOS-FOUNDATION
+      state: VERIFIED
+      evidence: independent HealthOS Focus app and navigation preserve canonical Noodle Nudge and Flexx Files runtimes; versioned daily-state and focus-session portable records use app-owned storage only
+    - id: TRUSTWORTHY-FOCUS-TIMER
+      state: VERIFIED
+      evidence: six modes, timestamp reconciliation, explicit review, manual correction, stale-tab rejection, idempotent completion, degraded guidance, opt-in capability fallbacks, offline and recovery tests
+    - id: HEALTHOS-PORTABILITY
+      state: VERIFIED
+      evidence: exact-preview portable transfer, atomic receipt and rollback, complete integrity backup/restore, scoped reset, and deterministic TS-Dash CSV fixture
     - id: FULL-LOCAL-VERIFICATION
       state: VERIFIED
-      evidence: npm run qa passed static, interchange, PWA contract and fail-closed worker gates, 5 native Flexx checks, 30 visual, 6 file, 23 behavior, and 6 read-only live route cases on 2026-07-21
+      evidence: npm run qa passed static/interchange/PWA/HealthOS contracts, fail-closed worker tests, 5 native Flexx checks, 35 visual, 7 file, 31 behavior, and 6 read-only existing live route cases on 2026-07-22
     - id: RELEASE
       state: NOT_RUN
       evidence: no publication authority granted
@@ -93,6 +106,9 @@ project:
     - id: D-006
       state: ACCEPTED
       decision: Reusable PWA assurance is a dependency-free app-owned shell contract with content-addressed complete staging, explicit compatible activation, one retained last-known-good shell, scoped health and reset, and no shared data runtime.
+    - id: D-007
+      state: ACCEPTED
+      decision: M3A adds an independent HealthOS Focus app and narrow portable schema; Noodle Nudge and Flexx Files remain canonical isolated modules, later HealthOS modules remain inactive, and the LedgerSuite compatibility URL remains preserved pending explicit deprecation authority.
   risks:
     - id: R-001
       status: controlled
@@ -114,6 +130,14 @@ project:
       status: controlled_with_limitations
       risk: interchange_forward_compatibility_and_browser_quota
       control: accept interchange 1.x conservatively and abort atomically; deterministically reject quota-interrupted shell staging and recover simulated eviction while exposing honest read-only health; real browser eviction remains browser-controlled
+    - id: R-006
+      status: controlled_with_limitations
+      risk: browser_timer_background_and_clock_behavior
+      control: derive duration from persisted instants, freeze visible state on detected rollback, preserve IANA timezone, require explicit review and manual correction; background cue delivery remains browser-controlled
+    - id: R-007
+      status: controlled
+      risk: healthos_scope_creep_or_health_claims
+      control: distinct observational fields, no combined score/diagnosis/streak pressure, independently owned modules, and later modules inactive until separate acceptance
   evidence:
     - path: docs/EVIDENCE_RECEIPT.md
       state: VERIFIED_LOCAL
@@ -123,9 +147,10 @@ project:
       state: VERIFIED
   unknowns:
     - storage_quota_and_eviction_behavior_varies_by_browser
+    - background_notification_audio_vibration_and_wake_lock_delivery_varies_by_browser
     - screen_reader_and_longitudinal_operational_evidence_not_yet_demonstrated
     - exact_consolidation_deployment_is_not_run
   blockers: []
   implementation_plan: docs/MPES_IMPLEMENTATION_PLAN.md
-  next_action: Begin the bounded M3 HealthOS convergence packet only after owner review. Do not publish absent explicit authority.
-  updated_at: 2026-07-21
+  next_action: Obtain owner acceptance of M3A before separately considering M3B meditation and breathing. Keep C25K and all later HealthOS modules inactive. Do not publish absent explicit authority.
+  updated_at: 2026-07-22

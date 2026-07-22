@@ -8,7 +8,8 @@ import { PWA_ASSURANCE_VERSION, classifyStorageEstimate, schemaCompatible } from
 const root = fileURLToPath(new URL("..", import.meta.url));
 const pilots = [
   { app: "commonground", manifest: "apps/commonground/pwa-shell.json", shell: "0.2.2-m2", schema: 4 },
-  { app: "flexx-files", manifest: "apps/flexx-files/pwa-shell.json", shell: "3.9.74", schema: "v3" }
+  { app: "flexx-files", manifest: "apps/flexx-files/pwa-shell.json", shell: "3.9.74", schema: "v3" },
+  { app: "healthos", manifest: "apps/healthos/pwa-shell.json", shell: "0.1.0-m3a", schema: 1 }
 ];
 
 for (const pilot of pilots) {
@@ -43,4 +44,4 @@ assert.deepEqual(classifyStorageEstimate(undefined), { available: false, usage: 
 assert.equal(classifyStorageEstimate({ usage: 95, quota: 100 }).state, "high");
 assert.equal(classifyStorageEstimate({ usage: 10, quota: 100 }).state, "healthy");
 
-console.log("PWA assurance contract regression passed for CommonGround and Flexx Files.");
+console.log("PWA assurance contract regression passed for CommonGround, Flexx Files, and HealthOS.");

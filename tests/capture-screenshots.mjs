@@ -50,10 +50,22 @@ try {
   await page.getByRole("heading", { name: "Unify the operating workflow" }).waitFor();
   await page.screenshot({ path: join(root, "apps", "commonground", "screenshot-app.png"), fullPage: false });
 
+  await page.goto(`${baseUrl}apps/healthos/`, { waitUntil: "domcontentloaded" });
+  await page.getByLabel("Mode").selectOption("25-5");
+  await page.getByLabel("Intention").fill("Finish the most important bounded task");
+  await page.getByLabel("Observed life state").selectOption("FOCUSED");
+  await page.getByLabel("Energy before").selectOption("4");
+  await page.getByRole("button", { name: "Start focus" }).click();
+  await page.getByLabel("Elapsed minutes").fill("8.5");
+  await page.getByRole("button", { name: "Apply correction" }).click();
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.screenshot({ path: join(root, "apps", "healthos", "screenshot.png"), fullPage: false });
+
   await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
   await page.evaluate(() => scrollTo(0, 0));
   await page.screenshot({ path: join(root, "screenshot.png"), fullPage: false });
 } finally {
   await browser.close();
+  server.closeAllConnections?.();
   await new Promise((resolve) => server.close(resolve));
 }

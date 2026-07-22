@@ -46,7 +46,7 @@ Training adherence improves when the tracker removes decisions instead of adding
 
 ## Relationship To Other Projects
 
-Flexx Files is a stable personal-systems app maintained inside LocalFirstApps. It is not a flagship focus area unless a dedicated fitness product line becomes a priority.
+Flexx Files is the canonical HealthOS strength/readiness/progression module, while remaining a complete independent app with its own scoped storage and recovery boundary. The separate [HealthOS Focus surface](../healthos/) links here but does not read or merge Flexx data. It is not a flagship focus area unless a dedicated fitness product line becomes a priority.
 
 ## Repository Layout
 

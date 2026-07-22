@@ -1,0 +1,30 @@
+{
+  "daily": {
+    "date": "2024-02-29",
+    "life_state": "READY",
+    "mood": 4,
+    "energy": 3,
+    "sleep_quality": 5,
+    "stress": 2,
+    "soreness": 1,
+    "pain_flags": [],
+    "intended_focus": "Finish the bounded proof",
+    "recovery_need": "Normal break",
+    "notes": "Leap-day deterministic fixture"
+  },
+  "focus": {
+    "intention": "Finish the bounded proof",
+    "mode": "25-5",
+    "planned_minutes": 25,
+    "completed_minutes": 25,
+    "interruptions": 1,
+    "distraction_notes": ["Email can wait"],
+    "outcome": "Proof completed",
+    "energy_before": 3,
+    "energy_after": 4,
+    "stopped_reason": "Target reached",
+    "started_at": "2024-02-29T13:00:00.000Z",
+    "ended_at": "2024-02-29T13:25:00.000Z",
+    "life_state": "READY"
+  }
+}

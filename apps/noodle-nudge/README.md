@@ -42,7 +42,7 @@ Reflection tools are most useful when they are private, simple, and available wh
 
 ## Relationship To Other Projects
 
-Noodle Nudge is a stable personal-growth app. It is intentionally not part of the active flagship set so maintenance energy stays focused.
+Noodle Nudge is the canonical HealthOS reflection and self-inquiry module, while remaining a complete independent app with its own IndexedDB data and recovery boundary. The separate [HealthOS Focus surface](../healthos/) links here but does not read or merge Noodle Nudge storage. It is intentionally not part of the active flagship set so maintenance energy stays focused.
 
 ## Repository Layout
 
