@@ -1,11 +1,11 @@
 project:
   id: localfirstapps-unified-suite
   version: 0.3.0
-  phase: r3b_strength_foundation_verified
-  status: r3b_verified_local_with_declared_review_limitations
+  phase: r3c_strength_controller_verified
+  status: r3c_verified_local_with_declared_review_limitations
   repository: https://github.com/shfqrkhn/LocalFirstApps
-  git_head: 097822a765ae4b18cd861a4815da4ef9724bc3cb
-  git_head_role: verified_r3b_implementation_commit_before_evidence_close
+  git_head: 93cd8039a39070059bb276b2a0c2c8c5cbf753f8
+  git_head_role: verified_r3c_implementation_commit_before_evidence_close
   takeover_baseline_head: ff25f15af266c2737fbc497983c26d582b2629d9
   m2_baseline_head: dd9a5879fadda8d63930a00e08c9c7c0e779e20e
   branch: agent/commonground-consolidation
@@ -50,9 +50,9 @@ project:
       - Learning Engine
     implementation: isolated_static_apps_with_explicit_file_transfer
   active_milestone: R3
-  active_packet: R3B-strength-foundation
+  active_packet: R3C-strength-controller-modularization
   active_packet_state: VERIFIED_LOCAL
-  active_governance_packet: r3b-flexx-strength-domain-extraction
+  active_governance_packet: r3c-flexx-controller-modularization
   active_governance_packet_state: VERIFIED_LOCAL
   completed_packets:
     - M1-shared-interchange-and-recovery
@@ -63,10 +63,11 @@ project:
     - R2-omnicore-extraction
     - R3A-lifeos-foundation
     - R3B-strength-foundation
+    - R3C-strength-controller-modularization
   completed_governance_packets:
     - adversarial-audit-and-r0-plan
   baseline_reconciliation: VERIFIED
-  next_milestone: R3C-strength-controller-modularization_after_owner_review
+  next_milestone: R3D-reflection-controller-modularization_after_owner_review
   requirements:
     - id: CG-MERGE
       state: IMPLEMENTED
@@ -97,7 +98,7 @@ project:
       evidence: exact-preview portable transfer, atomic receipt and rollback, complete integrity backup/restore, scoped reset, and deterministic TS-Dash CSV fixture
     - id: FULL-LOCAL-VERIFICATION
       state: VERIFIED
-      evidence: npm run ci:candidate passed contracts including OmniCore, R3A LifeOS/Reflection, and R3B Strength faults; 5 native Flexx checks, R1 foundations, 35 visual, 7 file, 35 behavior, 7 accessibility routes, deterministic 144-file build; npm audit reported 0 vulnerabilities on 2026-07-22
+      evidence: npm run ci:candidate passed contracts including OmniCore, R3A LifeOS/Reflection, R3B Strength, and R3C controller faults; 5 native Flexx checks, R1 foundations, 35 visual, 7 file, 37 behavior, 7 accessibility routes, deterministic 150-file build; npm audit reported 0 vulnerabilities on 2026-07-22
     - id: RELEASE
       state: NOT_RUN
       evidence: no publication authority granted
@@ -119,6 +120,9 @@ project:
     - id: R3B-STRENGTH-FOUNDATION
       state: VERIFIED
       evidence: Flexx-owned versioned Strength calculation, readiness, storage-contract, recovery, and app-adapter seams; exact seven-key inventory and 20-handler characterization; deterministic legacy/current backup, draft, quota, malformed-input, foreign-scope, and preview-only mapping evidence; unchanged v3 data, formats, routes, UI outputs, worker, and cache scope
+    - id: R3C-STRENGTH-CONTROLLER
+      state: VERIFIED
+      evidence: Flexx-owned versioned state/selectors, commands, modal, timer, safe views/chart, DOM and storage-event bindings; 209-line composition root; exact 20-name compatibility facade; complete phase/render/timer/draft/swap/pagination/chart/protocol/import/reset/multi-tab fault evidence; unchanged v3 data, formats, route, visible workflow, worker, and cache scope
   decisions:
     - id: D-001
       state: ACCEPTED
@@ -162,6 +166,9 @@ project:
     - id: D-015
       state: ACCEPTED
       decision: Strength domain logic remains Flexx-owned behind a versioned app adapter; LifeOS receives metadata and exact non-mutating previews only, while Flexx v3 storage, recovery, route, worker, cache, UI behavior, and compatibility identities remain authoritative.
+    - id: D-016
+      state: ACCEPTED
+      decision: Flexx UI orchestration is split into app-owned state, command, timer, modal, view, and binding modules; the 20 window names remain only as an explicit compatibility facade, cross-tab session changes invalidate local cache without interrupting an active workout, and completed sessions cannot be reintroduced as drafts.
   risks:
     - id: R-001
       status: controlled
@@ -220,9 +227,13 @@ project:
       risk: cross_storage_restore_can_commit_records_before_preferences
       control: durable pending-preference marker in the canonical IndexedDB transaction, one normalized preference write, explicit incomplete status, idempotent retry, and injected-failure browser proof
     - id: R-015
-      status: controlled_with_limitations
+      status: controlled
       risk: flexx_global_controller_and_html_rendering_coupling
-      control: R3B freezes the exact 20-handler surface and routes characterized domain work through a Flexx-owned adapter; incremental controller/view replacement requires a separate parity-gated packet
+      control: R3C replaces the monolith with six versioned app-owned controller modules, a 209-line composition root, safe numeric/chart and sanitized-content rendering, exact compatibility bindings, and deterministic/browser parity gates
+    - id: R-016
+      status: open
+      risk: noodle_reflection_ui_controller_coupling
+      control: preserve Noodle v1 data/scoring/backup/PWA behavior and route the next bounded packet through exact UI/controller characterization before modularization
   evidence:
     - path: docs/EVIDENCE_RECEIPT.md
       state: VERIFIED_LOCAL
@@ -246,6 +257,8 @@ project:
       state: VERIFIED
     - path: tests/r3b-strength-regression.mjs
       state: VERIFIED
+    - path: tests/r3c-strength-controller-regression.mjs
+      state: VERIFIED
   unknowns:
     - storage_quota_and_eviction_behavior_varies_by_browser
     - background_notification_audio_vibration_and_wake_lock_delivery_varies_by_browser
@@ -253,5 +266,5 @@ project:
     - exact_consolidation_deployment_is_not_run
   blockers: []
   implementation_plan: docs/MPES_IMPLEMENTATION_PLAN.md
-  next_action: Obtain owner review of verified R3B, then execute only the bounded R3C Flexx Strength controller modularization goal in docs/MPES_IMPLEMENTATION_PLAN.md. Keep data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, route retirement, and publication inactive. Do not mutate remotes absent explicit authority.
+  next_action: Obtain owner review of verified R3C, then execute only the bounded R3D Noodle Reflection controller modularization goal in docs/MPES_IMPLEMENTATION_PLAN.md. Keep data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, route retirement, and publication inactive. Do not mutate remotes absent explicit authority.
   updated_at: 2026-07-22

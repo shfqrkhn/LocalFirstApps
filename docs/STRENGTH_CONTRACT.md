@@ -1,10 +1,10 @@
-# CommonGround LifeOS Strength R3B Contract
+# CommonGround LifeOS Strength R3B–R3C Contract
 
-Version `1.0.0` defines the bounded Flexx-owned Strength foundation. The private MPES remains prime authority. R3B does not migrate data or UI, approve training/health content, or grant CommonGround LifeOS access to Flexx storage.
+Version `1.0.0` defines the bounded Flexx-owned Strength foundation and controller boundary. The private MPES remains prime authority. R3B–R3C do not migrate data, approve training/health content, or grant CommonGround LifeOS access to Flexx storage.
 
 ## Ownership and topology
 
-Flexx Files `3.9.76` remains the independently launchable canonical UI at `apps/flexx-files/`. Its storage schema remains `v3`; its worker scope, `flexx-` cache ownership, manifest, backup/reset workflow, calculations, and visible workflows remain app-owned. The LifeOS shell only links to Flexx. There is no cross-app read/write, dual-write, hidden sync, shared database, global bus, universal worker, backend, account, provider, or AI dependency.
+Flexx Files `3.9.77` remains the independently launchable canonical UI at `apps/flexx-files/`. Its storage schema remains `v3`; its worker scope, `flexx-` cache ownership, manifest, backup/reset workflow, calculations, and visible workflows remain app-owned. The LifeOS shell only links to Flexx. There is no cross-app read/write, dual-write, hidden sync, shared database, global bus, universal worker, backend, account, provider, or AI dependency.
 
 `apps/flexx-files/strength-adapter.js` is the app-owned `1.0.0` facade. Pure implementations live under `strength/`: calculations/progression, readiness, backup/draft recovery, and the storage contract. `js/core.js` retains the storage implementation and compatibility exports; `js/app.js` consumes the facade rather than importing the core directly.
 
@@ -36,18 +36,18 @@ Draft validation preserves the existing behaviors: valid drafts resume; structur
 
 The frozen pre-R3B characterization hash covers 250 deterministic histories, every public progression/lookup method, and 1,041 half-pound plate inputs. Existing focused native tests additionally cover precision, LRU behavior, alternatives, volume, draft handling, storage reset, rendering, pagination, and version consistency. R3B does not assert that the training rules are professionally approved.
 
-## Global-controller inventory
+## Controller boundary and compatibility inventory
 
-The existing HTML/UI still depends on exactly these `window` handlers; R3B inventories rather than rewrites them:
+The existing HTML/UI depends on exactly these `window` handlers:
 
 - Workout mutation: `updateWarmup`, `updateCardio`, `updateDecompress`, `setRec`, `modW`, `togS`, `swapAlt`, `swapCardioLink`, `nextPhase`, `finish`.
 - Timer/navigation: `skipTimer`, `skipRest`, `startCardio`, `loadMoreHistory`, `viewProtocol`, `closeProtocol`, `drawChart`.
 - Recovery/destructive actions: `del`, `wipe`, `imp`.
 
-These handlers depend on app-local `State`, `Timer`, `Modal`, DOM IDs, configuration maps, the Strength adapter, observability, accessibility, i18n, and app-owned PWA assurance. Removing inline handlers or splitting the remaining controller requires a later separately characterized UI packet.
+R3C implements them through `controller/state.js`, `commands.js`, `timer.js`, `modal.js`, `views.js`, and `bindings.js`. `js/app.js` is a 209-line composition root; `bindings.js` owns the exact 20-name facade plus app-local navigation, delete, and storage-event bindings. Views use safe numeric/chart construction and sanitized protocol content. Session storage events invalidate the app cache, refresh inactive history/progress views, preserve active workouts, and ignore foreign keys. Completing a session clears active/draft state before lifecycle persistence can restore it.
 
 ## Preview, verification, and rollback
 
 `createStrengthLifeOsPreview` accepts validated legacy/current backup input and returns only an exact deterministic proposal with `mutationAllowed:false`. It has no storage capability and is neither a migration receipt nor authorization. HealthOS and Noodle import no Strength adapter code.
 
-`tests/r3b-strength-regression.mjs` and `tests/fixtures/lifeos-strength-preview-v1.json` prove versions, storage inventory, full calculation hash, readiness, legacy/current backup shapes, drafts, malformed/quota failures, preview exactness/no mutation, controller inventory, compatibility exports, independent app ownership, and complete offline assets. Browser gates prove current restore, quota visibility, foreign localStorage/cache survival, route/subpath/offline behavior, update/reset, responsive layout, file fallback, and automated accessibility. Rollback is code-only because R3B changes no persisted schema or user data.
+`tests/r3b-strength-regression.mjs`, `tests/r3c-strength-controller-regression.mjs`, and `tests/fixtures/lifeos-strength-preview-v1.json` prove versions, storage inventory, full calculation hash, readiness, backup shapes, drafts, malformed/quota failures, preview no-mutation, every controller command/state/render/modal/timer path, exact compatibility bindings, multi-tab refresh, independent ownership, and complete offline assets. Browser gates prove full workout phases, swaps, timers, finish cancel/confirm, draft cleanup/restore, charts/protocol, reset failures, foreign survival, route/subpath/offline behavior, responsive layout, file fallback, and automated accessibility. Rollback is code-only: revert R3B `097822a` and/or R3C `93cd803`; neither changes persisted schema or user data.

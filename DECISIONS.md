@@ -123,3 +123,11 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Compatibility:** Preserve the seven `flexx_` keys, v3 session/draft shapes, legacy/current backups, output formats, route, worker/cache scope, independent reset, and all 20 existing global UI handlers. No migration, dual-write, foreign-store read, shared runtime, or content approval occurs.
 - **Evidence:** The frozen characterization hash covers 250 deterministic histories, every public progression/lookup method, and 1,041 plate inputs. Unit/browser gates cover readiness, recovery, malformed/quota faults, draft retention, foreign storage/cache survival, complete offline staging, responsive/file/accessibility behavior, and preview no-mutation.
 - **Rollback:** Revert implementation commit `097822a`; R3B changes no persisted schema or user data, so rollback is code-only.
+
+## D-016 — Modularize Flexx orchestration behind an exact compatibility facade
+
+- **State:** Accepted and verified locally for R3C.
+- **Decision:** Flexx owns versioned state/selectors, commands, timer, modal, safe view/chart, and DOM/storage binding modules. `js/app.js` is a 209-line composition root; the existing 20 `window` names remain only as an explicit compatibility facade.
+- **Compatibility:** Route, visible workflow, calculations, timing, translations, controls, seven `flexx_` keys, v3 records/drafts, backup/import/reset, worker/cache scope, and outputs remain unchanged. Session storage events invalidate local cache without interrupting an active workout; a completed session cannot be reintroduced as a draft.
+- **Evidence:** Deterministic and browser gates cover every command, phase/render/modal/timer path, resume/draft, progression/deload, swaps, pagination/chart/protocol, malformed/quota import, reset cancel/failure, multi-tab refresh, foreign-scope survival, offline, file, responsive, and accessibility behavior.
+- **Rollback:** Revert implementation commit `93cd803`; R3C changes no persisted schema or user data, so rollback is code-only.

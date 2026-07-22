@@ -274,3 +274,17 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `PASS_WITH_LIMITATIONS`: real browser eviction/quota variance, manual assistive-technology testing, qualified content/domain review, owner acceptance, postdeploy verification, deployment, and publication remain `NOT_RUN`.
 - **Rollback:** revert `097822a`. R3B changes no persisted schema or user data, so rollback is code-only.
 - **Next exact action:** obtain owner review, then execute only the bounded R3C Strength controller modularization prompt in `docs/MPES_IMPLEMENTATION_PLAN.md`.
+
+## 2026-07-22 R3C Flexx Strength Controller Modularization
+
+**State:** `VERIFIED_LOCAL`; owner acceptance, deployment, and publication remain `NOT_RUN`.
+
+- `PASS`: implementation commit `93cd803` extracts Flexx-owned versioned state/selectors, commands, timer, modal, safe view/chart, and DOM/storage binding modules. `js/app.js` falls from 1,580 to 209 physical lines; the exact 20 legacy `window` names remain an explicit compatibility facade.
+- `PASS`: deterministic characterization covers every state selector, command, render/modal/timer path, progression/deload, swaps, pagination/chart/protocol, draft recovery, malformed/quota imports, reset cancellation/failure, storage events, and foreign-scope behavior.
+- `PASS`: browser evidence completes every workout phase, timers/skips, alternative swaps, finish cancel/confirm, chart/protocol navigation, draft restore and completed-draft cleanup, multi-tab history refresh, reset backup failure, and unrelated storage survival.
+- `PASS`: exact session-key storage events invalidate cache without interrupting an active workout; foreign events are ignored. Completing a session clears active and forced-rest state before lifecycle persistence can recreate its draft.
+- `PASS`: no persisted key/schema, route, calculation/rule, visible workflow, backup/import format, worker/cache scope, or user data migrated. HealthOS and Noodle remain independent and have no Flexx storage authority.
+- `PASS`: `npm run ci:candidate` passed five native Flexx checks, R1 foundations, 35 visual, seven file, 37 browser-behavior, seven accessibility routes, and a deterministic 150-file runtime. `npm audit --audit-level=moderate` found zero vulnerabilities; `git diff --check` passed.
+- `PASS_WITH_LIMITATIONS`: real browser quota/eviction variance, manual assistive-technology testing, qualified content/domain review, owner acceptance, postdeploy verification, deployment, and publication remain `NOT_RUN`.
+- **Rollback:** revert `93cd803`. R3C changes no persisted schema or user data, so rollback is code-only.
+- **Next exact action:** obtain owner review, then execute only the bounded R3D Noodle Reflection controller modularization prompt in `docs/MPES_IMPLEMENTATION_PLAN.md`.

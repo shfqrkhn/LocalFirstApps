@@ -4,7 +4,7 @@ Date: 2026-07-22
 
 Baseline: `68076b3997294b7f3199c0b44677b921bf073a3d` on `agent/commonground-consolidation`
 
-Current verdict: **R3B CommonGround LifeOS Strength foundation is verified locally with declared review limitations; publication and app-data migration remain `NOT_RUN`.**
+Current verdict: **R3C Flexx Strength controller modularization is verified locally with declared review limitations; publication and app-data migration remain `NOT_RUN`.**
 
 ## Scope And Method
 
@@ -23,7 +23,7 @@ The pre-audit `npm run test:local` passed. That is useful characterization evide
 ## High-Risk Debt
 
 - TS-Dash ships an opaque 446 KB generated JavaScript bundle and Workbox output without readable source, a reproducible build, or complete third-party provenance. Recover the original source or behavior-first rewrite it; never refactor the bundle as source.
-- R3B reduced Flexx `core.js` to 591 physical lines by extracting characterized calculation, readiness, recovery, and storage-contract seams. The remaining 1,580-line `app.js`, 20 global handlers, HTML-string rendering, and app-owned persistence controller remain coupled and require an incremental parity-gated controller/view packet.
+- R3B reduced Flexx `core.js` to 591 physical lines; R3C reduced `app.js` from 1,580 to 209 physical lines by extracting six characterized state, command, timer, modal, safe view/chart, and binding modules. Exactly 20 global names remain only as an explicit compatibility facade. Further decomposition must be evidence-driven rather than structural churn.
 - Noodle Nudge remains a 65 KB HTML monolith with global state, inline presentation/handlers, and duplicated Bootstrap-era styling. R0 removed executable formulas; rebuild the remaining runtime around the validated pure scoring module during LifeOS work.
 - PMQuiz has 1,774 questions, 41 duplicate-text groups (96 instances), and no item-level source, license, version, review, or retirement ledger. Treat banks as unverified content until provenance and currentness gates exist; never imply PMI endorsement.
 - Noodle assessment/interpretation content lacks a formal provenance, license, version, scoring-validation, and professional-review ledger. Several credibility/public-domain statements are stronger than current evidence.
@@ -72,6 +72,8 @@ R2 implementation commit `1db2892` then extracted only the duplication proven by
 R3A implementation commit `17863b9` seeds the CommonGround LifeOS `1.0.0` label through a HealthOS-owned shell adapter without absorbing any app runtime. Health preference restore is failure-visible and resumable across IndexedDB/localStorage. Noodle owns the extracted ten-definition, 42-rule Reflection scoring and backup-preview seams; the original scoring URL and legacy backup shapes remain compatible, hostile inputs fail closed, and future LifeOS mapping is exact, preview-only, and mutation-forbidden.
 
 R3B implementation commit `097822a` extracts Flexx-owned versioned Strength calculation, readiness, recovery, storage-contract, and adapter seams after exact characterization. Seven persisted keys, v3 records/drafts, legacy/current backups, 20 global UI handlers, route, worker/cache boundary, calculations, outputs, and independent reset remain compatible. LifeOS receives no Flexx storage authority; its only data-shaped contract is a mutation-forbidden preview. The candidate builds 144 curated runtime files with 35 behavior cases.
+
+R3C implementation commit `93cd803` extracts Flexx-owned state/selectors, commands, timer, modal, safe views/chart, and DOM/storage bindings. Deterministic/browser evidence covers all 19 workflow commands, 20 compatibility names, full workout phases, timers, swaps, finish cancellation/completion, draft restore/cleanup, chart/protocol, import/reset failures, exact multi-tab refresh, and foreign survival. The candidate builds 150 curated runtime files with 37 behavior cases; no schema, key, record, route, rule, format, worker/cache scope, or user data changes.
 
 The content ledger inventories and quarantines 3,868 PMQuiz/Noodle/Flexx records and reports 41 PMQuiz duplicate groups; unsupported public claims were softened without inventing provenance. Automated route-level accessibility, responsive, behavior, local-file, CSP, icon, version, artifact, and visual gates pass. Qualified content/domain review, manual AT testing, postdeploy execution, and publication remain `NOT_RUN` and must not be represented as passes.
 

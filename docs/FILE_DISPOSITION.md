@@ -25,7 +25,7 @@ This ledger covers every tracked path at the 2026-07-22 audit. A glob is used on
 | `shared/design-tokens.css`, `design-primitives.css` | 2 | KEEP/ADOPT IN BOUNDED PACKETS; no mass migration without parity evidence. |
 | `tools/*.mjs`, `tools/generate-flexx-icons.ps1`, `tools/assets/flexx-icon-source.png` | 6 | KEEP as deterministic generators/verifiers and their canonical icon source; excluded from runtime. |
 | `vendor/*` | 6 | KEEP temporarily; consolidate duplicate Bootstrap versions only after visual/behavior parity and preserve notices. |
-| `tests/*.mjs`, `tests/*.spec.mjs`, `tests/fixtures/*` | 23 | KEEP/EXTEND; R0–R3B isolation, scoring, PWA, OmniCore, LifeOS, Strength, icon, artifact, provenance, responsive, and automated accessibility gates are present. |
+| `tests/*.mjs`, `tests/*.spec.mjs`, `tests/fixtures/*` | 24 | KEEP/EXTEND; R0–R3C isolation, scoring, PWA, OmniCore, LifeOS, Strength/controller, icon, artifact, provenance, responsive, and automated accessibility gates are present. |
 | `apps/commonground/README.md`, `index.html`, `styles.css`, manifest, PWA shell, worker, screenshot, 9 active icons | 16 | KEEP/REFACTOR; WorkOS shell and unified design migration. |
 | `apps/commonground/app.js`, `modules/*.js` | 7 | REFACTOR behind preserved v1/v2/Ledger/interchange/storage contracts; keep the OmniCore adapter app-owned. |
 | `apps/healthos/*`, `apps/healthos/modules/*` | 15 | KEEP/REFACTOR as LifeOS seed; shell/domain/timer modules and OmniCore/LifeOS adapters are app-owned; preference restore is failure-visible and resumable. |
@@ -39,8 +39,9 @@ This ledger covers every tracked path at the 2026-07-22 audit. A glob is used on
 | `apps/pmquiz/app.js`, `index.html`, `style.css`, `theme.js`, `json-worker.js`, `service-worker.js` | 6 | REFACTOR; immediately fix cache ownership, then extract content/session/view boundaries. |
 | Flexx README, `index.html`, manifest, PWA shell, worker, screenshot, favicon, 2 icons | 9 | KEEP/REFACTOR; icon dimensions are corrected and generated; retain scoped recovery. |
 | `apps/flexx-files/Complete_Strength_Protocol.md` | 1 | SOURCE/PROFESSIONAL REVIEW; never normative product authority. |
-| `apps/flexx-files/css/styles.css` and `js/*.js` | 9 | KEEP/REFACTOR; R3B extracted domain seams while preserving storage and UI behavior. |
+| `apps/flexx-files/css/styles.css` and `js/*.js` | 9 | KEEP; R3B extracted domain seams and R3C reduced `js/app.js` to a 209-line composition root while preserving storage and UI behavior. |
 | `apps/flexx-files/strength-adapter.js`, `strength/*.js` | 5 | KEEP/HARDEN as Flexx-owned versioned calculation, readiness, recovery, storage-contract, and adapter seams; no LifeOS storage access. |
+| `apps/flexx-files/controller/*.js` | 6 | KEEP/HARDEN as Flexx-owned versioned state, command, timer, modal, safe view/chart, and DOM/storage binding seams; exact 20-name compatibility facade retained. |
 | Flexx package files | 2 | KEEP; only maintained correctness scripts remain addressable. |
 | `apps/flexx-files/tests/*` | 17 | KEEP as characterization/correctness evidence; strengthen assertions where source-string based. |
 | `apps/ts-dash/README.md`, HTML, manifest, icons/favicon, screenshot | 6 | KEEP/UPDATE while preserving the current route and user workflow. |
@@ -49,4 +50,4 @@ This ledger covers every tracked path at the 2026-07-22 audit. A glob is used on
 | `archive/flexx-files-legacy-tests/*` | 25 | ARCHIVE; non-gating experiments/manual harnesses, excluded from runtime and authority. |
 | `archive/README.md` | 1 | KEEP as recovery manifest. |
 
-Counts reflect the 280-file R3B evidence-close layout. Before any later deletion, prove no route, manifest, worker shell, import, migration, test, license, provenance record, or user recovery path depends on the target.
+Counts reflect the 287-file R3C evidence-close layout. Before any later deletion, prove no route, manifest, worker shell, import, migration, test, license, provenance record, or user recovery path depends on the target.

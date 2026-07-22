@@ -4,7 +4,7 @@
 
 Offline-first strength training log and planning aid. Its suggestions are not medical advice or safety clearance; users remain responsible for choosing appropriate activity and seeking qualified guidance when needed.
 
-- **Status:** R3B foundation verified locally; canonical independent app
+- **Status:** R3C controller modularization verified locally; canonical independent app
 - **Version:** 3.9.77
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/flexx-files](https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/)
 - **Portfolio Role:** Fitness and personal-systems experiment.
@@ -48,7 +48,7 @@ Training adherence improves when the tracker removes decisions instead of adding
 
 Flexx Files is the canonical HealthOS strength/readiness/progression module, while remaining a complete independent app with its own scoped storage and recovery boundary. The separate [HealthOS Focus surface](../healthos/) links here but does not read or merge Flexx data. It is not a flagship focus area unless a dedicated fitness product line becomes a priority.
 
-The versioned Strength adapter exposes only pure calculations, readiness, validation, backup/draft recovery, storage metadata, and a non-mutating future LifeOS preview. See the [Strength contract](../../docs/STRENGTH_CONTRACT.md). No LifeOS runtime can read or write Flexx browser data.
+The versioned Strength adapter exposes only pure calculations, readiness, validation, backup/draft recovery, storage metadata, and a non-mutating future LifeOS preview. Six app-owned controller modules now isolate state/selectors, commands, timers, modals, safe views/chart rendering, and DOM/storage bindings behind a 209-line composition root and the exact legacy 20-name compatibility facade. See the [Strength contract](../../docs/STRENGTH_CONTRACT.md). No LifeOS runtime can read or write Flexx browser data.
 
 ## Repository Layout
 
