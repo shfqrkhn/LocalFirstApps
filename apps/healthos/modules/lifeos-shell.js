@@ -15,9 +15,9 @@ export const LIFEOS_MODULES = Object.freeze([
   Object.freeze({
     id: "strength",
     label: "Strength",
-    description: "Flexx Files remains the canonical strength, readiness, progression, and backup surface.",
+    description: "Flexx Files remains canonical while its pure calculations, readiness, validation, and recovery seams are versioned behind an app-owned adapter.",
     owner: "flexx-files",
-    status: "linked-canonical",
+    status: "foundation-ready-linked-canonical",
     href: "../flexx-files/",
     dataAccess: "none"
   }),

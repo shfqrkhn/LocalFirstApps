@@ -1,7 +1,7 @@
 {
   "contractVersion": "1.0.0",
   "appId": "flexx-files",
-  "shellVersion": "3.9.75",
+  "shellVersion": "3.9.76",
   "dataSchemaVersion": "v3",
   "compatibleDataSchemas": [
     "v3"
@@ -18,11 +18,31 @@
     },
     {
       "url": "./js/app.js",
-      "sha256": "12c2320892d9b3a2b192c092edaea1c2c28db41951ff9e4a0acb99763f1d577a"
+      "sha256": "989b1ad824e9efd47e616e34720e44b41ed8aacc041189257882601250a98411"
     },
     {
       "url": "./js/core.js",
-      "sha256": "d04fc15535fccd4e6e4cbe2621e94c82cfc406455a12c1fe94b0e033f1b33b56"
+      "sha256": "cdc91e0f4e7aaf522942df498b4c85a5646f39b4f4f7e3588610f28d9ee8d8d6"
+    },
+    {
+      "url": "./strength-adapter.js",
+      "sha256": "75bcd748f2f04c9e41c69ad28dd7ae8e92d8dac25da7abcd665938389be367e0"
+    },
+    {
+      "url": "./strength/calculations.js",
+      "sha256": "03ff45f77dd0c615b6cdda03f10078b47b7de8fe252ff8249cb77b29083178fd"
+    },
+    {
+      "url": "./strength/readiness.js",
+      "sha256": "f77533f73f460f0a7826a67cf0da926550150c0f4126e95f19f5d5e9380bbca2"
+    },
+    {
+      "url": "./strength/recovery.js",
+      "sha256": "45224abee53e246fd32e264a5e3e09cfef855fe16dad0be7aa750ea939f66e32"
+    },
+    {
+      "url": "./strength/storage-contract.js",
+      "sha256": "2ebf1c8046551f51edb5aa17fc01a77b0f24d9f1768f86e13fbc0f5f3ac8c20b"
     },
     {
       "url": "./js/config.js",
@@ -34,7 +54,7 @@
     },
     {
       "url": "./js/constants.js",
-      "sha256": "2e88fba99b23f846cc5475e90ea590e5c6a955a6424c30d549d5d8f24dc136c2"
+      "sha256": "7dea4bc58d68383701a2bee2de0d4c12f21185cc131f3b375e1badde2e9ef5ab"
     },
     {
       "url": "./js/i18n.js",

@@ -7,6 +7,7 @@ import { createStoredZip } from "../apps/commonground/modules/exports.js";
 import { createInterchangePackage } from "../shared/interchange.js";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
+const flexxShellVersion = JSON.parse(await readFile(join(root, "config", "deliverables.json"), "utf8")).deliverables.find(({ id }) => id === "flexx-files").shellVersion;
 let server;
 let baseUrl;
 let commonGroundWorkerRevision;
@@ -79,11 +80,11 @@ test.beforeAll(async () => {
       }
       if (url.pathname === "/apps/flexx-files/sw.js") {
         headers["cache-control"] = "no-store";
-        const shell = flexxWorkerRevision === 1 ? "3.9.75" : `3.9.75-test-${flexxWorkerRevision}`;
-        body = Buffer.from(body.toString("utf8").replace('shellVersion: "3.9.75"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${flexxWorkerRevision}\n`);
+        const shell = flexxWorkerRevision === 1 ? flexxShellVersion : `${flexxShellVersion}-test-${flexxWorkerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace(`shellVersion: "${flexxShellVersion}"`, `shellVersion: "${shell}"`) + `\n// test-worker-revision:${flexxWorkerRevision}\n`);
       }
       if (url.pathname === "/apps/flexx-files/pwa-shell.json" && flexxWorkerRevision > 1) {
-        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "3.9.75"', `"shellVersion": "3.9.75-test-${flexxWorkerRevision}"`));
+        body = Buffer.from(body.toString("utf8").replace(`"shellVersion": "${flexxShellVersion}"`, `"shellVersion": "${flexxShellVersion}-test-${flexxWorkerRevision}"`));
       }
       if (url.pathname === "/apps/noodle-nudge/service-worker.js") {
         headers["cache-control"] = "no-store";
@@ -306,6 +307,47 @@ test("Flexx Files exposes touch-safe backup/restore UI and rejects corrupt resto
   });
   await expect(page.locator("#modal-layer")).toHaveAttribute("aria-hidden", "false");
   await expect(page.locator("#modal-body")).toContainText(/invalid|format|sessions/i);
+});
+
+test("Flexx Files restores current backups, preserves foreign storage, and reports quota failure", async ({ page }) => {
+  const fixture = JSON.parse(await readFile(join(root, "tests", "fixtures", "lifeos-strength-preview-v1.json"), "utf8"));
+  await gotoApp(page, "flexx-files");
+  await page.evaluate(() => localStorage.setItem("other_app_data", "keep"));
+  await page.getByLabel("Navigate to system settings").tap();
+  await page.getByLabel("Restore Data").setInputFiles({
+    name: "flexx-current.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(fixture.currentBackup))
+  });
+  const reload = page.waitForEvent("load");
+  await page.getByRole("button", { name: "Confirm and close dialog" }).click();
+  await reload;
+  expect(await page.evaluate(() => ({
+    sessions: JSON.parse(localStorage.getItem("flexx_sessions_v3") || "[]"),
+    foreign: localStorage.getItem("other_app_data")
+  }))).toEqual({ sessions: fixture.currentBackup.sessions, foreign: "keep" });
+
+  await page.getByLabel("Navigate to system settings").tap();
+  await page.evaluate(() => {
+    window.__flexxOriginalSetItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key === "flexx_sessions_v3") throw new DOMException("quota", "QuotaExceededError");
+      return window.__flexxOriginalSetItem.call(this, key, value);
+    };
+  });
+  await page.getByLabel("Restore Data").setInputFiles({
+    name: "flexx-legacy.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(fixture.legacyBackup))
+  });
+  await page.getByRole("button", { name: "Confirm and close dialog" }).click();
+  await expect(page.locator("#modal-layer")).toHaveAttribute("aria-hidden", "false");
+  await expect(page.locator("#modal-body")).toContainText(/failed to apply import data/i);
+  expect(await page.evaluate(() => ({
+    sessions: JSON.parse(localStorage.getItem("flexx_sessions_v3") || "[]"),
+    foreign: localStorage.getItem("other_app_data")
+  }))).toEqual({ sessions: fixture.currentBackup.sessions, foreign: "keep" });
+  await page.evaluate(() => { Storage.prototype.setItem = window.__flexxOriginalSetItem; delete window.__flexxOriginalSetItem; });
 });
 
 async function createCommonGroundWorkspace(page, name = "Regression Workspace") {

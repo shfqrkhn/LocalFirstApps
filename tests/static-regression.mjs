@@ -80,6 +80,8 @@ function assertManifestRefs(file) {
 
 const index = readFileSync(join(root, "index.html"), "utf8");
 const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+const deliverables = JSON.parse(readFileSync(join(root, "config", "deliverables.json"), "utf8"));
+const flexxDeliverable = deliverables.deliverables.find(({ id }) => id === "flexx-files");
 const readme = readFileSync(join(root, "README.md"), "utf8");
 const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
 const zipPolicy = readFileSync(join(root, "docs", "REPO_ZIP_POLICY.md"), "utf8");
@@ -393,7 +395,7 @@ for (const phrase of ["Data classification", "Required transfer sequence", "shar
 for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "0.2.2-m2"', "dataSchemaVersion: 4", "legacyCacheNames"]) {
   assert(commonGroundSw.includes(phrase), `CommonGround service worker missing M2 contract: ${phrase}`);
 }
-for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "3.9.75"', 'dataSchemaVersion: "v3"', "legacyCacheNames"]) {
+for (const phrase of ["LFAPwaWorker.register", `shellVersion: "${flexxDeliverable.shellVersion}"`, 'dataSchemaVersion: "v3"', "legacyCacheNames"]) {
   assert(flexxSw.includes(phrase), `Flexx service worker missing M2 contract: ${phrase}`);
 }
 for (const phrase of ["LFAPwaWorker.register", 'shellVersion: "0.1.0-m3a"', "dataSchemaVersion: 1", 'cachePrefix: "healthos-"']) {

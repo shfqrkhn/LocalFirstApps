@@ -1,5 +1,5 @@
 import { EXERCISES, WARMUP, DECOMPRESSION, CARDIO_OPTIONS, RECOVERY_CONFIG, EXERCISE_MAP, WARMUP_MAP, DECOMPRESSION_MAP } from './config.js';
-import { Storage, Calculator, Validator } from './core.js';
+import { StrengthStorage as Storage, StrengthCalculator as Calculator, StrengthReadiness as Validator } from '../strength-adapter.js';
 import { Observability, Logger, Metrics, Analytics } from './observability.js';
 import { Accessibility, ScreenReader } from './accessibility.js';
 import { Security, Sanitizer } from './security.js';
@@ -1213,7 +1213,11 @@ window.imp = (el) => {
             title: I18n.t('settings.restoreData'),
             text: I18n.t('modal.importConfirm', { count: result.sessions.length })
         })) {
-            Storage.applyImport(result.sessions);
+            try {
+                Storage.applyImport(result.sessions);
+            } catch (error) {
+                await Modal.show({ title: I18n.t('modal.error'), text: error.message || I18n.t('errors.saveFailed') });
+            }
         }
         el.value = ''; // Reset input
     };

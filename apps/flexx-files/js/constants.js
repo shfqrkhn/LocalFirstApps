@@ -27,7 +27,7 @@ export const PLATE_CACHE_LIMIT = 300; // Max number of weight calculations to ca
 export const AUTO_EXPORT_INTERVAL = 5; // Auto-export every N sessions
 
 // === DATA VERSIONING ===
-export const APP_VERSION = '3.9.75';
+export const APP_VERSION = '3.9.76';
 export const STORAGE_VERSION = 'v3';
 export const STORAGE_PREFIX = 'flexx_';
 
