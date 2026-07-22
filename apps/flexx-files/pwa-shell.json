@@ -1,7 +1,7 @@
 {
   "contractVersion": "1.0.0",
   "appId": "flexx-files",
-  "shellVersion": "3.9.76",
+  "shellVersion": "3.9.77",
   "dataSchemaVersion": "v3",
   "compatibleDataSchemas": [
     "v3"
@@ -18,11 +18,35 @@
     },
     {
       "url": "./js/app.js",
-      "sha256": "989b1ad824e9efd47e616e34720e44b41ed8aacc041189257882601250a98411"
+      "sha256": "b2ff47d7809c4b61a79cf9873676d27799c7a78dd1c5dcf3fbb7fffadafa45e9"
+    },
+    {
+      "url": "./controller/state.js",
+      "sha256": "3b1ab300fe3263f0c88d91e9c17e90363936bfd2d315d3b9419ab50c68a5ddd5"
+    },
+    {
+      "url": "./controller/timer.js",
+      "sha256": "ef4cb1005d312810ca97f45fc49a6e568f0b1df0b3e1223afa9df431b3df2a55"
+    },
+    {
+      "url": "./controller/modal.js",
+      "sha256": "cc7a23dfd18f4266b72e55ebb797dce3ddc4f27ca888077d0d8fe4c78155f30b"
+    },
+    {
+      "url": "./controller/views.js",
+      "sha256": "2793f5a407ad72aef828c9aaf3a25951ef8671ee709be05218cb942af960aafe"
+    },
+    {
+      "url": "./controller/commands.js",
+      "sha256": "fa31f9aa20ab2f5d49784ffafeab8daecfe8253383eb841121bc85d551ff9ed3"
+    },
+    {
+      "url": "./controller/bindings.js",
+      "sha256": "64553c7e16e0c3a16e9888f79fcce52bd1cc934c1fbe9dacfc37f56419f46301"
     },
     {
       "url": "./js/core.js",
-      "sha256": "cdc91e0f4e7aaf522942df498b4c85a5646f39b4f4f7e3588610f28d9ee8d8d6"
+      "sha256": "efe70ba84b7fa9f7ccffe92b92acf7498e42f2a6c2b01cf94a42649bb3786e15"
     },
     {
       "url": "./strength-adapter.js",
@@ -54,7 +78,7 @@
     },
     {
       "url": "./js/constants.js",
-      "sha256": "7dea4bc58d68383701a2bee2de0d4c12f21185cc131f3b375e1badde2e9ef5ab"
+      "sha256": "a1152d47d7b9b75dd6142543164beae35925174cf59ffb489c41c1a8e5e4e980"
     },
     {
       "url": "./js/i18n.js",

@@ -1,11 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const CORE_PATH = 'js/core.js';
+const APP_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const CORE_PATH = path.join(APP_ROOT, 'js/core.js');
 
 console.log(`Verifying UI decoupling in ${CORE_PATH}...`);
 
-const content = fs.readFileSync(path.resolve(process.cwd(), CORE_PATH), 'utf8');
+const content = fs.readFileSync(CORE_PATH, 'utf8');
 
 // Forbidden tokens
 const FORBIDDEN = [

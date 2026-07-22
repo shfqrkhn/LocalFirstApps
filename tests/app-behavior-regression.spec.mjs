@@ -350,6 +350,124 @@ test("Flexx Files restores current backups, preserves foreign storage, and repor
   await page.evaluate(() => { Storage.prototype.setItem = window.__flexxOriginalSetItem; delete window.__flexxOriginalSetItem; });
 });
 
+test("Flexx R3C controller preserves workout phases, timers, swaps, charts, and protocol navigation", async ({ page }) => {
+  await gotoApp(page, "flexx-files");
+  await page.getByRole("button", { name: /Green - Full Strength/ }).click();
+  await expect(page.getByRole("heading", { name: "Warmup" })).toBeVisible();
+
+  await page.locator("#w-thoracic").check();
+  await page.locator("#alt-thoracic").evaluate(element => { element.closest("details").open = true; });
+  await page.locator("#alt-thoracic").selectOption("Standing Windmill");
+  await expect(page.locator("#name-thoracic")).toHaveText("Standing Windmill");
+  await page.getByRole("button", { name: "Start Lifting" }).click();
+  await expect(page.getByRole("heading", { name: "Lifting" })).toBeVisible();
+
+  await page.locator("#alt-hinge").evaluate(element => { element.closest("details").open = true; });
+  await page.locator("#alt-hinge").selectOption("Barbell RDL");
+  await expect(page.locator("#name-hinge")).toHaveText("Barbell RDL");
+  await page.locator("#s-hinge-0").click();
+  await expect(page.locator("#timer-dock")).toHaveClass(/active/);
+  await expect(page.locator("#timer-val")).toHaveText(/1:2[89]|1:30/);
+  await page.getByRole("button", { name: "Skip rest timer" }).click();
+  await expect(page.locator("#timer-dock")).not.toHaveClass(/active/);
+
+  await page.getByRole("button", { name: "Next: Cardio" }).click();
+  await page.locator("#cardio-type").selectOption({ index: 1 });
+  await page.getByRole("button", { name: "Start 5m Timer" }).click();
+  await expect(page.locator("#timer-val")).toHaveText(/4:5[89]|5:00/);
+  await page.getByRole("button", { name: "Skip rest timer" }).click();
+  await page.locator("#cardio-done").check();
+  await page.getByRole("button", { name: "Next: Decompress" }).click();
+  await expect(page.getByRole("heading", { name: "Decompress" })).toBeVisible();
+
+  await page.getByRole("button", { name: "Save & Finish" }).click();
+  await page.getByRole("button", { name: "Cancel and close dialog" }).click();
+  await expect(page.getByRole("heading", { name: "Decompress" })).toBeVisible();
+  await page.getByRole("button", { name: "Save & Finish" }).click();
+  await page.getByRole("button", { name: "Confirm and close dialog" }).click();
+  await expect(page.getByRole("heading", { name: "History" })).toBeVisible();
+  await expect.poll(() => page.evaluate(() => localStorage.getItem("flexx_draft_session"))).toBeNull();
+
+  await page.evaluate(async () => {
+    const { StrengthStorage } = await import("./strength-adapter.js");
+    StrengthStorage.flushPersistence();
+    const sessions = [
+      { id: "chart-1", date: "2026-01-01T00:00:00.000Z", recoveryStatus: "green", sessionNumber: 1, exercises: [{ id: "hinge", name: "Trap Bar Deadlift", weight: 100, completed: true }] },
+      { id: "chart-2", date: "2026-01-03T00:00:00.000Z", recoveryStatus: "green", sessionNumber: 2, exercises: [{ id: "hinge", name: "Trap Bar Deadlift", weight: 105, completed: true }] }
+    ];
+    localStorage.setItem("flexx_sessions_v3", JSON.stringify(sessions));
+    StrengthStorage.invalidateSessionCache();
+    localStorage.removeItem("flexx_draft_session");
+  });
+  await page.reload({ waitUntil: "domcontentloaded" });
+  if (await page.locator("#modal-layer").getAttribute("aria-hidden") === "false") {
+    await page.getByRole("button", { name: "Cancel and close dialog" }).click();
+  }
+  await page.getByLabel("Navigate to progress charts").click();
+  await expect(page.locator("#chart-area svg")).toBeVisible();
+  await page.getByLabel("Navigate to system settings").click();
+  await page.getByRole("button", { name: "Protocol Guide" }).click();
+  await expect(page.getByRole("heading", { name: "The Protocol" })).toBeVisible();
+  await page.getByRole("button", { name: /Back/ }).click();
+  await expect(page.getByRole("heading", { name: "Settings" })).toBeVisible();
+});
+
+test("Flexx R3C draft, multi-tab storage, and reset faults preserve recoverable and foreign state", async ({ page, context }) => {
+  const draft = {
+    id: "00000000-0000-4000-8000-000000000003", date: "2026-01-01T00:00:00.000Z", recoveryStatus: "green",
+    warmup: [], cardio: null, decompress: [],
+    exercises: [{ id: "hinge", name: "Trap Bar Deadlift", weight: 100, setsCompleted: 1, completed: false, usingAlternative: false, skipped: false }]
+  };
+  await gotoApp(page, "flexx-files");
+  await page.evaluate(value => {
+    localStorage.setItem("flexx_draft_session", JSON.stringify(value));
+    localStorage.setItem("flexx_r3c_reset", "keep-until-confirmed");
+    localStorage.setItem("other_app_data", "keep");
+  }, draft);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await expect(page.locator("#modal-body")).toContainText(/unsaved|restore/i);
+  await page.getByRole("button", { name: "Confirm and close dialog" }).click();
+  await expect(page.getByRole("heading", { name: "Lifting" })).toBeVisible();
+  await expect(page.locator("#w-hinge")).toHaveValue("100");
+
+  await page.evaluate(() => localStorage.removeItem("flexx_draft_session"));
+  await page.reload({ waitUntil: "domcontentloaded" });
+  if (await page.locator("#modal-layer").getAttribute("aria-hidden") === "false") {
+    await page.getByRole("button", { name: "Cancel and close dialog" }).click();
+  }
+  await page.getByLabel("Navigate to workout logs").click();
+  const sibling = await context.newPage();
+  await gotoApp(sibling, "flexx-files");
+  await sibling.evaluate(() => {
+    const session = { id: "from-sibling", date: "2026-02-01T00:00:00.000Z", recoveryStatus: "yellow", sessionNumber: 1, exercises: [] };
+    localStorage.setItem("other_app_data", "keep");
+    localStorage.setItem("flexx_sessions_v3", JSON.stringify([session]));
+  });
+  await expect(page.locator('[data-session-id="from-sibling"]')).toBeVisible();
+  expect(await page.evaluate(() => localStorage.getItem("other_app_data"))).toBe("keep");
+  await sibling.close();
+
+  await page.getByLabel("Navigate to system settings").click();
+  await page.getByLabel("Factory Reset").click();
+  await page.getByRole("button", { name: "Cancel and close dialog" }).click();
+  expect(await page.evaluate(() => localStorage.getItem("flexx_r3c_reset"))).toBe("keep-until-confirmed");
+
+  await page.evaluate(async () => {
+    const { StrengthStorage } = await import("./strength-adapter.js");
+    window.__r3cExport = StrengthStorage.exportData;
+    StrengthStorage.exportData = () => { throw new Error("synthetic backup failure"); };
+  });
+  await page.getByLabel("Factory Reset").click();
+  await page.getByRole("button", { name: "Confirm and close dialog" }).click();
+  await expect(page.locator("#modal-body")).toContainText("Reset stopped before deletion: synthetic backup failure");
+  expect(await page.evaluate(() => ({ owned: localStorage.getItem("flexx_r3c_reset"), foreign: localStorage.getItem("other_app_data") }))).toEqual({ owned: "keep-until-confirmed", foreign: "keep" });
+  await page.evaluate(async () => {
+    const { StrengthStorage } = await import("./strength-adapter.js");
+    StrengthStorage.exportData = window.__r3cExport;
+    delete window.__r3cExport;
+  });
+});
+
 async function createCommonGroundWorkspace(page, name = "Regression Workspace") {
   await gotoApp(page, "commonground");
   await page.getByLabel("Workspace name").fill(name);

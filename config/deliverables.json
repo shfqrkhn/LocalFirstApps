@@ -8,7 +8,7 @@
     { "id": "ts-dash", "appVersion": "1.0.0-legacy.1", "shellVersion": "workbox-7.3.0-legacy", "dataSchemaVersion": 2, "status": "source-unavailable-behavior-frozen" },
     { "id": "pmquiz", "appVersion": "1.3.62", "shellVersion": "1.3.62", "dataSchemaVersion": "session-only", "status": "supported" },
     { "id": "noodle-nudge", "appVersion": "1.2.30", "shellVersion": "1.2.31-r1", "dataSchemaVersion": 1, "status": "supported" },
-    { "id": "flexx-files", "appVersion": "3.9.76", "shellVersion": "3.9.76", "dataSchemaVersion": "v3", "status": "supported" },
+    { "id": "flexx-files", "appVersion": "3.9.77", "shellVersion": "3.9.77", "dataSchemaVersion": "v3", "status": "supported" },
     { "id": "healthos", "appVersion": "0.1.0", "shellVersion": "0.1.0-m3a", "dataSchemaVersion": 1, "status": "supported" },
     { "id": "commonground", "appVersion": "0.2.0", "shellVersion": "0.2.2-m2", "dataSchemaVersion": 4, "status": "supported" },
     { "id": "ledgersuite", "appVersion": "0.2.0-compat", "shellVersion": null, "dataSchemaVersion": [1, 2], "status": "compatibility-only" }

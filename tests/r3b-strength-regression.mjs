@@ -6,6 +6,7 @@ import { EXERCISES } from "../apps/flexx-files/js/config.js";
 import { createStrengthCalculator } from "../apps/flexx-files/strength/calculations.js";
 import { evaluateWorkoutReadiness } from "../apps/flexx-files/strength/readiness.js";
 import { buildStrengthBackup, validateStrengthDraft } from "../apps/flexx-files/strength/recovery.js";
+import { STRENGTH_COMPATIBILITY_HANDLERS } from "../apps/flexx-files/controller/bindings.js";
 
 const store = new Map();
 globalThis.localStorage = {
@@ -201,10 +202,11 @@ const expectedGlobals = [
   "swapCardioLink", "nextPhase", "finish", "skipTimer", "skipRest", "startCardio", "loadMoreHistory",
   "viewProtocol", "closeProtocol", "del", "wipe", "imp", "drawChart"
 ];
-const globals = [...appSource.matchAll(/window\.([A-Za-z_$][\w$]*)\s*=\s*/g)].map(match => match[1]);
-assert.deepEqual(globals, expectedGlobals, "global controller inventory changed without an explicit packet");
-assert.match(appSource, /from '\.\.\/strength-adapter\.js'/);
-assert.doesNotMatch(appSource, /from '\.\/core\.js'/);
+assert.deepEqual(STRENGTH_COMPATIBILITY_HANDLERS, expectedGlobals, "global controller inventory changed without an explicit packet");
+assert.match(appSource, /bindStrengthCompatibilityHandlers\(window,/);
+assert.doesNotMatch(appSource, /window\.([A-Za-z_$][\w$]*)\s*=\s*/, "R3C must keep the legacy globals behind one explicit binding seam");
+assert.match(appSource, /from ["']\.\.\/strength-adapter\.js["']/);
+assert.doesNotMatch(appSource, /from ["']\.\/core\.js["']/);
 assert.match(coreSource, /createStrengthCalculator/);
 assert.doesNotMatch(coreSource, /getBaseRecommendation\(exerciseId, sessions\) \{/);
 assert.match(healthShellSource, /foundation-ready-linked-canonical/);

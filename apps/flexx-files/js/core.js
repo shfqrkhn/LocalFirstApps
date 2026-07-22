@@ -22,6 +22,10 @@ export const Storage = {
     _pendingDraftWrite: null,
     _shouldClearDraft: false,
 
+    invalidateSessionCache() {
+        this._sessionCache = null;
+    },
+
     /**
      * ATOMIC TRANSACTION SYSTEM
      * Provides rollback capability for safe data operations

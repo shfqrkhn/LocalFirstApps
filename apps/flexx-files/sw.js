@@ -3,7 +3,7 @@ importScripts("../../shared/pwa-worker.js");
 self.LFAPwaWorker.register({
     appId: "flexx-files",
     cachePrefix: "flexx-",
-    shellVersion: "3.9.76",
+    shellVersion: "3.9.77",
     dataSchemaVersion: "v3",
     compatibleDataSchemas: ["v3"],
     manifestUrl: "./pwa-shell.json",
