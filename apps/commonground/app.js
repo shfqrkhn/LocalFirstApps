@@ -36,7 +36,14 @@ import {
   rollbackCommonGroundInterchange,
   stageCommonGroundInterchange
 } from "./modules/interchange-adapter.js";
-import { MATTER_TYPES, matterRoutes, matterType, nextMatterStep } from "./modules/matter-types.js";
+import {
+  MATTER_TYPES,
+  workOSMatterRoutes as matterRoutes,
+  workOSMatterType as matterType,
+  workOSModuleSummaries,
+  workOSNavigation,
+  workOSNextMatterStep as nextMatterStep
+} from "./workos-adapter.js";
 import { errorMessage } from "./modules/omnicore-adapter.js";
 import {
   activatePwaUpdate,
@@ -46,7 +53,7 @@ import {
   registerPwaAssurance
 } from "../../shared/pwa-assurance.js";
 
-const APP_VERSION = "0.2.0";
+const APP_VERSION = "0.3.0";
 const root = document.querySelector("#app");
 const statusRegion = document.querySelector("#app-status");
 
@@ -69,7 +76,9 @@ const state = {
   updateCompatible: true,
   pwaRegistration: null,
   pwaHealth: null,
-  modal: null
+  modal: null,
+  modalReturnAction: null,
+  restoreFocusAction: null
 };
 
 function escapeHtml(value) {
@@ -152,13 +161,14 @@ function onboardingView() {
 }
 
 function header() {
+  const navigation = workOSNavigation(state.route);
   return `
     <header class="app-header">
-      <div class="brand"><img src="./icons/icon-32.png" alt="" width="30" height="30"><div><strong>CommonGround</strong><small>Local-first facilitation and decision workspace</small></div></div>
+      <div class="brand"><img src="./icons/icon-32.png" alt="" width="30" height="30"><div><strong>CommonGround</strong><small>WorkOS · Local-first facilitation and decision workspace</small></div></div>
       <label class="workspace-switcher">Workspace<select id="workspace-switcher">${state.workspaces.map((workspace) => `<option value="${workspace.id}" ${workspace.id === state.workspace.id ? "selected" : ""}>${escapeHtml(workspace.name)}</option>`).join("")}</select></label>
-      <nav aria-label="Main navigation">
-        ${[["dashboard", "Dashboard"], ["matters", "Matters"], ["settings", "Settings"]]
-          .map(([route, label]) => `<button class="nav-button ${state.route === route ? "active" : ""}" data-route="${route}" ${state.route === route ? 'aria-current="page"' : ""}>${label}</button>`)
+      <nav aria-label="Main navigation" data-shell="workos">
+        ${navigation
+          .map(({ route, label, current }) => `<button class="nav-button ${current ? "active" : ""}" data-route="${route}" ${current ? 'aria-current="page"' : ""}>${label}</button>`)
           .join("")}
       </nav>
     </header>`;
@@ -167,6 +177,7 @@ function header() {
 function dashboardView() {
   const facilitation = state.matters.filter((matter) => matterType(matter.type).family === "facilitation");
   const decisions = state.matters.filter((matter) => matterType(matter.type).family === "decision");
+  const modules = workOSModuleSummaries(state.matters);
   return `
     <section class="page-header"><div><p class="eyebrow">${escapeHtml(state.workspace.name)}</p><h1>Shared work, clear next steps</h1><p>Owned locally by ${escapeHtml(state.workspace.owner || "Local owner")}</p></div><button class="primary" data-route="create-matter">New Matter</button></section>
     <section class="stat-grid" aria-label="Workspace summary">
@@ -174,6 +185,10 @@ function dashboardView() {
       <article class="stat"><span>Facilitation</span><strong>${facilitation.length}</strong></article>
       <article class="stat"><span>Decision analysis</span><strong>${decisions.length}</strong></article>
       <article class="stat"><span>Need suitability</span><strong>${facilitation.filter((matter) => matter.suitabilityState === "pending").length}</strong></article>
+    </section>
+    <section class="section-block" aria-label="Active WorkOS modules">
+      <div class="section-title"><div><p class="eyebrow">CommonGround WorkOS</p><h2>Active modules</h2></div></div>
+      <div class="workos-module-grid">${modules.map((module) => `<article class="workos-module-card"><div><span class="badge">Active</span><h3>${escapeHtml(module.label)}</h3><p>${escapeHtml(module.description)}</p></div><strong>${module.count} ${module.count === 1 ? "matter" : "matters"}</strong></article>`).join("")}</div>
     </section>
     <section class="section-block"><div class="section-title"><h2>Recent matters</h2><button class="secondary" data-route="matters">View all</button></div>${matterList(state.matters.slice(0, 5))}</section>`;
 }
@@ -354,6 +369,12 @@ function modalView() {
   return `<div class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title"><section class="modal-card"><h2 id="modal-title">${matterDelete ? "Delete Matter" : "Factory Reset"}</h2><p>${matterDelete ? "Delete this matter and every linked record from this device." : "Download a backup, then permanently delete CommonGround data on this device."}</p><label>Type DELETE to confirm<input id="modal-phrase" autocomplete="off"></label><div class="form-actions"><button class="secondary" data-action="close-modal">Cancel</button><button class="danger" data-action="${matterDelete ? "confirm-delete-matter" : "confirm-reset"}">${matterDelete ? "Delete Matter" : "Back Up and Reset"}</button></div></section></div>`;
 }
 
+function closeModal() {
+  state.modal = null;
+  state.restoreFocusAction = state.modalReturnAction;
+  state.modalReturnAction = null;
+}
+
 function routeView() {
   if (!state.workspace) return onboardingView();
   if (state.route === "dashboard") return dashboardView();
@@ -390,7 +411,12 @@ function render() {
   } else {
     root.innerHTML = `${header()}<main id="main-content" class="app-main" tabindex="-1">${noticeMarkup()}${routeView()}</main>${modalView()}<footer>CommonGround v${APP_VERSION} · Local-first · No accounts or telemetry</footer>`;
   }
-  root.querySelector(".modal-card input")?.focus();
+  if (state.modal) {
+    root.querySelector(".modal-card input")?.focus();
+  } else if (state.restoreFocusAction) {
+    root.querySelector(`[data-action="${state.restoreFocusAction}"]`)?.focus();
+    state.restoreFocusAction = null;
+  }
   document.documentElement.dataset.appReady = "true";
 }
 
@@ -534,15 +560,17 @@ async function clearScopedRuntime() {
 }
 
 async function handleAction(action, button) {
-  if (action === "delete-matter") state.modal = "delete-matter";
-  else if (action === "open-reset") state.modal = "factory-reset";
-  else if (action === "close-modal") state.modal = null;
+  if (action === "delete-matter" || action === "open-reset") {
+    state.modal = action === "delete-matter" ? "delete-matter" : "factory-reset";
+    state.modalReturnAction = action;
+  } else if (action === "close-modal") closeModal();
   else if (action === "confirm-delete-matter") {
     if (root.querySelector("#modal-phrase")?.value !== "DELETE") throw new Error("Type DELETE exactly to confirm.");
     await deleteMatterGraph(state.matter.id);
     state.matter = null;
     state.graph = null;
     state.modal = null;
+    state.modalReturnAction = null;
     state.route = "matters";
     await refreshWorkspace();
     announce("Matter deleted.", "success");
@@ -635,6 +663,27 @@ async function handleAction(action, button) {
   render();
 }
 
+function handleModalKeydown(event) {
+  if (!state.modal) return;
+  if (event.key === "Escape") {
+    event.preventDefault();
+    closeModal();
+    render();
+    return;
+  }
+  if (event.key !== "Tab") return;
+  const controls = [...root.querySelectorAll(".modal-card input, .modal-card button")].filter((element) => !element.disabled);
+  const first = controls[0];
+  const last = controls.at(-1);
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last?.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first?.focus();
+  }
+}
+
 async function handleClick(event) {
   const button = event.target.closest("button");
   if (!button) return;
@@ -721,6 +770,7 @@ async function start() {
   }));
   root.addEventListener("click", handleClick);
   root.addEventListener("change", handleChange);
+  root.addEventListener("keydown", handleModalKeydown);
   try {
     await refreshWorkspace();
     state.pendingLegacy = await detectLegacyMigration();

@@ -45,7 +45,7 @@ footer { padding: 1.5rem max(1rem, 5vw) 5rem; color: var(--muted); text-align: c
 .brand strong { display: block; font-size: 1.05rem; }
 .brand small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .workspace-switcher { min-width: 10rem; color: var(--muted); font-size: .72rem; }
-.workspace-switcher select { margin-top: .15rem; padding: .45rem .65rem; }
+.workspace-switcher select { min-height: var(--cg-touch-target); margin-top: .15rem; padding: .45rem .65rem; }
 .app-header nav { display: flex; gap: .35rem; }
 .nav-button, .matter-nav button { color: var(--muted); background: transparent; }
 .nav-button:hover, .nav-button.active, .matter-nav button:hover, .matter-nav button.active { color: var(--text); border-color: var(--line); background: var(--surface-2); }
@@ -62,6 +62,11 @@ footer { padding: 1.5rem max(1rem, 5vw) 5rem; color: var(--muted); text-align: c
 .stat span { display: block; color: var(--muted); font-size: .82rem; }
 .stat strong { display: block; margin-top: .4rem; font-size: 2rem; }
 .section-block { margin-top: 2rem; }
+.workos-module-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.workos-module-card { display: flex; min-width: 0; align-items: flex-end; justify-content: space-between; gap: 1.25rem; border: 1px solid var(--line); border-radius: var(--cg-radius-lg); padding: var(--cg-space-6); background: var(--surface); box-shadow: var(--cg-shadow-1); }
+.workos-module-card h3 { margin: .75rem 0 .35rem; font-size: 1.2rem; }
+.workos-module-card p { margin: 0; }
+.workos-module-card > strong { flex: 0 0 auto; color: var(--accent); font-variant-numeric: tabular-nums; }
 .matter-list { overflow: hidden; }
 .matter-row { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 1rem 1.25rem; color: var(--text); text-align: left; background: transparent; }
 .matter-row:last-child { border-bottom: 0; }
@@ -119,9 +124,10 @@ summary { cursor: pointer; color: var(--text); font-weight: 750; }
 }
 
 @media (max-width: 520px) {
-  .brand small { display: none; }
+  .brand small { white-space: normal; }
   .app-main { width: min(100% - 1rem, 1180px); }
-  .stat-grid, .form-grid, .brief-grid { grid-template-columns: 1fr; }
+  .stat-grid, .form-grid, .brief-grid, .workos-module-grid { grid-template-columns: 1fr; }
+  .workos-module-card { align-items: flex-start; flex-direction: column; }
   .span-all { grid-column: auto; }
   .matter-row { align-items: flex-start; flex-direction: column; }
   .form-actions > button { flex: 1 1 100%; }
@@ -130,6 +136,10 @@ summary { cursor: pointer; color: var(--text); font-weight: 750; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+
+@media (forced-colors: active) {
+  .workos-module-card, .app-header, .nav-button, .matter-nav button { border-color: CanvasText; }
 }
 
 @media print {

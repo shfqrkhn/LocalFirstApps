@@ -10,7 +10,7 @@
     { "id": "noodle-nudge", "appVersion": "1.2.31", "shellVersion": "1.2.33-r3e", "dataSchemaVersion": 1, "status": "supported" },
     { "id": "flexx-files", "appVersion": "3.9.78", "shellVersion": "3.9.78", "dataSchemaVersion": "v3", "status": "supported" },
     { "id": "healthos", "appVersion": "0.1.0", "shellVersion": "0.1.1-r3e", "dataSchemaVersion": 1, "status": "supported" },
-    { "id": "commonground", "appVersion": "0.2.0", "shellVersion": "0.2.2-m2", "dataSchemaVersion": 4, "status": "supported" },
+    { "id": "commonground", "appVersion": "0.3.0", "shellVersion": "0.3.0-r4a", "dataSchemaVersion": 4, "status": "supported" },
     { "id": "ledgersuite", "appVersion": "0.2.0-compat", "shellVersion": null, "dataSchemaVersion": [1, 2], "status": "compatibility-only" }
   ]
 }

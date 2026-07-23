@@ -1,7 +1,7 @@
 {
   "contractVersion": "1.0.0",
   "appId": "commonground",
-  "shellVersion": "0.2.2-m2",
+  "shellVersion": "0.3.0-r4a",
   "dataSchemaVersion": 4,
   "compatibleDataSchemas": [
     3,
@@ -15,11 +15,23 @@
     },
     {
       "url": "./styles.css",
-      "sha256": "02e04718877c9dc2479db1d3f1881d90e8d3d7c0d8febf9f17f2e67e8e3829aa"
+      "sha256": "b0fdfa65025c28e5a1be4b9f734aeaeec382dedfee12b6871b13ce74ffe1f08e"
     },
     {
       "url": "./app.js",
-      "sha256": "7c0b162a50155091d84656f83ec30a66070b417b8d5054039f762017f1fe330d"
+      "sha256": "6c04f1ff4ab849d26cb620254142b42b71147852d24abbc5d3385d0ce605c899"
+    },
+    {
+      "url": "./workos/catalog.js",
+      "sha256": "02d3707fb6ff0ceee075560dc07640fa251d768297f4368707fe136b596ae0d6"
+    },
+    {
+      "url": "./workos/shell.js",
+      "sha256": "de16a92b6a4df29f78e71f6f78de557bf2b898951bff52bad17f1b3f65d60746"
+    },
+    {
+      "url": "./workos-adapter.js",
+      "sha256": "31186d2d1d3e64bb0d07c59aa37c2abfac0ec7a46df068ca08c5a80e5ddd0554"
     },
     {
       "url": "./manifest.webmanifest",

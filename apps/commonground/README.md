@@ -2,13 +2,24 @@
 
 <p><a href="https://github.com/sponsors/shfqrkhn?o=esb"><strong>Sponsor this project</strong></a></p>
 
-Local-first facilitation and decision workspace.
+Local-first facilitation and decision workspace, now serving as the bounded
+CommonGround WorkOS shell foundation.
 
 - **Status:** Stable unified utility
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/commonground](https://shfqrkhn.github.io/LocalFirstApps/apps/commonground/)
 - **Portfolio Role:** Private human-systems and accountable-decision workspace
 
 CommonGround keeps facilitation cases and structured decision analysis in one browser-local workspace without accounts, telemetry, external provider credentials, or silent upload.
+
+## WorkOS Boundary
+
+WorkOS `1.0.0` is an app-owned navigation and module catalog, not a shared data
+runtime. Collaboration and Decisions are the only active modules and continue
+to use CommonGround's existing matter registry and IndexedDB v4 records.
+Insights, Learning, and Knowledge remain inactive metadata with no routes,
+imports, storage, workers, or mutation authority. TS-Dash and PMQuiz remain
+independent applications until their separate parity, provenance, recovery,
+accessibility, and owner-acceptance gates pass.
 
 ## Screenshot
 

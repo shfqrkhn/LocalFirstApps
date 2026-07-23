@@ -8,6 +8,7 @@ import { createInterchangePackage } from "../shared/interchange.js";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const deliverables = JSON.parse(await readFile(join(root, "config", "deliverables.json"), "utf8")).deliverables;
+const commonGroundShellVersion = deliverables.find(({ id }) => id === "commonground").shellVersion;
 const flexxShellVersion = deliverables.find(({ id }) => id === "flexx-files").shellVersion;
 const noodleShellVersion = deliverables.find(({ id }) => id === "noodle-nudge").shellVersion;
 let server;
@@ -74,11 +75,11 @@ test.beforeAll(async () => {
       let body = await readFile(filePath);
       if (url.pathname === "/apps/commonground/sw.js") {
         headers["cache-control"] = "no-store";
-        const shell = commonGroundWorkerRevision === 1 ? "0.2.2-m2" : `0.2.2-m2-test-${commonGroundWorkerRevision}`;
-        body = Buffer.from(body.toString("utf8").replace('shellVersion: "0.2.2-m2"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${commonGroundWorkerRevision}\n`);
+        const shell = commonGroundWorkerRevision === 1 ? commonGroundShellVersion : `${commonGroundShellVersion}-test-${commonGroundWorkerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace(`shellVersion: "${commonGroundShellVersion}"`, `shellVersion: "${shell}"`) + `\n// test-worker-revision:${commonGroundWorkerRevision}\n`);
       }
       if (url.pathname === "/apps/commonground/pwa-shell.json" && commonGroundWorkerRevision > 1) {
-        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "0.2.2-m2"', `"shellVersion": "0.2.2-m2-test-${commonGroundWorkerRevision}"`));
+        body = Buffer.from(body.toString("utf8").replace(`"shellVersion": "${commonGroundShellVersion}"`, `"shellVersion": "${commonGroundShellVersion}-test-${commonGroundWorkerRevision}"`));
       }
       if (url.pathname === "/apps/flexx-files/sw.js") {
         headers["cache-control"] = "no-store";
@@ -1112,7 +1113,7 @@ test("CommonGround first install stays stable and its scoped shell reloads offli
   await page.waitForTimeout(100);
   expect(mainFrameNavigations).toBe(1);
   const cacheKeys = await page.evaluate(() => caches.keys());
-  expect(cacheKeys.some((key) => key.startsWith("commonground-shell-0.2.2-m2"))).toBe(true);
+  expect(cacheKeys.some((key) => key.startsWith(`commonground-shell-${commonGroundShellVersion}`))).toBe(true);
   await context.setOffline(true);
   await page.reload({ waitUntil: "domcontentloaded" });
   await expect(page.getByRole("heading", { name: "Shared work, clear next steps" })).toBeVisible();
