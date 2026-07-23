@@ -168,6 +168,14 @@ test("inactive Insights preview is accessible, responsive, and non-causal", asyn
   await expect(page.getByRole("status")).toContainText("2 visible points");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
   expect(await page.evaluate(() => getComputedStyle(document.querySelector(".insights-preview")).getPropertyValue("--insights-motion").trim())).toBe("0ms");
+  await page.keyboard.press("Tab");
+  const focus = await page.evaluate(() => {
+    const style = getComputedStyle(document.activeElement);
+    return { tag: document.activeElement?.tagName, kind: style.outlineStyle, width: Number.parseFloat(style.outlineWidth) };
+  });
+  expect(focus.tag).not.toBe("BODY");
+  expect(focus.kind).not.toBe("none");
+  expect(focus.width).toBeGreaterThanOrEqual(2);
 
   await page.getByRole("button", { name: "All time" }).press("Enter");
   await expect(page.getByRole("status")).toContainText("5 visible points");
@@ -179,6 +187,36 @@ test("inactive Insights preview is accessible, responsive, and non-causal", asyn
     expect(control.width).toBeGreaterThanOrEqual(44);
     expect(control.height).toBeGreaterThanOrEqual(44);
   }
+
+  await page.setViewportSize({ width: 3840, height: 2160 });
+  expect(await page.evaluate(() => ({
+    overflow: Math.max(
+      document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      document.body.scrollWidth - document.body.clientWidth
+    ),
+    width: document.querySelector(".insights-preview").getBoundingClientRect().width
+  }))).toEqual({ overflow: 0, width: 1152 });
+
+  await page.emulateMedia({ reducedMotion: "reduce", forcedColors: "none" });
+  const contrastRatios = await page.evaluate(() => {
+    const channels = (value) => value.match(/\d+(?:\.\d+)?/g).slice(0, 3).map(Number);
+    const luminance = (value) => channels(value).map((channel) => {
+      const normalized = channel / 255;
+      return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+    }).reduce((sum, channel, index) => sum + channel * [0.2126, 0.7152, 0.0722][index], 0);
+    const ratio = (foreground, background) => {
+      const values = [luminance(foreground), luminance(background)].sort((left, right) => right - left);
+      return (values[0] + 0.05) / (values[1] + 0.05);
+    };
+    const shell = getComputedStyle(document.querySelector(".insights-preview"));
+    const eyebrow = getComputedStyle(document.querySelector(".insights-eyebrow"));
+    return {
+      text: ratio(shell.color, shell.backgroundColor),
+      accent: ratio(eyebrow.color, shell.backgroundColor)
+    };
+  });
+  expect(contrastRatios.text).toBeGreaterThanOrEqual(4.5);
+  expect(contrastRatios.accent).toBeGreaterThanOrEqual(4.5);
 });
 
 test("content-addressed successor sources load offline without activation", async ({ page, context }) => {

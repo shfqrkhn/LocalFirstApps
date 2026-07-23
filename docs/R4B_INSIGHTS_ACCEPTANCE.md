@@ -61,7 +61,8 @@ or schema is mutated.
 
 - `npm run test:r4b`: deterministic contract plus four browser cases pass,
   including frozen-runtime normalization, legacy JSON round-trip, v1-to-v2
-  database upgrade, accessible preview, and offline inactive-source loading.
+  database upgrade, 320-to-3840 px accessible preview, 200%-equivalent reflow,
+  and offline inactive-source loading.
 - `npm run ci:candidate`: all existing unit, app-native, governance, visual,
   file, behavior, accessibility, recovery, and PWA gates pass; the
   deterministic runtime contains 172 files.

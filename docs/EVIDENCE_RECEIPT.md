@@ -393,8 +393,8 @@ deployment, and publication remain `NOT_RUN`.
 - `PASS`: malformed, oversized, stale, quota, partial, duplicate, and
   concurrent cases reject without partial preview mutation. The test-only UI
   supplies non-causal text, semantic SVG description, equivalent values table,
-  keyboard controls, 44 px targets, 320 px reflow, reduced motion, and forced
-  colors.
+  visible keyboard focus, 44 px targets, 320-to-3840 px layouts,
+  200%-equivalent reflow, reduced motion, and forced colors.
 - `PASS`: CommonGround `0.3.1` shell `0.3.1-r4b` content-addresses all
   successor sources. Browser proof loads JS and CSS offline while the contract
   remains inactive; existing missing/corrupt/update/last-known-good coverage
