@@ -3,7 +3,7 @@ importScripts("../../shared/pwa-worker.js");
 self.LFAPwaWorker.register({
   appId: "healthos",
   cachePrefix: "healthos-",
-  shellVersion: "0.1.0-m3a",
+  shellVersion: "0.1.1-r3e",
   dataSchemaVersion: 1,
   compatibleDataSchemas: [1],
   manifestUrl: "./pwa-shell.json",

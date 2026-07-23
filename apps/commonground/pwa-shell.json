@@ -91,11 +91,11 @@
     },
     {
       "url": "../../shared/design-primitives.css",
-      "sha256": "71bd7a301b24871a81c187a6d956b36f63b482c1587d75c3ca96e95b7d98d182"
+      "sha256": "cc8bb60233a51fd9d570a6f67c1aed8b4513b3c11ed012414c60b79dfcd4e2b8"
     },
     {
       "url": "../../shared/design-tokens.css",
-      "sha256": "1adb4cb665be53693f29d72ee832df9d411019f124a4b69e795584106ab00047"
+      "sha256": "e0be0c96272f68ade974ca9d9d49ebdf35f111d1c762889cb2ccd5f18ae68cef"
     },
     {
       "url": "../../shared/pwa-assurance.js",
@@ -103,7 +103,7 @@
     },
     {
       "url": "../../suite-shell.css",
-      "sha256": "d63e05f0610260d3872f7e924ac08778037537cff1f23f116e7b7ca1551c33d3"
+      "sha256": "f2710685ee1234e46e57b5989e4a906b422e160cf8f5a15135c439d9c01e3281"
     },
     {
       "url": "../../suite-shell.js",

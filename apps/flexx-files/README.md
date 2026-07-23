@@ -5,7 +5,7 @@
 Offline-first strength training log and planning aid. Its suggestions are not medical advice or safety clearance; users remain responsible for choosing appropriate activity and seeking qualified guidance when needed.
 
 - **Status:** R3C controller modularization verified locally; canonical independent app
-- **Version:** 3.9.77
+- **Version:** 3.9.78
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/flexx-files](https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/)
 - **Portfolio Role:** Fitness and personal-systems experiment.
 

@@ -8,6 +8,7 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 let server;
 let baseUrl;
 let workerRevision;
+let healthShellVersion;
 
 const mime = new Map([
   [".css", "text/css"], [".html", "text/html"], [".js", "text/javascript"], [".json", "application/json"],
@@ -17,6 +18,8 @@ const mime = new Map([
 test.use({ hasTouch: true });
 
 test.beforeAll(async () => {
+  const deliverables = JSON.parse(await readFile(join(root, "config", "deliverables.json"), "utf8"));
+  healthShellVersion = deliverables.deliverables.find(({ id }) => id === "healthos").shellVersion;
   workerRevision = 1;
   server = createServer(async (request, response) => {
     try {
@@ -33,11 +36,11 @@ test.beforeAll(async () => {
       let body = await readFile(filePath);
       if (url.pathname === "/apps/healthos/sw.js") {
         headers["cache-control"] = "no-store";
-        const shell = workerRevision === 1 ? "0.1.0-m3a" : `0.1.0-m3a-test-${workerRevision}`;
-        body = Buffer.from(body.toString("utf8").replace('shellVersion: "0.1.0-m3a"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${workerRevision}\n`);
+        const shell = workerRevision === 1 ? healthShellVersion : `${healthShellVersion}-test-${workerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace(`shellVersion: "${healthShellVersion}"`, `shellVersion: "${shell}"`) + `\n// test-worker-revision:${workerRevision}\n`);
       }
       if (url.pathname === "/apps/healthos/pwa-shell.json" && workerRevision > 1) {
-        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "0.1.0-m3a"', `"shellVersion": "0.1.0-m3a-test-${workerRevision}"`));
+        body = Buffer.from(body.toString("utf8").replace(`"shellVersion": "${healthShellVersion}"`, `"shellVersion": "${healthShellVersion}-test-${workerRevision}"`));
       }
       response.writeHead(200, headers);
       response.end(body);

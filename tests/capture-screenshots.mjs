@@ -61,6 +61,32 @@ try {
   await page.evaluate(() => scrollTo(0, 0));
   await page.screenshot({ path: join(root, "apps", "healthos", "screenshot.png"), fullPage: false });
 
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(`${baseUrl}apps/noodle-nudge/`, { waitUntil: "domcontentloaded" });
+  await page.locator("#loader-overlay.is-hidden").waitFor({ state: "attached" });
+  await page.evaluate(() => {
+    globalThis.NoodleNudge.State.set({ viewDate: "2026-01-01T12:00:00.000Z" });
+    globalThis.NoodleNudge.App.navigate("dashboard");
+    document.activeElement?.blur();
+  });
+  await page.locator("#app-root h2").waitFor();
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.screenshot({
+    path: join(root, "apps", "noodle-nudge", "images", "screenshot.jpeg"),
+    type: "jpeg",
+    quality: 90,
+    fullPage: false
+  });
+
+  await page.goto(`${baseUrl}apps/flexx-files/`, { waitUntil: "domcontentloaded" });
+  await page.getByRole("heading", { name: "How do you feel?" }).waitFor();
+  await page.waitForFunction(() => !document.querySelector("#main-content .fade-in") ||
+    getComputedStyle(document.querySelector("#main-content .fade-in")).opacity === "1");
+  await page.waitForTimeout(600);
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.screenshot({ path: join(root, "apps", "flexx-files", "screenshot.png"), fullPage: false });
+
+  await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
   await page.evaluate(() => scrollTo(0, 0));
   await page.screenshot({ path: join(root, "screenshot.png"), fullPage: false });

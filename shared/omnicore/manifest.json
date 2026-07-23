@@ -78,10 +78,15 @@
       "id": "design",
       "path": "shared/design-tokens.css",
       "primitivePath": "shared/design-primitives.css",
-      "version": "1.0.0",
-      "consumers": ["commonground", "healthos"],
-      "adapters": ["apps/commonground/styles.css", "apps/healthos/styles.css"],
-      "failureContract": "Apps retain palette and layout ownership; adoption requires visual, responsive, keyboard, and reduced-motion parity."
+      "version": "1.1.0",
+      "consumers": ["commonground", "healthos", "noodle-nudge", "flexx-files"],
+      "adapters": [
+        "apps/commonground/styles.css",
+        "apps/healthos/styles.css",
+        "apps/noodle-nudge/styles.css",
+        "apps/flexx-files/css/styles.css"
+      ],
+      "failureContract": "Apps retain palette, layout, data, and runtime ownership; adoption requires visual, responsive, contrast, one-input, reduced-motion, file, offline, and recovery parity."
     }
   ],
   "excludedDomainModules": [

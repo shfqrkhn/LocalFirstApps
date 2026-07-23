@@ -1,7 +1,7 @@
 {
   "contractVersion": "1.0.0",
   "appId": "flexx-files",
-  "shellVersion": "3.9.77",
+  "shellVersion": "3.9.78",
   "dataSchemaVersion": "v3",
   "compatibleDataSchemas": [
     "v3"
@@ -10,11 +10,11 @@
   "assets": [
     {
       "url": "./index.html",
-      "sha256": "94e70c674b6f9a53b1e43975bd32dc57d0e5eda776ad24c48566870321621e85"
+      "sha256": "660e1bbf8ee5a975b18e5e0ab17f58de0345ecc1964182b281acbc55857da642"
     },
     {
       "url": "./css/styles.css",
-      "sha256": "0ec749d9ea83f15e896a8685a78a2e1e3551e87083c0d669e497a4e015553662"
+      "sha256": "d68554e53af9a25102989c7dc010a773e177d559e88195f5095b9fb9c2afd6de"
     },
     {
       "url": "./js/app.js",
@@ -78,7 +78,7 @@
     },
     {
       "url": "./js/constants.js",
-      "sha256": "a1152d47d7b9b75dd6142543164beae35925174cf59ffb489c41c1a8e5e4e980"
+      "sha256": "0258d72de1f65644b46178e16ab7bc45eab09b6faf476501e7f3010c6e0092d6"
     },
     {
       "url": "./js/i18n.js",
@@ -109,8 +109,16 @@
       "sha256": "87b34cd917cd780089ba6bec9e3c6bc77eb5c498682db34cae4ff174cd0dacdf"
     },
     {
+      "url": "../../shared/design-primitives.css",
+      "sha256": "cc8bb60233a51fd9d570a6f67c1aed8b4513b3c11ed012414c60b79dfcd4e2b8"
+    },
+    {
+      "url": "../../shared/design-tokens.css",
+      "sha256": "e0be0c96272f68ade974ca9d9d49ebdf35f111d1c762889cb2ccd5f18ae68cef"
+    },
+    {
       "url": "../../suite-shell.css",
-      "sha256": "d63e05f0610260d3872f7e924ac08778037537cff1f23f116e7b7ca1551c33d3"
+      "sha256": "f2710685ee1234e46e57b5989e4a906b422e160cf8f5a15135c439d9c01e3281"
     },
     {
       "url": "../../suite-shell.js",

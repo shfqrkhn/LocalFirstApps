@@ -1,6 +1,6 @@
 export const NOODLE_APP_VERSION = "1.2.31";
 export const NOODLE_DATA_SCHEMA_VERSION = 1;
-export const NOODLE_SHELL_VERSION = "1.2.32-r3d";
+export const NOODLE_SHELL_VERSION = "1.2.33-r3e";
 
 export const NOODLE_ASSESSMENT_ORDER = Object.freeze([
   "core_profile_v1.0.0",

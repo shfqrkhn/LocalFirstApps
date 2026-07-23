@@ -2,7 +2,8 @@
 
 .cg-focus-ring:focus-visible,
 .cg-button:focus-visible,
-.cg-field:focus-visible {
+.cg-field:focus-visible,
+.cg-action:focus-visible {
   outline: 3px solid var(--cg-focus);
   outline-offset: 3px;
 }
@@ -33,6 +34,27 @@
   padding: var(--cg-space-3) var(--cg-space-4);
 }
 
+.cg-card {
+  border: 1px solid var(--cg-border);
+  border-radius: var(--cg-radius-lg);
+  padding: var(--cg-space-6);
+  color: var(--cg-text);
+  background: var(--cg-surface-raised);
+  box-shadow: var(--cg-shadow-1);
+}
+
+.cg-action {
+  box-sizing: border-box;
+  min-block-size: var(--cg-touch-target);
+  border-radius: var(--cg-radius-sm);
+  touch-action: manipulation;
+}
+
+.cg-status-success { color: var(--cg-success); background: var(--cg-success-soft); }
+.cg-status-warning { color: var(--cg-warning); background: var(--cg-warning-soft); }
+.cg-status-danger { color: var(--cg-danger); background: var(--cg-danger-soft); }
+.cg-status-info { color: var(--cg-info); background: var(--cg-info-soft); }
+
 .cg-sr-only {
   position: absolute;
   inline-size: 1px;
@@ -43,4 +65,19 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+@media (forced-colors: active) {
+  .cg-button,
+  .cg-field,
+  .cg-card,
+  .cg-status {
+    border-color: CanvasText;
+  }
+
+  .cg-button:focus-visible,
+  .cg-field:focus-visible,
+  .cg-action:focus-visible {
+    outline-color: Highlight;
+  }
 }

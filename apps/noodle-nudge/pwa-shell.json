@@ -1,7 +1,7 @@
 {
   "contractVersion": "1.0.0",
   "appId": "noodle-nudge",
-  "shellVersion": "1.2.32-r3d",
+  "shellVersion": "1.2.33-r3e",
   "dataSchemaVersion": 1,
   "compatibleDataSchemas": [
     1
@@ -10,11 +10,11 @@
   "assets": [
     {
       "url": "./index.html",
-      "sha256": "3eb484c6b62e96221432028dd40e365307c7a3ce4eacee74b7f64ec2c2e9892c"
+      "sha256": "1ae9a2de0d2da6996eb8b98d6bac5299e08c1dde45765a8a9c09282c268e153c"
     },
     {
       "url": "./styles.css",
-      "sha256": "1de9c7f9b9e8220a2ba3e65fb107a72ab6075ac81fe2c136b837aa60fef8e1c1"
+      "sha256": "c65f489c4fb3a812b81a030b6c0ec3ddff1088c39f130103ccec014e66e80e7e"
     },
     {
       "url": "./app.js",
@@ -22,7 +22,7 @@
     },
     {
       "url": "./controller/config.js",
-      "sha256": "8761df9396f80a600e206d417a99abee34d6f63af2003db391a0d788e531127d"
+      "sha256": "888a3a7553830f2280a49c6509872b51dcdea20d2cf7dd07e5e78275b0044e5f"
     },
     {
       "url": "./controller/state.js",
@@ -149,8 +149,16 @@
       "sha256": "87b34cd917cd780089ba6bec9e3c6bc77eb5c498682db34cae4ff174cd0dacdf"
     },
     {
+      "url": "../../shared/design-primitives.css",
+      "sha256": "cc8bb60233a51fd9d570a6f67c1aed8b4513b3c11ed012414c60b79dfcd4e2b8"
+    },
+    {
+      "url": "../../shared/design-tokens.css",
+      "sha256": "e0be0c96272f68ade974ca9d9d49ebdf35f111d1c762889cb2ccd5f18ae68cef"
+    },
+    {
       "url": "../../suite-shell.css",
-      "sha256": "d63e05f0610260d3872f7e924ac08778037537cff1f23f116e7b7ca1551c33d3"
+      "sha256": "f2710685ee1234e46e57b5989e4a906b422e160cf8f5a15135c439d9c01e3281"
     },
     {
       "url": "../../suite-shell.js",

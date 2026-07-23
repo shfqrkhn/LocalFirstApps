@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/static-regression.mjs && node tests/interchange-regression.mjs && node tests/omnicore-regression.mjs && node tests/r3a-lifeos-regression.mjs && node tests/r3b-strength-regression.mjs && node tests/r3c-strength-controller-regression.mjs && node tests/r3d-noodle-controller-regression.mjs && node tests/pwa-assurance-regression.mjs && node tests/pwa-worker-regression.mjs && node tests/r0-worker-regression.mjs && node tests/noodle-scoring-regression.mjs && node tests/healthos-regression.mjs",
+    "test": "node tests/static-regression.mjs && node tests/interchange-regression.mjs && node tests/omnicore-regression.mjs && node tests/r3a-lifeos-regression.mjs && node tests/r3b-strength-regression.mjs && node tests/r3c-strength-controller-regression.mjs && node tests/r3d-noodle-controller-regression.mjs && node tests/r3e-design-regression.mjs && node tests/pwa-assurance-regression.mjs && node tests/pwa-worker-regression.mjs && node tests/r0-worker-regression.mjs && node tests/noodle-scoring-regression.mjs && node tests/healthos-regression.mjs",
     "test:visual": "playwright test tests/visual-regression.spec.mjs --reporter=line",
     "test:file": "playwright test tests/local-file-regression.spec.mjs --reporter=line",
     "test:behavior": "playwright test tests/app-behavior-regression.spec.mjs tests/healthos-behavior.spec.mjs --reporter=line",
@@ -15,9 +15,10 @@
     "test:r3b": "node tests/r3b-strength-regression.mjs",
     "test:r3c": "node tests/r3c-strength-controller-regression.mjs",
     "test:r3d": "node tests/r3d-noodle-controller-regression.mjs",
+    "test:r3e": "node tests/r3e-design-regression.mjs && playwright test tests/r3e-design-convergence.spec.mjs --reporter=line",
     "build": "node tools/build-runtime.mjs",
     "test:live": "playwright test tests/live-regression.spec.mjs --reporter=line",
-    "test:local": "npm test && npm run test:flexx && npm run test:r1 && npm run test:visual && npm run test:file && npm run test:behavior && playwright test tests/r1-accessibility.spec.mjs --reporter=line",
+    "test:local": "npm test && npm run test:flexx && npm run test:r1 && npm run test:visual && npm run test:file && npm run test:behavior && playwright test tests/r1-accessibility.spec.mjs tests/r3e-design-convergence.spec.mjs --reporter=line",
     "ci:candidate": "npm run test:local && npm run build",
     "test:all": "npm run test:local && npm run test:live",
     "qa": "npm run test:all"

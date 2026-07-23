@@ -1,7 +1,7 @@
 .lfa-suite-home,
 .lfa-file-notice {
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--cg-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
   letter-spacing: 0;
 }
 
@@ -12,7 +12,7 @@
   z-index: 40;
   display: inline-flex;
   min-width: 48px;
-  min-height: 34px;
+  min-height: var(--cg-touch-target, 44px);
   align-items: center;
   justify-content: center;
   padding: 0 10px;
@@ -38,7 +38,7 @@
 
 .lfa-suite-home:focus-visible,
 .lfa-suite-home:hover {
-  outline: 2px solid #62c49d;
+  outline: 3px solid var(--cg-focus, #62c49d);
   outline-offset: 3px;
   opacity: 1;
 }
@@ -67,7 +67,7 @@
     left: max(8px, env(safe-area-inset-left));
     bottom: max(14px, env(safe-area-inset-bottom));
     min-width: 44px;
-    min-height: 32px;
+    min-height: var(--cg-touch-target, 44px);
     padding: 0 9px;
     opacity: .66;
   }
