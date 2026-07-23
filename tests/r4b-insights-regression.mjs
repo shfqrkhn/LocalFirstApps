@@ -177,6 +177,12 @@ const added = applyPreviewCommand(original, {
 assert.equal(added.revision, 3);
 assert.equal(added.datasets.length, 1);
 assert.deepEqual(added.foreign, original.foreign);
+assert.throws(() => applyPreviewCommand(added, {
+  type: "import",
+  expectedRevision: 3,
+  dataset,
+  points: fixture.normalization.points
+}), /PREVIEW_DUPLICATE_DATASET/);
 assert.throws(() => applyPreviewCommand(original, { type: "clear", expectedRevision: 1 }), /STALE_PREVIEW_WRITE/);
 assert.throws(() => applyPreviewCommand(original, { type: "clear", expectedRevision: 2, fault: "quota" }), /PREVIEW_QUOTA/);
 assert.throws(() => applyPreviewCommand(original, { type: "clear", expectedRevision: 2, fault: "partial" }), /PREVIEW_PARTIAL/);

@@ -16,10 +16,12 @@ CommonGround keeps facilitation cases and structured decision analysis in one br
 WorkOS `1.0.0` is an app-owned navigation and module catalog, not a shared data
 runtime. Collaboration and Decisions are the only active modules and continue
 to use CommonGround's existing matter registry and IndexedDB v4 records.
-Insights, Learning, and Knowledge remain inactive metadata with no routes,
-imports, storage, workers, or mutation authority. TS-Dash and PMQuiz remain
-independent applications until their separate parity, provenance, recovery,
-accessibility, and owner-acceptance gates pass.
+Insights, Learning, and Knowledge remain inactive with no routes, imports,
+storage, workers, or mutation authority. R4B adds readable dependency-free
+Insights parsing, analytics, transfer, and preview source behind that inactive
+boundary; only tests load it, and it cannot read TS-Dash storage. TS-Dash and
+PMQuiz remain independent applications until their separate activation,
+provenance, recovery, accessibility, and owner-acceptance gates pass.
 
 ## Screenshot
 

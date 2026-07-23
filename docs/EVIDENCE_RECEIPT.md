@@ -376,3 +376,41 @@ publication remain `NOT_RUN`.
 - **Next exact action:** obtain owner review, then execute only bounded R4B,
   the readable parallel TS-Dash-to-Insights rewrite in
   `docs/MPES_IMPLEMENTATION_PLAN.md`; do not cut over or migrate data.
+
+## 2026-07-23 R4B Readable Insights Successor
+
+**State:** `VERIFIED_LOCAL`; activation, owner acceptance, manual AT,
+deployment, and publication remain `NOT_RUN`.
+
+- `PASS`: implementation commit `0f5b455` adds dependency-free, readable
+  CommonGround-owned parsing, normalization, analytics, transfer, pure preview
+  state, and semantic preview modules. They are inactive static assets with no
+  app import, route, database, worker, cross-app access, or mutation authority.
+- `PASS`: golden and live-browser comparisons match the frozen TS-Dash runtime
+  for normalized points, warnings, units, duplicate handling, and legacy JSON
+  package round-trip. The physical TSDashDB v1-to-v2 upgrade retains data.
+  Frozen artifacts and hashes are unchanged.
+- `PASS`: malformed, oversized, stale, quota, partial, duplicate, and
+  concurrent cases reject without partial preview mutation. The test-only UI
+  supplies non-causal text, semantic SVG description, equivalent values table,
+  keyboard controls, 44 px targets, 320 px reflow, reduced motion, and forced
+  colors.
+- `PASS`: CommonGround `0.3.1` shell `0.3.1-r4b` content-addresses all
+  successor sources. Browser proof loads JS and CSS offline while the contract
+  remains inactive; existing missing/corrupt/update/last-known-good coverage
+  passes unchanged.
+- `PASS`: `npm run ci:candidate` passes deterministic/unit gates, five native
+  Flexx checks, R1 sync/governance/foundations, 35 visual, seven file, 39
+  behavior, and 20 combined accessibility/design/WorkOS/Insights cases, then
+  builds a deterministic 172-file runtime. The focused R4B gate,
+  runtime-contract sync, content governance, and `git diff --check` pass.
+  `npm audit --audit-level=moderate` reports zero vulnerabilities.
+- `PASS_WITH_LIMITATIONS`: R4B creates no production Insights UI, storage,
+  import, migration, cutover, dual-write, route retirement, Learning/Knowledge
+  work, deployment, or publication. Owner review, manual assistive-technology
+  testing, real browser quota/eviction, and postdeploy verification remain
+  `NOT_RUN`.
+- **Rollback:** revert `0f5b455`. No persisted schema or user data changed.
+- **Next exact action:** owner-review R4B, then define and explicitly accept a
+  bounded R4C authority/storage/migration/support-window/rollback packet before
+  any activation implementation.

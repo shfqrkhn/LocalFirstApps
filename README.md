@@ -54,6 +54,11 @@ CommonGround, Flexx Files, HealthOS Focus, and Noodle Nudge share only a narrow 
 
 CommonGround LifeOS `1.0.0` is the bounded shell label seeded by HealthOS Focus. Reflection remains Noodle-owned through versioned domain, state, storage, session, settings, safe-view, and binding modules. Strength links to canonical Flexx Files, whose domain and controller contracts are likewise app-owned. No shell module reads another app's storage. HealthOS records use explicit portable files, and its timestamp-reconciled timer writes a session only after user review. Meditation, breathing, C25K, and later HealthOS modules remain inactive pending separate acceptance.
 
+CommonGround WorkOS keeps Collaboration and Decisions active over the existing
+matter registry. A readable dependency-free Insights successor is verified only
+as inactive, storage-free source and a test harness; it has no product route or
+TS-Dash database access. The focused TS-Dash app remains canonical.
+
 ## Local Use
 
 Download the current main repository ZIP with **Code > Download ZIP** or the direct ZIP link above, extract it, and open `index.html` in a browser. Individual apps live under `apps/<app>/`.
@@ -66,7 +71,12 @@ python -m http.server 8080
 
 ## Development
 
-R3D CommonGround LifeOS Reflection controller modularization is verified locally. Noodle is independent with a 119-line composition root, a 65-line HTML shell, safe DOM rendering, transactional assessment persistence, backup-gated reset, and nine explicit compatibility bindings. Flexx remains independently modularized, and LifeOS has no Noodle/Flexx storage access. Stores, formats, routes, workers, caches, scoring outputs, and user data remain isolated and unmigrated. Manual assistive-technology and qualified content/domain review remain `NOT_RUN`; publication is separate.
+R4B's readable parallel Insights successor is verified locally at `0f5b455`.
+Frozen-runtime normalization, JSON round-trip, legacy database upgrade,
+accessible preview, offline content-addressed loading, and the full candidate
+gate pass. No Insights activation, storage, migration, route retirement, or
+publication occurred. Manual assistive-technology, real quota/eviction, owner
+acceptance, deployment, and publication remain `NOT_RUN`.
 
 From a git checkout:
 

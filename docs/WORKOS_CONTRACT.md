@@ -15,7 +15,7 @@ app. `apps/commonground/workos/catalog.js`, `workos/shell.js`, and
 | --- | --- | --- | --- |
 | Collaboration | active | CommonGround | existing facilitation matters |
 | Decisions | active | CommonGround | existing Decision Analysis matters |
-| Insights | inactive metadata | TS-Dash | none |
+| Insights | inactive readable successor | CommonGround; TS-Dash remains canonical | test-only preview |
 | Learning | inactive metadata | PMQuiz | none |
 | Knowledge | inactive metadata | unassigned | none |
 
@@ -59,6 +59,13 @@ explicit, reviewed file transfer under the interchange contract.
 
 Activation requires a later versioned decision, tests before mutation, exact
 compatibility and recovery evidence, and independently reversible delivery.
+
+R4B satisfies the readable-source and characterized transformation prerequisites
+only. Its dependency-free modules are static content-addressed CommonGround
+assets with a test-only preview. They own no route, store, import UI, worker, or
+mutation authority; they never read `TSDashDB`. The frozen TS-Dash route,
+artifacts, formats, database, install/offline behavior, and user data remain
+canonical until a separately reviewed activation packet.
 
 ## Exclusions and safe failure
 

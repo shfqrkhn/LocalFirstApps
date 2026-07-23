@@ -85,6 +85,20 @@ candidate, 163-file deterministic build, 35 visual, seven file, 39 behavior,
 pass locally. Manual AT/domain/content review, real quota/eviction, owner
 acceptance, deployment, and publication remain `NOT_RUN`.
 
+R4B result: **VERIFIED_LOCAL** on 2026-07-23 in implementation commit
+`0f5b455`. A readable dependency-free CommonGround-owned Insights successor
+now provides bounded CSV parsing, legacy-compatible normalization and file
+transforms, deterministic analytics/selectors, pure fault-injectable preview
+transactions, and an accessible semantic chart/table harness. It remains
+inactive and storage-free. Live-browser evidence proves frozen TS-Dash
+normalization and JSON package parity, additive TSDashDB v1-to-v2 upgrade, and
+offline content-addressed source availability without route or activation.
+The unchanged focused TS-Dash runtime remains canonical. Full candidate,
+172-file deterministic build, focused R4B, governance, and zero-vulnerability
+audit pass. Owner acceptance, manual AT, real quota/eviction, activation,
+storage, cutover, migration, retirement, deployment, and publication remain
+`NOT_RUN`.
+
 ### R5 — Converge and retire safely
 
 Make LifeOS and WorkOS the only primary launcher cards after every module reaches parity. Compatibility URLs remain lightweight redirects/migration surfaces. Deprecation requires usage/migration evidence, complete export, tested restore and rollback, owner approval, and a dated removal decision. Archive source only after the final supported release window; never archive required migrations or format readers.
@@ -99,7 +113,23 @@ Definition of 100%: all MPES requirements are mapped to passing evidence or an o
 
 ## Next `/goal` Prompt
 
-`/goal Complete bounded LocalFirstApps R4B readable Insights successor in parallel after verified R4A. Local reversible implementation only. Re-read the prime private MPES, supplementary OmniOS guidance, live Git/state/decisions, WORKOS and TS_DASH_REWRITE contracts, frozen TS-Dash runtime/hashes, storage/import/export/PWA/design/accessibility evidence, dependency inventory, and current tests. Preserve authority/evidence separation and report limitations; do not claim OmniOS conformance. Before mutation, adversarially characterize every evidenced TS-Dash behavior and define failing golden/parity tests. Build a readable dependency-minimal CommonGround-owned Insights successor behind the inactive WorkOS boundary: pure typed-by-contract parsing/validation/normalization/transformation/selectors, deterministic tables/text plus equivalent charts, accessible responsive preview UI, explicit non-causal language, and app-owned storage/recovery/PWA seams only where exact behavior requires them. Preserve /apps/ts-dash/, opaque artifacts/hashes, TSDashDB v1/v2 and migrations, accepted CSV/JSON mappings, units/missing/order/round/date behavior, filenames/exports, clear confirmation, install/offline, CSP, keyboard/pointer/touch, reduced motion, and foreign scope. Do not activate Insights, route/cut over, migrate/dual-write/read TS-Dash data from CommonGround, delete opaque code, change TS-Dash behavior/formats, touch PMQuiz/Learning/Knowledge, add backend/account/telemetry/AI/sync/shared store/universal worker, retire/archive/publish, or add a dependency without evidence. Use a test-only/explicit preview boundary; unknown/malformed/stale/quota/partial/concurrent cases fail visibly and atomically. Prove old/new golden transformation and import/export parity, legacy upgrades, rollback/recovery, no cross-app access, complete content-addressed shell, file/subpath/offline/update/LKG, 320–3840 px and 200%-equivalent reflow, contrast/focus/modal/status/reduced-motion/forced-color, and deterministic build. Update contracts/state/decision/evidence/handoff only to observed facts; keep owner cutover, manual AT, real quota/eviction, deployment and publication NOT_RUN. Run focused gates, npm run ci:candidate, npm audit --audit-level=moderate, sync/content governance, git diff --check, artifact and clean tracked-status checks. Commit locally; do not push or deploy.`
+`/goal Perform the bounded LocalFirstApps post-R4B owner-review and R4C
+activation-readiness packet. Treat the private MPES as prime and OmniOS as
+supplementary assurance guidance. Re-read live state/decisions, WorkOS and
+TS-Dash rewrite contracts, R4B acceptance/evidence, frozen runtime, storage,
+transfer, PWA, accessibility, and rollback contracts. Adversarially audit every
+remaining parity gap and define an explicit activation/cutover decision record,
+owned CommonGround storage/recovery model, exact user-reviewed file migration,
+dual-route support window, rollback, and acceptance tests. Default to planning
+and failing tests only: do not activate Insights, add a route/store/import UI,
+read or mutate TSDashDB, migrate/dual-write, retire TS-Dash, touch
+PMQuiz/Learning/Knowledge, add dependencies/services/telemetry/AI/sync, publish,
+or mutate remotes without separate explicit owner approval. Preserve all
+focused-app data, formats, URLs, offline behavior, and recovery paths. Report
+owner choices and manual/real-browser evidence still required; update only
+observed facts. Run applicable focused/static/governance/diff checks and commit
+locally only if files change.`
 
-Do not start R4B until R4A is reviewed. Later packets must be regenerated from
-current state.
+Do not start activation implementation until R4B is owner-reviewed and the
+R4C authority, data ownership, migration, support window, and rollback packet
+is explicitly accepted. Regenerate later packets from current state.

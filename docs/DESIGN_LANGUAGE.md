@@ -1,6 +1,7 @@
 # CommonGround design language
 
-Status: R3E LifeOS convergence and R4A WorkOS shell adoption verified locally;
+Status: R3E LifeOS convergence, R4A WorkOS shell adoption, and the R4B
+test-only Insights preview verified locally;
 later WorkOS modules remain parity-gated.
 
 CommonGround is the product name and shared design language. LifeOS and WorkOS are navigational groupings, not separate runtimes. Existing apps retain their routes, storage, file formats, and identities while converging visually.

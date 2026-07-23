@@ -64,17 +64,16 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**R4A VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `f52d957`
-adds CommonGround WorkOS catalog, shell, and adapter `1.0.0`. Collaboration and
-Decisions remain the unchanged active matter families; Insights, Learning, and
-Knowledge are inert metadata without runtime authority. CommonGround v4
-storage, routes, formats, LedgerSuite compatibility, transfers, reset, scoped
-PWA, focused apps, and user data are unchanged. Full candidate, focused WorkOS,
-design/accessibility, recovery, and moderate-audit gates pass. Manual AT, real
-quota/eviction, qualified content/domain review, owner acceptance, deployment,
-and publication remain `NOT_RUN`. R4B may build a readable parallel Insights
-successor only after review; cutover, migration, retirement, and publication
-remain inactive.
+**R4B VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `0f5b455`
+adds a readable dependency-free CommonGround-owned Insights successor behind
+the inactive WorkOS boundary. Golden/live parity, legacy package round-trip,
+TSDashDB v1-to-v2 upgrade, semantic preview, offline source loading, full
+candidate, and zero-vulnerability gates pass. Insights still has no product
+route, store, import UI, worker, cross-app access, or mutation authority;
+TS-Dash remains canonical and unchanged. CommonGround v4 storage, routes,
+formats, LedgerSuite compatibility, focused apps, and user data are unchanged.
+Manual AT, real quota/eviction, owner acceptance, activation, migration,
+retirement, deployment, and publication remain `NOT_RUN`.
 
 ## Key Files
 
@@ -94,6 +93,10 @@ remain inactive.
   `docs/WORKOS_CONTRACT.md`, and `tests/r4a-workos-*`: R4A active
   Collaboration/Decisions composition, inactive-module prerequisites,
   ownership, exact delegation, accessibility, PWA integrity, and rollback.
+- `apps/commonground/workos/insights/*`,
+  `docs/R4B_INSIGHTS_ACCEPTANCE.md`, and `tests/r4b-insights-*`: R4B readable
+  parsing/normalization/analytics/transfer/preview source, frozen-runtime
+  parity, isolation, accessibility, offline integrity, and rollback evidence.
 - `apps/noodle-nudge/reflection/*`, `reflection-adapter.js`, `controller/*`, `app.js`, `docs/REFLECTION_CONTRACT.md`, and `tests/r3a-lifeos-regression.mjs`/`tests/r3d-noodle-controller-regression.mjs`: Noodle-owned domain/controller, transactional recovery, exact parity, hostile bounds, compatibility, and isolation evidence.
 - `apps/flexx-files/strength/*`, `apps/flexx-files/strength-adapter.js`, `apps/flexx-files/controller/*`, `docs/STRENGTH_CONTRACT.md`, and `tests/r3b-strength-regression.mjs`/`tests/r3c-strength-controller-regression.mjs`: Flexx-owned domain, recovery, storage, controller, exact parity, failure bounds, and non-mutating preview evidence.
 - `README.md`: public suite overview.
@@ -127,10 +130,12 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- After owner review of verified R4A, execute only bounded R4B, the readable
-  parallel Insights successor in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not
-  activate it, cut over, read/migrate TS-Dash data from CommonGround, modify the
-  frozen artifacts, begin Learning/Knowledge, retire routes, or publish.
+- Owner-review verified R4B before any activation work. Next define and
+  explicitly accept the bounded R4C authority, app-owned storage/recovery,
+  exact file migration, dual-route support window, rollback, and acceptance
+  packet in `docs/MPES_IMPLEMENTATION_PLAN.md`. Until then, do not activate
+  Insights, read/migrate TS-Dash data from CommonGround, modify frozen
+  artifacts, begin Learning/Knowledge, retire routes, or publish.
 - Keep OmniCore pure and dependency-free. Every promoted contract requires a minimal semver API, two real consumers, app-owned adapters, explicit failure behavior, deterministic faults, and code-only rollback. Never move app transaction scope, stores, workers, routes, or domain records into OmniCore.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.

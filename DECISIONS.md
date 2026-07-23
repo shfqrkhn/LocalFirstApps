@@ -179,3 +179,27 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
   cross-app access.
 - **Rollback:** Revert implementation commit `f52d957`; R4A changes no persisted
   schema or user data, so rollback is code/style-only.
+
+## D-020 — Prove readable Insights parity before granting runtime authority
+
+- **State:** Accepted and verified locally for bounded R4B.
+- **Decision:** CommonGround owns a dependency-free readable Insights successor
+  for parsing, normalization, deterministic analytics, file transforms, pure
+  preview transactions, and an accessible test harness. It remains inactive:
+  no product route, store, import surface, worker, mutation authority, or
+  `TSDashDB` access exists.
+- **Compatibility:** `/apps/ts-dash/`, its four hash-frozen artifacts,
+  TSDashDB physical v1/v2 upgrade, mappings, normalization, units, warnings,
+  filenames, JSON/CSV semantics, clear flow, CSP, PWA, and focused-app identity
+  remain unchanged. CommonGround merely integrity-caches the inactive readable
+  source for offline verification.
+- **Evidence:** Golden fixtures and live-browser comparison prove normalized
+  output and legacy package round-trip parity; deterministic faults cover
+  malformed/oversized/stale/quota/partial/duplicate inputs; browser tests cover
+  the additive legacy upgrade, semantic chart/table, keyboard/touch sizing,
+  reflow, forced colors, reduced motion, and offline source retrieval.
+- **Boundary:** Owner acceptance, manual assistive-technology testing, real
+  quota/eviction, activation, storage, cutover, migration, retirement,
+  deployment, and publication remain `NOT_RUN` and require a later decision.
+- **Rollback:** Revert implementation commit `0f5b455`; R4B changes no persisted
+  schema or user data, so rollback is code/test-only.
