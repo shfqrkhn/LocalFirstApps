@@ -20,9 +20,9 @@ async function project(relative, transform) {
 }
 
 const noodle = byId.get('noodle-nudge');
-await project('apps/noodle-nudge/index.html', source => source
-  .replace(/version: "1\.2\.(?:29|30)"/g, `version: "${noodle.appVersion}"`)
-  .replace(/noodle-nudge-cache-v1\.2\.(?:29|30)/g, `noodle-nudge-cache-v${noodle.appVersion}`));
+await project('apps/noodle-nudge/controller/config.js', source => source
+  .replace(/NOODLE_APP_VERSION = "[^"]+"/, `NOODLE_APP_VERSION = "${noodle.appVersion}"`)
+  .replace(/NOODLE_SHELL_VERSION = "[^"]+"/, `NOODLE_SHELL_VERSION = "${noodle.shellVersion}"`));
 
 await project('package.json', source => {
   const value = JSON.parse(source);

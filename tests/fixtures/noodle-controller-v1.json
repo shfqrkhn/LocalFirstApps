@@ -1,0 +1,80 @@
+{
+  "contractVersion": "1.0.0",
+  "database": {
+    "name": "NoodleNudgeDB",
+    "version": 1,
+    "store": "appState",
+    "recordKey": "appState"
+  },
+  "stateKeys": [
+    "assessments",
+    "dailyContent",
+    "userAnswers",
+    "userResults",
+    "userHistory",
+    "viewDate",
+    "appConfig",
+    "settings",
+    "debugLog"
+  ],
+  "persistedKeys": [
+    "userAnswers",
+    "userResults",
+    "userHistory",
+    "viewDate",
+    "appConfig",
+    "settings",
+    "debugLog"
+  ],
+  "routes": [
+    "dashboard",
+    "assessments",
+    "assessment",
+    "results",
+    "settings"
+  ],
+  "compatibilityBindings": [
+    "App.init",
+    "App.navigate",
+    "State.get",
+    "State.set",
+    "Scoring.calculateResults",
+    "SettingsManager.exportData",
+    "SettingsManager.importData",
+    "SettingsManager.resetData",
+    "SettingsManager.fillWithRandomData"
+  ],
+  "interactionTypes": {
+    "likertScale": 9,
+    "cardSort": 1
+  },
+  "assessmentCount": 10,
+  "scoringRuleCount": 42,
+  "historyLimit": 50,
+  "maxImportBytes": 2097152,
+  "eventBindings": [
+    "click",
+    "keydown",
+    "change",
+    "submit",
+    "dragstart",
+    "dragend",
+    "dragover",
+    "dragleave",
+    "drop",
+    "visibilitychange",
+    "pageshow",
+    "storage"
+  ],
+  "renderPaths": [
+    "dashboard",
+    "assessment-list",
+    "assessment-likert",
+    "assessment-card-sort",
+    "results-chart-and-cards",
+    "settings",
+    "toast",
+    "loader",
+    "pwa-update-notice"
+  ]
+}

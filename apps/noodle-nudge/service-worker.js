@@ -3,7 +3,7 @@ importScripts("../../shared/pwa-worker.js");
 self.LFAPwaWorker.register({
   appId: "noodle-nudge",
   cachePrefix: "noodle-nudge-",
-  shellVersion: "1.2.31-r1",
+  shellVersion: "1.2.32-r3d",
   dataSchemaVersion: 1,
   compatibleDataSchemas: [1],
   manifestUrl: "./pwa-shell.json",

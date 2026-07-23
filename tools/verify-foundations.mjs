@@ -50,7 +50,7 @@ async function verifyVersions() {
 
   const checks = [
     ["pmquiz", "apps/pmquiz/service-worker.js", `selfquiz-cache-v${byId.get("pmquiz").shellVersion}`],
-    ["noodle-nudge-app", "apps/noodle-nudge/index.html", `version: \"${byId.get("noodle-nudge").appVersion}\"`],
+    ["noodle-nudge-app", "apps/noodle-nudge/controller/config.js", `NOODLE_APP_VERSION = \"${byId.get("noodle-nudge").appVersion}\"`],
     ["noodle-nudge-worker", "apps/noodle-nudge/service-worker.js", `shellVersion: \"${byId.get("noodle-nudge").shellVersion}\"`],
     ["noodle-nudge-shell", "apps/noodle-nudge/pwa-shell.json", `\"shellVersion\": \"${byId.get("noodle-nudge").shellVersion}\"`],
     ["flexx-constant", "apps/flexx-files/js/constants.js", `APP_VERSION = '${byId.get("flexx-files").appVersion}'`],

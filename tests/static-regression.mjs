@@ -116,6 +116,8 @@ const healthStorage = readFileSync(join(root, "apps", "healthos", "storage.js"),
 const lifeOsShell = readFileSync(join(root, "apps", "healthos", "modules", "lifeos-shell.js"), "utf8");
 const pmQuizWorker = readFileSync(join(root, "apps", "pmquiz", "service-worker.js"), "utf8");
 const noodleIndex = readFileSync(join(root, "apps", "noodle-nudge", "index.html"), "utf8");
+const noodleApp = readFileSync(join(root, "apps", "noodle-nudge", "app.js"), "utf8");
+const noodleBindings = readFileSync(join(root, "apps", "noodle-nudge", "controller", "bindings.js"), "utf8");
 const noodleScoring = readFileSync(join(root, "apps", "noodle-nudge", "reflection", "scoring.js"), "utf8");
 const noodleScoringShim = readFileSync(join(root, "apps", "noodle-nudge", "scoring.js"), "utf8");
 const noodleWorker = readFileSync(join(root, "apps", "noodle-nudge", "service-worker.js"), "utf8");
@@ -436,7 +438,7 @@ assert(!/install[\s\S]{0,300}skipWaiting/.test(sharedPwaWorker), "PWA updates mu
 assert(pmQuizWorker.includes("key.startsWith(CACHE_PREFIX)"), "PMQuiz cache cleanup must be app-prefix scoped.");
 assert(!pmQuizWorker.includes("caches.match("), "PMQuiz must not search sibling app caches.");
 assert(!noodleIndex.includes("unsafe-eval") && !noodleIndex.includes("new Function"), "Noodle scoring content must remain inert.");
-assert(noodleIndex.includes("activatePwaUpdate") && noodleIndex.includes("registerPwaAssurance"), "Noodle updates must be explicitly activated through PWA assurance.");
+assert(noodleBindings.includes("activatePwaUpdate") && noodleApp.includes("registerPwaAssurance"), "Noodle updates must be explicitly activated through PWA assurance.");
 assert(noodleScoring.includes("ALLOWED_FUNCTIONS") && noodleScoring.includes("LIMITS"), "Noodle scoring must use an allowlisted bounded interpreter.");
 assert(noodleScoringShim.includes("./reflection/scoring.js"), "The old Noodle scoring URL must remain a compatibility re-export.");
 assert(noodleWorker.includes('cachePrefix: "noodle-nudge-"') && noodleWorker.includes("LFAPwaWorker.register"), "Noodle worker must use the app-owned PWA contract.");

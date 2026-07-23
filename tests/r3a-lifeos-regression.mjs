@@ -33,6 +33,8 @@ const noodleShell = JSON.parse(await readFile(resolve(root, "apps/noodle-nudge/p
 const healthStorage = await readFile(resolve(root, "apps/healthos/storage.js"), "utf8");
 const healthIndex = await readFile(resolve(root, "apps/healthos/index.html"), "utf8");
 const noodleIndex = await readFile(resolve(root, "apps/noodle-nudge/index.html"), "utf8");
+const noodleApp = await readFile(resolve(root, "apps/noodle-nudge/app.js"), "utf8");
+const noodleContent = await readFile(resolve(root, "apps/noodle-nudge/controller/content.js"), "utf8");
 
 assert.equal(LIFEOS_ADAPTER_VERSION, "1.0.0");
 assert.equal(LIFEOS_SHELL_CONTRACT_VERSION, "1.0.0");
@@ -90,8 +92,9 @@ assert.match(healthStorage, /HEALTHOS_DB_VERSION = 1/);
 assert.match(healthStorage, /HEALTHOS_PREFERENCE_RESTORE_ID/);
 assert.match(healthStorage, /HEALTHOS_PREFERENCES_PENDING/);
 assert.match(healthIndex, /\.\.\/\.\.\/shared\/design-primitives\.css/);
-assert.match(noodleIndex, /from '\.\/reflection-adapter\.js'/);
-assert.match(noodleIndex, /assessments: \[\.\.\.REFLECTION_ASSESSMENT_URLS\]/);
-assert.doesNotMatch(noodleIndex, /from '\.\/reflection\/backup\.js'/);
+assert.match(noodleApp, /from "\.\/controller\/content\.js"/);
+assert.match(noodleContent, /from "\.\.\/reflection-adapter\.js"/);
+assert.match(noodleContent, /\.\.\.REFLECTION_ASSESSMENT_URLS/);
+assert.doesNotMatch(noodleIndex, /reflection\/backup\.js/);
 
 console.log("R3A LifeOS shell, Reflection extraction, compatibility, preview, and isolation regression passed.");

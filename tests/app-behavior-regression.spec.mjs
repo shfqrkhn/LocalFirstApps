@@ -7,7 +7,9 @@ import { createStoredZip } from "../apps/commonground/modules/exports.js";
 import { createInterchangePackage } from "../shared/interchange.js";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const flexxShellVersion = JSON.parse(await readFile(join(root, "config", "deliverables.json"), "utf8")).deliverables.find(({ id }) => id === "flexx-files").shellVersion;
+const deliverables = JSON.parse(await readFile(join(root, "config", "deliverables.json"), "utf8")).deliverables;
+const flexxShellVersion = deliverables.find(({ id }) => id === "flexx-files").shellVersion;
+const noodleShellVersion = deliverables.find(({ id }) => id === "noodle-nudge").shellVersion;
 let server;
 let baseUrl;
 let commonGroundWorkerRevision;
@@ -88,11 +90,11 @@ test.beforeAll(async () => {
       }
       if (url.pathname === "/apps/noodle-nudge/service-worker.js") {
         headers["cache-control"] = "no-store";
-        const shell = noodleWorkerRevision === 1 ? "1.2.31-r1" : `1.2.31-r1-test-${noodleWorkerRevision}`;
-        body = Buffer.from(body.toString("utf8").replace('shellVersion: "1.2.31-r1"', `shellVersion: "${shell}"`) + `\n// test-worker-revision:${noodleWorkerRevision}\n`);
+        const shell = noodleWorkerRevision === 1 ? noodleShellVersion : `${noodleShellVersion}-test-${noodleWorkerRevision}`;
+        body = Buffer.from(body.toString("utf8").replace(`shellVersion: "${noodleShellVersion}"`, `shellVersion: "${shell}"`) + `\n// test-worker-revision:${noodleWorkerRevision}\n`);
       }
       if (url.pathname === "/apps/noodle-nudge/pwa-shell.json" && noodleWorkerRevision > 1) {
-        body = Buffer.from(body.toString("utf8").replace('"shellVersion": "1.2.31-r1"', `"shellVersion": "1.2.31-r1-test-${noodleWorkerRevision}"`));
+        body = Buffer.from(body.toString("utf8").replace(`"shellVersion": "${noodleShellVersion}"`, `"shellVersion": "${noodleShellVersion}-test-${noodleWorkerRevision}"`));
       }
       if (fault === "corrupt") body = Buffer.concat([body, Buffer.from("\n/* deterministic-corruption */\n")]);
       response.writeHead(200, headers);
@@ -289,6 +291,158 @@ test("Noodle PWA is fail-closed, explicit, recoverable, and foreign-cache safe",
   expect(recovered.recoveredFromPrevious).toBe(true);
   expect(await page.evaluate(() => NoodleNudge.State.get().appConfig?.r0Proof)).toBe("kept");
   await context.setOffline(false);
+});
+
+test("Noodle R3D completes all ten assessment paths and preserves history across reload", async ({ page }) => {
+  await gotoApp(page, "noodle-nudge");
+  await page.waitForFunction(() => Object.keys(NoodleNudge.State.get().assessments || {}).length === 10);
+  const assessmentIds = await page.evaluate(() => Object.keys(NoodleNudge.State.get().assessments));
+
+  for (const [index, assessmentId] of assessmentIds.entries()) {
+    await page.evaluate((id) => NoodleNudge.App.navigate("assessment", { id }), assessmentId);
+    const form = page.locator("[data-assessment-form]");
+    await expect(form).toBeVisible();
+    if (await form.locator(".card-sort-section").count()) {
+      const firstSection = form.locator(".card-sort-section").first();
+      const firstCard = firstSection.locator(".sortable-card").first();
+      await firstCard.focus();
+      await page.keyboard.press("Enter");
+      await expect(firstSection.locator(".card-sort-target .sortable-card")).toHaveCount(1);
+      const remaining = firstSection.locator(".card-sort-source .sortable-card");
+      if (await remaining.count()) await remaining.first().dragTo(firstSection.locator(".card-sort-target").last());
+    } else if (index === 0) {
+      const fieldsets = form.locator("fieldset");
+      for (let field = 0; field < await fieldsets.count(); field += 1) {
+        await fieldsets.nth(field).locator("label").first().click();
+      }
+    } else {
+      await form.evaluate((node) => {
+        for (const fieldset of node.querySelectorAll("fieldset")) fieldset.querySelector("input")?.click();
+      });
+    }
+    await form.locator('[type="submit"]').click();
+    await expect(page.locator("#app-root h2")).toContainText("Your Results for");
+  }
+
+  expect(await page.evaluate(() => ({
+    answers: Object.keys(NoodleNudge.State.get().userAnswers).length,
+    results: Object.keys(NoodleNudge.State.get().userResults).length,
+    history: Object.keys(NoodleNudge.State.get().userHistory).length,
+    capped: Object.values(NoodleNudge.State.get().userHistory).every((entries) => entries.length <= 50)
+  }))).toEqual({ answers: 10, results: 10, history: 10, capped: true });
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => Object.keys(NoodleNudge.State.get().userResults || {}).length === 10);
+  expect(await page.evaluate(() => Object.keys(NoodleNudge.State.get().userHistory).length)).toBe(10);
+});
+
+test("Noodle R3D legacy/current import, quota, reset-cancel, multi-tab, and foreign events fail safely", async ({ page, context }) => {
+  const legacy = JSON.parse(await readFile(join(root, "tests/fixtures/lifeos-reflection-preview-v1.json"), "utf8")).legacyBackup;
+  await gotoApp(page, "noodle-nudge");
+  await page.waitForFunction(() => Object.keys(NoodleNudge.State.get().assessments || {}).length === 10);
+  await page.getByLabel("Settings").click();
+
+  await Promise.all([
+    page.waitForEvent("load"),
+    page.locator("#import-file").setInputFiles({
+      name: "legacy.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(legacy))
+    })
+  ]);
+  await page.waitForFunction(() => Object.hasOwn(NoodleNudge.State.get().userResults || {}, "core_profile_v1.0.0"));
+  expect(await page.evaluate(() => NoodleNudge.State.get().userHistory)).toEqual({});
+
+  const currentBackup = await page.evaluate(() => NoodleNudge.State.get());
+  await page.getByLabel("Settings").click();
+  await Promise.all([
+    page.waitForEvent("load"),
+    page.locator("#import-file").setInputFiles({
+      name: "current.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(currentBackup))
+    })
+  ]);
+  await page.waitForFunction(() => Object.hasOwn(NoodleNudge.State.get().userResults || {}, "core_profile_v1.0.0"));
+  await page.evaluate(() => NoodleNudge.State.set({ appConfig: { ...NoodleNudge.State.get().appConfig, r3dSentinel: "kept" } }));
+
+  await page.getByLabel("Settings").click();
+  await page.evaluate(() => {
+    window.__noodleOriginalPut = IDBObjectStore.prototype.put;
+    IDBObjectStore.prototype.put = function quotaFault(...args) {
+      throw new DOMException("synthetic quota", "QuotaExceededError");
+    };
+  });
+  await page.locator("#import-file").setInputFiles({
+    name: "quota.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(currentBackup))
+  });
+  await expect(page.locator("#toast-container")).toContainText("synthetic quota");
+  await page.evaluate(() => { IDBObjectStore.prototype.put = window.__noodleOriginalPut; });
+  expect(await page.evaluate(() => NoodleNudge.State.get().appConfig.r3dSentinel)).toBe("kept");
+
+  const secondPage = await context.newPage();
+  await gotoApp(secondPage, "noodle-nudge");
+  await secondPage.waitForFunction(() => Object.keys(NoodleNudge.State.get().assessments || {}).length === 10);
+  await page.evaluate(() => NoodleNudge.App.navigate("assessment", { id: "proactive_personality_v1.0.0" }));
+  await page.locator("[data-assessment-form]").evaluate((form) => {
+    for (const fieldset of form.querySelectorAll("fieldset")) fieldset.querySelector("input")?.click();
+    form.requestSubmit();
+  });
+  await expect(page.locator("#app-root h2")).toContainText("Your Results for");
+  await secondPage.evaluate(() => window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true })));
+  await secondPage.waitForFunction(() => Object.hasOwn(NoodleNudge.State.get().userResults || {}, "proactive_personality_v1.0.0"));
+  const beforeForeign = await secondPage.evaluate(() => JSON.stringify(NoodleNudge.State.get().userResults));
+  await secondPage.evaluate(() => window.dispatchEvent(new StorageEvent("storage", { key: "otherapp_data", newValue: "changed" })));
+  expect(await secondPage.evaluate(() => JSON.stringify(NoodleNudge.State.get().userResults))).toBe(beforeForeign);
+  await secondPage.close();
+
+  await page.getByLabel("Settings").click();
+  const reset = page.getByRole("button", { name: /Reset All Data/i });
+  await reset.click();
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => NoodleNudge.State.get().appConfig?.r3dSentinel === "kept");
+  await page.getByLabel("Settings").click();
+  await page.evaluate(() => {
+    window.__noodleOriginalObjectUrl = URL.createObjectURL;
+    URL.createObjectURL = () => { throw new Error("synthetic backup failure"); };
+  });
+  const guardedReset = page.getByRole("button", { name: /Reset All Data/i });
+  await guardedReset.click();
+  await guardedReset.click();
+  await expect(page.locator("#toast-container")).toContainText("Reset canceled");
+  expect(await page.evaluate(() => NoodleNudge.State.get().appConfig.r3dSentinel)).toBe("kept");
+  await page.evaluate(() => { URL.createObjectURL = window.__noodleOriginalObjectUrl; });
+
+  await page.evaluate(async () => {
+    localStorage.setItem("r3d_foreign_local", "keep");
+    await new Promise((resolve, reject) => {
+      const request = indexedDB.open("r3d-foreign-db", 1);
+      request.onupgradeneeded = () => request.result.createObjectStore("records");
+      request.onsuccess = () => {
+        const transaction = request.result.transaction("records", "readwrite");
+        transaction.objectStore("records").put("keep", "sentinel");
+        transaction.oncomplete = () => { request.result.close(); resolve(); };
+        transaction.onerror = () => reject(transaction.error);
+      };
+      request.onerror = () => reject(request.error);
+    });
+  });
+  const successfulReset = page.getByRole("button", { name: /Reset All Data/i });
+  await successfulReset.click();
+  const resetDownload = page.waitForEvent("download");
+  await Promise.all([page.waitForEvent("load"), successfulReset.click(), resetDownload]);
+  expect(await page.evaluate(() => localStorage.getItem("r3d_foreign_local"))).toBe("keep");
+  expect(await page.evaluate(async () => new Promise((resolve, reject) => {
+    const request = indexedDB.open("r3d-foreign-db", 1);
+    request.onsuccess = () => {
+      const read = request.result.transaction("records").objectStore("records").get("sentinel");
+      read.onsuccess = () => { request.result.close(); resolve(read.result); };
+      read.onerror = () => reject(read.error);
+    };
+    request.onerror = () => reject(request.error);
+  }))).toBe("keep");
+  expect(await page.evaluate(() => Object.keys(NoodleNudge.State.get().userResults || {}).length)).toBe(0);
 });
 
 test("Flexx Files exposes touch-safe backup/restore UI and rejects corrupt restore data", async ({ page }) => {

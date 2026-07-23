@@ -1,7 +1,7 @@
 {
   "contractVersion": "1.0.0",
   "appId": "noodle-nudge",
-  "shellVersion": "1.2.31-r1",
+  "shellVersion": "1.2.32-r3d",
   "dataSchemaVersion": 1,
   "compatibleDataSchemas": [
     1
@@ -10,7 +10,47 @@
   "assets": [
     {
       "url": "./index.html",
-      "sha256": "f15e19928a4385a550c81c52e4acae6dfae344c09ca438edf219de9d21e203ec"
+      "sha256": "3eb484c6b62e96221432028dd40e365307c7a3ce4eacee74b7f64ec2c2e9892c"
+    },
+    {
+      "url": "./styles.css",
+      "sha256": "1de9c7f9b9e8220a2ba3e65fb107a72ab6075ac81fe2c136b837aa60fef8e1c1"
+    },
+    {
+      "url": "./app.js",
+      "sha256": "e1be4182bca6c9dde46641f52fce401f552e21f87f2e54b5aabded6b072a58b1"
+    },
+    {
+      "url": "./controller/config.js",
+      "sha256": "8761df9396f80a600e206d417a99abee34d6f63af2003db391a0d788e531127d"
+    },
+    {
+      "url": "./controller/state.js",
+      "sha256": "bb8fd691f9e06e09aac609c35a4f422e20ebacea6d8d5a73b4d23e31cd5c4f27"
+    },
+    {
+      "url": "./controller/storage.js",
+      "sha256": "f549b8312fd535a9ced16db7291d55026252d88d95d6413b21e99461bae8e898"
+    },
+    {
+      "url": "./controller/content.js",
+      "sha256": "6ea522b0c3b5dd6dd9e9e1602fc45d4b70e9124f068ee6136942e70dab7aa7a6"
+    },
+    {
+      "url": "./controller/session.js",
+      "sha256": "88958eae327df21558293dedd661387d564191046f6e3958413f023aa266434f"
+    },
+    {
+      "url": "./controller/settings.js",
+      "sha256": "085327e0a0e52119e5c403614e2fd5c260f1fe452f6a2c05accc5540e5f8bcef"
+    },
+    {
+      "url": "./controller/views.js",
+      "sha256": "1ac0c38f59fd0806bae930249f4ac903fa47211f6bf03d5bb690a365e785313d"
+    },
+    {
+      "url": "./controller/bindings.js",
+      "sha256": "ff0592f35947f8d909508d51f3268db5315ca03bc9dc1c48b5def76eeaa50e21"
     },
     {
       "url": "./scoring.js",
