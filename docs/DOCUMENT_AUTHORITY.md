@@ -14,6 +14,14 @@ This hierarchy resolves conflicts; it does not turn observations into requiremen
 | A7 | Descriptive/source material | Root/app READMEs, screenshots, question banks, assessment/content JSON, and `apps/flexx-files/Complete_Strength_Protocol.md`. They may describe or supply content but cannot override requirements or establish medical, legal, psychometric, licensing, or exam-authority claims. |
 | A8 | Historical archive | `archive/`. Recovery evidence only; never current behavior, a test gate, or an authority. |
 
+The private workspace reference `../docs/OmniOS_20260714.md` is supplementary
+assurance guidance under A0 owner instruction. Apply it proportionally through
+truth/evidence separation, reversible packets, explicit limitations,
+composition/recovery contracts, adversarial verification, and complexity
+budgets. It is not an alternate product authority, runtime-conformance claim,
+or permission to override the MPES, accepted decisions, app ownership, user
+data, compatibility, or current evidence.
+
 ## Conflict Protocol
 
 1. Stop destructive or release work when two applicable sources disagree.

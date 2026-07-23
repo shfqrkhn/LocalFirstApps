@@ -1,6 +1,9 @@
-# CommonGround LifeOS Reflection R3A–R3D Contract
+# CommonGround LifeOS Reflection R3A–R3E Contract
 
-Version `1.0.0` defines the Noodle-owned Reflection domain and controller boundary. The private MPES remains prime authority. R3A–R3D do not migrate user data, approve assessment/health content, or grant CommonGround LifeOS access to Noodle storage.
+Version `1.1.0` defines the Noodle-owned Reflection domain, controller, and
+design-adapter boundary. The private MPES remains prime authority. R3A–R3E do
+not migrate user data, approve assessment/health content, or grant CommonGround
+LifeOS access to Noodle storage.
 
 ## Ownership and compatibility
 
@@ -39,3 +42,13 @@ Legacy backups without `userHistory` and current backups remain accepted after s
 `tests/r3d-noodle-controller-regression.mjs` and `tests/fixtures/noodle-controller-v1.json` freeze the database, state, routes, compatibility, input, render, event, import, history, scoring, CSP, isolation, and offline-shell contracts. Browser gates complete all ten assessments, both interaction types, keyboard/pointer/drag paths, reload/history, legacy/current/malformed/quota imports, multi-tab refresh, foreign events/data, reset cancellation/failure/success, offline/update/last-known-good recovery, responsive/file behavior, and automated accessibility.
 
 Rollback is code-only: revert R3D implementation commit `0d8634c`. No data downgrade or migration reversal is required.
+
+## R3E design adapter
+
+Noodle loads CommonGround design contract `1.1.0` before its vendored Bootstrap
+and maps Bootstrap/app roles to the shared semantic vocabulary in its app-owned
+stylesheet. Its route, DOM hooks, nine compatibility names, v1 store, content,
+scoring, history, imports/backups/reset, worker scope, and data remain
+unchanged. Shell `1.2.33-r3e` integrity-binds both shared stylesheets. Toasts
+remain visible but cannot obstruct assessment controls. Revert `8e8b5a1` for
+code/style-only rollback.

@@ -1,6 +1,9 @@
-# CommonGround LifeOS R3A–R3D Contract
+# CommonGround LifeOS R3A–R3E Contract
 
-Version `1.0.0` defines the bounded CommonGround LifeOS foundation. The private MPES remains prime authority. This packet does not authorize data migration, route retirement, content approval, later HealthOS modules, or a shared runtime.
+Version `1.1.0` defines the bounded CommonGround LifeOS foundation and visual
+convergence. The private MPES remains prime authority. This packet does not
+authorize data migration, route retirement, content approval, later HealthOS
+modules, or a shared runtime.
 
 ## Shell and ownership
 
@@ -39,3 +42,19 @@ R3C additionally isolates Flexx-owned state/selectors, commands, timer, modal, s
 `tests/r3a-lifeos-regression.mjs`, `tests/r3b-strength-regression.mjs`, `tests/r3c-strength-controller-regression.mjs`, and `tests/r3d-noodle-controller-regression.mjs` prove module boundaries, versioned adapters, Reflection ten-definition/42-rule and controller parity, Strength parity, hostile backup/draft rejection, old formats, exact previews, no mutation authority, and complete offline shells. Browser tests prove preference failure/retry, quota visibility, recovery, stale/replay/atomic and multi-tab faults, all ten Reflection workflows, independent Noodle/Flexx surfaces, foreign cache/store survival, responsive/file/offline operation, and automated accessibility.
 
 Rollback is code-only: revert R3A `17863b9`, R3B `097822a`, R3C `93cd803`, and/or R3D `0d8634c`. No database version, persistent schema, route, compatibility URL, format, cache prefix, worker scope, or user data was migrated.
+
+## R3E visual composition
+
+Design contract `1.1.0` gives HealthOS, Noodle, and Flexx one semantic
+CommonGround vocabulary through app-owned CSS mappings. Shared code owns no DOM
+controller or state. The apps retain their recognizable light/dark identity,
+navigation, workflows, routes, data, and recovery. Their complete-shell
+manifests integrity-bind the shared tokens/primitives and fail closed to the
+last-known-good shell on a mixed or corrupt candidate.
+
+`tests/r3e-design-regression.mjs` and
+`tests/r3e-design-convergence.spec.mjs` prove adoption, ownership, shell
+integrity, contrast, focus, target size, reduced motion, forced colors, and
+reflow. Existing visual, behavior, accessibility, file, subpath, offline,
+update/recovery, and foreign-scope suites prove composition parity. R3E rollback
+is code/style-only: revert `8e8b5a1`; it changes no persisted state.

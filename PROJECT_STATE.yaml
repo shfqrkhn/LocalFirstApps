@@ -1,11 +1,11 @@
 project:
   id: localfirstapps-unified-suite
   version: 0.3.0
-  phase: r3d_reflection_controller_verified
-  status: r3d_verified_local_with_declared_review_limitations
+  phase: r3e_lifeos_design_convergence_verified
+  status: r3e_verified_local_with_declared_review_limitations
   repository: https://github.com/shfqrkhn/LocalFirstApps
-  git_head: 0d8634c0336d08de76f0630f2de67cfd59e5b2a6
-  git_head_role: verified_r3d_implementation_commit_before_evidence_close
+  git_head: 8e8b5a175502c44ffae3e621c1089ae62713e5e6
+  git_head_role: verified_r3e_implementation_commit_before_evidence_close
   takeover_baseline_head: ff25f15af266c2737fbc497983c26d582b2629d9
   m2_baseline_head: dd9a5879fadda8d63930a00e08c9c7c0e779e20e
   branch: agent/commonground-consolidation
@@ -50,9 +50,9 @@ project:
       - Learning Engine
     implementation: isolated_static_apps_with_explicit_file_transfer
   active_milestone: R3
-  active_packet: R3D-reflection-controller-modularization
+  active_packet: R3E-lifeos-design-language-convergence
   active_packet_state: VERIFIED_LOCAL
-  active_governance_packet: r3d-noodle-controller-modularization
+  active_governance_packet: r3e-lifeos-design-language-convergence
   active_governance_packet_state: VERIFIED_LOCAL
   completed_packets:
     - M1-shared-interchange-and-recovery
@@ -65,10 +65,11 @@ project:
     - R3B-strength-foundation
     - R3C-strength-controller-modularization
     - R3D-reflection-controller-modularization
+    - R3E-lifeos-design-language-convergence
   completed_governance_packets:
     - adversarial-audit-and-r0-plan
   baseline_reconciliation: VERIFIED
-  next_milestone: R3E-lifeos-design-convergence_after_owner_review
+  next_milestone: R4-workos-foundation_after_owner_review
   requirements:
     - id: CG-MERGE
       state: IMPLEMENTED
@@ -99,7 +100,7 @@ project:
       evidence: exact-preview portable transfer, atomic receipt and rollback, complete integrity backup/restore, scoped reset, and deterministic TS-Dash CSV fixture
     - id: FULL-LOCAL-VERIFICATION
       state: VERIFIED
-      evidence: npm run ci:candidate passed contracts including OmniCore, R3A LifeOS/Reflection, R3B/R3C Strength, and R3D Reflection controller faults; 5 native Flexx checks, R1 foundations, 35 visual, 7 file, 39 behavior, 7 accessibility routes, deterministic 160-file build; npm audit reported 0 vulnerabilities on 2026-07-22
+      evidence: npm run ci:candidate passed contracts including OmniCore, R3A-R3E LifeOS/Reflection/Strength, and controller/design faults; 5 native Flexx checks, R1 foundations, 35 visual, 7 file, 39 behavior, 7 accessibility routes plus 6 R3E design cases, deterministic 160-file build; npm audit reported 0 vulnerabilities on 2026-07-23
     - id: RELEASE
       state: NOT_RUN
       evidence: no publication authority granted
@@ -127,6 +128,9 @@ project:
     - id: R3D-REFLECTION-CONTROLLER
       state: VERIFIED
       evidence: Noodle-owned versioned state/selectors, transactional storage, content, assessment session, settings/recovery, safe views/chart, and lifecycle/DOM bindings; 119-line composition root and 65-line HTML shell; exact nine-name compatibility facade; all ten assessments and both interaction types; legacy/current/malformed/quota import, multi-tab, reset backup, foreign-scope, offline, responsive, file, and accessibility evidence; unchanged v1 database/store/key, records, scoring, routes, worker, and cache scope
+    - id: R3E-LIFEOS-DESIGN-CONVERGENCE
+      state: VERIFIED
+      evidence: CommonGround design contract 1.1.0 with HealthOS, Noodle, and Flexx app-owned mappings; integrity-bound shell versions; regenerated LifeOS screenshots; contrast, focus, 44px targets, forced colors, reduced motion, 200%-equivalent reflow, 320-3840px, file/subpath/offline/update/recovery and existing behavior parity; unchanged routes, stores, formats, domain outputs, workers, cache scopes, and user data
   decisions:
     - id: D-001
       state: ACCEPTED
@@ -176,6 +180,9 @@ project:
     - id: D-017
       state: ACCEPTED
       decision: Noodle UI orchestration is split into eight app-owned controller modules behind nine evidenced compatibility bindings; assessment completion atomically merges with the latest app record, lifecycle refresh preserves active forms, imports and reset fail visibly without partial or foreign mutation, and inline script/handlers are removed without changing v1 data or 42 scoring outputs.
+    - id: D-018
+      state: ACCEPTED
+      decision: R3E converges HealthOS, Noodle, and Flexx on CommonGround design contract 1.1.0 through app-owned CSS and integrity-bound PWA shells while preserving distinct identities and all runtime/data boundaries; selectable theme persistence remains deferred until an explicit owner and storage contract exist.
   risks:
     - id: R-001
       status: controlled
@@ -242,9 +249,13 @@ project:
       risk: noodle_reflection_ui_controller_coupling
       control: R3D replaces the HTML monolith with eight app-owned controller modules, a 119-line composition root, safe DOM/chart construction, nine explicit compatibility bindings, atomic assessment persistence, scoped recovery, and complete deterministic/browser parity gates
     - id: R-017
-      status: open
+      status: controlled
       risk: lifeos_visual_language_fragmentation
-      control: preserve app identity/data/runtime boundaries while routing the next bounded packet through token-by-token responsive, interaction, contrast, focus, reduced-motion, file, offline, and screenshot parity gates across HealthOS, Noodle, and Flexx
+      control: shared design contract 1.1.0 with app-owned semantic mappings, integrity-bound shells, screenshots, deterministic adoption tests, contrast/focus/touch/forced-colors/reduced-motion/reflow gates, and full behavior/file/offline parity across HealthOS, Noodle, and Flexx
+    - id: R-018
+      status: controlled_with_limitations
+      risk: cross_app_theme_preference_would_create_ambiguous_state_ownership
+      control: preserve evidenced per-app light/dark identities and defer selectable light/dark/system persistence until a bounded preference owner, storage, compatibility, recovery, and rollback contract is accepted
   evidence:
     - path: docs/EVIDENCE_RECEIPT.md
       state: VERIFIED_LOCAL
@@ -272,6 +283,10 @@ project:
       state: VERIFIED
     - path: tests/r3d-noodle-controller-regression.mjs
       state: VERIFIED
+    - path: tests/r3e-design-regression.mjs
+      state: VERIFIED
+    - path: tests/r3e-design-convergence.spec.mjs
+      state: VERIFIED_AUTOMATED
   unknowns:
     - storage_quota_and_eviction_behavior_varies_by_browser
     - background_notification_audio_vibration_and_wake_lock_delivery_varies_by_browser
@@ -279,5 +294,5 @@ project:
     - exact_consolidation_deployment_is_not_run
   blockers: []
   implementation_plan: docs/MPES_IMPLEMENTATION_PLAN.md
-  next_action: Obtain owner review of verified R3D, then execute only the bounded R3E LifeOS design-language convergence goal in docs/MPES_IMPLEMENTATION_PLAN.md. Keep data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, route retirement, and publication inactive. Do not mutate remotes absent explicit authority.
-  updated_at: 2026-07-22
+  next_action: Obtain owner review of verified R3E, then execute only the bounded R4 CommonGround WorkOS foundation goal in docs/MPES_IMPLEMENTATION_PLAN.md. Keep data migration, later HealthOS modules, content approval, route retirement, and publication inactive. Do not mutate remotes absent explicit authority.
+  updated_at: 2026-07-23

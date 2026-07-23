@@ -1,6 +1,6 @@
 # AI Maintainer Handoff
 
-Last updated: 2026-07-22.
+Last updated: 2026-07-23.
 Repo: `D:\VSCode\GH\LocalFirstApps`.
 
 Treat this as a public-safe continuation map. Re-read current files before editing.
@@ -30,6 +30,11 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## OmniOS Transfer Contract
 
+- Private workspace `../docs/OmniOS_20260714.md` is proportional supplementary assurance
+  guidance under the latest owner instruction, not a product authority or a
+  demonstrated runtime. Use truth/evidence separation, bounded reversible
+  packets, explicit limitations, composition/recovery contracts, adversarial
+  checks, and complexity budgets without overriding the MPES or app boundaries.
 - Product truth: consolidated static local-first utility suite, not standalone retired app surfaces or provider/OAuth integrations.
 - Execution truth: preserve per-app completeness, suite shell, file/live, visual, local-file, static, and privacy gates before publishing.
 - Evidence truth: use `docs/EVIDENCE_RECEIPT.md`, per-app README/screenshot checks, protected-path scans, and tests; public claims must stay within `PASS` or `PASS_WITH_LIMITATIONS`.
@@ -59,7 +64,18 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**R3D VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `0d8634c` adds Noodle-owned state/selectors, transactional storage, content, assessment-session, settings/recovery, safe DOM/chart views, and lifecycle bindings after exact characterization. The former 471-line HTML monolith is a 65-line shell with a 119-line composition root and nine compatibility names. All ten assessments, 42 outputs, v1 records, backups, routes, worker/cache scope, input modes, and visible workflows remain compatible; session commits merge atomically, multi-tab refresh preserves active forms, and reset is backup-gated and foreign-safe. LifeOS has no Noodle storage access. The full candidate and moderate audit pass. Manual AT, real quota/eviction, qualified content/domain review, owner acceptance, deployment, and publication remain `NOT_RUN`. R3E LifeOS design convergence is next only after owner review; data migration, TS-Dash/WorkOS, later HealthOS modules, and publication remain inactive.
+**R3E VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `8e8b5a1`
+promotes CommonGround design contract `1.1.0` across HealthOS, Noodle, and Flexx
+through app-owned CSS mappings and integrity-bound PWA shells. Shared semantic
+type, spacing, shape, surface, status, focus, target, elevation, overlay, and
+motion roles now coexist with recognizable green, blue, and orange app
+identities. Routes, stores, formats, domain behavior, compatibility, workers,
+caches, and user data are unchanged. The full candidate, R3E contrast/focus/
+target/forced-color/reflow gates, and moderate audit pass. Manual AT, real
+quota/eviction, qualified content/domain review, owner acceptance, deployment,
+and publication remain `NOT_RUN`. R4 WorkOS foundation is next only after owner
+review; data migration, later HealthOS modules, retirement, and publication
+remain inactive.
 
 ## Key Files
 
@@ -84,7 +100,11 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 - `config/deliverables.json`, `config/dependencies.json`, and `config/runtime-artifact.json`: canonical versions, dependency provenance, and curated artifact policy.
 - `governance/content-review-ledger.json`: deterministic quarantined content inventory; null provenance is unresolved, never approval.
 - `shared/omnicore/manifest.json`, `shared/omnicore/*.js`, `tests/omnicore-regression.mjs`, and `docs/OMNICORE_BOUNDARIES.md`: R2 semver inventory, pure contracts, two-consumer/fault proof, ownership exclusions, and rollback.
-- `shared/design-tokens.css`, `shared/design-primitives.css`, and `docs/DESIGN_LANGUAGE.md`: shared visual semantics consumed by CommonGround and HealthOS without surrendering app palette/layout ownership.
+- `shared/design-tokens.css`, `shared/design-primitives.css`,
+  `docs/DESIGN_LANGUAGE.md`, `docs/R3E_DESIGN_CONVERGENCE.md`, and
+  `tests/r3e-design-*.mjs`: design contract `1.1.0`, app-owned LifeOS mappings,
+  adoption/PWA integrity, contrast, focus, target, forced-color, reduced-motion,
+  and reflow evidence without data/runtime ownership.
 - `docs/TS_DASH_REWRITE_CONTRACT.md`: frozen opaque runtime disposition and readable-rewrite parity gate.
 - `docs/CAPABILITY_RECOVERY_MATRIX.md`: per-app storage, recovery, input, and test boundaries.
 - `tests/static-regression.mjs`: canonical app list and static guardrails.
@@ -104,7 +124,10 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- After owner review of verified R3D, execute only the bounded R3E LifeOS design-language convergence goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, retirement, or publication.
+- After owner review of verified R3E, execute only the bounded R4 CommonGround
+  WorkOS foundation goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin
+  data migration, later HealthOS modules, content approval, retirement, or
+  publication.
 - Keep OmniCore pure and dependency-free. Every promoted contract requires a minimal semver API, two real consumers, app-owned adapters, explicit failure behavior, deterministic faults, and code-only rollback. Never move app transaction scope, stores, workers, routes, or domain records into OmniCore.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.

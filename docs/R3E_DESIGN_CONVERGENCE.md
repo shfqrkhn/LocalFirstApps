@@ -1,11 +1,13 @@
 # R3E LifeOS design convergence
 
-Status: TARGET baseline recorded before runtime mutation on 2026-07-23.
+Status: VERIFIED_LOCAL on 2026-07-23 at implementation commit `8e8b5a1`;
+owner acceptance, manual AT, deployment, and publication remain `NOT_RUN`.
 
 This bounded packet converges the HealthOS Focus, Noodle Nudge/Reflection, and
 Flexx Files/Strength surfaces on the existing CommonGround design vocabulary.
-The private MPES remains prime product authority. `docs/OmniOS_20260714.md` is
-private, supplementary assurance guidance under the latest owner instruction;
+The private MPES remains prime product authority. Workspace reference
+`../docs/OmniOS_20260714.md` is private, supplementary assurance guidance under
+the latest owner instruction;
 it does not override accepted app, data, compatibility, or evidence boundaries.
 The repository demonstrates doctrine-guided engineering, not an OmniOS runtime.
 
@@ -60,3 +62,29 @@ and retains the last-known-good shell. Rollback reverts code/styles only.
 6. Evidence is version-bound and reports manual assistive-technology, qualified
    content/domain review, real quota/eviction, owner acceptance, deployment and
    publication as `NOT_RUN`.
+
+## Verification result
+
+- `PASS`: shared design contract `1.1.0` is consumed through app-owned CSS by
+  CommonGround, HealthOS, Noodle, and Flexx. The three LifeOS PWA manifests
+  integrity-bind both shared stylesheets and use new shell versions.
+- `PASS`: semantic-role contrast, accent-button contrast, visible focus,
+  44 px targets, forced colors, reduced motion, light/dark identity, and
+  200%-equivalent 320 px reflow pass on all three LifeOS surfaces.
+- `PASS`: 35 visual envelopes span 320–3840 px; seven file routes, 39 browser
+  behavior cases, seven accessibility baselines, and six R3E design cases cover
+  the combined route/state, keyboard, pointer, touch/card-sort, modal/toast,
+  timer/chart, multi-tab, recovery, offline, subpath, update, last-known-good,
+  and foreign-scope contracts.
+- `PASS`: `npm run ci:candidate` built the deterministic 160-file runtime;
+  `npm audit --audit-level=moderate` found zero vulnerabilities and
+  `git diff --check` passed.
+- `PASS_WITH_LIMITATIONS`: manual assistive-technology testing, real
+  browser-controlled quota/eviction, qualified content/domain review, owner
+  acceptance, postdeploy verification, deployment, and publication are
+  `NOT_RUN`.
+
+Selectable light/dark/system persistence remains intentionally deferred. The
+three apps have no accepted shared preference owner or storage contract; adding
+one in a visual-only packet would violate the state and complexity boundaries.
+This is explicit assurance debt, not a partial or hidden theme implementation.

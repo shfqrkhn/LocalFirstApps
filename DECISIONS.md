@@ -139,3 +139,24 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Compatibility:** Preserve `NoodleNudgeDB` v1 and its store/key/record shapes, nine runtime/export fields, seven persisted fields, ten definitions, 42 outputs, five routes, both interaction types, backups, old scoring URL, worker/cache scope, and nine evidenced global bindings. No LifeOS store access or data migration occurs.
 - **Safety:** Assessment completion merges answers/results/history atomically with the latest record; lifecycle refresh preserves active forms; imports fail atomically; reset starts a complete backup before scoped deletion; foreign stores/caches survive. Dynamic HTML and inline handlers are removed, and script CSP no longer permits `unsafe-inline`.
 - **Rollback:** Revert implementation commit `0d8634c`; R3D changes no persisted schema or user data, so rollback is code-only.
+
+## D-018 — Converge LifeOS visually without creating shared state
+
+- **State:** Accepted and verified locally for R3E.
+- **Decision:** CommonGround design contract `1.1.0` supplies one semantic type,
+  spacing, shape, surface, status, focus, target, elevation, overlay, and motion
+  vocabulary to HealthOS, Noodle, and Flexx through app-owned CSS mappings and
+  integrity-bound complete shells.
+- **Identity and ownership:** Reflection retains its calm light/blue identity,
+  Focus its ambient dark/green identity, and Strength its dense dark/orange
+  identity. Shared CSS receives no DOM controller, route, store, record,
+  worker, cache, transfer, recovery, or domain capability.
+- **Theme boundary:** Selectable light/dark/system persistence is deferred.
+  There is no accepted cross-app preference owner, storage key, compatibility,
+  recovery, or rollback contract; R3E does not invent one.
+- **Evidence:** Deterministic adoption/PWA-integrity checks, per-surface
+  screenshots, semantic contrast, focus, 44 px target, forced-color,
+  reduced-motion, reflow, responsive, one-input, file, offline, update/recovery,
+  and existing full behavior gates pass locally.
+- **Rollback:** Revert implementation commit `8e8b5a1`; R3E changes no persisted
+  state, so rollback is code/style-only.
