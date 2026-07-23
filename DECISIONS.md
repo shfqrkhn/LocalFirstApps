@@ -131,3 +131,11 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
 - **Compatibility:** Route, visible workflow, calculations, timing, translations, controls, seven `flexx_` keys, v3 records/drafts, backup/import/reset, worker/cache scope, and outputs remain unchanged. Session storage events invalidate local cache without interrupting an active workout; a completed session cannot be reintroduced as a draft.
 - **Evidence:** Deterministic and browser gates cover every command, phase/render/modal/timer path, resume/draft, progression/deload, swaps, pagination/chart/protocol, malformed/quota import, reset cancel/failure, multi-tab refresh, foreign-scope survival, offline, file, responsive, and accessibility behavior.
 - **Rollback:** Revert implementation commit `93cd803`; R3C changes no persisted schema or user data, so rollback is code-only.
+
+## D-017 — Modularize Noodle orchestration without transferring Reflection ownership
+
+- **State:** Accepted and verified locally for R3D.
+- **Decision:** Noodle owns eight controller modules for state/selectors, transactional storage, content, assessment sessions, settings/recovery, safe views/chart rendering, and lifecycle/DOM bindings. `app.js` is a 119-line composition root and the HTML is a 65-line shell.
+- **Compatibility:** Preserve `NoodleNudgeDB` v1 and its store/key/record shapes, nine runtime/export fields, seven persisted fields, ten definitions, 42 outputs, five routes, both interaction types, backups, old scoring URL, worker/cache scope, and nine evidenced global bindings. No LifeOS store access or data migration occurs.
+- **Safety:** Assessment completion merges answers/results/history atomically with the latest record; lifecycle refresh preserves active forms; imports fail atomically; reset starts a complete backup before scoped deletion; foreign stores/caches survive. Dynamic HTML and inline handlers are removed, and script CSP no longer permits `unsafe-inline`.
+- **Rollback:** Revert implementation commit `0d8634c`; R3D changes no persisted schema or user data, so rollback is code-only.

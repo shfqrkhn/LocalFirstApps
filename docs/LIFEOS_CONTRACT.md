@@ -1,4 +1,4 @@
-# CommonGround LifeOS R3A–R3C Contract
+# CommonGround LifeOS R3A–R3D Contract
 
 Version `1.0.0` defines the bounded CommonGround LifeOS foundation. The private MPES remains prime authority. This packet does not authorize data migration, route retirement, content approval, later HealthOS modules, or a shared runtime.
 
@@ -26,6 +26,8 @@ The catalog fixes the ten canonical local assessment paths and validates identit
 
 Legacy Noodle backups, including backups without `userHistory`, remain accepted by the extracted compatibility validator. `createLifeOsReflectionPreview` produces only a deterministic, explicit, non-mutating proposed mapping. It cannot write any app store and is not a migration receipt or authorization.
 
+R3D additionally isolates Noodle-owned state/selectors, transactional storage, content, assessment sessions, settings/recovery, safe DOM/chart views, and lifecycle bindings behind a 119-line composition root, 65-line HTML shell, and nine evidenced compatibility names. Assessment commits atomically merge answers/results/history with the latest record; reset starts a complete backup; multi-tab lifecycle refresh preserves active forms. This creates no LifeOS import or data authority.
+
 ## Strength extraction
 
 Flexx Files owns `strength/calculations.js`, `strength/readiness.js`, `strength/recovery.js`, `strength/storage-contract.js`, and `strength-adapter.js`. The adapter preserves the existing calculator/readiness/storage identities and exposes only pure seams, exact boundary metadata, and a future LifeOS preview that cannot mutate storage. The seven `flexx_` keys, v3 session/draft records, legacy/current backup shapes, route, UI, worker/cache scope, and reset boundary remain unchanged. Structural validation is not professional training, health, provenance, license, or content approval.
@@ -34,6 +36,6 @@ R3C additionally isolates Flexx-owned state/selectors, commands, timer, modal, s
 
 ## Verification and rollback
 
-`tests/r3a-lifeos-regression.mjs`, `tests/r3b-strength-regression.mjs`, and `tests/r3c-strength-controller-regression.mjs` prove module boundaries, versioned adapters, Reflection ten-definition/42-rule coverage, Strength calculation and controller parity, hostile backup/draft rejection, old format compatibility, exact previews, no mutation authority, and complete offline shells. Browser tests prove preference failure/retry, quota visibility, recovery, stale/replay/atomic and multi-tab faults, independent Noodle/Flexx surfaces, foreign cache/store survival, responsive/file/offline operation, and automated accessibility.
+`tests/r3a-lifeos-regression.mjs`, `tests/r3b-strength-regression.mjs`, `tests/r3c-strength-controller-regression.mjs`, and `tests/r3d-noodle-controller-regression.mjs` prove module boundaries, versioned adapters, Reflection ten-definition/42-rule and controller parity, Strength parity, hostile backup/draft rejection, old formats, exact previews, no mutation authority, and complete offline shells. Browser tests prove preference failure/retry, quota visibility, recovery, stale/replay/atomic and multi-tab faults, all ten Reflection workflows, independent Noodle/Flexx surfaces, foreign cache/store survival, responsive/file/offline operation, and automated accessibility.
 
-Rollback is code-only: revert R3A `17863b9`, R3B `097822a`, and/or R3C `93cd803`. No database version, persistent schema, route, compatibility URL, format, cache prefix, worker scope, or user data was migrated.
+Rollback is code-only: revert R3A `17863b9`, R3B `097822a`, R3C `93cd803`, and/or R3D `0d8634c`. No database version, persistent schema, route, compatibility URL, format, cache prefix, worker scope, or user data was migrated.

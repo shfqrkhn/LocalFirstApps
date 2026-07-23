@@ -288,3 +288,17 @@ This public-safe receipt keeps LocalFirstApps claims tied to evidence instead of
 - `PASS_WITH_LIMITATIONS`: real browser quota/eviction variance, manual assistive-technology testing, qualified content/domain review, owner acceptance, postdeploy verification, deployment, and publication remain `NOT_RUN`.
 - **Rollback:** revert `93cd803`. R3C changes no persisted schema or user data, so rollback is code-only.
 - **Next exact action:** obtain owner review, then execute only the bounded R3D Noodle Reflection controller modularization prompt in `docs/MPES_IMPLEMENTATION_PLAN.md`.
+
+## 2026-07-22 R3D Noodle Reflection Controller Modularization
+
+**State:** `VERIFIED_LOCAL`; owner acceptance, deployment, and publication remain `NOT_RUN`.
+
+- `PASS`: implementation commit `0d8634c` extracts Noodle-owned configuration, state/selectors, transactional storage, content, assessment-session, settings/recovery, safe DOM/chart views, and lifecycle/DOM bindings. The 61 KB/471-line HTML monolith becomes a 65-line shell with a 119-line composition root and nine exact compatibility names.
+- `PASS`: all ten assessments, nine Likert and one two-section card-sort workflow, all five routes, nine render/status paths, 12 event/lifecycle bindings, and all 42 scoring outputs are frozen by deterministic and browser evidence. Inline event handlers and dynamic HTML injection are absent; script CSP no longer permits `unsafe-inline`.
+- `PASS`: assessment completion atomically merges answers, result, and capped history with the latest IndexedDB record. Reload/history and page-restore multi-tab refresh preserve committed sets without interrupting an active assessment; localStorage/foreign events are ignored.
+- `PASS`: current and legacy backups pass size/type/structure/unsafe-key validation and one-record atomic restore. Malformed and quota failures preserve prior state. Reset requires two actions, starts a complete backup, cancels on backup failure, clears only Noodle data on success, and preserves foreign IndexedDB, localStorage, and caches.
+- `PASS`: route, `NoodleNudgeDB` v1 database/store/key and records, nine runtime/export fields, seven persisted fields, assessment content/scoring, old `scoring.js` URL, manifest, worker/cache ownership, offline/update/last-known-good behavior, HealthOS/Flexx isolation, and user data remain unmigrated.
+- `PASS`: `npm run ci:candidate` passed five native Flexx checks, R1 foundations, 35 visual, seven file, 39 browser-behavior, seven accessibility routes, and a deterministic 160-file runtime. `npm audit --audit-level=moderate` found zero vulnerabilities; `git diff --check` passed.
+- `PASS_WITH_LIMITATIONS`: real browser quota/eviction variance, manual assistive-technology testing, qualified assessment/content review, full LifeOS visual convergence, owner acceptance, postdeploy verification, deployment, and publication remain `NOT_RUN`.
+- **Rollback:** revert `0d8634c`. R3D changes no persisted schema or user data, so rollback is code-only.
+- **Next exact action:** obtain owner review, then execute only the bounded R3E LifeOS design-language convergence prompt in `docs/MPES_IMPLEMENTATION_PLAN.md`.

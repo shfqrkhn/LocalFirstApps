@@ -59,7 +59,7 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**R3C VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `93cd803` adds Flexx-owned versioned state/selectors, commands, timer, modal, safe views/chart, and DOM/storage bindings after exact characterization. The composition root is 209 lines and retains exactly 20 compatibility names. All seven `flexx_` keys, v3 records/drafts, backups, calculations, outputs, route, worker/cache scope, reset boundary, and visible workflows remain compatible; multi-tab session changes invalidate cache without interrupting an active workout, and completion cannot recreate a draft. LifeOS has no Flexx storage access. The full candidate and moderate audit pass. Manual AT, real quota/eviction, qualified content/domain review, owner acceptance, deployment, and publication remain `NOT_RUN`. R3D Noodle controller modularization is next only after owner review; TS-Dash/WorkOS migration and later HealthOS modules remain inactive.
+**R3D VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `0d8634c` adds Noodle-owned state/selectors, transactional storage, content, assessment-session, settings/recovery, safe DOM/chart views, and lifecycle bindings after exact characterization. The former 471-line HTML monolith is a 65-line shell with a 119-line composition root and nine compatibility names. All ten assessments, 42 outputs, v1 records, backups, routes, worker/cache scope, input modes, and visible workflows remain compatible; session commits merge atomically, multi-tab refresh preserves active forms, and reset is backup-gated and foreign-safe. LifeOS has no Noodle storage access. The full candidate and moderate audit pass. Manual AT, real quota/eviction, qualified content/domain review, owner acceptance, deployment, and publication remain `NOT_RUN`. R3E LifeOS design convergence is next only after owner review; data migration, TS-Dash/WorkOS, later HealthOS modules, and publication remain inactive.
 
 ## Key Files
 
@@ -74,8 +74,8 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 - `shared/pwa-worker.js`, `shared/pwa-assurance.js`, and `docs/PWA_ASSURANCE_CONTRACT.md`: M2 complete-shell staging, activation, health, scoped reset, and last-known-good contract.
 - `apps/noodle-nudge/scoring.js` and `apps/noodle-nudge/pwa-shell.json`: inert bounded scoring and app-owned complete-shell definition.
 - `apps/healthos/modules/healthos.js`, `apps/healthos/modules/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: HealthOS-owned observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract. The former `shared/` URLs are compatibility re-exports.
-- `apps/healthos/modules/lifeos-shell.js`, `apps/healthos/lifeos-adapter.js`, and `docs/LIFEOS_CONTRACT.md`: R3A–R3C shell membership, isolation, recovery, Reflection/Strength preview, controller, and rollback contract.
-- `apps/noodle-nudge/reflection/*`, `apps/noodle-nudge/reflection-adapter.js`, and `tests/r3a-lifeos-regression.mjs`: Noodle-owned definitions/scoring/backup-preview seams, exact parity, hostile bounds, and compatibility evidence.
+- `apps/healthos/modules/lifeos-shell.js`, `apps/healthos/lifeos-adapter.js`, and `docs/LIFEOS_CONTRACT.md`: R3A–R3D shell membership, isolation, recovery, Reflection/Strength preview, controller, and rollback contract.
+- `apps/noodle-nudge/reflection/*`, `reflection-adapter.js`, `controller/*`, `app.js`, `docs/REFLECTION_CONTRACT.md`, and `tests/r3a-lifeos-regression.mjs`/`tests/r3d-noodle-controller-regression.mjs`: Noodle-owned domain/controller, transactional recovery, exact parity, hostile bounds, compatibility, and isolation evidence.
 - `apps/flexx-files/strength/*`, `apps/flexx-files/strength-adapter.js`, `apps/flexx-files/controller/*`, `docs/STRENGTH_CONTRACT.md`, and `tests/r3b-strength-regression.mjs`/`tests/r3c-strength-controller-regression.mjs`: Flexx-owned domain, recovery, storage, controller, exact parity, failure bounds, and non-mutating preview evidence.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
@@ -104,7 +104,7 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- After owner review of verified R3C, execute only the bounded R3D Noodle Reflection controller modularization goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, retirement, or publication.
+- After owner review of verified R3D, execute only the bounded R3E LifeOS design-language convergence goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin data migration, TS-Dash/WorkOS work, later HealthOS modules, content approval, retirement, or publication.
 - Keep OmniCore pure and dependency-free. Every promoted contract requires a minimal semver API, two real consumers, app-owned adapters, explicit failure behavior, deterministic faults, and code-only rollback. Never move app transaction scope, stores, workers, routes, or domain records into OmniCore.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.

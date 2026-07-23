@@ -52,7 +52,7 @@ Cross-app integration uses explicit local files, not shared hidden storage. The 
 
 CommonGround, Flexx Files, HealthOS Focus, and Noodle Nudge share only a narrow PWA assurance contract. Each app still owns its worker, versioned content-addressed shell, data schema, caches, update controls, and reset boundary. A failed candidate cannot replace the active shell; compatible updates require explicit activation and retain one last-known-good shell.
 
-CommonGround LifeOS `1.0.0` is the bounded shell label seeded by HealthOS Focus. Reflection remains Noodle-owned and adapter-only. Strength links to canonical Flexx Files, whose calculation, readiness, recovery, storage, state, command, timer, modal, view, and compatibility-binding contracts are app-owned modules. No shell module reads another app's storage. HealthOS records use explicit portable files, and its timestamp-reconciled timer writes a session only after user review. Meditation, breathing, C25K, and later HealthOS modules remain inactive pending separate acceptance.
+CommonGround LifeOS `1.0.0` is the bounded shell label seeded by HealthOS Focus. Reflection remains Noodle-owned through versioned domain, state, storage, session, settings, safe-view, and binding modules. Strength links to canonical Flexx Files, whose domain and controller contracts are likewise app-owned. No shell module reads another app's storage. HealthOS records use explicit portable files, and its timestamp-reconciled timer writes a session only after user review. Meditation, breathing, C25K, and later HealthOS modules remain inactive pending separate acceptance.
 
 ## Local Use
 
@@ -66,7 +66,7 @@ python -m http.server 8080
 
 ## Development
 
-R3C CommonGround LifeOS Strength controller modularization is verified locally. HealthOS preference restore remains failure-visible and resumable; Noodle exposes versioned pure Reflection seams; Flexx remains independent with a 209-line composition root and an explicit 20-name compatibility facade, without granting LifeOS storage access. Stores, formats, routes, workers, caches, UI outputs, and user data remain isolated and unmigrated. Manual assistive-technology and qualified content/domain review remain `NOT_RUN`; publication is separate.
+R3D CommonGround LifeOS Reflection controller modularization is verified locally. Noodle is independent with a 119-line composition root, a 65-line HTML shell, safe DOM rendering, transactional assessment persistence, backup-gated reset, and nine explicit compatibility bindings. Flexx remains independently modularized, and LifeOS has no Noodle/Flexx storage access. Stores, formats, routes, workers, caches, scoring outputs, and user data remain isolated and unmigrated. Manual assistive-technology and qualified content/domain review remain `NOT_RUN`; publication is separate.
 
 From a git checkout:
 

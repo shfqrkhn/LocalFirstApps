@@ -7,7 +7,7 @@ This hierarchy resolves conflicts; it does not turn observations into requiremen
 | A0 | Binding external constraints | Applicable law, platform/security/privacy constraints, and the repository owner's latest explicit instruction. These always win. |
 | A1 | Prime product authority | Private `MPES-LocalFirstApps-Unified-v1.1.0.md`, amended only by explicit owner decisions recorded in `DECISIONS.md`. The MPES is the ultimate project specification beneath A0. |
 | A2 | Accepted decisions | `DECISIONS.md`. It makes owner-approved MPES amendments and unresolved conflicts visible; it cannot invent owner intent. |
-| A3 | Normative engineering contracts | `docs/INTERCHANGE_CONTRACT.md`, `docs/PWA_ASSURANCE_CONTRACT.md`, `docs/HEALTHOS_CONTRACT.md`, `docs/REPO_ZIP_POLICY.md`, and `docs/future-app-intake.md`. They govern their bounded interfaces only. |
+| A3 | Normative engineering contracts | `docs/INTERCHANGE_CONTRACT.md`, `docs/PWA_ASSURANCE_CONTRACT.md`, `docs/HEALTHOS_CONTRACT.md`, `docs/LIFEOS_CONTRACT.md`, `docs/STRENGTH_CONTRACT.md`, `docs/REFLECTION_CONTRACT.md`, `docs/REPO_ZIP_POLICY.md`, and `docs/future-app-intake.md`. They govern their bounded interfaces only. |
 | A4 | Observed execution truth | `PROJECT_STATE.yaml`, current Git state, runtime source, schemas, tests, CI, and deployment evidence. They prove what exists; they cannot silently redefine A0–A3. |
 | A5 | Evidence and operations | `docs/EVIDENCE_RECEIPT.md`, `docs/CAPABILITY_RECOVERY_MATRIX.md`, `docs/AI_MAINTAINER_HANDOFF.md`, and this audit. Claims must remain within their evidence limits. |
 | A6 | Derived plans | `docs/MPES_IMPLEMENTATION_PLAN.md`. Plans are replaceable execution proposals, never product authority. |
