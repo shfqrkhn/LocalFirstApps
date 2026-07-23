@@ -53,7 +53,7 @@ import {
   registerPwaAssurance
 } from "../../shared/pwa-assurance.js";
 
-const APP_VERSION = "0.3.0";
+const APP_VERSION = "0.3.1";
 const root = document.querySelector("#app");
 const statusRegion = document.querySelector("#app-status");
 

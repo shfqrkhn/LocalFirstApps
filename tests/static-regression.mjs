@@ -192,7 +192,7 @@ assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "R
 assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(pkg.scripts?.qa === "npm run test:all", "package must expose the full QA gate.");
-assert(pkg.version === "0.3.0", "suite version must identify the bounded HealthOS M3A packet.");
+assert(pkg.version === deliverables.suite.version, "package version must match the canonical suite deliverable.");
 for (const phrase of ["mpes_authority: prime", "M1-shared-interchange-and-recovery", "M2-reusable-pwa-baseline", "M3A-healthos-foundation-and-focus-timer", "D-001", "D-005", "D-006", "D-007", "NOT_RUN", "no publication authority granted"]) {
   assert(projectState.includes(phrase), `PROJECT_STATE.yaml missing required state: ${phrase}`);
 }

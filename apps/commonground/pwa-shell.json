@@ -1,7 +1,7 @@
 {
   "contractVersion": "1.0.0",
   "appId": "commonground",
-  "shellVersion": "0.3.0-r4a",
+  "shellVersion": "0.3.1-r4b",
   "dataSchemaVersion": 4,
   "compatibleDataSchemas": [
     3,
@@ -19,7 +19,7 @@
     },
     {
       "url": "./app.js",
-      "sha256": "6c04f1ff4ab849d26cb620254142b42b71147852d24abbc5d3385d0ce605c899"
+      "sha256": "9e4851341698d3cb800f69529eec54dc2db405ebad5cffa8925fbfd45c44034d"
     },
     {
       "url": "./workos/catalog.js",
@@ -28,6 +28,42 @@
     {
       "url": "./workos/shell.js",
       "sha256": "de16a92b6a4df29f78e71f6f78de557bf2b898951bff52bad17f1b3f65d60746"
+    },
+    {
+      "url": "./workos/insights/contract.js",
+      "sha256": "74f58d770a6339ef6b7ae42ee90bfa023b4b3f9f017f20198e1312c9a95a7e6f"
+    },
+    {
+      "url": "./workos/insights/csv.js",
+      "sha256": "b7c0764ad664b6c5001ac8f550f40ef2eb4b3cb412deceef6452a3a81df9b2d4"
+    },
+    {
+      "url": "./workos/insights/normalize.js",
+      "sha256": "45515f3c98452e16feaa8aff8396fd3f6d4e32549629ca52228a8a4c6883d759"
+    },
+    {
+      "url": "./workos/insights/analytics.js",
+      "sha256": "d1596d1d702f27883d4900a49836ca7e13d8a7c7ac39ba67aff8426ac496782c"
+    },
+    {
+      "url": "./workos/insights/transfer.js",
+      "sha256": "6088ec9f85ec3fdd1e147fd0b41eff28fba0653318c41497b144803b255fbaf0"
+    },
+    {
+      "url": "./workos/insights/state.js",
+      "sha256": "c54e5015ddbf586a3f67b56b553993aab5d178aa4f191efadac8e25a1fb66588"
+    },
+    {
+      "url": "./workos/insights/preview.js",
+      "sha256": "1fa3380017a0aaaea9cc43f4f357ebe0d5ee46a86f43a47ecb558ef9350f2d44"
+    },
+    {
+      "url": "./workos/insights/index.js",
+      "sha256": "2ffd307fa31fb8bc9e8ff9e90c145101970c3e4700c67ac03497b8bfa8bae172"
+    },
+    {
+      "url": "./workos/insights/preview.css",
+      "sha256": "4e3fe8fa052bbb0c9286d41dcd8751247a218cfa5ce6aed78fd5ca0ba9365639"
     },
     {
       "url": "./workos-adapter.js",

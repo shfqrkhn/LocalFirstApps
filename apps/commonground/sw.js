@@ -3,7 +3,7 @@ importScripts("../../shared/pwa-worker.js");
 self.LFAPwaWorker.register({
   appId: "commonground",
   cachePrefix: "commonground-",
-  shellVersion: "0.3.0-r4a",
+  shellVersion: "0.3.1-r4b",
   dataSchemaVersion: 4,
   compatibleDataSchemas: [3, 4],
   manifestUrl: "./pwa-shell.json",
