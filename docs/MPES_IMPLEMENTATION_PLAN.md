@@ -1,6 +1,6 @@
 # MPES Implementation Plan
 
-Status: revised 2026-07-23 after verified R3E. This is an A6 execution plan. The private `MPES-LocalFirstApps-Unified-v1.1.0.md` is the A1 prime product authority; explicit owner amendments in `DECISIONS.md` govern final CommonGround-branded LifeOS/WorkOS convergence.
+Status: revised 2026-07-23 after verified R4A. This is an A6 execution plan. The private `MPES-LocalFirstApps-Unified-v1.1.0.md` is the A1 prime product authority; explicit owner amendments in `DECISIONS.md` govern final CommonGround-branded LifeOS/WorkOS convergence.
 
 ## Non-Negotiable Architecture
 
@@ -73,6 +73,18 @@ Refactor CommonGround facilitation/Decision Analysis into the WorkOS shell witho
 
 Gate per module: behavioral and format parity, exact-preview transfer, scoped storage/reset/PWA, accessibility, offline recovery, content provenance, and owner acceptance. Generic analysis must never infer causality or professional advice.
 
+R4A result: **VERIFIED_LOCAL** on 2026-07-23 in implementation commit
+`f52d957`. CommonGround WorkOS catalog, shell, and adapter `1.0.0` activate only
+Collaboration and Decisions over the unchanged matter registry. Insights,
+Learning, and Knowledge remain inert prerequisite metadata. CommonGround
+`0.3.0` preserves IndexedDB v4/thirteen stores, every matter/route/revision
+rule, v1/v2 and LedgerSuite compatibility, portable transfer/reset, scoped PWA,
+offline/update/recovery, focused-app independence, and user data. Full
+candidate, 163-file deterministic build, 35 visual, seven file, 39 behavior,
+16 accessibility/design/WorkOS cases, focused R4A, and zero-vulnerability audit
+pass locally. Manual AT/domain/content review, real quota/eviction, owner
+acceptance, deployment, and publication remain `NOT_RUN`.
+
 ### R5 — Converge and retire safely
 
 Make LifeOS and WorkOS the only primary launcher cards after every module reaches parity. Compatibility URLs remain lightweight redirects/migration surfaces. Deprecation requires usage/migration evidence, complete export, tested restore and rollback, owner approval, and a dated removal decision. Archive source only after the final supported release window; never archive required migrations or format readers.
@@ -87,6 +99,7 @@ Definition of 100%: all MPES requirements are mapped to passing evidence or an o
 
 ## Next `/goal` Prompt
 
-`/goal Complete bounded LocalFirstApps R4A CommonGround WorkOS shell foundation after verified R3E. Treat invocation as local reversible implementation authority only. Re-read the prime private MPES, OmniOS guidance, live Git/state, decisions, CommonGround contracts/runtime/schema/tests, TS-Dash rewrite contract, PMQuiz/content governance, design 1.1, PWA and recovery evidence. Preserve authority/evidence separation and report limitations; do not claim OmniOS runtime conformance. Seed WorkOS from the existing CommonGround facilitation and Decision Analysis runtime: define a versioned app-owned WorkOS shell/catalog/adapter, coherent WorkOS navigation and module boundaries, and exact ownership/non-goal/composition contracts. Keep CommonGround branding, every route/bookmark, matter type and suitability gate, hard constraint, stage/revision/conflict rule, IndexedDB v4 store/index/record, LedgerSuite migration/import compatibility, v1/v2 exports/imports, portable preview/receipt/rollback, backup-gated reset, manifest/worker/cache scope, file/subpath/offline/update/LKG behavior, and current visual/accessibility semantics exact. LifeOS and all focused apps remain independent. Add no shared store, cross-app reads, sync/bus, universal worker, backend/account/telemetry/AI, hidden aggregation, causal/professional claim, or dependency. Do not rewrite/import TS-Dash, migrate PMQuiz, implement Knowledge, change content, retire routes, archive compatibility, or publish; expose those only as inactive catalog entries with explicit prerequisites if useful. Define tests before mutation. Prove shell/catalog purity, app-only mutation authority, exact CommonGround behavior/data/format parity, stale/malformed/quota/partial/multi-tab faults, foreign scope survival, 320–3840 px and 200%-equivalent reflow, keyboard/pointer/touch, focus/modal/status/reduced-motion/forced-color, file/subpath/offline/update/recovery. Update authority/state/decision/WorkOS/OmniCore/design/evidence/handoff only to observed facts and record assurance debt. Run focused tests, npm run ci:candidate, npm audit --audit-level=moderate, git diff --check, deterministic artifact and clean tracked-status gates. Make bounded local commits; do not push, deploy, publish, retire, or claim manual AT/domain/owner validation not performed.`
+`/goal Complete bounded LocalFirstApps R4B readable Insights successor in parallel after verified R4A. Local reversible implementation only. Re-read the prime private MPES, supplementary OmniOS guidance, live Git/state/decisions, WORKOS and TS_DASH_REWRITE contracts, frozen TS-Dash runtime/hashes, storage/import/export/PWA/design/accessibility evidence, dependency inventory, and current tests. Preserve authority/evidence separation and report limitations; do not claim OmniOS conformance. Before mutation, adversarially characterize every evidenced TS-Dash behavior and define failing golden/parity tests. Build a readable dependency-minimal CommonGround-owned Insights successor behind the inactive WorkOS boundary: pure typed-by-contract parsing/validation/normalization/transformation/selectors, deterministic tables/text plus equivalent charts, accessible responsive preview UI, explicit non-causal language, and app-owned storage/recovery/PWA seams only where exact behavior requires them. Preserve /apps/ts-dash/, opaque artifacts/hashes, TSDashDB v1/v2 and migrations, accepted CSV/JSON mappings, units/missing/order/round/date behavior, filenames/exports, clear confirmation, install/offline, CSP, keyboard/pointer/touch, reduced motion, and foreign scope. Do not activate Insights, route/cut over, migrate/dual-write/read TS-Dash data from CommonGround, delete opaque code, change TS-Dash behavior/formats, touch PMQuiz/Learning/Knowledge, add backend/account/telemetry/AI/sync/shared store/universal worker, retire/archive/publish, or add a dependency without evidence. Use a test-only/explicit preview boundary; unknown/malformed/stale/quota/partial/concurrent cases fail visibly and atomically. Prove old/new golden transformation and import/export parity, legacy upgrades, rollback/recovery, no cross-app access, complete content-addressed shell, file/subpath/offline/update/LKG, 320–3840 px and 200%-equivalent reflow, contrast/focus/modal/status/reduced-motion/forced-color, and deterministic build. Update contracts/state/decision/evidence/handoff only to observed facts; keep owner cutover, manual AT, real quota/eviction, deployment and publication NOT_RUN. Run focused gates, npm run ci:candidate, npm audit --audit-level=moderate, sync/content governance, git diff --check, artifact and clean tracked-status checks. Commit locally; do not push or deploy.`
 
-Do not start R4A until R3E is reviewed. Later packets must be regenerated from current state.
+Do not start R4B until R4A is reviewed. Later packets must be regenerated from
+current state.

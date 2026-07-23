@@ -1,6 +1,7 @@
 # CommonGround design language
 
-Status: R3E LifeOS convergence verified locally; WorkOS-wide adoption remains future parity-gated work.
+Status: R3E LifeOS convergence and R4A WorkOS shell adoption verified locally;
+later WorkOS modules remain parity-gated.
 
 CommonGround is the product name and shared design language. LifeOS and WorkOS are navigational groupings, not separate runtimes. Existing apps retain their routes, storage, file formats, and identities while converging visually.
 
@@ -28,3 +29,10 @@ reduced-motion, 200%-equivalent reflow, 320–3840 px visual, keyboard, pointer,
 touch/card-sort, file, subpath, offline, update/recovery, and existing behavior
 gates. Selectable light/dark/system persistence is deferred because no accepted
 cross-app preference store or owner exists; R3E does not invent one.
+
+R4A applies the same contract to the CommonGround-owned WorkOS shell. Its active
+module cards use semantic surfaces, status text, 44 px controls, responsive
+reflow, reduced motion, and forced-color boundaries. Existing CommonGround
+navigation remains semantically named, and destructive dialogs now trap focus,
+close predictably, and restore the opener. This visual membership grants no
+foreign runtime or data access.

@@ -160,3 +160,22 @@ Public-safe architectural decisions for LocalFirstApps. Private source specifica
   and existing full behavior gates pass locally.
 - **Rollback:** Revert implementation commit `8e8b5a1`; R3E changes no persisted
   state, so rollback is code/style-only.
+
+## D-019 — Seed WorkOS from existing CommonGround authority
+
+- **State:** Accepted and verified locally for R4A.
+- **Decision:** WorkOS `1.0.0` is a CommonGround-owned shell, catalog, and
+  adapter over the existing facilitation and Decision Analysis runtime.
+  Collaboration and Decisions are active; Insights, Learning, and Knowledge are
+  inactive metadata with no route or mutation authority.
+- **Compatibility:** The existing matter registry remains authoritative.
+  IndexedDB v4, all thirteen stores, matter rules/routes/revisions, CommonGround
+  and LedgerSuite formats, transfer/reset behavior, worker/cache scope, and
+  focused-app independence remain unchanged.
+- **Boundary:** TS-Dash requires a readable behavior-first rewrite before
+  Insights activation. PMQuiz requires content governance before Learning.
+  Knowledge requires an accepted owner and user-controlled data/recovery
+  contract. Catalog membership never authorizes hidden aggregation or
+  cross-app access.
+- **Rollback:** Revert implementation commit `f52d957`; R4A changes no persisted
+  schema or user data, so rollback is code/style-only.

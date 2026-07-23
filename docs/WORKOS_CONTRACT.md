@@ -1,6 +1,6 @@
 # CommonGround WorkOS contract
 
-Version: 1.0.0  
+Version: 1.0.0
 Status: normative R4A foundation; locally verified implementation evidence is
 recorded separately.
 

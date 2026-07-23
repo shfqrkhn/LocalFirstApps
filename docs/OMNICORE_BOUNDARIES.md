@@ -25,6 +25,11 @@ layouts, and reset/recovery flows. The old `shared/healthos.js` and
 `shared/focus-timer.js` URLs are compatibility re-exports; their canonical
 implementations are HealthOS-owned under `apps/healthos/modules/`.
 
+CommonGround WorkOS catalog, shell, and adapter modules are explicitly
+CommonGround-owned composition seams. They are not OmniCore modules and grant
+OmniCore no route, domain, storage, mutation, worker, cache, or activation
+authority.
+
 ## Share
 
 - Design tokens, accessibility primitives, suite navigation, PWA assurance, deterministic build metadata, content-review schemas, version projections, import/export envelopes, and test utilities.

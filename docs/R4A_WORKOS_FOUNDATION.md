@@ -1,6 +1,6 @@
 # R4A CommonGround WorkOS foundation
 
-Status: acceptance defined before runtime mutation. Verification is `NOT_RUN`.
+Status: `VERIFIED_LOCAL` on 2026-07-23 in implementation commit `f52d957`.
 
 The private MPES is prime product authority. Workspace
 `../docs/OmniOS_20260714.md` is proportional supplementary assurance guidance,
@@ -64,3 +64,21 @@ change, or publication.
 Safe failure: an invalid catalog or missing shell asset rejects the candidate;
 the last-known-good CommonGround shell and all user data remain untouched.
 Rollback reverts R4A code/styles only.
+
+## Observed result
+
+- WorkOS catalog, shell, and adapter `1.0.0` expose only Collaboration and
+  Decisions as active. Insights, Learning, and Knowledge remain inert metadata.
+- The existing matter registry remains the sole domain authority. IndexedDB v4,
+  all thirteen stores, routes, formats, LedgerSuite readers, transfers, reset,
+  PWA scope, and focused-app ownership are unchanged.
+- `npm run ci:candidate` passed deterministic/unit gates, five native Flexx
+  checks, R1 foundations, 35 responsive views, seven file routes, 39 behavior
+  cases, 16 accessibility/design/WorkOS cases, and a deterministic 163-file
+  runtime. The focused R4A gate and moderate audit pass; vulnerabilities: zero.
+- The modal now traps focus, closes with Escape, and restores its opener. A
+  discovered 33 px compact workspace selector was corrected to the 44 px design
+  target.
+- Real quota/eviction, manual assistive-technology and domain/content review,
+  owner acceptance, deployment, postdeploy verification, and publication are
+  `NOT_RUN`.

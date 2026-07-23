@@ -64,17 +64,16 @@ Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS an
 
 ## Current Release Status
 
-**R3E VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `8e8b5a1`
-promotes CommonGround design contract `1.1.0` across HealthOS, Noodle, and Flexx
-through app-owned CSS mappings and integrity-bound PWA shells. Shared semantic
-type, spacing, shape, surface, status, focus, target, elevation, overlay, and
-motion roles now coexist with recognizable green, blue, and orange app
-identities. Routes, stores, formats, domain behavior, compatibility, workers,
-caches, and user data are unchanged. The full candidate, R3E contrast/focus/
-target/forced-color/reflow gates, and moderate audit pass. Manual AT, real
+**R4A VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `f52d957`
+adds CommonGround WorkOS catalog, shell, and adapter `1.0.0`. Collaboration and
+Decisions remain the unchanged active matter families; Insights, Learning, and
+Knowledge are inert metadata without runtime authority. CommonGround v4
+storage, routes, formats, LedgerSuite compatibility, transfers, reset, scoped
+PWA, focused apps, and user data are unchanged. Full candidate, focused WorkOS,
+design/accessibility, recovery, and moderate-audit gates pass. Manual AT, real
 quota/eviction, qualified content/domain review, owner acceptance, deployment,
-and publication remain `NOT_RUN`. R4 WorkOS foundation is next only after owner
-review; data migration, later HealthOS modules, retirement, and publication
+and publication remain `NOT_RUN`. R4B may build a readable parallel Insights
+successor only after review; cutover, migration, retirement, and publication
 remain inactive.
 
 ## Key Files
@@ -91,6 +90,10 @@ remain inactive.
 - `apps/noodle-nudge/scoring.js` and `apps/noodle-nudge/pwa-shell.json`: inert bounded scoring and app-owned complete-shell definition.
 - `apps/healthos/modules/healthos.js`, `apps/healthos/modules/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: HealthOS-owned observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract. The former `shared/` URLs are compatibility re-exports.
 - `apps/healthos/modules/lifeos-shell.js`, `apps/healthos/lifeos-adapter.js`, and `docs/LIFEOS_CONTRACT.md`: R3A–R3D shell membership, isolation, recovery, Reflection/Strength preview, controller, and rollback contract.
+- `apps/commonground/workos/*`, `apps/commonground/workos-adapter.js`,
+  `docs/WORKOS_CONTRACT.md`, and `tests/r4a-workos-*`: R4A active
+  Collaboration/Decisions composition, inactive-module prerequisites,
+  ownership, exact delegation, accessibility, PWA integrity, and rollback.
 - `apps/noodle-nudge/reflection/*`, `reflection-adapter.js`, `controller/*`, `app.js`, `docs/REFLECTION_CONTRACT.md`, and `tests/r3a-lifeos-regression.mjs`/`tests/r3d-noodle-controller-regression.mjs`: Noodle-owned domain/controller, transactional recovery, exact parity, hostile bounds, compatibility, and isolation evidence.
 - `apps/flexx-files/strength/*`, `apps/flexx-files/strength-adapter.js`, `apps/flexx-files/controller/*`, `docs/STRENGTH_CONTRACT.md`, and `tests/r3b-strength-regression.mjs`/`tests/r3c-strength-controller-regression.mjs`: Flexx-owned domain, recovery, storage, controller, exact parity, failure bounds, and non-mutating preview evidence.
 - `README.md`: public suite overview.
@@ -124,10 +127,10 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
-- After owner review of verified R3E, execute only the bounded R4 CommonGround
-  WorkOS foundation goal in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not begin
-  data migration, later HealthOS modules, content approval, retirement, or
-  publication.
+- After owner review of verified R4A, execute only bounded R4B, the readable
+  parallel Insights successor in `docs/MPES_IMPLEMENTATION_PLAN.md`. Do not
+  activate it, cut over, read/migrate TS-Dash data from CommonGround, modify the
+  frozen artifacts, begin Learning/Knowledge, retire routes, or publish.
 - Keep OmniCore pure and dependency-free. Every promoted contract requires a minimal semver API, two real consumers, app-owned adapters, explicit failure behavior, deterministic faults, and code-only rollback. Never move app transaction scope, stores, workers, routes, or domain records into OmniCore.
 - Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
@@ -136,6 +139,9 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 - Keep `tests/static-regression.mjs`, the actual `apps/` directories, launcher cards, and README app links in exact membership parity; an unregistered app folder is a repo-sprawl blocker, not an implicit new app.
 - Keep each app README explicit about its data/recovery boundary; document export/import/reset support or state the limitation when no separate recovery workflow exists.
 - Keep CommonGround's matter-type registry authoritative. Facilitation matters retain suitability and route-out behavior; Decision Analysis matters use the shared workspace/storage/export shell but never inherit facilitation-only gates.
+- Keep WorkOS app-owned and fail-closed. Collaboration and Decisions are the
+  only active modules. Insights, Learning, and Knowledge have no route,
+  storage, import, worker, or mutation authority until separately accepted.
 - Preserve CommonGround export v2 plus CommonGround v1 and LedgerSuite v1/v2 import compatibility. Legacy database migration must stay previewed, atomic, idempotent, and source-preserving.
 - Keep portable transfer file-only and explicit: select, exact preview, confirm, validate, atomic app-owned apply, unique receipt and rollback. Accept compatible `1.x` conservatively, preserve unknown record/payload fields, reject other majors, and never add hidden shared storage or synchronization.
 - Keep decision hard constraints distinct from comparative scores. Preserve revision checks on singleton writes and portable conflict metadata so stale or duplicate tabs fail visibly instead of overwriting newer records.

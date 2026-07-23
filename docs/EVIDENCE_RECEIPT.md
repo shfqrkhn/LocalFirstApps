@@ -338,3 +338,41 @@ publication remain `NOT_RUN`.
   code/style-only.
 - **Next exact action:** obtain owner review, then execute only the bounded R4
   CommonGround WorkOS foundation prompt in `docs/MPES_IMPLEMENTATION_PLAN.md`.
+
+## 2026-07-23 R4A CommonGround WorkOS Foundation
+
+**State:** `VERIFIED_LOCAL`; owner acceptance, manual AT, deployment, and
+publication remain `NOT_RUN`.
+
+- `PASS`: implementation commit `f52d957` adds CommonGround-owned WorkOS
+  catalog, shell, and adapter `1.0.0`. Collaboration and Decisions delegate to
+  the existing matter registry. Insights, Learning, and Knowledge are inert
+  metadata without routes, imports, storage, workers, or mutation authority.
+- `PASS`: CommonGround remains branded and keeps its existing main navigation,
+  workflows, progressive disclosure, and matter semantics. Active module
+  boundaries are visible; inactive future modules are not exposed as actions.
+  Reset dialog focus is contained and restored, and the compact workspace
+  control now meets the 44 px target.
+- `PASS`: database `commonground-suite` remains v4 with thirteen stores.
+  Matter types/suitability/hard constraints/routes/revisions, selected-graph
+  deletion, CommonGround v1/v2 and LedgerSuite v1/v2 compatibility, portable
+  preview/receipt/rollback, backup-gated reset, and foreign scope survival pass.
+- `PASS`: CommonGround `0.3.0` shell `0.3.0-r4a` integrity-binds the WorkOS
+  modules. First install, explicit compatible update, corrupt/missing/quota
+  rejection, last-known-good recovery, file fallback, repository subpath,
+  offline restart, schema upgrade, and stale-tab rejection pass.
+- `PASS`: `npm run ci:candidate` passes deterministic/unit gates, five native
+  Flexx checks, R1 foundations, 35 visual, seven file, 39 behavior, seven
+  accessibility baselines, six R3E design and three R4A cases, and a
+  deterministic 163-file runtime. The focused R4A gate and sync/content
+  governance checks pass; the moderate audit reports zero vulnerabilities.
+- `PASS_WITH_LIMITATIONS`: no TS-Dash rewrite/import, PMQuiz migration,
+  Knowledge runtime, route retirement, data migration, deployment, or
+  publication occurred. Real quota/eviction, manual assistive-technology and
+  qualified content/domain review, owner acceptance, and postdeploy verification
+  remain `NOT_RUN`.
+- **Rollback:** revert `f52d957`. R4A changes no persisted state, so rollback is
+  code/style-only.
+- **Next exact action:** obtain owner review, then execute only bounded R4B,
+  the readable parallel TS-Dash-to-Insights rewrite in
+  `docs/MPES_IMPLEMENTATION_PLAN.md`; do not cut over or migrate data.
