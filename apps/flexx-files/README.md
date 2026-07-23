@@ -2,10 +2,10 @@
 
 <p><a href="https://github.com/sponsors/shfqrkhn?o=esb"><strong>Sponsor this project</strong></a></p>
 
-Offline-first strength protocol tracker.
+Offline-first strength training log and planning aid. Its suggestions are not medical advice or safety clearance; users remain responsible for choosing appropriate activity and seeking qualified guidance when needed.
 
-- **Status:** Stable maintenance app
-- **Version:** 3.9.73
+- **Status:** R3C controller modularization verified locally; canonical independent app
+- **Version:** 3.9.78
 - **Live Demo:** [shfqrkhn.github.io/LocalFirstApps/apps/flexx-files](https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/)
 - **Portfolio Role:** Fitness and personal-systems experiment.
 
@@ -25,13 +25,14 @@ Training adherence improves when the tracker removes decisions instead of adding
 - Calculates plate math and micro-loading.
 - Handles rest timers, progression, stalls, and deloads.
 - Runs offline as a PWA.
+- Stages a content-addressed complete shell, requires explicit compatible update activation, and retains one last-known-good shell.
 - Includes debug and verification support for maintenance.
 
 ## Quick Start
 
 1. Open the live demo.
 2. Start or continue the training workflow.
-3. Follow the prescribed movements and timers.
+3. Review the planned movements and timers; adjust them to your circumstances.
 4. Record work sets.
 5. Let progression logic handle next-session targets.
 
@@ -39,11 +40,15 @@ Training adherence improves when the tracker removes decisions instead of adding
 
 - No account or backend is required for normal use.
 - Training data stays local to the browser.
-- Export or back up data before clearing browser storage.
+- JSON backup and validated restore preserve training sessions; malformed restores fail closed.
+- Factory reset downloads a complete backup first, then clears only `flexx_` data, Flexx caches, and its worker registration. Unrelated origin data is preserved.
+- Settings exposes read-only quota/persistence/offline-shell health. Browser quota and eviction remain outside the app's control.
 
 ## Relationship To Other Projects
 
-Flexx Files is a stable personal-systems app maintained inside LocalFirstApps. It is not a flagship focus area unless a dedicated fitness product line becomes a priority.
+Flexx Files is the canonical HealthOS strength/readiness/progression module, while remaining a complete independent app with its own scoped storage and recovery boundary. The separate [HealthOS Focus surface](../healthos/) links here but does not read or merge Flexx data. It is not a flagship focus area unless a dedicated fitness product line becomes a priority.
+
+The versioned Strength adapter exposes only pure calculations, readiness, validation, backup/draft recovery, storage metadata, and a non-mutating future LifeOS preview. Six app-owned controller modules now isolate state/selectors, commands, timers, modals, safe views/chart rendering, and DOM/storage bindings behind a 209-line composition root and the exact legacy 20-name compatibility facade. See the [Strength contract](../../docs/STRENGTH_CONTRACT.md). No LifeOS runtime can read or write Flexx browser data.
 
 ## Repository Layout
 
@@ -52,6 +57,8 @@ Flexx Files is a stable personal-systems app maintained inside LocalFirstApps. I
 ├── index.html
 ├── css/
 ├── js/
+├── strength/
+├── strength-adapter.js
 ├── assets/
 ├── tests/
 ├── sw.js

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "urn:lfa:commonground:matter:fixture-001",
+  "type": "commonground/matter",
+  "status": "active",
+  "truthClass": "user-authored",
+  "confidence": null,
+  "owner": "Fixture owner",
+  "sourceApp": "commonground",
+  "createdAt": "2026-07-21T12:00:00.000Z",
+  "updatedAt": "2026-07-21T12:05:00.000Z",
+  "timezone": "America/Toronto",
+  "units": {},
+  "assumptions": [{ "text": "Fixture assumption" }],
+  "conflicts": [],
+  "relationships": [{ "type": "belongs-to", "targetId": "urn:lfa:commonground:workspace:fixture" }],
+  "tags": ["fixture"],
+  "payload": {
+    "workspace": { "id": "fixture-workspace", "name": "Fixture Workspace", "owner": "Fixture owner" },
+    "graph": {
+      "matter": { "id": "fixture-matter", "workspaceId": "fixture-workspace", "title": "Portable fixture", "type": "decision-analysis", "status": "active", "createdAt": "2026-07-21T12:00:00.000Z", "updatedAt": "2026-07-21T12:05:00.000Z", "revision": 1 },
+      "participants": [], "intakeRecords": [], "issueNodes": [], "sessions": [], "commitments": [], "followUps": [], "exportArtifacts": [], "decisionBriefs": [], "decisionItems": []
+    },
+    "futurePayloadField": { "preserve": true }
+  },
+  "revision": 1,
+  "idempotencyKey": "fixture-record-idempotency-001",
+  "futureRecordField": { "preserve": true }
+}

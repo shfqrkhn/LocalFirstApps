@@ -6,8 +6,8 @@
   "description": "This assessment measures your natural tendency to take initiative, identify opportunities, and actively influence your environment. A proactive personality is often linked to personal growth, career advancement, and entrepreneurship.",
   "instructions": "Please rate how accurately each statement describes you. There are no right or wrong answers. Use the following scale for your responses.",
   "scientificBasis": {
-    "summary": "This assessment measures Proactive Personality, a well-established construct in organizational psychology. It reflects an individual's disposition to identify and act on opportunities, show initiative, and persevere until meaningful change occurs. The items are based on the public domain International Personality Item Pool (IPIP) and concepts from foundational research on proactive personality.",
-    "citation": "Items are adapted from the Proactive Personality Scale by Bateman and Crant (1993, 1996). The concepts are public domain and wording has been adapted for general use, aligning with the International Personality Item Pool (IPIP) philosophy."
+    "summary": "This self-reflection activity draws on proactive-personality concepts. It has not been independently validated and does not predict initiative or future behavior.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "responseScale": [
     { "text": "Strongly Disagree", "value": 1 },

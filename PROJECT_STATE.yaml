@@ -1,0 +1,332 @@
+project:
+  id: localfirstapps-unified-suite
+  version: 0.3.1
+  phase: r4b_readable_insights_successor_verified
+  status: r4b_verified_local_with_declared_activation_limitations
+  repository: https://github.com/shfqrkhn/LocalFirstApps
+  git_head: 0f5b455219db1c5cc5b10607c62f2cc600450189
+  git_head_role: verified_r4b_implementation_commit_before_evidence_close
+  takeover_baseline_head: ff25f15af266c2737fbc497983c26d582b2629d9
+  m2_baseline_head: dd9a5879fadda8d63930a00e08c9c7c0e779e20e
+  branch: agent/commonground-consolidation
+  mpes_version: 1.1.0-draft
+  mpes_authority: prime
+  canonical_human_authority: MPES-LocalFirstApps-Unified-v1.1.0.md
+  canonical_machine_state: PROJECT_STATE.yaml
+  authority: mpes_v1.1.0_draft_with_explicit_owner_amendments
+  objective: Build the smallest coherent LifeOS and WorkOS local-first suite under OmniCore while preserving focused apps, user data, offline independence, portability, recovery, and human authority.
+  observed_apps:
+    - ts-dash
+    - pmquiz
+    - noodle-nudge
+    - flexx-files
+    - healthos
+    - commonground
+  compatibility_aliases:
+    - ledgersuite
+  storage_inventory:
+    - app: ts-dash
+      store: IndexedDB
+    - app: pmquiz
+      store: memory_and_localStorage_theme
+    - app: noodle-nudge
+      store: IndexedDB
+    - app: flexx-files
+      store: scoped_localStorage
+    - app: healthos
+      store: IndexedDB_healthos-focus_v1_plus_scoped_preferences
+    - app: commonground
+      store: IndexedDB_commonground-suite_v4_with_transfer_receipts
+    - compatibility_source: ledgersuite
+      store: IndexedDB_ledger-suite_read_only_until_explicit_backup_gated_deletion
+  architecture:
+    product_groupings:
+      - LifeOS
+      - WorkOS
+    assurance_layer: OmniCore
+    shared_engines:
+      - Insight Engine
+      - Knowledge Engine
+      - Learning Engine
+    implementation: isolated_static_apps_with_explicit_file_transfer
+  active_milestone: R4
+  active_packet: R4B-readable-insights-successor
+  active_packet_state: VERIFIED_LOCAL
+  active_governance_packet: r4b-readable-insights-successor
+  active_governance_packet_state: VERIFIED_LOCAL
+  completed_packets:
+    - M1-shared-interchange-and-recovery
+    - M2-reusable-pwa-baseline
+    - M3A-healthos-foundation-and-focus-timer
+    - R0-safety-containment
+    - R1-engineering-foundations
+    - R2-omnicore-extraction
+    - R3A-lifeos-foundation
+    - R3B-strength-foundation
+    - R3C-strength-controller-modularization
+    - R3D-reflection-controller-modularization
+    - R3E-lifeos-design-language-convergence
+    - R4A-commonground-workos-foundation
+    - R4B-readable-insights-successor
+  completed_governance_packets:
+    - adversarial-audit-and-r0-plan
+  baseline_reconciliation: VERIFIED
+  next_milestone: R4B-owner-review_then_R4C-activation-readiness-planning
+  requirements:
+    - id: CG-MERGE
+      state: IMPLEMENTED
+      evidence: CommonGround native modules, IndexedDB v4, five-app registry
+    - id: LEGACY-MIGRATION
+      state: IMPLEMENTED
+      evidence: validated preview, atomic copy, idempotency receipt, source preservation, v1-v2 import
+    - id: DECISION-MODES
+      state: IMPLEMENTED
+      evidence: personal, professional, and shared decision context
+    - id: OFFLINE-PWA
+      state: VERIFIED
+      evidence: shared content-addressed complete-shell contract used by CommonGround, Flexx Files, HealthOS, and Noodle Nudge; explicit activation, fail-closed staging, last-known-good recovery, health and scoped reset
+    - id: SHARED-INTERCHANGE
+      state: IMPLEMENTED
+      evidence: shared/interchange.js, docs/INTERCHANGE_CONTRACT.md, CommonGround adapter, portable fixture, contract and browser tests
+    - id: INTERCHANGE-RECOVERY
+      state: IMPLEMENTED
+      evidence: exact preview and confirmation, atomic new-ID import, unique persistent receipt, correction/deletion closure, rollback and replay protection
+    - id: HEALTHOS-FOUNDATION
+      state: VERIFIED
+      evidence: independent HealthOS Focus app and navigation preserve canonical Noodle Nudge and Flexx Files runtimes; versioned daily-state and focus-session portable records use app-owned storage only
+    - id: TRUSTWORTHY-FOCUS-TIMER
+      state: VERIFIED
+      evidence: six modes, timestamp reconciliation, explicit review, manual correction, stale-tab rejection, idempotent completion, degraded guidance, opt-in capability fallbacks, offline and recovery tests
+    - id: HEALTHOS-PORTABILITY
+      state: VERIFIED
+      evidence: exact-preview portable transfer, atomic receipt and rollback, complete integrity backup/restore, scoped reset, and deterministic TS-Dash CSV fixture
+    - id: FULL-LOCAL-VERIFICATION
+      state: VERIFIED
+      evidence: npm run ci:candidate passed contracts including OmniCore, R3A-R3E LifeOS/Reflection/Strength, R4A WorkOS, R4B Insights, and controller/design faults; 5 native Flexx checks, R1 foundations, 35 visual, 7 file, 39 behavior, 20 combined accessibility/design/WorkOS/Insights cases, deterministic 172-file build; npm audit reported 0 vulnerabilities on 2026-07-23
+    - id: RELEASE
+      state: NOT_RUN
+      evidence: no publication authority granted
+    - id: ADVERSARIAL-AUDIT
+      state: IMPLEMENTED
+      evidence: document authority, full file disposition, codebase audit, reversible archive manifest, and revised MPES implementation plan
+    - id: R0-SAFETY-CONTAINMENT
+      state: VERIFIED
+      evidence: PMQuiz prefix-scoped cleanup/lookups; Noodle bounded allowlisted scoring with 42-rule parity fixture; content-addressed fail-closed shell, explicit activation, last-known-good recovery, and foreign-cache unit/worker/browser tests
+    - id: R1-ENGINEERING-FOUNDATIONS
+      state: VERIFIED_WITH_LIMITATIONS
+      evidence: TS-Dash recovery exhausted and four opaque artifacts hash-frozen behind a behavior-first rewrite contract; 12-component dependency/SBOM inventory; deterministic curated artifact; split candidate/deploy/postdeploy workflows; truthful Flexx icons; canonical deliverable versions; 3868 quarantined content records and 41 duplicate groups; CommonGround design and OmniCore boundary contracts; automated accessibility baseline plus manual AT matrix NOT_RUN
+    - id: R2-OMNICORE-EXTRACTION
+      state: VERIFIED
+      evidence: OmniCore 1.0.0 manifest and pure error, integrity, time, IndexedDB completion, and receipt modules; CommonGround and HealthOS app-owned adapters; app-owned HealthOS domain modules with compatibility re-exports; deterministic two-consumer/fault fixture; unchanged stores, schemas, formats, routes, workers, and cache scopes; full candidate and zero-vulnerability audit
+    - id: R3A-LIFEOS-FOUNDATION
+      state: VERIFIED
+      evidence: CommonGround LifeOS 1.0.0 shell and HealthOS-owned adapter; durable failure-visible preference recovery marker/retry; Noodle-owned ten-definition and 42-rule Reflection adapter; old scoring URL and backup compatibility; non-mutating exact preview fixture; unchanged routes, stores, schemas, formats, workers, and cache scopes
+    - id: R3B-STRENGTH-FOUNDATION
+      state: VERIFIED
+      evidence: Flexx-owned versioned Strength calculation, readiness, storage-contract, recovery, and app-adapter seams; exact seven-key inventory and 20-handler characterization; deterministic legacy/current backup, draft, quota, malformed-input, foreign-scope, and preview-only mapping evidence; unchanged v3 data, formats, routes, UI outputs, worker, and cache scope
+    - id: R3C-STRENGTH-CONTROLLER
+      state: VERIFIED
+      evidence: Flexx-owned versioned state/selectors, commands, modal, timer, safe views/chart, DOM and storage-event bindings; 209-line composition root; exact 20-name compatibility facade; complete phase/render/timer/draft/swap/pagination/chart/protocol/import/reset/multi-tab fault evidence; unchanged v3 data, formats, route, visible workflow, worker, and cache scope
+    - id: R3D-REFLECTION-CONTROLLER
+      state: VERIFIED
+      evidence: Noodle-owned versioned state/selectors, transactional storage, content, assessment session, settings/recovery, safe views/chart, and lifecycle/DOM bindings; 119-line composition root and 65-line HTML shell; exact nine-name compatibility facade; all ten assessments and both interaction types; legacy/current/malformed/quota import, multi-tab, reset backup, foreign-scope, offline, responsive, file, and accessibility evidence; unchanged v1 database/store/key, records, scoring, routes, worker, and cache scope
+    - id: R3E-LIFEOS-DESIGN-CONVERGENCE
+      state: VERIFIED
+      evidence: CommonGround design contract 1.1.0 with HealthOS, Noodle, and Flexx app-owned mappings; integrity-bound shell versions; regenerated LifeOS screenshots; contrast, focus, 44px targets, forced colors, reduced motion, 200%-equivalent reflow, 320-3840px, file/subpath/offline/update/recovery and existing behavior parity; unchanged routes, stores, formats, domain outputs, workers, cache scopes, and user data
+    - id: R4A-WORKOS-FOUNDATION
+      state: VERIFIED
+      evidence: CommonGround-owned WorkOS catalog, shell, and adapter 1.0.0 activate only Collaboration and Decisions through exact existing matter-registry delegation; inactive Insights/Learning/Knowledge grant no runtime authority; IndexedDB v4/thirteen stores, routes, formats, LedgerSuite compatibility, transfers, reset, PWA recovery, focused apps, and user data remain unchanged
+    - id: R4B-READABLE-INSIGHTS-SUCCESSOR
+      state: VERIFIED_WITH_LIMITATIONS
+      evidence: dependency-free CommonGround-owned parsing, normalization, analytics, transfer, pure preview state, and accessible test harness match frozen TS-Dash normalization and JSON package behavior; legacy v1-to-v2 upgrade and offline content-addressed sources pass while activation, route, storage, cross-app access, migration, and mutation authority remain absent
+  decisions:
+    - id: D-001
+      state: ACCEPTED
+      decision: The prime MPES is amended by explicit owner direction to merge LedgerSuite into CommonGround while retaining compatibility and all MPES safety invariants.
+    - id: D-002
+      state: ACCEPTED
+      decision: Keep LedgerSuite as an archive-excluded compatibility redirect for v0.2.0 and keep legacy import support indefinitely.
+    - id: D-003
+      state: ACCEPTED
+      decision: Preserve focused app isolation; do not interpret conceptual LifeOS and WorkOS groupings as permission for a repository-wide monolith.
+    - id: D-005
+      state: ACCEPTED
+      decision: Shared integration is a dependency-free semver file contract with app-owned adapters, explicit preview and atomic receipt-backed mutation; it creates no shared runtime storage or synchronization.
+    - id: D-006
+      state: ACCEPTED
+      decision: Reusable PWA assurance is a dependency-free app-owned shell contract with content-addressed complete staging, explicit compatible activation, one retained last-known-good shell, scoped health and reset, and no shared data runtime.
+    - id: D-007
+      state: ACCEPTED
+      decision: M3A adds an independent HealthOS Focus app and narrow portable schema; Noodle Nudge and Flexx Files remain canonical isolated modules, later HealthOS modules remain inactive, and the LedgerSuite compatibility URL remains preserved pending explicit deprecation authority.
+    - id: D-008
+      state: ACCEPTED
+      decision: Explicit document authority makes the MPES prime product authority beneath external constraints and later owner instructions; source content and archives are non-authoritative.
+    - id: D-009
+      state: ACCEPTED
+      decision: Converge primary user surfaces into CommonGround LifeOS and WorkOS while preserving isolated data, explicit transfer, compatibility routes, and reversible migration.
+    - id: D-010
+      state: ACCEPTED
+      decision: Archive only proven-inactive material with export exclusion, provenance, and restoration instructions; never archive required compatibility or recovery paths.
+    - id: D-011
+      state: ACCEPTED
+      decision: R0 contains shared-origin cache and executable-scoring risks without migrating data; Noodle adopts the app-owned PWA assurance contract and inert scoring grammar while PMQuiz retains its existing worker behind strict cache ownership.
+    - id: D-012
+      state: ACCEPTED
+      decision: R1 freezes unrecoverable TS-Dash generated artifacts and requires a behavior-first readable rewrite; design, governance, build, release, and provenance foundations remain narrow contracts and do not authorize app migration.
+    - id: D-013
+      state: ACCEPTED
+      decision: OmniCore 1.0.0 promotes only proven pure contracts with CommonGround and HealthOS adapters; mutation scope and domain logic remain app-owned, and old HealthOS shared URLs remain compatibility re-exports.
+    - id: D-014
+      state: ACCEPTED
+      decision: CommonGround LifeOS is seeded by HealthOS Focus without absorbing app runtimes; Reflection stays Noodle-owned and adapter-only, Strength stays linked to Flexx, and preference restore is failure-visible and resumable.
+    - id: D-015
+      state: ACCEPTED
+      decision: Strength domain logic remains Flexx-owned behind a versioned app adapter; LifeOS receives metadata and exact non-mutating previews only, while Flexx v3 storage, recovery, route, worker, cache, UI behavior, and compatibility identities remain authoritative.
+    - id: D-016
+      state: ACCEPTED
+      decision: Flexx UI orchestration is split into app-owned state, command, timer, modal, view, and binding modules; the 20 window names remain only as an explicit compatibility facade, cross-tab session changes invalidate local cache without interrupting an active workout, and completed sessions cannot be reintroduced as drafts.
+    - id: D-017
+      state: ACCEPTED
+      decision: Noodle UI orchestration is split into eight app-owned controller modules behind nine evidenced compatibility bindings; assessment completion atomically merges with the latest app record, lifecycle refresh preserves active forms, imports and reset fail visibly without partial or foreign mutation, and inline script/handlers are removed without changing v1 data or 42 scoring outputs.
+    - id: D-018
+      state: ACCEPTED
+      decision: R3E converges HealthOS, Noodle, and Flexx on CommonGround design contract 1.1.0 through app-owned CSS and integrity-bound PWA shells while preserving distinct identities and all runtime/data boundaries; selectable theme persistence remains deferred until an explicit owner and storage contract exist.
+    - id: D-019
+      state: ACCEPTED
+      decision: WorkOS 1.0.0 is a CommonGround-owned composition seam over the existing facilitation and Decision Analysis runtime; only Collaboration and Decisions are active, while Insights, Learning, and Knowledge remain inert until their separate ownership, parity, recovery, and acceptance gates pass.
+    - id: D-020
+      state: ACCEPTED
+      decision: R4B proves a readable CommonGround-owned Insights successor behind the inactive WorkOS boundary; TS-Dash remains canonical and unchanged, and no route, store, cross-app read, migration, activation, or mutation authority exists before a separately accepted R4C packet.
+  risks:
+    - id: R-001
+      status: controlled
+      risk: legacy_data_loss
+      control: export, validation, atomic copy, new IDs, receipt, source preservation
+    - id: R-002
+      status: controlled
+      risk: stale_or_mixed_pwa_shell
+      control: content-addressed complete candidate, schema compatibility gate, explicit activation, cache integrity recheck, one last-known-good shell, scoped reset
+    - id: R-003
+      status: open
+      risk: broader MPES milestones are not implemented by this packet
+      control: keep deferred modules inactive and sequence them through bounded future packets
+    - id: R-004
+      status: controlled
+      risk: concurrent_edits
+      control: revision checks reject stale singleton writes; portable records carry explicit conflicts and revisions; transfer receipt uniqueness rejects duplicate-tab replay
+    - id: R-005
+      status: controlled_with_limitations
+      risk: interchange_forward_compatibility_and_browser_quota
+      control: accept interchange 1.x conservatively and abort atomically; deterministically reject quota-interrupted shell staging and recover simulated eviction while exposing honest read-only health; real browser eviction remains browser-controlled
+    - id: R-006
+      status: controlled_with_limitations
+      risk: browser_timer_background_and_clock_behavior
+      control: derive duration from persisted instants, freeze visible state on detected rollback, preserve IANA timezone, require explicit review and manual correction; background cue delivery remains browser-controlled
+    - id: R-007
+      status: controlled
+      risk: healthos_scope_creep_or_health_claims
+      control: distinct observational fields, no combined score/diagnosis/streak pressure, independently owned modules, and later modules inactive until separate acceptance
+    - id: R-008
+      status: controlled
+      risk: cross_app_cache_deletion_by_pmquiz_and_noodle_workers
+      control: PMQuiz cleanup and matching are selfquiz-prefix/cache scoped; Noodle uses noodle-nudge-prefixed assurance cleanup; worker and browser sentinels prove foreign-cache survival
+    - id: R-009
+      status: controlled
+      risk: executable_noodle_scoring_configuration_and_unsafe_eval
+      control: bounded tokenizer/parser/evaluator allowlists the 13 evidenced functions and operators, rejects malicious syntax and non-finite results, preserves all 42 captured outputs, and removes unsafe-eval
+    - id: R-010
+      status: controlled
+      risk: noodle_incomplete_pwa_candidate_can_install
+      control: content-addressed complete staging deletes failed candidates, requires explicit compatible activation, retains last-known-good recovery, and passes missing/corrupt/quota/eviction evidence
+    - id: R-011
+      status: controlled_with_limitations
+      risk: opaque_tsdash_build_and_incomplete_third_party_provenance
+      control: source recovery exhausted; generated artifacts hash-frozen, recognizable dependencies inventoried with uncertainty, and behavior-first rewrite/parity contract required before WorkOS integration
+    - id: R-012
+      status: controlled_with_limitations
+      risk: ungoverned_exam_psychometric_and_health_content_claims
+      control: 3868 item-level records and 41 duplicate groups are machine-inventoried and quarantined; unsupported user-facing claims are softened; qualified source/license/domain review remains required before approval or consolidated release
+    - id: R-013
+      status: controlled
+      risk: omnicore_abstraction_creep_or_shared_runtime_coupling
+      control: machine-readable exclusions, two-consumer gate, app-owned adapters/databases/workers/transactions, compatibility tests, and code-only rollback
+    - id: R-014
+      status: controlled
+      risk: cross_storage_restore_can_commit_records_before_preferences
+      control: durable pending-preference marker in the canonical IndexedDB transaction, one normalized preference write, explicit incomplete status, idempotent retry, and injected-failure browser proof
+    - id: R-015
+      status: controlled
+      risk: flexx_global_controller_and_html_rendering_coupling
+      control: R3C replaces the monolith with six versioned app-owned controller modules, a 209-line composition root, safe numeric/chart and sanitized-content rendering, exact compatibility bindings, and deterministic/browser parity gates
+    - id: R-016
+      status: controlled
+      risk: noodle_reflection_ui_controller_coupling
+      control: R3D replaces the HTML monolith with eight app-owned controller modules, a 119-line composition root, safe DOM/chart construction, nine explicit compatibility bindings, atomic assessment persistence, scoped recovery, and complete deterministic/browser parity gates
+    - id: R-017
+      status: controlled
+      risk: lifeos_visual_language_fragmentation
+      control: shared design contract 1.1.0 with app-owned semantic mappings, integrity-bound shells, screenshots, deterministic adoption tests, contrast/focus/touch/forced-colors/reduced-motion/reflow gates, and full behavior/file/offline parity across HealthOS, Noodle, and Flexx
+    - id: R-018
+      status: controlled_with_limitations
+      risk: cross_app_theme_preference_would_create_ambiguous_state_ownership
+      control: preserve evidenced per-app light/dark identities and defer selectable light/dark/system persistence until a bounded preference owner, storage, compatibility, recovery, and rollback contract is accepted
+    - id: R-019
+      status: controlled
+      risk: workos_shell_drift_or_premature_inactive_module_activation
+      control: versioned immutable catalog/shell/adapter, exact matter-registry delegation, no route or mutation authority for inactive modules, integrity-bound complete shell, deterministic parity and browser accessibility/recovery gates
+    - id: R-020
+      status: controlled_with_limitations
+      risk: readable_insights_successor_could_be_mistaken_for_cutover_authority
+      control: immutable inactive contract, no active import/route/store/worker/cross-app read, frozen legacy hashes, golden/live parity, content-addressed offline source, explicit owner-review and R4C decision gate before activation
+  evidence:
+    - path: docs/EVIDENCE_RECEIPT.md
+      state: VERIFIED_LOCAL
+    - path: docs/CAPABILITY_RECOVERY_MATRIX.md
+      state: IMPLEMENTED
+    - path: tests/app-behavior-regression.spec.mjs
+      state: VERIFIED
+    - path: tests/noodle-scoring-regression.mjs
+      state: VERIFIED
+    - path: tests/r0-worker-regression.mjs
+      state: VERIFIED
+    - path: docs/TS_DASH_REWRITE_CONTRACT.md
+      state: VERIFIED_LOCAL
+    - path: governance/content-review-ledger.json
+      state: VERIFIED_LOCAL_QUARANTINED
+    - path: tests/r1-accessibility.spec.mjs
+      state: VERIFIED_AUTOMATED_WITH_MANUAL_AT_NOT_RUN
+    - path: tests/omnicore-regression.mjs
+      state: VERIFIED
+    - path: tests/r3a-lifeos-regression.mjs
+      state: VERIFIED
+    - path: tests/r3b-strength-regression.mjs
+      state: VERIFIED
+    - path: tests/r3c-strength-controller-regression.mjs
+      state: VERIFIED
+    - path: tests/r3d-noodle-controller-regression.mjs
+      state: VERIFIED
+    - path: tests/r3e-design-regression.mjs
+      state: VERIFIED
+    - path: tests/r3e-design-convergence.spec.mjs
+      state: VERIFIED_AUTOMATED
+    - path: docs/WORKOS_CONTRACT.md
+      state: VERIFIED_LOCAL
+    - path: tests/r4a-workos-regression.mjs
+      state: VERIFIED
+    - path: tests/r4a-workos-convergence.spec.mjs
+      state: VERIFIED_AUTOMATED
+    - path: docs/R4B_INSIGHTS_ACCEPTANCE.md
+      state: VERIFIED_LOCAL_WITH_LIMITATIONS
+    - path: tests/r4b-insights-regression.mjs
+      state: VERIFIED
+    - path: tests/r4b-insights-parity.spec.mjs
+      state: VERIFIED_AUTOMATED
+  unknowns:
+    - storage_quota_and_eviction_behavior_varies_by_browser
+    - background_notification_audio_vibration_and_wake_lock_delivery_varies_by_browser
+    - screen_reader_and_longitudinal_operational_evidence_not_yet_demonstrated
+    - exact_consolidation_deployment_is_not_run
+  blockers: []
+  implementation_plan: docs/MPES_IMPLEMENTATION_PLAN.md
+  next_action: Obtain owner review of verified R4B, then define and explicitly accept only the bounded R4C activation-readiness authority, storage, exact file migration, support-window, rollback, and acceptance packet in docs/MPES_IMPLEMENTATION_PLAN.md. Do not activate or cut over Insights, read or mutate TSDashDB from CommonGround, modify frozen TS-Dash artifacts, start Learning/Knowledge, retire routes, publish, or mutate remotes absent separate explicit authority.
+  updated_at: 2026-07-23

@@ -1,0 +1,119 @@
+{
+  "contractVersion": "1.0.0",
+  "legacyArtifacts": {
+    "javascriptSha256": "bd61baa909060380925f7a0153e4e315f0b9e9351cb2fcf17b29a6635a72eea7",
+    "cssSha256": "58b56ad0eb2eb20575a30501654c5511be2df22f0dd767d16bc38b5024499517",
+    "workerSha256": "ca68b97673434c307adc01e44e4aed5e0df5853335032d3e5a094bfbc4928d5f"
+  },
+  "database": {
+    "name": "TSDashDB",
+    "dexieV1PhysicalVersion": 10,
+    "dexieV2PhysicalVersion": 20,
+    "stores": {
+      "datasets": "id, name, updated_at",
+      "points": "++id, dataset_id, metric_key, timestamp_ms, [dataset_id+metric_key]",
+      "metric_settings": "++id, dataset_id, metric_key, [dataset_id+metric_key], updated_at"
+    }
+  },
+  "edgeCsv": "timestamp,value,metric,unit\r\n2026-01-03,80,Weight,kgs\r\n2026-01-01T00:00:00Z,180,Weight,lbs\r\nbad,foo,Weight,lb\r\n2026-01-02T00:00:00Z,100,Calories,cal\r\n2026-01-02T00:00:00Z,120,Calories,kcals\r\n2026-01-04T00:00:00Z,\"1,234\",Blood Pressure,mmHg\r\n",
+  "mapping": {
+    "timestampCol": "timestamp",
+    "valueCol": "value",
+    "metricCol": "metric",
+    "unitCol": "unit",
+    "fixedMetric": "weight",
+    "fixedUnit": "lb"
+  },
+  "normalization": {
+    "datasetId": "golden-dataset",
+    "dateOnlyTimezone": "utc",
+    "conflictPolicy": "latest",
+    "metricCount": 3,
+    "warningCounts": {
+      "invalidTimestampCount": 1,
+      "invalidValueCount": 1,
+      "dateOnlyCount": 1,
+      "conflictCount": 1
+    },
+    "warnings": [
+      "1 rows had invalid timestamps and were skipped.",
+      "1 rows had invalid numeric values and were skipped.",
+      "1 date-only rows were parsed using UTC.",
+      "1 duplicate timestamp conflicts resolved using \"latest\" policy."
+    ],
+    "points": [
+      {
+        "dataset_id": "golden-dataset",
+        "timestamp_ms": 1767225600000,
+        "metric_key": "weight",
+        "value": 180,
+        "raw_value": "180",
+        "unit": "lb",
+        "is_interpolated": 0
+      },
+      {
+        "dataset_id": "golden-dataset",
+        "timestamp_ms": 1767312000000,
+        "metric_key": "calories",
+        "value": 120,
+        "raw_value": "120",
+        "unit": "kcal",
+        "is_interpolated": 0
+      },
+      {
+        "dataset_id": "golden-dataset",
+        "timestamp_ms": 1767398400000,
+        "metric_key": "weight",
+        "value": 176.369809744,
+        "raw_value": "80",
+        "unit": "lb",
+        "is_interpolated": 0
+      },
+      {
+        "dataset_id": "golden-dataset",
+        "timestamp_ms": 1767484800000,
+        "metric_key": "blood_pressure",
+        "value": 1,
+        "raw_value": "1,234",
+        "unit": "mmhg",
+        "is_interpolated": 0
+      }
+    ]
+  },
+  "trendPoints": [
+    { "dataset_id": "trend", "timestamp_ms": 1767225600000, "metric_key": "weight", "value": 100, "raw_value": "100", "unit": "lb", "is_interpolated": 0 },
+    { "dataset_id": "trend", "timestamp_ms": 1767312000000, "metric_key": "weight", "value": 102, "raw_value": "102", "unit": "lb", "is_interpolated": 0 },
+    { "dataset_id": "trend", "timestamp_ms": 1767830400000, "metric_key": "weight", "value": 104, "raw_value": "104", "unit": "lb", "is_interpolated": 0 },
+    { "dataset_id": "trend", "timestamp_ms": 1769817600000, "metric_key": "weight", "value": 110, "raw_value": "110", "unit": "lb", "is_interpolated": 0 },
+    { "dataset_id": "trend", "timestamp_ms": 1770681600000, "metric_key": "weight", "value": 120, "raw_value": "120", "unit": "lb", "is_interpolated": 0 }
+  ],
+  "trend30d": {
+    "latest": 120,
+    "avg7d": 120,
+    "avg30d": 115,
+    "rangeSummary": {
+      "first": 110,
+      "last": 120,
+      "min": 110,
+      "max": 120,
+      "count": 2,
+      "change": 10
+    },
+    "statistics": {
+      "mean": 115,
+      "median": 115,
+      "standardDeviation": 5,
+      "variance": 25,
+      "min": 110,
+      "max": 120,
+      "count": 2
+    }
+  },
+  "normalizedCsvHeader": "dataset_id,timestamp_iso,metric_key,value,raw_value,unit,is_interpolated",
+  "filenames": {
+    "normalizedCsv": "edge_normalized.csv",
+    "datasetPackage": "edge_package.json",
+    "chart": "edge_chart.png",
+    "viewSummary": "edge_view_summary.json"
+  }
+}

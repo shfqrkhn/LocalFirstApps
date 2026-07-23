@@ -1,13 +1,22 @@
 # AI Maintainer Handoff
 
-Last updated: 2026-07-21.
+Last updated: 2026-07-23.
 Repo: `D:\VSCode\GH\LocalFirstApps`.
 
 Treat this as a public-safe continuation map. Re-read current files before editing.
 
+## Authority And State
+
+- Prime human-readable authority: owner-controlled `MPES-LocalFirstApps-Unified-v1.1.0.md` in the approved workspace reference area. It remains private unless publication is separately approved.
+- Authority hierarchy and conflict protocol: `docs/DOCUMENT_AUTHORITY.md`.
+- Canonical observed execution state: `PROJECT_STATE.yaml`.
+- Accepted amendments and visible conflicts: `DECISIONS.md`.
+- Bounded implementation sequence and reusable goal prompts: `docs/MPES_IMPLEMENTATION_PLAN.md`.
+- The MPES governs requirements; project state reports observations. Neither may silently override the other.
+
 ## Mission
 
-Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser utilities. It exists to reduce repo sprawl while preserving each migrated app as a native suite module.
+Converge LocalFirstApps into two CommonGround-branded primary shells—LifeOS and WorkOS—over an invisible OmniCore source layer. Reduce user-facing sprawl while preserving isolated data/cache ownership, explicit transfer, compatibility, and independently reversible delivery.
 
 ## Product Contract
 
@@ -21,6 +30,11 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 
 ## OmniOS Transfer Contract
 
+- Private workspace `../docs/OmniOS_20260714.md` is proportional supplementary assurance
+  guidance under the latest owner instruction, not a product authority or a
+  demonstrated runtime. Use truth/evidence separation, bounded reversible
+  packets, explicit limitations, composition/recovery contracts, adversarial
+  checks, and complexity budgets without overriding the MPES or app boundaries.
 - Product truth: consolidated static local-first utility suite, not standalone retired app surfaces or provider/OAuth integrations.
 - Execution truth: preserve per-app completeness, suite shell, file/live, visual, local-file, static, and privacy gates before publishing.
 - Evidence truth: use `docs/EVIDENCE_RECEIPT.md`, per-app README/screenshot checks, protected-path scans, and tests; public claims must stay within `PASS` or `PASS_WITH_LIMITATIONS`.
@@ -42,16 +56,62 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 - `apps/ts-dash`
 - `apps/pmquiz`
 - `apps/noodle-nudge`
-- `apps/ledgersuite`
 - `apps/flexx-files`
+- `apps/healthos`
 - `apps/commonground`
+
+`apps/ledgersuite` is an unlisted compatibility redirect, not an active app. Preserve its URL and CommonGround LedgerSuite v1/v2 import support unless the owner separately approves deprecation with migration evidence and rollback planning.
+
+## Current Release Status
+
+**R4B VERIFIED_LOCAL; publication NOT_RUN.** Implementation commit `0f5b455`
+adds a readable dependency-free CommonGround-owned Insights successor behind
+the inactive WorkOS boundary. Golden/live parity, legacy package round-trip,
+TSDashDB v1-to-v2 upgrade, semantic preview, offline source loading, full
+candidate, and zero-vulnerability gates pass. Insights still has no product
+route, store, import UI, worker, cross-app access, or mutation authority;
+TS-Dash remains canonical and unchanged. CommonGround v4 storage, routes,
+formats, LedgerSuite compatibility, focused apps, and user data are unchanged.
+Manual AT, real quota/eviction, owner acceptance, activation, migration,
+retirement, deployment, and publication remain `NOT_RUN`.
 
 ## Key Files
 
+- `PROJECT_STATE.yaml`: current machine-readable milestone, requirements, risks, evidence, and next action.
+- `DECISIONS.md`: accepted architectural decisions and MPES amendments.
+- `docs/DOCUMENT_AUTHORITY.md`: authoritative source levels and conflict protocol.
+- `docs/CODEBASE_ADVERSARIAL_AUDIT.md`: skeptical architecture, code, content, CI, and risk findings.
+- `docs/FILE_DISPOSITION.md`: coverage and disposition for every tracked file family.
+- `docs/MPES_IMPLEMENTATION_PLAN.md`: R0–R6 risk-first sequence and completion definition.
+- `archive/README.md`: excluded historical-file manifest and restoration rules.
+- `shared/interchange.js` and `docs/INTERCHANGE_CONTRACT.md`: M1 portable-record implementation and public contract.
+- `shared/pwa-worker.js`, `shared/pwa-assurance.js`, and `docs/PWA_ASSURANCE_CONTRACT.md`: M2 complete-shell staging, activation, health, scoped reset, and last-known-good contract.
+- `apps/noodle-nudge/scoring.js` and `apps/noodle-nudge/pwa-shell.json`: inert bounded scoring and app-owned complete-shell definition.
+- `apps/healthos/modules/healthos.js`, `apps/healthos/modules/focus-timer.js`, and `docs/HEALTHOS_CONTRACT.md`: HealthOS-owned observational records, explicit transfer, timestamp-derived focus timer, and module-ownership contract. The former `shared/` URLs are compatibility re-exports.
+- `apps/healthos/modules/lifeos-shell.js`, `apps/healthos/lifeos-adapter.js`, and `docs/LIFEOS_CONTRACT.md`: R3A–R3D shell membership, isolation, recovery, Reflection/Strength preview, controller, and rollback contract.
+- `apps/commonground/workos/*`, `apps/commonground/workos-adapter.js`,
+  `docs/WORKOS_CONTRACT.md`, and `tests/r4a-workos-*`: R4A active
+  Collaboration/Decisions composition, inactive-module prerequisites,
+  ownership, exact delegation, accessibility, PWA integrity, and rollback.
+- `apps/commonground/workos/insights/*`,
+  `docs/R4B_INSIGHTS_ACCEPTANCE.md`, and `tests/r4b-insights-*`: R4B readable
+  parsing/normalization/analytics/transfer/preview source, frozen-runtime
+  parity, isolation, accessibility, offline integrity, and rollback evidence.
+- `apps/noodle-nudge/reflection/*`, `reflection-adapter.js`, `controller/*`, `app.js`, `docs/REFLECTION_CONTRACT.md`, and `tests/r3a-lifeos-regression.mjs`/`tests/r3d-noodle-controller-regression.mjs`: Noodle-owned domain/controller, transactional recovery, exact parity, hostile bounds, compatibility, and isolation evidence.
+- `apps/flexx-files/strength/*`, `apps/flexx-files/strength-adapter.js`, `apps/flexx-files/controller/*`, `docs/STRENGTH_CONTRACT.md`, and `tests/r3b-strength-regression.mjs`/`tests/r3c-strength-controller-regression.mjs`: Flexx-owned domain, recovery, storage, controller, exact parity, failure bounds, and non-mutating preview evidence.
 - `README.md`: public suite overview.
 - `index.html`: suite launcher.
 - `suite-shell.css` and `suite-shell.js`: shared return/file-mode shell.
 - `docs/future-app-intake.md`: required intake contract for new modules.
+- `config/deliverables.json`, `config/dependencies.json`, and `config/runtime-artifact.json`: canonical versions, dependency provenance, and curated artifact policy.
+- `governance/content-review-ledger.json`: deterministic quarantined content inventory; null provenance is unresolved, never approval.
+- `shared/omnicore/manifest.json`, `shared/omnicore/*.js`, `tests/omnicore-regression.mjs`, and `docs/OMNICORE_BOUNDARIES.md`: R2 semver inventory, pure contracts, two-consumer/fault proof, ownership exclusions, and rollback.
+- `shared/design-tokens.css`, `shared/design-primitives.css`,
+  `docs/DESIGN_LANGUAGE.md`, `docs/R3E_DESIGN_CONVERGENCE.md`, and
+  `tests/r3e-design-*.mjs`: design contract `1.1.0`, app-owned LifeOS mappings,
+  adoption/PWA integrity, contrast, focus, target, forced-color, reduced-motion,
+  and reflow evidence without data/runtime ownership.
+- `docs/TS_DASH_REWRITE_CONTRACT.md`: frozen opaque runtime disposition and readable-rewrite parity gate.
 - `docs/CAPABILITY_RECOVERY_MATRIX.md`: per-app storage, recovery, input, and test boundaries.
 - `tests/static-regression.mjs`: canonical app list and static guardrails.
 - `tests/app-behavior-regression.spec.mjs`: isolated synthetic-data import/export/reset/recovery flows.
@@ -62,6 +122,7 @@ Maintain LocalFirstApps as a consolidated suite of small, privacy-first browser 
 
 ```bash
 npm run test:local
+npm run ci:candidate
 npm run qa
 ```
 
@@ -69,11 +130,32 @@ Use `test:local` while hardening without publishing. `qa` adds the read-only liv
 
 ## Continuation Notes
 
+- Owner-review verified R4B before any activation work. Next define and
+  explicitly accept the bounded R4C authority, app-owned storage/recovery,
+  exact file migration, dual-route support window, rollback, and acceptance
+  packet in `docs/MPES_IMPLEMENTATION_PLAN.md`. Until then, do not activate
+  Insights, read/migrate TS-Dash data from CommonGround, modify frozen
+  artifacts, begin Learning/Knowledge, retire routes, or publish.
+- Keep OmniCore pure and dependency-free. Every promoted contract requires a minimal semver API, two real consumers, app-owned adapters, explicit failure behavior, deterministic faults, and code-only rollback. Never move app transaction scope, stores, workers, routes, or domain records into OmniCore.
+- Treat `archive/` as historical evidence only. Restore rather than copy from it, and only after establishing a current owner, reference, assertion, and gate.
 - Verify the current branch delta with `git rev-list --left-right --count 'HEAD...@{u}'` before pushing; do not rely on stale ahead/behind notes.
 - If the Pages API summary reports `errored`, compare the latest current-head `Deploy GitHub Pages` workflow, deployments API SHA, and live HTTP 200 before editing source; treat a contradictory API summary as stale residue and report it with limitations.
 - Use `docs/future-app-intake.md` before adding any new module.
 - Keep `tests/static-regression.mjs`, the actual `apps/` directories, launcher cards, and README app links in exact membership parity; an unregistered app folder is a repo-sprawl blocker, not an implicit new app.
 - Keep each app README explicit about its data/recovery boundary; document export/import/reset support or state the limitation when no separate recovery workflow exists.
+- Keep CommonGround's matter-type registry authoritative. Facilitation matters retain suitability and route-out behavior; Decision Analysis matters use the shared workspace/storage/export shell but never inherit facilitation-only gates.
+- Keep WorkOS app-owned and fail-closed. Collaboration and Decisions are the
+  only active modules. Insights, Learning, and Knowledge have no route,
+  storage, import, worker, or mutation authority until separately accepted.
+- Preserve CommonGround export v2 plus CommonGround v1 and LedgerSuite v1/v2 import compatibility. Legacy database migration must stay previewed, atomic, idempotent, and source-preserving.
+- Keep portable transfer file-only and explicit: select, exact preview, confirm, validate, atomic app-owned apply, unique receipt and rollback. Accept compatible `1.x` conservatively, preserve unknown record/payload fields, reject other majors, and never add hidden shared storage or synchronization.
+- Keep decision hard constraints distinct from comparative scores. Preserve revision checks on singleton writes and portable conflict metadata so stale or duplicate tabs fail visibly instead of overwriting newer records.
+- CommonGround, Flexx, HealthOS, and Noodle worker updates must remain app-owned, content-addressed, completely staged, schema-compatible, and user-activated. PMQuiz's legacy worker must remain cache-prefix and named-cache scoped. First install must not reload; later activation reloads each open tab once. Missing/corrupt/quota-failed candidates must delete only their incomplete cache, and a corrupt/evicted current shell must select the retained complete prior shell.
+- Preserve app ownership boundaries: cache prefixes, registrations, data stores, health UI and reset remain scoped. Health checks must not request persistence or imply that browser quota/eviction is controllable. Keep hosted subpaths and safe `file://` fallback covered.
+- CommonGround LifeOS currently uses the bounded HealthOS navigation/daily-state/focus surface only. Noodle Nudge remains canonical for Reflection and Flexx Files for Strength; HealthOS/LifeOS must not read either store. Keep meditation, breathing, C25K, mobility, sleep and later modules inactive until separately accepted.
+- Persist focus timestamps and derive duration from instants. Preserve reload/sleep reconciliation, clock/timezone anomaly visibility, manual correction, explicit pause/resume/restart/skip/cancel/review, stale-tab rejection and idempotent completion. Device cues remain detected, opt-in and visibly degradable.
+- Keep HealthOS transfer explicit and file-based: exact preview, confirm, atomic app-owned apply, durable replay receipt and rollback. TS-Dash stays generic and receives only deterministic user-exported CSV; correlation language must remain non-causal.
+- The local M3A route is not deployed. Existing live-route checks do not prove HealthOS publication.
 - Keep `docs/CAPABILITY_RECOVERY_MATRIX.md`, the behavior suite, and package gates aligned whenever a recovery or input contract changes.
 - Use private LocalFirstApps planning notes only to decide routing and guardrails; commit only the public-safe intake contract and app files.
 - Future userscripts belong in a separate userscripts repo by default, not LocalFirstApps.

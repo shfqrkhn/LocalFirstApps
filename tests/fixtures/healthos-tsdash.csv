@@ -1,0 +1,9 @@
+timestamp,value,metric,unit,source_app,record_id,truth_class,derivation,correlation_note
+2024-02-29T12:00:00.000Z,4,healthos.mood,ordinal-1-5,healthos,healthos-daily-fixture,user-entered,direct user observation,Observational export; correlation does not establish causation.
+2024-02-29T12:00:00.000Z,3,healthos.energy,ordinal-1-5,healthos,healthos-daily-fixture,user-entered,direct user observation,Observational export; correlation does not establish causation.
+2024-02-29T12:00:00.000Z,5,healthos.sleep_quality,ordinal-1-5,healthos,healthos-daily-fixture,user-entered,direct user observation,Observational export; correlation does not establish causation.
+2024-02-29T12:00:00.000Z,2,healthos.stress,ordinal-1-5,healthos,healthos-daily-fixture,user-entered,direct user observation,Observational export; correlation does not establish causation.
+2024-02-29T12:00:00.000Z,1,healthos.soreness,ordinal-1-5,healthos,healthos-daily-fixture,user-entered,direct user observation,Observational export; correlation does not establish causation.
+2024-02-29T13:25:00.000Z,25,healthos.focus.completed_minutes,minute,healthos,healthos-focus-fixture,user-entered,duration derived from persisted timestamps,Observational export; correlation does not establish causation.
+2024-02-29T13:25:00.000Z,3,healthos.focus.energy_before,ordinal-1-5,healthos,healthos-focus-fixture,user-entered,direct user observation,Observational export; correlation does not establish causation.
+2024-02-29T13:25:00.000Z,4,healthos.focus.energy_after,ordinal-1-5,healthos,healthos-focus-fixture,user-entered,direct user observation,Observational export; correlation does not establish causation.

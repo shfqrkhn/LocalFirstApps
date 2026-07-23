@@ -1,0 +1,24 @@
+name: Post-deploy verification
+
+on:
+  workflow_run:
+    workflows: ["Deploy GitHub Pages"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  live-smoke:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:live

@@ -8,8 +8,8 @@ const pages = [
   ["ts-dash", "apps/ts-dash/"],
   ["pmquiz", "apps/pmquiz/"],
   ["noodle-nudge", "apps/noodle-nudge/"],
-  ["ledgersuite", "apps/ledgersuite/"],
   ["flexx-files", "apps/flexx-files/"],
+  ["healthos", "apps/healthos/"],
   ["commonground", "apps/commonground/"]
 ];
 

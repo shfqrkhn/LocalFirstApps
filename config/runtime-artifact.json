@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "outputDirectory": "dist",
+  "rootFiles": [
+    ".nojekyll",
+    "LICENSE",
+    "index.html",
+    "styles.css",
+    "suite-shell.css",
+    "suite-shell.js"
+  ],
+  "includeDirectories": ["apps", "shared", "vendor"],
+  "exclude": [
+    "**/README.md",
+    "apps/flexx-files/Complete_Strength_Protocol.md",
+    "apps/flexx-files/package.json",
+    "apps/flexx-files/package-lock.json",
+    "apps/flexx-files/tests/**",
+    "shared/fixtures/**"
+  ],
+  "requiredCompatibilityPaths": ["apps/ledgersuite/index.html"],
+  "metadataDirectory": "_meta"
+}

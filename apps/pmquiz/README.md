@@ -10,6 +10,8 @@ Offline-capable project-management certification practice app.
 
 PMQuiz is a free PWA for project-management certification practice, with question banks, timed quiz flow, instant feedback, and review mode.
 
+The bundled questions are unofficial and unverified. PMQuiz is not affiliated with or endorsed by PMI, and its scores do not establish certification readiness.
+
 ## Screenshot
 
 ![PMQuiz practice quiz interface](./screenshot.png)

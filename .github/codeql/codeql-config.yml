@@ -1,9 +1,8 @@
 name: LocalFirstApps runtime CodeQL
 
 paths-ignore:
+  - archive/**
   - node_modules/**
   - test-results/**
   - playwright-report/**
   - tests/**
-  - apps/commonground/assets/**
-  - apps/commonground/workbox-*.js

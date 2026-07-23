@@ -1,0 +1,180 @@
+{
+  "contractVersion": "1.0.0",
+  "appId": "noodle-nudge",
+  "shellVersion": "1.2.33-r3e",
+  "dataSchemaVersion": 1,
+  "compatibleDataSchemas": [
+    1
+  ],
+  "navigationFallback": "./index.html",
+  "assets": [
+    {
+      "url": "./index.html",
+      "sha256": "1ae9a2de0d2da6996eb8b98d6bac5299e08c1dde45765a8a9c09282c268e153c"
+    },
+    {
+      "url": "./styles.css",
+      "sha256": "c65f489c4fb3a812b81a030b6c0ec3ddff1088c39f130103ccec014e66e80e7e"
+    },
+    {
+      "url": "./app.js",
+      "sha256": "e1be4182bca6c9dde46641f52fce401f552e21f87f2e54b5aabded6b072a58b1"
+    },
+    {
+      "url": "./controller/config.js",
+      "sha256": "888a3a7553830f2280a49c6509872b51dcdea20d2cf7dd07e5e78275b0044e5f"
+    },
+    {
+      "url": "./controller/state.js",
+      "sha256": "bb8fd691f9e06e09aac609c35a4f422e20ebacea6d8d5a73b4d23e31cd5c4f27"
+    },
+    {
+      "url": "./controller/storage.js",
+      "sha256": "f549b8312fd535a9ced16db7291d55026252d88d95d6413b21e99461bae8e898"
+    },
+    {
+      "url": "./controller/content.js",
+      "sha256": "6ea522b0c3b5dd6dd9e9e1602fc45d4b70e9124f068ee6136942e70dab7aa7a6"
+    },
+    {
+      "url": "./controller/session.js",
+      "sha256": "88958eae327df21558293dedd661387d564191046f6e3958413f023aa266434f"
+    },
+    {
+      "url": "./controller/settings.js",
+      "sha256": "085327e0a0e52119e5c403614e2fd5c260f1fe452f6a2c05accc5540e5f8bcef"
+    },
+    {
+      "url": "./controller/views.js",
+      "sha256": "1ac0c38f59fd0806bae930249f4ac903fa47211f6bf03d5bb690a365e785313d"
+    },
+    {
+      "url": "./controller/bindings.js",
+      "sha256": "ff0592f35947f8d909508d51f3268db5315ca03bc9dc1c48b5def76eeaa50e21"
+    },
+    {
+      "url": "./scoring.js",
+      "sha256": "e4a6aa95a92e788c5df14cc946cf3e663ff2b958ec565a81b695c8b14abfad12"
+    },
+    {
+      "url": "./reflection-adapter.js",
+      "sha256": "c7e068206f28176149c3d583888bbf87ed1986f8d6028c27ec4fb5a7e9feaae1"
+    },
+    {
+      "url": "./reflection/scoring.js",
+      "sha256": "960adedb511ee22e477c3d94d7a1bf559b0d977de68c0a9e3709752ffd83f9a2"
+    },
+    {
+      "url": "./reflection/definitions.js",
+      "sha256": "9de6bd13d378670f09dbcda3fa5f703070320914b434769dbf29c1cb02d6ed98"
+    },
+    {
+      "url": "./reflection/backup.js",
+      "sha256": "2639a1c5a84699890494af937473f644a98c59f5c4e3efb8ebfe9ce0c76b4a1d"
+    },
+    {
+      "url": "./manifest.json",
+      "sha256": "07bd1a05391a8e0f4ae863184190d1c6d66d07c4ca9fa199fc594ef46d45469d"
+    },
+    {
+      "url": "./favicon.ico",
+      "sha256": "826015600c60abacac926ad06b4afa7767b1ee7190dd67518a2dabc5f227fee2"
+    },
+    {
+      "url": "./icons/icon-192x192.png",
+      "sha256": "f86781815abbe5fe291b43e23a3bb8b00a2a5efdf82d6a9b228248a0566afdb0"
+    },
+    {
+      "url": "./icons/icon-512x512.png",
+      "sha256": "abad283a2c88c43c3b37270e4b2fa51d1743fed9c0876bd5915dab52b4a71197"
+    },
+    {
+      "url": "./JSON/Q1_Core%20Personality.json",
+      "sha256": "70b9edf8adf36546f5c253dbd90f85a67d4a234292f6eae0af723bbfb3b7fc02"
+    },
+    {
+      "url": "./JSON/Q2_Core%20Values.json",
+      "sha256": "f3b9871bf958fbc3f5b3948fdf5f2dfd662e193a1752015f6dab4a0b649edbdb"
+    },
+    {
+      "url": "./JSON/Q3_Core%20Agency.json",
+      "sha256": "25bed8035992f3110d908d262e924ea07f7dbaeeeaa963c2f493d975feae7e04"
+    },
+    {
+      "url": "./JSON/Q4_Work%20Motivation.json",
+      "sha256": "6d66c8e18523cb4e2fcce56f607093c1cc28de265f21e97fa9fff7190bf89844"
+    },
+    {
+      "url": "./JSON/Q5_Perceived%20Stress%20Scale%20(PSS).json",
+      "sha256": "f9265eebe20d7ba1a2e42371a7a4743600263f36964b049db2bd3f5720602ea3"
+    },
+    {
+      "url": "./JSON/Q6_Conflict%20%26%20Negotiation%20Style.json",
+      "sha256": "38d685f28f7f975880c3412eebf48c7a81256c476c97218b5eb208caf229cad6"
+    },
+    {
+      "url": "./JSON/Q7_Authentic%20%26%20Ethical%20Leadership.json",
+      "sha256": "6d1193974d1870b35e6f8d0b2aa8349ba59f9c834ea4b95c3e267d4ba7a667a7"
+    },
+    {
+      "url": "./JSON/Q8_Assertiveness%20Profile.json",
+      "sha256": "621ae629f8b4664ec619021281b884d4bc0cff1f151c76b2aabcaf145c77ae49"
+    },
+    {
+      "url": "./JSON/Q9_Power%20%26%20Influence%20Profile.json",
+      "sha256": "62934681876e1ecc31abf908ccea07e0fa9cefd0ddcda1fe35c87e9320a6abd6"
+    },
+    {
+      "url": "./JSON/Q10_Proactive%20Personality%20Scale.json",
+      "sha256": "0ab2f52ecc75a8d46f6fcd6102b27c6b624215836b9955273c77a35648316ea3"
+    },
+    {
+      "url": "./JSON/Content_CognitiveBiases.json",
+      "sha256": "bbcd0078756c3a8a6ad3945b653c44780d781793b397d002ac787323bc64931a"
+    },
+    {
+      "url": "./JSON/Content_Meditations.json",
+      "sha256": "32de5b8bb2a9e06c37bca96e8bf147d48d7628ddf4c08e0687996db6cd67d7ee"
+    },
+    {
+      "url": "./JSON/Content_Quotes.json",
+      "sha256": "2fbcb4e9002edc3aa3427556cd3b737b2a9f60488b7bee2b1d1ccf49b376f624"
+    },
+    {
+      "url": "./JSON/Content_Reflections.json",
+      "sha256": "e457544dd3661a599bbe29778d83ac1241ee9d479b720dd50b5cbdb1949ca33c"
+    },
+    {
+      "url": "../../shared/pwa-assurance.js",
+      "sha256": "87b34cd917cd780089ba6bec9e3c6bc77eb5c498682db34cae4ff174cd0dacdf"
+    },
+    {
+      "url": "../../shared/design-primitives.css",
+      "sha256": "cc8bb60233a51fd9d570a6f67c1aed8b4513b3c11ed012414c60b79dfcd4e2b8"
+    },
+    {
+      "url": "../../shared/design-tokens.css",
+      "sha256": "e0be0c96272f68ade974ca9d9d49ebdf35f111d1c762889cb2ccd5f18ae68cef"
+    },
+    {
+      "url": "../../suite-shell.css",
+      "sha256": "f2710685ee1234e46e57b5989e4a906b422e160cf8f5a15135c439d9c01e3281"
+    },
+    {
+      "url": "../../suite-shell.js",
+      "sha256": "63bdda790a2c19ad9795a72e9642183118351ab6625a270b1400298f86b42618"
+    },
+    {
+      "url": "../../vendor/bootstrap-5.3.3.min.css",
+      "sha256": "3c8f27e6009ccfd710a905e6dcf12d0ee3c6f2ac7da05b0572d3e0d12e736fc8"
+    },
+    {
+      "url": "../../vendor/bootstrap-5.3.3.bundle.min.js",
+      "sha256": "0833b2e9c3a26c258476c46266e6877fc75218625162e0460be9a3a098a61c6c"
+    },
+    {
+      "url": "../../vendor/chart-4.4.2.umd.js",
+      "sha256": "c7e2cbfb0348f9901decc497f316c1fea8420209b610412ffb88fd3d516f9d30"
+    }
+  ]
+}

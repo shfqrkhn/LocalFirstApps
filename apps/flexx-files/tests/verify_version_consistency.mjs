@@ -1,8 +1,10 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Helpers
-const readFile = (p) => fs.readFileSync(path.resolve(process.cwd(), p), 'utf8');
+const appRoot = fileURLToPath(new URL('..', import.meta.url));
+const readFile = (p) => fs.readFileSync(path.resolve(appRoot, p), 'utf8');
 
 try {
     console.log('Verifying version consistency...');
@@ -32,8 +34,8 @@ try {
 
     // 3. Get version from sw.js
     const sw = readFile('sw.js');
-    const swMatch = sw.match(/CACHE_NAME = 'flexx-v([\d\.]+)';/);
-    if (!swMatch) throw new Error('Could not find CACHE_NAME version in sw.js');
+    const swMatch = sw.match(/shellVersion: "([\d\.]+)"/);
+    if (!swMatch) throw new Error('Could not find PWA shell version in sw.js');
     const swVersion = swMatch[1];
     console.log(`[SW]     Version: ${swVersion}`);
 

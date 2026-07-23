@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "status": "source-unavailable-behavior-frozen",
+  "recoveryCheckedAt": "2026-07-22",
+  "recoveryScope": [
+    "current checkout",
+    "all local Git refs and tags",
+    "reflog",
+    "unreachable Git objects",
+    "D:/VSCode/GH workspace outside dependency and Git metadata directories"
+  ],
+  "editableGeneratedFiles": false,
+  "artifacts": [
+    { "path": "apps/ts-dash/assets/index-Bu3OO-ZO.js", "sha256": "bd61baa909060380925f7a0153e4e315f0b9e9351cb2fcf17b29a6635a72eea7" },
+    { "path": "apps/ts-dash/assets/index-CAzVA2AX.css", "sha256": "58b56ad0eb2eb20575a30501654c5511be2df22f0dd767d16bc38b5024499517" },
+    { "path": "apps/ts-dash/sw.js", "sha256": "ca68b97673434c307adc01e44e4aed5e0df5853335032d3e5a094bfbc4928d5f" },
+    { "path": "apps/ts-dash/workbox-8c29f6e4.js", "sha256": "553dc3dea2fe33f01265b8ee5d0e95feef1254049d8d8f4e81f1cd9859f13008" }
+  ],
+  "frozenBehavior": [
+    "JSON and CSV import",
+    "normalized export naming",
+    "deterministic transformations",
+    "clear confirmation",
+    "TSDashDB v1 and v2 compatibility",
+    "local and offline operation"
+  ],
+  "rewriteContract": "docs/TS_DASH_REWRITE_CONTRACT.md"
+}

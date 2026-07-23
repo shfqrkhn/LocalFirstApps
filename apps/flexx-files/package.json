@@ -1,14 +1,12 @@
 {
   "name": "flexx-files",
-  "version": "3.9.73",
+  "version": "3.9.78",
   "type": "module",
   "scripts": {
     "test:correctness": "node tests/verify_correctness.mjs",
     "test:simulation": "node tests/simulation_24_months.mjs",
     "test:version": "node tests/verify_version_consistency.mjs",
     "test:optimization": "node tests/verify_optimization_last_session.mjs",
-    "test:render": "node tests/verify_app_render.mjs",
-    "bench:calculator": "node tests/benchmark_calculator.mjs",
-    "bench:storage": "node tests/benchmark_storage.mjs"
+    "test:render": "node tests/verify_app_render.mjs"
   }
 }

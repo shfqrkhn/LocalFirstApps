@@ -1,19 +1,14 @@
-import { EXERCISES, EXERCISE_MAP } from './config.js';
+import { EXERCISE_MAP } from './config.js';
 import * as CONST from './constants.js';
 import { Validator as SecurityValidator, Sanitizer } from './security.js';
 import { Logger } from './observability.js';
-
-// Optimization: Create O(1) lookup map and Set for exercises
-const EXERCISE_IDS = new Set(EXERCISE_MAP.keys());
+import { createStrengthCalculator } from '../strength/calculations.js';
+import { createStrengthReadiness } from '../strength/readiness.js';
+import { buildStrengthBackup, validateStrengthBackup, validateStrengthDraft } from '../strength/recovery.js';
+import { STRENGTH_STORAGE_KEYS } from '../strength/storage-contract.js';
 
 export const Storage = {
-    KEYS: {
-        SESSIONS: `${CONST.STORAGE_PREFIX}sessions_v3`,
-        PREFS: `${CONST.STORAGE_PREFIX}prefs`,
-        MIGRATION_VERSION: `${CONST.STORAGE_PREFIX}migration_version`,
-        BACKUP: `${CONST.STORAGE_PREFIX}backup_snapshot`,
-        DRAFT: `${CONST.STORAGE_PREFIX}draft_session`
-    },
+    KEYS: STRENGTH_STORAGE_KEYS,
 
     // Performance Optimization: Cache parsed sessions to avoid repeated JSON.parse()
     _sessionCache: null,
@@ -26,6 +21,10 @@ export const Storage = {
     _draftCache: null,
     _pendingDraftWrite: null,
     _shouldClearDraft: false,
+
+    invalidateSessionCache() {
+        this._sessionCache = null;
+    },
 
     /**
      * ATOMIC TRANSACTION SYSTEM
@@ -149,9 +148,9 @@ export const Storage = {
 
             if (parsed) {
                 // SECURITY: Validate draft structure to prevent injection/corruption
-                const validation = SecurityValidator.validateSession(parsed);
+                const validation = validateStrengthDraft(parsed, session => SecurityValidator.validateSession(session));
                 if (!validation.valid) {
-                    Logger.warn('Invalid draft session detected and discarded', { errors: validation.errors });
+                    Logger.warn('Invalid draft session detected and discarded', { errors: validation.issues });
                     this.clearDraft();
                     return null;
                 }
@@ -415,11 +414,10 @@ export const Storage = {
     exportData() {
         try {
             const sessions = this.getSessions();
-            const data = {
+            const data = buildStrengthBackup(sessions, {
                 version: CONST.APP_VERSION,
-                exportDate: new Date().toISOString(),
-                sessions
-            };
+                exportDate: new Date().toISOString()
+            });
             // Windows Safe Filename (No colons)
             const safeDate = new Date().toISOString().replace(/:/g, '-').split('.')[0];
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -436,11 +434,10 @@ export const Storage = {
 
     autoExport(sessions) {
         try {
-            const data = {
+            const data = buildStrengthBackup(sessions, {
                 version: CONST.APP_VERSION,
-                type: 'auto',
-                sessions
-            };
+                type: 'auto'
+            });
             const safeDate = new Date().toISOString().replace(/:/g, '-').split('.')[0];
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const a = document.createElement('a');
@@ -454,27 +451,14 @@ export const Storage = {
     },
 
     validateImport(jsonString) {
-        try {
-            const data = JSON.parse(jsonString);
-
-            // Use Security Validator
-            const validation = SecurityValidator.validateImportData(data);
-            if (!validation.valid) {
-                // SECURITY: Never expose validation details to user
-                Logger.error('Import validation failed', { errors: validation.errors });
-                return { valid: false, error: CONST.ERROR_MESSAGES.IMPORT_PARSE_ERROR };
-            }
-
-            const sessions = Array.isArray(data) ? data : data.sessions;
-
-            // Sentinel: Scrub sessions to prevent schema pollution
-            const cleanSessions = sessions.map(s => Sanitizer.scrubSession(s)).filter(s => s !== null);
-
-            return { valid: true, sessions: cleanSessions };
-        } catch (e) {
-            Logger.error('Import error:', { error: e.message });
-            return { valid: false, error: CONST.ERROR_MESSAGES.IMPORT_PARSE_ERROR };
-        }
+        const result = validateStrengthBackup(jsonString, {
+            validateImportData: data => SecurityValidator.validateImportData(data),
+            scrubSession: session => Sanitizer.scrubSession(session)
+        }, CONST.ERROR_MESSAGES.IMPORT_PARSE_ERROR);
+        if (!result.valid) Logger.error('Import validation failed', { errors: result.issues });
+        return result.valid
+            ? { valid: true, sessions: result.sessions }
+            : { valid: false, error: result.error };
     },
 
     applyImport(sessions) {
@@ -601,610 +585,11 @@ export const Storage = {
 
 };
 
-export const Calculator = {
-    // Optimization: Cache expensive lookups keyed by sessions array instance
-    _cache: new WeakMap(),
-    _plateCache: new Map(),
-    _loadBuffer: [],
-    // Optimization: Pre-calculate plate strings to avoid repeated conversion
-    _plateStrings: CONST.AVAILABLE_PLATES.map(String),
-    _lastSessions: null,
-    _lastLookup: null,
-
-    _cloneLookup(lookup) {
-        const newLookup = new Map();
-        for (const [key, val] of lookup) {
-            newLookup.set(key, {
-                last: val.last,
-                lastSession: val.lastSession,
-                lastCompleted: val.lastCompleted,
-                lastNonDeload: val.lastNonDeload,
-                lastGreen: val.lastGreen,
-                recent: [...val.recent] // Copy array to prevent shared mutation
-            });
-        }
-        return newLookup;
-    },
-
-    _applySession(lookup, session) {
-        const week = Math.ceil(session.sessionNumber / CONST.SESSIONS_PER_WEEK);
-        const isDeload = (week % CONST.DELOAD_WEEK_INTERVAL === 0);
-
-        for (const ex of session.exercises) {
-            if (ex.skipped) continue;
-
-            const key = (ex.usingAlternative && ex.altName) ? ex.altName : ex.id;
-            if (!lookup.has(key)) {
-                lookup.set(key, { last: null, lastSession: null, lastCompleted: null, lastNonDeload: null, lastGreen: null, recent: [] });
-            }
-            const entry = lookup.get(key);
-
-            // Add to recent history (newest at start)
-            entry.recent.unshift(ex);
-            if (entry.recent.length > CONST.STALL_DETECTION_SESSIONS) {
-                entry.recent.pop();
-            }
-
-            // Update last (this is the newest)
-            entry.last = ex;
-            entry.lastSession = session;
-
-            // Update lastCompleted
-            if (ex.completed) {
-                entry.lastCompleted = ex;
-            }
-
-            // Update lastNonDeload
-            if (!isDeload) {
-                entry.lastNonDeload = ex;
-            }
-
-            // Update lastGreen
-            if (session.recoveryStatus === 'green' && !isDeload) {
-                entry.lastGreen = ex;
-            }
-        }
-    },
-
-    _rollbackSession(lookup, session, historySessions) {
-        // Rollback is trickier because we need to undo state changes.
-        // historySessions is the FULL history array from which we are removing the last session.
-        // We use it to refill 'recent' buffer and find previous 'lastCompleted' if needed.
-
-        // We need to know which exercises were in the session we are removing
-        for (const ex of session.exercises) {
-            if (ex.skipped) continue;
-
-            const key = (ex.usingAlternative && ex.altName) ? ex.altName : ex.id;
-            const entry = lookup.get(key);
-            if (!entry) continue;
-
-            // 1. Remove from 'recent'
-            // The removed exercise should be at index 0 of recent
-            if (entry.recent.length > 0 && entry.recent[0] === ex) {
-                entry.recent.shift();
-
-                // Refill 'recent' from history if it dropped below threshold
-                if (entry.recent.length < CONST.STALL_DETECTION_SESSIONS) {
-                    this._scanBackwardsForRecent(entry, key, historySessions, historySessions.length - 2);
-                }
-            }
-
-            // 2. Update 'last'
-            entry.last = entry.recent.length > 0 ? entry.recent[0] : null;
-            entry.lastSession = null; // Invalidate cache to force fallback
-
-            // 3. Update 'lastCompleted'
-            if (entry.lastCompleted === ex) {
-                const recentCompleted = entry.recent.find(e => e.completed);
-                if (recentCompleted) {
-                    entry.lastCompleted = recentCompleted;
-                } else {
-                    entry.lastCompleted = this._scanBackwardsForCompleted(key, historySessions, historySessions.length - 2);
-                }
-            }
-
-            // 4. Update 'lastNonDeload'
-            if (entry.lastNonDeload === ex) {
-                entry.lastNonDeload = this._scanBackwardsForNonDeload(key, historySessions, historySessions.length - 2);
-            }
-
-            // 5. Update 'lastGreen'
-            if (entry.lastGreen === ex) {
-                entry.lastGreen = this._scanBackwardsForGreen(key, historySessions, historySessions.length - 2);
-            }
-        }
-    },
-
-    _scanBackwardsForGreen(key, sessions, startIndex) {
-        for (let i = startIndex; i >= 0; i--) {
-            const session = sessions[i];
-            if (session.recoveryStatus !== 'green') continue;
-
-            const week = Math.ceil(session.sessionNumber / CONST.SESSIONS_PER_WEEK);
-            if (week % CONST.DELOAD_WEEK_INTERVAL === 0) continue;
-
-            const ex = session.exercises.find(e => {
-                const k = (e.usingAlternative && e.altName) ? e.altName : e.id;
-                return k === key && !e.skipped;
-            });
-
-            if (ex) return ex;
-        }
-        return null;
-    },
-
-    _scanBackwardsForRecent(entry, key, sessions, startIndex) {
-        for (let i = startIndex; i >= 0; i--) {
-            if (entry.recent.length >= CONST.STALL_DETECTION_SESSIONS) break;
-
-            const session = sessions[i];
-            const ex = session.exercises.find(e => {
-                const k = (e.usingAlternative && e.altName) ? e.altName : e.id;
-                return k === key && !e.skipped;
-            });
-
-            if (ex) {
-                if (!entry.recent.includes(ex)) {
-                    entry.recent.push(ex);
-                }
-            }
-        }
-    },
-
-    _scanBackwardsForCompleted(key, sessions, startIndex) {
-        for (let i = startIndex; i >= 0; i--) {
-            const session = sessions[i];
-            const ex = session.exercises.find(e => {
-                const k = (e.usingAlternative && e.altName) ? e.altName : e.id;
-                return k === key && !e.skipped;
-            });
-
-            if (ex && ex.completed) {
-                return ex;
-            }
-        }
-        return null;
-    },
-
-    _scanBackwardsForNonDeload(key, sessions, startIndex) {
-        for (let i = startIndex; i >= 0; i--) {
-            const session = sessions[i];
-            const week = Math.ceil(session.sessionNumber / CONST.SESSIONS_PER_WEEK);
-            if (week % CONST.DELOAD_WEEK_INTERVAL === 0) continue;
-
-            const ex = session.exercises.find(e => {
-                const k = (e.usingAlternative && e.altName) ? e.altName : e.id;
-                return k === key && !e.skipped;
-            });
-
-            if (ex) return ex;
-        }
-        return null;
-    },
-
-    _ensureCache(sessions, targetId = null) {
-        if (this._cache.has(sessions)) {
-            const lookup = this._cache.get(sessions);
-            // If targetId is requested but missing, and the cache was built using a partial scan,
-            // we must force a full scan to find the missing target.
-            if (targetId && !lookup.has(targetId) && lookup._isPartial) {
-                // Fall through to full scan logic (bypass return)
-            } else {
-                return lookup;
-            }
-        }
-
-        // Optimization: Content Equality Check
-        // If array identity differs but content is identical (same session objects in same order),
-        // we can reuse the cached lookup.
-        if (this._lastSessions && sessions.length === this._lastSessions.length) {
-            let match = true;
-            // Iterate backwards as changes are usually at the end
-            for (let i = sessions.length - 1; i >= 0; i--) {
-                if (sessions[i] !== this._lastSessions[i]) {
-                    match = false;
-                    break;
-                }
-            }
-            if (match) {
-                // Check for partial cache validity with targetId
-                if (targetId && !this._lastLookup.has(targetId) && this._lastLookup._isPartial) {
-                    // Fall through to full scan
-                } else {
-                    this._cache.set(sessions, this._lastLookup);
-                    this._lastSessions = sessions; // Update reference to newest array
-                    return this._lastLookup;
-                }
-            }
-        }
-
-        // Optimization: Incremental Update
-        if (this._lastSessions && this._lastLookup) {
-            const oldLen = this._lastSessions.length;
-            const newLen = sessions.length;
-
-            // If the last lookup was partial and we need a target it doesn't have,
-            // we cannot use incremental update safely without complex logic.
-            // Simpler to just fall back to full scan.
-            const forceFullScan = targetId && !this._lastLookup.has(targetId) && this._lastLookup._isPartial;
-
-            if (!forceFullScan) {
-                // Case 1: Append (newLen === oldLen + 1)
-                if (newLen === oldLen + 1 &&
-                    (oldLen === 0 || (sessions[0] === this._lastSessions[0] && sessions[oldLen - 1] === this._lastSessions[oldLen - 1]))) {
-
-                    const newLookup = this._cloneLookup(this._lastLookup);
-                    newLookup._isPartial = this._lastLookup._isPartial;
-                    this._applySession(newLookup, sessions[newLen - 1]);
-
-                    this._cache.set(sessions, newLookup);
-                    this._lastSessions = sessions;
-                    this._lastLookup = newLookup;
-                    return newLookup;
-                }
-
-                // Case 2: Replace Last (newLen === oldLen)
-                // e.g. User updated the current workout
-                if (newLen === oldLen && oldLen > 0 &&
-                    (sessions[0] === this._lastSessions[0] &&
-                     (oldLen === 1 || sessions[oldLen - 2] === this._lastSessions[oldLen - 2]))) {
-
-                    const newLookup = this._cloneLookup(this._lastLookup);
-                    newLookup._isPartial = this._lastLookup._isPartial;
-                    this._rollbackSession(newLookup, this._lastSessions[oldLen - 1], this._lastSessions);
-                    this._applySession(newLookup, sessions[newLen - 1]);
-
-                    this._cache.set(sessions, newLookup);
-                    this._lastSessions = sessions;
-                    this._lastLookup = newLookup;
-                    return newLookup;
-                }
-
-                // Case 3: Remove Last (newLen === oldLen - 1)
-                // e.g. User deleted the last workout
-                if (newLen === oldLen - 1 && newLen > 0 &&
-                     (sessions[0] === this._lastSessions[0] && sessions[newLen - 1] === this._lastSessions[newLen - 1])) {
-
-                     const newLookup = this._cloneLookup(this._lastLookup);
-                     newLookup._isPartial = this._lastLookup._isPartial;
-                     this._rollbackSession(newLookup, this._lastSessions[oldLen - 1], this._lastSessions);
-
-                     this._cache.set(sessions, newLookup);
-                     this._lastSessions = sessions;
-                     this._lastLookup = newLookup;
-                     return newLookup;
-                }
-
-                // Case 4: Remove Last to Empty (1 -> 0)
-                if (newLen === 0 && oldLen === 1) {
-                     const newLookup = new Map();
-                     newLookup._isPartial = false; // Empty is complete
-                     this._cache.set(sessions, newLookup);
-                     this._lastSessions = sessions;
-                     this._lastLookup = newLookup;
-                     return newLookup;
-                }
-            }
-        }
-
-        // Optimization: Iterate backwards and stop early once we found data for all current exercises.
-        // NOTE: This assumes we primarily care about exercises in the current configuration (EXERCISES).
-        // If the user has history for exercises no longer in EXERCISES, or if they haven't performed
-        // one of the current exercises, we will scan the full history (falling back to O(N)).
-        // This is acceptable as the app UI is driven by EXERCISES.
-        const lookup = new Map(); // Map<exerciseId, { last, lastSession, lastCompleted, lastNonDeload, lastGreen, recent }>
-
-        // Optimization: Use pre-calculated Set
-        const requiredIds = EXERCISE_IDS;
-        const fullyResolved = new Set();
-        let brokeEarly = false;
-
-        for (let i = sessions.length - 1; i >= 0; i--) {
-            // Stop if we have found everything we need
-            // AND if a specific target was requested, we found it too.
-            const targetFound = !targetId || fullyResolved.has(targetId);
-            if (fullyResolved.size >= requiredIds.size && targetFound) {
-                brokeEarly = true;
-                break;
-            }
-
-            const session = sessions[i];
-            for (const ex of session.exercises) {
-                if (ex.skipped) continue;
-
-                const key = (ex.usingAlternative && ex.altName) ? ex.altName : ex.id;
-                if (!lookup.has(key)) {
-                    lookup.set(key, { last: null, lastSession: null, lastCompleted: null, lastNonDeload: null, lastGreen: null, recent: [] });
-                }
-                const entry = lookup.get(key);
-
-                // Add to recent history if we haven't hit the limit yet
-                if (entry.recent.length < CONST.STALL_DETECTION_SESSIONS) {
-                    entry.recent.push(ex);
-                }
-
-                // Since iterating backwards, the first valid entry found is the latest
-                if (!entry.last) {
-                    entry.last = ex;
-                    entry.lastSession = session;
-                }
-
-                if (ex.completed && !entry.lastCompleted) {
-                    entry.lastCompleted = ex;
-                }
-
-                if (!entry.lastNonDeload) {
-                    const week = Math.ceil(session.sessionNumber / CONST.SESSIONS_PER_WEEK);
-                    if (week % CONST.DELOAD_WEEK_INTERVAL !== 0) {
-                        entry.lastNonDeload = ex;
-                    }
-                }
-
-                // Update lastGreen (first one encountered is the latest)
-                if (!entry.lastGreen && session.recoveryStatus === 'green') {
-                    const week = Math.ceil(session.sessionNumber / CONST.SESSIONS_PER_WEEK);
-                    if (week % CONST.DELOAD_WEEK_INTERVAL !== 0) {
-                        entry.lastGreen = ex;
-                    }
-                }
-
-                // Check if this exercise is fully resolved (we have lastCompleted AND enough recent history)
-                // Note: We need lastCompleted to calculate progression.
-                // We need recent to detect stalls.
-                // If we have both, we can stop searching for this exercise.
-                const isRequired = requiredIds.has(key) || key === targetId;
-                if (isRequired && !fullyResolved.has(key)) {
-                    // We are resolved if:
-                    // 1. We have found a completed entry (so we know the last successful weight)
-                    // 2. We have filled the recent buffer (so we can detect stalls)
-                    // 3. We have found the last non-deload entry
-                    // 4. We have found the last green entry
-                    // Note: If the user has NEVER completed the exercise, we will scan full history.
-                    // This is expected and necessary to find the last completion (which doesn't exist).
-                    if (entry.lastCompleted && entry.recent.length >= CONST.STALL_DETECTION_SESSIONS && entry.lastNonDeload && entry.lastGreen) {
-                        fullyResolved.add(key);
-                    }
-                }
-            }
-        }
-
-        lookup._isPartial = brokeEarly;
-        this._cache.set(sessions, lookup);
-        this._lastSessions = sessions;
-        this._lastLookup = lookup;
-        return lookup;
-    },
-
-    getRecommendedWeight(exerciseId, recoveryStatus, sessions) {
-        if (!sessions) sessions = Storage.getSessions();
-        if (sessions.length === 0) return 0;
-
-        const base = this.getBaseRecommendation(exerciseId, sessions);
-        const factor = recoveryStatus === CONST.RECOVERY_STATES.YELLOW ?
-            CONST.YELLOW_RECOVERY_MULTIPLIER : 1.0;
-        let w = base * factor;
-        return parseFloat((Math.round(w / CONST.STEPPER_INCREMENT_LBS) * CONST.STEPPER_INCREMENT_LBS).toFixed(1));
-    },
-
-    isDeloadWeek(sessions) {
-        if (!sessions) sessions = Storage.getSessions();
-        const week = Math.ceil((sessions.length + 1) / CONST.SESSIONS_PER_WEEK);
-        return (week > 0 && week % CONST.DELOAD_WEEK_INTERVAL === 0);
-    },
-
-    getBaseRecommendation(exerciseId, sessions) {
-        // Deload every N weeks
-        if (this.isDeloadWeek(sessions)) {
-            // Check if we are already in the deload week (mid-week)
-            if (sessions.length > 0) {
-                const lastSession = sessions[sessions.length - 1];
-                const currentWeek = Math.ceil((sessions.length + 1) / CONST.SESSIONS_PER_WEEK);
-                const lastWeek = Math.ceil(lastSession.sessionNumber / CONST.SESSIONS_PER_WEEK);
-
-                if (lastWeek === currentWeek) {
-                    // Already deloaded. Return last attempt weight (maintain).
-                    const lastAttempt = this.getLastExercise(exerciseId, sessions);
-                    return lastAttempt ? lastAttempt.weight : CONST.OLYMPIC_BAR_WEIGHT_LBS;
-                }
-            }
-
-            const last = this.getLastCompletedExercise(exerciseId, sessions);
-            return last ? last.weight * CONST.DELOAD_PERCENTAGE : CONST.OLYMPIC_BAR_WEIGHT_LBS;
-        }
-
-        // Stall detection: reduce weight if failing repeatedly
-        if (this.detectStall(exerciseId, sessions)) {
-            const last = this.getLastExercise(exerciseId, sessions);
-            return last ? last.weight * CONST.STALL_DELOAD_PERCENTAGE : CONST.OLYMPIC_BAR_WEIGHT_LBS;
-        }
-
-        // Normal progression: add weight on success
-        const last = this.getLastExercise(exerciseId, sessions);
-        if (!last) return CONST.OLYMPIC_BAR_WEIGHT_LBS;
-
-        // Check if coming out of a deload week
-        if (sessions.length > 0) {
-            const lastSession = sessions[sessions.length - 1];
-            const lastWeek = Math.ceil(lastSession.sessionNumber / CONST.SESSIONS_PER_WEEK);
-
-            // If previous session was a deload week, resume from pre-deload weight
-            if (lastWeek % CONST.DELOAD_WEEK_INTERVAL === 0) {
-                const preDeloadEx = this.getLastNonDeloadExercise(exerciseId, sessions);
-                if (preDeloadEx) {
-                    // Check if pre-deload session was a transient dip (Yellow)
-                    const lastGreen = this.getLastGreenExercise(exerciseId, sessions);
-                    if (lastGreen && preDeloadEx.completed && preDeloadEx.weight < lastGreen.weight) {
-                        return lastGreen.weight;
-                    }
-                    return preDeloadEx.completed ? preDeloadEx.weight + CONST.WEIGHT_INCREMENT_LBS : preDeloadEx.weight;
-                }
-            }
-        }
-
-        // Transient State Resilience:
-        // If the last session was a constrained recovery day (Yellow/Red) and resulted in a
-        // weight lower than our Green baseline, we should restore the Green baseline.
-        // This prevents temporary constraints from permanently degrading progress.
-        const lastRecovery = this.getLastRecoveryStatus(exerciseId, sessions);
-        if (lastRecovery && lastRecovery !== 'green' && last.completed) {
-            const lastGreen = this.getLastGreenExercise(exerciseId, sessions);
-            // If we have a green baseline that is higher than what we just did
-            if (lastGreen && lastGreen.weight > last.weight) {
-                // Resume progression from the Green baseline
-                // (Assuming we would have progressed if not constrained)
-                return lastGreen.completed ? lastGreen.weight + CONST.WEIGHT_INCREMENT_LBS : lastGreen.weight;
-            }
-        }
-
-        return last.completed ? last.weight + CONST.WEIGHT_INCREMENT_LBS : last.weight;
-    },
-
-    detectStall(exerciseId, sessions) {
-        const cache = this._ensureCache(sessions, exerciseId);
-        const entry = cache.get(exerciseId);
-
-        // If we don't have enough history, it's not a stall
-        if (!entry || entry.recent.length < CONST.STALL_DETECTION_SESSIONS) return false;
-
-        const recent = entry.recent;
-        // Stall detected if all recent attempts failed at same weight
-        return recent.every(e => !e.completed && e.weight === recent[0].weight);
-    },
-
-    getLastExercise(exerciseId, sessions) {
-        const cache = this._ensureCache(sessions, exerciseId);
-        const entry = cache.get(exerciseId);
-        return entry ? entry.last : null;
-    },
-
-    getLastCompletedExercise(exerciseId, sessions) {
-        const cache = this._ensureCache(sessions, exerciseId);
-        const entry = cache.get(exerciseId);
-        return entry ? entry.lastCompleted : null;
-    },
-
-    getLastNonDeloadExercise(exerciseId, sessions) {
-        const cache = this._ensureCache(sessions, exerciseId);
-        const entry = cache.get(exerciseId);
-        return entry ? entry.lastNonDeload : null;
-    },
-
-    getLastGreenExercise(exerciseId, sessions) {
-        const cache = this._ensureCache(sessions, exerciseId);
-        const entry = cache.get(exerciseId);
-        return entry ? entry.lastGreen : null;
-    },
-
-    getLastRecoveryStatus(exerciseId, sessions) {
-        const cache = this._ensureCache(sessions, exerciseId);
-        const entry = cache.get(exerciseId);
-
-        // Optimized Path: O(1)
-        if (entry && entry.lastSession) {
-            return entry.lastSession.recoveryStatus;
-        }
-
-        // Fallback Path: O(N)
-        if (!entry || !entry.last) return null;
-
-        // Find the session containing the last exercise object
-        // Optimization: iterate backwards as it's likely recent
-        for (let i = sessions.length - 1; i >= 0; i--) {
-            const s = sessions[i];
-            if (s.exercises.includes(entry.last)) {
-                // Self-healing cache: Update lastSession if found
-                entry.lastSession = s;
-                return s.recoveryStatus;
-            }
-        }
-        return null;
-    },
-
-    getPlateLoad(weight) {
-        if (this._plateCache.has(weight)) {
-            const result = this._plateCache.get(weight);
-            // LRU: Move to end of cache by deleting and re-inserting
-            this._plateCache.delete(weight);
-            this._plateCache.set(weight, result);
-            return result;
-        }
-
-        // Calculate plates needed for each side of barbell
-        let result;
-        if (weight < CONST.OLYMPIC_BAR_WEIGHT_LBS) {
-            result = 'Use DBs / Fixed Bar';
-        } else {
-            const target = (weight - CONST.OLYMPIC_BAR_WEIGHT_LBS) / 2; // Each side gets half
-            // Epsilon for floating point comparison (0.005 lbs precision is sufficient for 1.25 lbs plates)
-            const EPSILON = 0.005;
-
-            if (target <= EPSILON) {
-                result = 'Empty Bar';
-            } else {
-                this._loadBuffer.length = 0;
-                let rem = target + EPSILON; // Add epsilon to ensure we catch plates slightly below threshold due to FP error
-                const plates = CONST.AVAILABLE_PLATES;
-                const plateStrs = this._plateStrings;
-                const len = plates.length;
-
-                // Greedy algorithm: use largest plates first
-                for (let i = 0; i < len; i++) {
-                    const p = plates[i];
-                    const pStr = plateStrs[i];
-                    while (rem >= p) {
-                        this._loadBuffer.push(pStr);
-                        rem -= p;
-                    }
-                }
-                result = this._loadBuffer.length ? `+ [ ${this._loadBuffer.join(', ')} ]` : 'Empty Bar';
-            }
-        }
-
-        // Optimization: Memoize result
-        // Limit cache size to prevent memory leaks (e.g. 300 entries)
-        if (this._plateCache.size > CONST.PLATE_CACHE_LIMIT) {
-            const firstKey = this._plateCache.keys().next().value;
-            this._plateCache.delete(firstKey);
-        }
-        this._plateCache.set(weight, result);
-
-        return result;
-    },
-};
-
-export const Validator = {
-    canStartWorkout() {
-        const sessions = Storage.getSessions();
-        if (sessions.length === 0) return { valid: true, isFirst: true };
-
-        const lastSession = sessions[sessions.length - 1];
-        if (!lastSession || !lastSession.date) {
-            Logger.warn('Last session missing date');
-            return { valid: true, warning: true };
-        }
-
-        const hours = (Date.now() - new Date(lastSession.date)) / 3600000;
-
-        // Require minimum rest period
-        if (hours < CONST.REST_PERIOD_HOURS) {
-            return {
-                valid: false,
-                hours: Math.ceil(CONST.REST_PERIOD_HOURS - hours),
-                nextAvailable: new Date(Date.now() + ((CONST.REST_PERIOD_HOURS - hours) * 3600000))
-            };
-        }
-
-        // Warn if it's been more than a week
-        if (hours > CONST.WEEK_WARNING_HOURS) {
-            return {
-                valid: true,
-                warning: true,
-                days: Math.floor(hours / 24),
-                message: 'Long gap since last workout'
-            };
-        }
-
-        return { valid: true };
-    }
-};
+export const Calculator = createStrengthCalculator({
+    getSessions: () => Storage.getSessions()
+});
+
+export const Validator = createStrengthReadiness({
+    getSessions: () => Storage.getSessions(),
+    onMissingDate: () => Logger.warn('Last session missing date')
+});

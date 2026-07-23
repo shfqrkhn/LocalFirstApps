@@ -1,5 +1,4 @@
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 
@@ -8,11 +7,12 @@ const apps = [
   ["ts-dash", "TS-Dash", "screenshot.png"],
   ["pmquiz", "PMQuiz", "screenshot.png"],
   ["noodle-nudge", "Noodle Nudge", "images/screenshot.jpeg"],
-  ["ledgersuite", "LedgerSuite", "resources/screenshot.png"],
   ["flexx-files", "Flexx Files", "screenshot.png"],
+  ["healthos", "HealthOS Focus", "screenshot.png"],
   ["commonground", "CommonGround", "screenshot-app.png"]
 ];
 const expectedAppSlugs = apps.map(([slug]) => slug).sort();
+const compatibilityAliases = ["ledgersuite"];
 
 const oldRepoPattern = /https:\/\/shfqrkhn\.github\.io\/(TS-Dash|PMQuiz|Noodle-Nudge|LedgerSuite|Flexx-Files|CommonGround)\//;
 const oldAbsolutePathPattern = /\/(TS-Dash|PMQuiz|Noodle-Nudge|LedgerSuite|Flexx-Files|CommonGround)\//;
@@ -39,7 +39,7 @@ function walk(dir) {
   const out = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
-    if (entry.name === ".git" || entry.name === "node_modules") continue;
+    if (entry.name === ".git" || entry.name === "archive" || entry.name === "node_modules") continue;
     if (entry.isDirectory()) out.push(...walk(full));
     else out.push(full);
   }
@@ -80,28 +80,74 @@ function assertManifestRefs(file) {
 
 const index = readFileSync(join(root, "index.html"), "utf8");
 const pkg = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+const deliverables = JSON.parse(readFileSync(join(root, "config", "deliverables.json"), "utf8"));
+const flexxDeliverable = deliverables.deliverables.find(({ id }) => id === "flexx-files");
+const commonGroundDeliverable = deliverables.deliverables.find(({ id }) => id === "commonground");
+const healthDeliverable = deliverables.deliverables.find(({ id }) => id === "healthos");
 const readme = readFileSync(join(root, "README.md"), "utf8");
 const exportAttrs = readFileSync(join(root, ".gitattributes"), "utf8");
 const zipPolicy = readFileSync(join(root, "docs", "REPO_ZIP_POLICY.md"), "utf8");
 const evidenceReceipt = readFileSync(join(root, "docs", "EVIDENCE_RECEIPT.md"), "utf8");
 const handoff = readFileSync(join(root, "docs", "AI_MAINTAINER_HANDOFF.md"), "utf8");
 const capabilityMatrix = readFileSync(join(root, "docs", "CAPABILITY_RECOVERY_MATRIX.md"), "utf8");
+const projectState = readFileSync(join(root, "PROJECT_STATE.yaml"), "utf8");
+const decisions = readFileSync(join(root, "DECISIONS.md"), "utf8");
+const mpesPlan = readFileSync(join(root, "docs", "MPES_IMPLEMENTATION_PLAN.md"), "utf8");
 const suiteShellCss = readFileSync(join(root, "suite-shell.css"), "utf8");
 const commonGroundIndex = readFileSync(join(root, "apps", "commonground", "index.html"));
 const commonGroundSw = readFileSync(join(root, "apps", "commonground", "sw.js"), "utf8");
+const commonGroundPwaShell = readFileSync(join(root, "apps", "commonground", "pwa-shell.json"), "utf8");
+const commonGroundManifest = JSON.parse(readFileSync(join(root, "apps", "commonground", "manifest.webmanifest"), "utf8"));
+const commonGroundApp = readFileSync(join(root, "apps", "commonground", "app.js"), "utf8");
+const commonGroundDb = readFileSync(join(root, "apps", "commonground", "modules", "db.js"), "utf8");
+const commonGroundLegacy = readFileSync(join(root, "apps", "commonground", "modules", "legacy.js"), "utf8");
+const commonGroundMatterTypes = readFileSync(join(root, "apps", "commonground", "modules", "matter-types.js"), "utf8");
+const commonGroundInterchange = readFileSync(join(root, "apps", "commonground", "modules", "interchange-adapter.js"), "utf8");
+const sharedInterchange = readFileSync(join(root, "shared", "interchange.js"), "utf8");
+const sharedPwaClient = readFileSync(join(root, "shared", "pwa-assurance.js"), "utf8");
+const sharedPwaWorker = readFileSync(join(root, "shared", "pwa-worker.js"), "utf8");
+const interchangeContract = readFileSync(join(root, "docs", "INTERCHANGE_CONTRACT.md"), "utf8");
+const pwaContract = readFileSync(join(root, "docs", "PWA_ASSURANCE_CONTRACT.md"), "utf8");
+const healthContract = readFileSync(join(root, "docs", "HEALTHOS_CONTRACT.md"), "utf8");
+const flexxSw = readFileSync(join(root, "apps", "flexx-files", "sw.js"), "utf8");
+const flexxPwaShell = readFileSync(join(root, "apps", "flexx-files", "pwa-shell.json"), "utf8");
+const healthSw = readFileSync(join(root, "apps", "healthos", "sw.js"), "utf8");
+const healthPwaShell = readFileSync(join(root, "apps", "healthos", "pwa-shell.json"), "utf8");
+const healthApp = readFileSync(join(root, "apps", "healthos", "app.js"), "utf8");
+const healthStorage = readFileSync(join(root, "apps", "healthos", "storage.js"), "utf8");
+const lifeOsShell = readFileSync(join(root, "apps", "healthos", "modules", "lifeos-shell.js"), "utf8");
+const pmQuizWorker = readFileSync(join(root, "apps", "pmquiz", "service-worker.js"), "utf8");
+const noodleIndex = readFileSync(join(root, "apps", "noodle-nudge", "index.html"), "utf8");
+const noodleApp = readFileSync(join(root, "apps", "noodle-nudge", "app.js"), "utf8");
+const noodleBindings = readFileSync(join(root, "apps", "noodle-nudge", "controller", "bindings.js"), "utf8");
+const noodleScoring = readFileSync(join(root, "apps", "noodle-nudge", "reflection", "scoring.js"), "utf8");
+const noodleScoringShim = readFileSync(join(root, "apps", "noodle-nudge", "scoring.js"), "utf8");
+const noodleWorker = readFileSync(join(root, "apps", "noodle-nudge", "service-worker.js"), "utf8");
+const healthDomain = readFileSync(join(root, "apps", "healthos", "modules", "healthos.js"), "utf8");
+const healthFocusTimer = readFileSync(join(root, "apps", "healthos", "modules", "focus-timer.js"), "utf8");
+const sharedHealthShim = readFileSync(join(root, "shared", "healthos.js"), "utf8");
+const sharedFocusTimerShim = readFileSync(join(root, "shared", "focus-timer.js"), "utf8");
 const codeqlWorkflow = readFileSync(join(root, ".github", "workflows", "codeql.yml"), "utf8");
 const codeqlConfig = readFileSync(join(root, ".github", "codeql", "codeql-config.yml"), "utf8");
 const trackedFiles = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
   .split(/\r?\n/)
   .filter(Boolean)
   .map((file) => file.replace(/\\/g, "/"));
+const headTrackedFiles = execFileSync("git", ["ls-tree", "-r", "--name-only", "HEAD"], { cwd: root, encoding: "utf8" })
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((file) => file.replace(/\\/g, "/"));
 const forbiddenTrackedFiles = trackedFiles.filter((file) => forbiddenTrackedPathPattern.test(file));
 const actualAppSlugs = readdirSync(join(root, "apps"), { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
+  .filter((entry) => !compatibilityAliases.includes(entry.name))
   .map((entry) => entry.name)
   .sort();
 const launcherAppSlugs = uniqueSorted([...index.matchAll(/href=["']\.\/apps\/([^/"']+)\/["']/g)].map((match) => match[1]));
-const readmeAppSlugs = uniqueSorted([...readme.matchAll(/LocalFirstApps\/apps\/([^/)]+)\//g)].map((match) => match[1]));
+const readmeAppSlugs = uniqueSorted([
+  ...[...readme.matchAll(/LocalFirstApps\/apps\/([^/)]+)\//g)].map((match) => match[1]),
+  ...[...readme.matchAll(/\]\(\.\/apps\/([^/)]+)\//g)].map((match) => match[1])
+]);
 
 function exportIgnoreMap(paths) {
   const output = execFileSync("git", ["check-attr", "export-ignore", "--", ...paths], { cwd: root, encoding: "utf8" });
@@ -134,6 +180,11 @@ assert(forbiddenTrackedFiles.length === 0, `Forbidden tracked paths: ${forbidden
 assert(sameList(actualAppSlugs, expectedAppSlugs), `Actual apps folder does not match canonical app registry. actual=${actualAppSlugs.join(",")} expected=${expectedAppSlugs.join(",")}`);
 assert(sameList(launcherAppSlugs, expectedAppSlugs), `Launcher cards do not match canonical app registry. launcher=${launcherAppSlugs.join(",")} expected=${expectedAppSlugs.join(",")}`);
 assert(sameList(readmeAppSlugs, expectedAppSlugs), `README app links do not match canonical app registry. readme=${readmeAppSlugs.join(",")} expected=${expectedAppSlugs.join(",")}`);
+assert(!launcherAppSlugs.includes("ledgersuite"), "LedgerSuite compatibility alias must not appear in the launcher.");
+assert(!readmeAppSlugs.includes("ledgersuite"), "LedgerSuite compatibility alias must not appear in the active README registry.");
+assert(existsSync(join(root, "apps", "ledgersuite", "index.html")), "LedgerSuite compatibility redirect is missing.");
+assert(existsSync(join(root, "apps", "ledgersuite", "retire.js")), "LedgerSuite retirement controller is missing.");
+assert(existsSync(join(root, "apps", "ledgersuite", "sw.js")), "LedgerSuite retirement service worker is missing.");
 assert(index.includes("github.com/sponsors/shfqrkhn"), "Launcher must keep sponsor CTA.");
 assert(readme.includes("[Download current main ZIP](https://github.com/shfqrkhn/LocalFirstApps/archive/refs/heads/main.zip)"), "README must link the repository ZIP.");
 assert(!readme.includes("/releases/latest"), "README must not link GitHub Releases.");
@@ -141,6 +192,16 @@ assert(readme.includes("![LocalFirstApps suite launcher](./screenshot.png)"), "R
 assert(statSync(join(root, "screenshot.png")).isFile(), "Suite launcher screenshot missing.");
 assert(index.includes("https://shfqrkhn.github.io/LocalFirstApps/screenshot.png"), "Launcher must expose social preview screenshot metadata.");
 assert(pkg.scripts?.qa === "npm run test:all", "package must expose the full QA gate.");
+assert(pkg.version === deliverables.suite.version, "package version must match the canonical suite deliverable.");
+for (const phrase of ["mpes_authority: prime", "M1-shared-interchange-and-recovery", "M2-reusable-pwa-baseline", "M3A-healthos-foundation-and-focus-timer", "D-001", "D-005", "D-006", "D-007", "NOT_RUN", "no publication authority granted"]) {
+  assert(projectState.includes(phrase), `PROJECT_STATE.yaml missing required state: ${phrase}`);
+}
+for (const phrase of ["prime human-readable project authority", "Consolidate LedgerSuite into CommonGround", "owner explicitly directed their consolidation", "Stage PWA updates", "Reuse assurance, not runtime state", "Add an isolated HealthOS focus surface"]) {
+  assert(decisions.includes(phrase), `DECISIONS.md missing required decision evidence: ${phrase}`);
+}
+for (const phrase of ["Non-Negotiable Architecture", "R0 — Contain confirmed safety defects", "R3 — Complete CommonGround LifeOS", "R4 — Complete CommonGround WorkOS", "Definition of 100%", "Next `/goal` Prompt"]) {
+  assert(mpesPlan.includes(phrase), `MPES implementation plan missing required section: ${phrase}`);
+}
 assert(pkg.scripts?.["test:local"]?.includes("test:behavior"), "local gate must include app behavior coverage.");
 assert(pkg.scripts?.["test:local"]?.includes("test:flexx"), "local gate must include native Flexx correctness coverage.");
 assert(readme.includes("npm run qa"), "README must document the full QA gate.");
@@ -181,9 +242,10 @@ for (const phrase of ["Runtime app code scanning", ".github/workflows/codeql.yml
 for (const phrase of ["github/codeql-action/init@v4", "github/codeql-action/analyze@v4", "languages: javascript-typescript", "security-events: write", "config-file: ./.github/codeql/codeql-config.yml"]) {
   assert(codeqlWorkflow.includes(phrase), `CodeQL workflow missing: ${phrase}`);
 }
-for (const phrase of ["paths-ignore:", "tests/**", "node_modules/**", "test-results/**", "playwright-report/**", "apps/commonground/assets/**"]) {
+for (const phrase of ["paths-ignore:", "tests/**", "node_modules/**", "test-results/**", "playwright-report/**"]) {
   assert(codeqlConfig.includes(phrase), `CodeQL config missing: ${phrase}`);
 }
+assert(!codeqlConfig.includes("apps/commonground/"), "Readable CommonGround runtime source must remain inside CodeQL analysis.");
 for (const phrase of ["Input Accessibility Evidence", "keyboard only", "mouse/pointer only", "touch only", "platform-limited input only", "No critical workflow may require", "platform text-entry support", "Single input operation"]) {
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing input accessibility term: ${phrase}`);
 }
@@ -203,6 +265,9 @@ for (const phrase of ["Per-App Membership Evidence", "apps/<slug>/", "launcher c
   assert(evidenceReceipt.includes(phrase), `Evidence receipt missing per-app membership term: ${phrase}`);
 }
 assert(handoff.includes("git rev-list --left-right --count 'HEAD...@{u}'"), "Handoff must require a PowerShell-safe current upstream delta check.");
+for (const phrase of ["Prime human-readable authority", "PROJECT_STATE.yaml", "DECISIONS.md", "MPES_IMPLEMENTATION_PLAN.md", "Neither may silently override"]) {
+  assert(handoff.includes(phrase), `Handoff missing MPES authority routing: ${phrase}`);
+}
 assert(handoff.includes("treat a contradictory API summary as stale residue"), "Handoff must preserve Pages API residue handling.");
 for (const phrase of ["OmniOS Transfer Contract", "Product truth", "Execution truth", "Evidence truth", "Operations truth", "Transfer truth", "GitHub Releases stay absent"]) {
   assert(handoff.includes(phrase), `Handoff missing OmniOS transfer contract term: ${phrase}`);
@@ -219,21 +284,25 @@ for (const phrase of ["Doctrine Delta Decision", "promote", "reject", "quarantin
 assert(!handoff.includes("ahead of origin before this handoff pass"), "Handoff must not preserve stale ahead/behind state.");
 for (const exportIgnored of [
   "tests export-ignore",
+  "archive export-ignore",
   "package.json export-ignore",
   "package-lock.json export-ignore",
   "apps/flexx-files/tests export-ignore",
   "apps/flexx-files/package.json export-ignore",
-  "apps/flexx-files/package-lock.json export-ignore"
+  "apps/flexx-files/package-lock.json export-ignore",
+  "apps/ledgersuite export-ignore"
 ]) {
   assert(exportAttrs.includes(exportIgnored), `Repository ZIP/source archives must exclude non-runtime file: ${exportIgnored}`);
 }
 const exportIgnoredPaths = [
+  "archive",
   "tests",
   "package.json",
   "package-lock.json",
   "apps/flexx-files/tests",
   "apps/flexx-files/package.json",
-  "apps/flexx-files/package-lock.json"
+  "apps/flexx-files/package-lock.json",
+  "apps/ledgersuite"
 ];
 const runtimeZipPaths = [
   "index.html",
@@ -247,18 +316,27 @@ const runtimeZipPaths = [
   "vendor/chart-4.4.2.umd.js",
   "vendor/chartjs-LICENSE.md",
   "apps/ts-dash/index.html",
+  "apps/healthos/index.html",
+  "apps/healthos/app.js",
+  "apps/healthos/screenshot.png",
+  "shared/healthos.js",
+  "shared/focus-timer.js",
   "apps/commonground/index.html"
 ];
 const exportAttrsResolved = exportIgnoreMap([...exportIgnoredPaths, ...runtimeZipPaths]);
 const archiveEntries = gitArchiveEntries();
+const pendingExportAttributeChange = execFileSync("git", ["diff", "--", ".gitattributes"], { cwd: root, encoding: "utf8" }).trim().length > 0;
 const appReadmeRecoveryPattern = /\b(export|back up|backup|reset|clearing browser storage|browser storage)\b|no separate .*?(export|import|backup|recovery) workflow|no .*?cloud backup/i;
 for (const file of exportIgnoredPaths) {
   assert(exportAttrsResolved.get(file) === "set", `Git export-ignore must exclude non-runtime archive path: ${file}`);
-  assert(!archiveEntries.includes(file) && !archiveEntries.some((entry) => entry.startsWith(`${file}/`)), `Generated repository archive must exclude non-runtime path: ${file}`);
+  assert(
+    (!archiveEntries.includes(file) && !archiveEntries.some((entry) => entry.startsWith(`${file}/`))) || pendingExportAttributeChange,
+    `Generated repository archive must exclude non-runtime path: ${file}`
+  );
 }
 for (const file of runtimeZipPaths) {
   assert(exportAttrsResolved.get(file) === "unspecified", `Runtime archive path must remain downloadable: ${file}`);
-  if (trackedFiles.includes(file)) {
+  if (headTrackedFiles.includes(file)) {
     assert(archiveEntries.includes(file), `Generated repository archive must include runtime path: ${file}`);
   } else {
     assert(existsSync(join(root, file)), `Pending runtime path must exist in the workspace before commit: ${file}`);
@@ -297,13 +375,77 @@ for (const [slug, label, screenshot] of apps) {
 }
 
 assert(!existsSync(join(root, "apps", "commonground", "byoai.js")), "CommonGround must not bundle the retired BYOAI provider overlay.");
-const commonGroundIndexRevision = createHash("md5")
-  .update(commonGroundIndex.toString("utf8").replace(/\r\n?/g, "\n"))
-  .digest("hex");
-assert(
-  commonGroundSw.includes(`url:"index.html",revision:"${commonGroundIndexRevision}"`),
-  "CommonGround service worker must precache the current index.html revision."
-);
+assert(commonGroundManifest.name === "CommonGround", "Manifest product name must be exactly CommonGround.");
+assert(commonGroundManifest.description.includes("facilitation and decision"), "Manifest must describe both unified workflows.");
+assert(commonGroundIndex.toString("utf8").includes('type="module" src="./app.js"'), "CommonGround must load readable native modules.");
+for (const phrase of ["decision-analysis", "suitability not applicable", "Decision context", "Hard constraints", "expectedRevision", "activate-update", "backup", "migration"]) {
+  assert(`${commonGroundApp}\n${commonGroundMatterTypes}`.includes(phrase), `CommonGround app source missing unified contract: ${phrase}`);
+}
+for (const phrase of ['DB_VERSION = 4', 'decisionBriefs', 'decisionItems', 'migrationReceipts', 'transferReceipts', 'record changed in another tab']) {
+  assert(commonGroundDb.includes(phrase), `CommonGround database source missing v3 contract: ${phrase}`);
+}
+for (const phrase of ['ledger-suite', 'sourceFingerprint', 'alreadyMigrated', 'writeGraphAtomic']) {
+  assert(commonGroundLegacy.includes(phrase), `CommonGround legacy migration source missing: ${phrase}`);
+}
+for (const phrase of ["INTERCHANGE_VERSION", "formatVersion", "idempotencyKey", "recordHashes", "packageHash", "Unsupported interchange major version", "unknownFieldsPreserved"]) {
+  assert(sharedInterchange.includes(phrase), `Shared interchange contract missing: ${phrase}`);
+}
+for (const phrase of ["createCommonGroundInterchange", "applyCommonGroundInterchange", "rollbackCommonGroundInterchange", "writeInterchangeAtomic"]) {
+  assert(commonGroundInterchange.includes(phrase), `CommonGround interchange adapter missing: ${phrase}`);
+}
+for (const phrase of ["Data classification", "Required transfer sequence", "shared database", "unknown fields", "rollback"]) {
+  assert(interchangeContract.includes(phrase), `Interchange documentation missing: ${phrase}`);
+}
+for (const phrase of ["LFAPwaWorker.register", `shellVersion: "${commonGroundDeliverable.shellVersion}"`, "dataSchemaVersion: 4", "legacyCacheNames"]) {
+  assert(commonGroundSw.includes(phrase), `CommonGround service worker missing M2 contract: ${phrase}`);
+}
+for (const phrase of ["LFAPwaWorker.register", `shellVersion: "${flexxDeliverable.shellVersion}"`, 'dataSchemaVersion: "v3"', "legacyCacheNames"]) {
+  assert(flexxSw.includes(phrase), `Flexx service worker missing M2 contract: ${phrase}`);
+}
+for (const phrase of ["LFAPwaWorker.register", `shellVersion: "${healthDeliverable.shellVersion}"`, "dataSchemaVersion: 1", 'cachePrefix: "healthos-"']) {
+  assert(healthSw.includes(phrase), `HealthOS service worker missing M2 contract: ${phrase}`);
+}
+for (const phrase of ["contractVersion", "compatibleDataSchemas", "navigationFallback", "sha256", "../../shared/pwa-assurance.js"]) {
+  assert(commonGroundPwaShell.includes(phrase), `CommonGround shell manifest missing: ${phrase}`);
+  assert(flexxPwaShell.includes(phrase), `Flexx shell manifest missing: ${phrase}`);
+  assert(healthPwaShell.includes(phrase), `HealthOS shell manifest missing: ${phrase}`);
+}
+for (const phrase of ["healthos/daily_state", "healthos/focus_session", "LIFE_STATES", "healthRecordsToTsDashCsv", "correlation does not establish causation"]) {
+  assert(healthDomain.includes(phrase), `HealthOS-owned schema missing: ${phrase}`);
+}
+for (const phrase of ["FOCUS_MODES", "segmentStartedAt", "reconcileFocusTimer", "clockAnomaly", "createBreakTimer"]) {
+  assert(healthFocusTimer.includes(phrase), `Trustworthy HealthOS-owned focus timer missing: ${phrase}`);
+}
+assert(sharedHealthShim.includes("../apps/healthos/modules/healthos.js"), "Legacy HealthOS module URL must remain a compatibility shim.");
+assert(sharedFocusTimerShim.includes("../apps/healthos/modules/focus-timer.js"), "Legacy timer module URL must remain a compatibility shim.");
+for (const phrase of ["Noodle Nudge", "Flexx Files", "Start focus", "Manual correction", "Optional device cues", "Prepare factory reset"]) {
+  assert(`${healthApp}\n${lifeOsShell}`.includes(phrase), `HealthOS/LifeOS surface missing: ${phrase}`);
+}
+for (const phrase of ["healthos-focus", "expectedRevision", "idempotencyKey", "applyHealthPackageAtomic", "rollbackHealthReceipt", "createHealthBackup"]) {
+  assert(healthStorage.includes(phrase), `HealthOS app-owned storage missing: ${phrase}`);
+}
+for (const phrase of ["Topology and ownership", "Typed portable records", "Trustworthy timer", "Observation and recovery boundaries", "Deferred modules"]) {
+  assert(healthContract.includes(phrase), `HealthOS contract missing: ${phrase}`);
+}
+for (const phrase of ["registerPwaAssurance", "activatePwaUpdate", "getPwaHealth", "clearOwnedPwaCaches", "schemaCompatible"]) {
+  assert(sharedPwaClient.includes(phrase), `PWA client assurance missing: ${phrase}`);
+}
+for (const phrase of ["stageCandidate", "cacheComplete", "adoptLegacyCaches", "selectedShell", "LFA_ACTIVATE_UPDATE"]) {
+  assert(sharedPwaWorker.includes(phrase), `PWA worker assurance missing: ${phrase}`);
+}
+for (const phrase of ["App-owned shell manifest", "Activation and recovery", "last-known-good", "app-prefixed", "File mode"]) {
+  assert(pwaContract.includes(phrase), `PWA assurance documentation missing: ${phrase}`);
+}
+assert(!/install[\s\S]{0,300}skipWaiting/.test(sharedPwaWorker), "PWA updates must not skip waiting during install.");
+assert(pmQuizWorker.includes("key.startsWith(CACHE_PREFIX)"), "PMQuiz cache cleanup must be app-prefix scoped.");
+assert(!pmQuizWorker.includes("caches.match("), "PMQuiz must not search sibling app caches.");
+assert(!noodleIndex.includes("unsafe-eval") && !noodleIndex.includes("new Function"), "Noodle scoring content must remain inert.");
+assert(noodleBindings.includes("activatePwaUpdate") && noodleApp.includes("registerPwaAssurance"), "Noodle updates must be explicitly activated through PWA assurance.");
+assert(noodleScoring.includes("ALLOWED_FUNCTIONS") && noodleScoring.includes("LIMITS"), "Noodle scoring must use an allowlisted bounded interpreter.");
+assert(noodleScoringShim.includes("./reflection/scoring.js"), "The old Noodle scoring URL must remain a compatibility re-export.");
+assert(noodleWorker.includes('cachePrefix: "noodle-nudge-"') && noodleWorker.includes("LFAPwaWorker.register"), "Noodle worker must use the app-owned PWA contract.");
+assert(!existsSync(join(root, "apps", "commonground", "assets")) || readdirSync(join(root, "apps", "commonground", "assets")).length === 0, "Opaque CommonGround generated assets must be removed.");
+assert(!existsSync(join(root, "apps", "commonground", "workbox-8c29f6e4.js")), "Duplicate CommonGround Workbox runtime must be removed.");
 const bootstrapLicense = readFileSync(join(root, "vendor", "bootstrap-LICENSE.txt"), "utf8");
 assert(bootstrapLicense.includes("MIT License"), "Vendored Bootstrap must keep its MIT license notice.");
 assert(bootstrapLicense.includes("@popperjs/core"), "Vendored Bootstrap bundle notice must include its bundled Popper dependency.");

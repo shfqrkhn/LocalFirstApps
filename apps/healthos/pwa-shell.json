@@ -1,0 +1,108 @@
+{
+  "contractVersion": "1.0.0",
+  "appId": "healthos",
+  "shellVersion": "0.1.1-r3e",
+  "dataSchemaVersion": 1,
+  "compatibleDataSchemas": [
+    1
+  ],
+  "navigationFallback": "./index.html",
+  "assets": [
+    {
+      "url": "./index.html",
+      "sha256": "aa26c366a654629383d0a14914474f50d27a11e2f87a7c603287d70525f65b2b"
+    },
+    {
+      "url": "./styles.css",
+      "sha256": "62bba64329bc951614aa2ccf442ccb6bfd14fbdcea680f440194176bccb05a5b"
+    },
+    {
+      "url": "./app.js",
+      "sha256": "447247009afec7784b85d294ffc90e81b2c8cb109a35d146afee0cc95367fde5"
+    },
+    {
+      "url": "./storage.js",
+      "sha256": "47e8645a57a7919a55a17afe119e9ed156e19a011d4003187890f0f5ad70f688"
+    },
+    {
+      "url": "./omnicore-adapter.js",
+      "sha256": "10870da23c42fbe8373acd68d22be1cb8e67d04331e2aaff8e2fde3c155dcdaf"
+    },
+    {
+      "url": "./lifeos-adapter.js",
+      "sha256": "a900fcd69472bb3bd83e62ce2f2e23cfc0a6594ad2049ea087a8fc495a2a8861"
+    },
+    {
+      "url": "./modules/healthos.js",
+      "sha256": "b835e6e485ea89189a3e01e56957b289c31992032cbf4c65642d66a284f3540a"
+    },
+    {
+      "url": "./modules/focus-timer.js",
+      "sha256": "19c4b167b73a50f0cd64e9b0d82409bfdc823d01a94f853b4453757d85fbfbb5"
+    },
+    {
+      "url": "./modules/lifeos-shell.js",
+      "sha256": "0a49495d1bccb1bc3e58fc02b09081e149d1c531810a161c22fc3f367df3d12c"
+    },
+    {
+      "url": "./manifest.webmanifest",
+      "sha256": "bac87de479a90f631af16e33bc8bc514c182b52a71fdee759fd267f386c47f81"
+    },
+    {
+      "url": "./icon.svg",
+      "sha256": "5f6befc6a6444335e87520385fb82d39b35fe295cf1b5445e56d7320949d8ff9"
+    },
+    {
+      "url": "../../shared/interchange.js",
+      "sha256": "a92a9abbece5edd228d04ce4c61af1f6e8368f400d7b43f5a40a583119bec13b"
+    },
+    {
+      "url": "../../shared/healthos.js",
+      "sha256": "19b68b368960819bedbbc095c788a812c794d3ef978179cc816cd3e9d362a624"
+    },
+    {
+      "url": "../../shared/focus-timer.js",
+      "sha256": "7367217f4c2296759d1765a8521608f884210223754ccee3f4720403f0f0bd6e"
+    },
+    {
+      "url": "../../shared/omnicore/errors.js",
+      "sha256": "0e8ada82c53c795a8e1029855f46f4fc50d7a8d15b27036623da4882a9b5d382"
+    },
+    {
+      "url": "../../shared/omnicore/indexeddb.js",
+      "sha256": "afa20c4cafacd3144db0284edca5a48148b6ae4648c84f5c3e8b8499d4e22cab"
+    },
+    {
+      "url": "../../shared/omnicore/integrity.js",
+      "sha256": "5b6b41a160495a86b2f59d16b2626a6db08116ee07f01f73cca4bbec3311a917"
+    },
+    {
+      "url": "../../shared/omnicore/receipts.js",
+      "sha256": "d3a6d564b2f0dd5fdd672a9117c90aa1cddd4665ac48a8a701bbd0e4c03deb9c"
+    },
+    {
+      "url": "../../shared/omnicore/time.js",
+      "sha256": "286254c149eaccfe153c1aa6653e464dbb26be18a934e8f5c9993600c307ead0"
+    },
+    {
+      "url": "../../shared/design-primitives.css",
+      "sha256": "cc8bb60233a51fd9d570a6f67c1aed8b4513b3c11ed012414c60b79dfcd4e2b8"
+    },
+    {
+      "url": "../../shared/design-tokens.css",
+      "sha256": "e0be0c96272f68ade974ca9d9d49ebdf35f111d1c762889cb2ccd5f18ae68cef"
+    },
+    {
+      "url": "../../shared/pwa-assurance.js",
+      "sha256": "87b34cd917cd780089ba6bec9e3c6bc77eb5c498682db34cae4ff174cd0dacdf"
+    },
+    {
+      "url": "../../suite-shell.css",
+      "sha256": "f2710685ee1234e46e57b5989e4a906b422e160cf8f5a15135c439d9c01e3281"
+    },
+    {
+      "url": "../../suite-shell.js",
+      "sha256": "63bdda790a2c19ad9795a72e9642183118351ab6625a270b1400298f86b42618"
+    }
+  ]
+}

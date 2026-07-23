@@ -1,6 +1,8 @@
 # THE COMPLETE STRENGTH PROTOCOL
 
-**Full-Body Strength • Time-Efficient • Evidence-Based**
+**Full-Body Strength • Time-Efficient • Unverified Planning Template**
+
+This document describes the app's default template. It is not medical advice, individualized programming, or a determination that exercise is safe. Evidence, source, and licensing review is tracked separately and is incomplete.
 
 ---
 
@@ -513,5 +515,5 @@ Notes: _________________________________________________
 ---
 
 **Protocol Version:** 3.2
-**App Version:** 3.9.73
+**App Version:** 3.9.78
 **Last Updated:** February 2026

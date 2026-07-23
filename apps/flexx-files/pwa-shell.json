@@ -1,0 +1,128 @@
+{
+  "contractVersion": "1.0.0",
+  "appId": "flexx-files",
+  "shellVersion": "3.9.78",
+  "dataSchemaVersion": "v3",
+  "compatibleDataSchemas": [
+    "v3"
+  ],
+  "navigationFallback": "./index.html",
+  "assets": [
+    {
+      "url": "./index.html",
+      "sha256": "660e1bbf8ee5a975b18e5e0ab17f58de0345ecc1964182b281acbc55857da642"
+    },
+    {
+      "url": "./css/styles.css",
+      "sha256": "d68554e53af9a25102989c7dc010a773e177d559e88195f5095b9fb9c2afd6de"
+    },
+    {
+      "url": "./js/app.js",
+      "sha256": "b2ff47d7809c4b61a79cf9873676d27799c7a78dd1c5dcf3fbb7fffadafa45e9"
+    },
+    {
+      "url": "./controller/state.js",
+      "sha256": "3b1ab300fe3263f0c88d91e9c17e90363936bfd2d315d3b9419ab50c68a5ddd5"
+    },
+    {
+      "url": "./controller/timer.js",
+      "sha256": "ef4cb1005d312810ca97f45fc49a6e568f0b1df0b3e1223afa9df431b3df2a55"
+    },
+    {
+      "url": "./controller/modal.js",
+      "sha256": "cc7a23dfd18f4266b72e55ebb797dce3ddc4f27ca888077d0d8fe4c78155f30b"
+    },
+    {
+      "url": "./controller/views.js",
+      "sha256": "2793f5a407ad72aef828c9aaf3a25951ef8671ee709be05218cb942af960aafe"
+    },
+    {
+      "url": "./controller/commands.js",
+      "sha256": "fa31f9aa20ab2f5d49784ffafeab8daecfe8253383eb841121bc85d551ff9ed3"
+    },
+    {
+      "url": "./controller/bindings.js",
+      "sha256": "64553c7e16e0c3a16e9888f79fcce52bd1cc934c1fbe9dacfc37f56419f46301"
+    },
+    {
+      "url": "./js/core.js",
+      "sha256": "efe70ba84b7fa9f7ccffe92b92acf7498e42f2a6c2b01cf94a42649bb3786e15"
+    },
+    {
+      "url": "./strength-adapter.js",
+      "sha256": "75bcd748f2f04c9e41c69ad28dd7ae8e92d8dac25da7abcd665938389be367e0"
+    },
+    {
+      "url": "./strength/calculations.js",
+      "sha256": "03ff45f77dd0c615b6cdda03f10078b47b7de8fe252ff8249cb77b29083178fd"
+    },
+    {
+      "url": "./strength/readiness.js",
+      "sha256": "f77533f73f460f0a7826a67cf0da926550150c0f4126e95f19f5d5e9380bbca2"
+    },
+    {
+      "url": "./strength/recovery.js",
+      "sha256": "45224abee53e246fd32e264a5e3e09cfef855fe16dad0be7aa750ea939f66e32"
+    },
+    {
+      "url": "./strength/storage-contract.js",
+      "sha256": "2ebf1c8046551f51edb5aa17fc01a77b0f24d9f1768f86e13fbc0f5f3ac8c20b"
+    },
+    {
+      "url": "./js/config.js",
+      "sha256": "f36c297445ade5470934fd1168e0a75efa3d09c2cfe85f4a1975e765c7274cfa"
+    },
+    {
+      "url": "./js/accessibility.js",
+      "sha256": "2e2b068bde2746218dec833a265355c6acf420290bb74b9771fd9f6e62059477"
+    },
+    {
+      "url": "./js/constants.js",
+      "sha256": "0258d72de1f65644b46178e16ab7bc45eab09b6faf476501e7f3010c6e0092d6"
+    },
+    {
+      "url": "./js/i18n.js",
+      "sha256": "6f4b2bd641a3a1f05f29884170203e4e03ba0697d42e0c791738704b457fc21b"
+    },
+    {
+      "url": "./js/observability.js",
+      "sha256": "3158fd903963e66fb4c7f0d8365a96ce8f2b65ac3bf5023ae37f7f2734a578ef"
+    },
+    {
+      "url": "./js/security.js",
+      "sha256": "95d890d34ebe72625561db4be6c33deaa50b971d7648d08a2bc52d6837f2f091"
+    },
+    {
+      "url": "./manifest.json",
+      "sha256": "ad55e441ec50104c860f7162745706b8415fcb28c45016100d28d2cb07941cd4"
+    },
+    {
+      "url": "./assets/icon-192.png",
+      "sha256": "6fdebff50201b9cd5bc6a9274fd5de6008968bdaa45deddcbc1e2aa1e2d6bfae"
+    },
+    {
+      "url": "./assets/icon-512.png",
+      "sha256": "a095c286d7a26a748d2dce712b07b1ca9684fe6f7e785df716f698c0a9563d0f"
+    },
+    {
+      "url": "../../shared/pwa-assurance.js",
+      "sha256": "87b34cd917cd780089ba6bec9e3c6bc77eb5c498682db34cae4ff174cd0dacdf"
+    },
+    {
+      "url": "../../shared/design-primitives.css",
+      "sha256": "cc8bb60233a51fd9d570a6f67c1aed8b4513b3c11ed012414c60b79dfcd4e2b8"
+    },
+    {
+      "url": "../../shared/design-tokens.css",
+      "sha256": "e0be0c96272f68ade974ca9d9d49ebdf35f111d1c762889cb2ccd5f18ae68cef"
+    },
+    {
+      "url": "../../suite-shell.css",
+      "sha256": "f2710685ee1234e46e57b5989e4a906b422e160cf8f5a15135c439d9c01e3281"
+    },
+    {
+      "url": "../../suite-shell.js",
+      "sha256": "63bdda790a2c19ad9795a72e9642183118351ab6625a270b1400298f86b42618"
+    }
+  ]
+}

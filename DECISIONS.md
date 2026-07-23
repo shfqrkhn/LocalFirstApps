@@ -1,0 +1,205 @@
+# Decisions
+
+Public-safe architectural decisions for LocalFirstApps. Private source specifications remain outside this repository.
+
+## Authority
+
+`MPES-LocalFirstApps-Unified-v1.1.0.md` is the prime human-readable project authority. `PROJECT_STATE.yaml` records observed execution state and may not silently override the MPES. Explicit later owner directions are recorded as amendments; conflicts remain visible until resolved.
+
+## D-001 — Consolidate LedgerSuite into CommonGround
+
+- **State:** Accepted by repository owner
+- **Decision:** CommonGround is the single active facilitation and decision application. Decision Analysis supports personal, professional, and shared contexts.
+- **Amendment:** The prime MPES places LedgerSuite and CommonGround as separate components, while the owner explicitly directed their consolidation. The approved amendment changes placement only; MPES invariants for preservation, migration, recovery, offline use, accessibility, evidence, and release authority remain binding.
+- **Compatibility:** Keep an unlisted, archive-excluded LedgerSuite redirect for the v0.2.0 transition. Retain LedgerSuite v1/v2 file import and same-origin database migration indefinitely.
+- **Safety:** Migration validates and previews first, writes a new-ID copy atomically, records an idempotency fingerprint, and leaves the source untouched unless the user downloads a backup and explicitly confirms deletion.
+- **Rollback:** Revert the consolidation commit. The source database is preserved by default, and CommonGround can restore its pre-reset/exported backups.
+
+## D-002 — Preserve app isolation
+
+- **State:** Accepted
+- **Decision:** LifeOS, WorkOS, and OmniCore are conceptual product and assurance boundaries, not a mandate for one runtime or one screen.
+- **Implementation:** Keep focused static apps independently launchable. Share only narrow contracts and use explicit user-reviewed file transfer rather than hidden cross-app writes.
+
+## D-003 — Stage PWA updates
+
+- **State:** Accepted
+- **Decision:** Cache the complete versioned shell before installation and wait for explicit user activation when replacing an active CommonGround worker.
+- **Rollback:** The prior active worker and cache remain available until the staged worker is activated.
+
+## D-004 — Preserve hard constraints and newer concurrent edits
+
+- **State:** Accepted
+- **Decision:** Decision Analysis stores non-negotiable constraints as distinct records; comparative option scores cannot offset them. Mutable singleton records carry revisions, and a stale tab must reload instead of overwriting a newer saved revision.
+- **Limit:** Independent list-item additions remain separate records, but semantic reconciliation across different records is deferred to the shared M1 conflict contract.
+- **Rollback:** Export the current workspace, revert the consolidation commit, and restore the preserved LedgerSuite source or CommonGround backup as applicable.
+
+## D-005 — Integrate through explicit portable files
+
+- **State:** Accepted
+- **Decision:** The shared M1 surface is a dependency-free semver `1.x` portable-record package and validator. Apps keep isolated storage and own narrowly scoped adapters; there is no suite database, hidden cross-app read, synchronization, background mutation, or network transport.
+- **Safety:** A transfer must select, show exact serialized content, require confirmation, validate size/shape/version/hashes, apply records plus a unique idempotency receipt atomically, and expose rollback. Unknown record and payload fields stay inert and survive the CommonGround pilot round trip. Unsupported majors fail visibly.
+- **Compatibility:** CommonGround portable records are additive. CommonGround export v2, CommonGround v1 import, LedgerSuite v1/v2 import, existing routes, data and source-preserving migration remain unchanged.
+- **Rollback:** Roll back an individual applied receipt in Settings, or revert the M1 commit. Receipts remain after rollback as replay protection; pre-M1 data is untouched by the v4 additive store upgrade.
+
+## D-006 — Reuse assurance, not runtime state
+
+- **State:** Accepted
+- **Decision:** CommonGround and Flexx Files use one dependency-free PWA assurance contract while retaining app-owned workers, manifests, caches, schemas, data stores, update UI, and reset behavior. No shared data store, hidden synchronization, telemetry, external transmission, or background business mutation is introduced.
+- **Safety:** A content-addressed candidate must cache completely before install succeeds. Missing, corrupt, interrupted, or quota-failed candidates delete only their incomplete cache and cannot displace the active shell. Activation stays explicit and is blocked when the worker does not declare the current data schema compatible. Cache integrity is rechecked before use and one complete prior shell is retained for last-known-good recovery.
+- **Operations:** First install claims without a reload loop. Later controller changes reload each open tab once. Health is read-only and reports unavailable estimates honestly. Cache clear and factory reset remain app-scoped; Flexx and CommonGround reset only after a complete backup starts successfully.
+- **Compatibility:** CommonGround database v3 upgrades additively to v4; CommonGround/LedgerSuite formats, M1 receipts, Flexx `v3` storage, drafts and backups remain unchanged. Hosted repository subpaths work; `file://` remains a safe reduced fallback because browsers do not provide module/worker parity there.
+- **Rollback:** Revert the M2 commit. Existing user stores are not migrated or rewritten by this packet; the retained old worker/cache or an app export remains the recovery source.
+
+## D-007 — Add an isolated HealthOS focus surface
+
+- **State:** Accepted for the bounded M3A packet
+- **Decision:** Add `apps/healthos` as the app-owned daily-state/focus surface and minimal HealthOS navigator. Noodle Nudge remains canonical for reflection/self-inquiry and Flexx Files remains canonical for strength/readiness/progression; neither runtime or store is merged or read by HealthOS.
+- **Integration:** Share only versioned M1-compatible `daily_state` and `focus_session` schemas plus pure timestamp math. Movement uses exact-preview portable files with atomic app-owned apply/receipt/rollback. TS-Dash receives explicit deterministic CSV and remains a generic source-data consumer.
+- **Safety:** Keep observations distinct with no aggregate score. Timer completion is user-reviewed, stale-tab-safe and idempotent. Device cues are detected, opt-in and degradable; health language is non-diagnostic and pressure-free. Meditation, breathing, C25K, mobility, sleep and later modules stay inactive pending separate acceptance.
+- **Compatibility amendment:** Preserve every existing URL during this unpublished M3A packet, including the LedgerSuite migration alias. Its earlier one-release removal note is superseded by the MPES deprecation rule: removal requires explicit approval, migration evidence, and rollback planning.
+- **Rollback:** Revert the M3A commit. Existing app data and code were not migrated; HealthOS complete backup restores its own v1 records/runtime, and the pre-M3A suite remains independently usable.
+
+## D-008 — Establish explicit document authority
+
+- **State:** Accepted under the owner's instruction to assess and set authority.
+- **Decision:** Use `docs/DOCUMENT_AUTHORITY.md`. Applicable external constraints and the latest explicit owner instruction are A0; the private MPES is A1 prime product authority; accepted decisions are A2; bounded contracts are A3; repository/runtime evidence is observed truth at A4 and cannot redefine requirements.
+- **Content boundary:** Question banks, assessments, wellness/training prose, screenshots, and app READMEs are descriptive/source material only. They cannot establish professional guidance, licensing, endorsement, or product authority.
+- **Conflict rule:** Preserve data and compatibility, record the conflict, and resolve it across decision, contract, implementation, tests, evidence, and handoff—not in code alone.
+
+## D-009 — Converge primary surfaces under CommonGround
+
+- **State:** Accepted owner amendment to D-002.
+- **Decision:** The target is two CommonGround-branded primary shells, LifeOS and WorkOS, supported by an invisible OmniCore source layer. This reduces user-facing app sprawl while retaining domain modules and independent safety boundaries.
+- **Boundary:** D-002 remains binding during migration: app-owned stores/caches, explicit reviewed file transfer, independently reversible packets, and no shared runtime database, hidden synchronization, universal worker, or cross-app mutation.
+- **Retirement:** Existing focused routes remain supported until parity, backup/restore, migration receipt/rollback, offline, accessibility, and owner acceptance pass. LedgerSuite keeps its stricter explicit deprecation gate.
+
+## D-010 — Archive only proven-inactive material
+
+- **State:** Accepted under the owner's archive instruction.
+- **Decision:** Move unreferenced assets and non-gating archaeology to export-excluded `archive/` with a restoration manifest. Archived paths are historical evidence, not runtime, authority, or test coverage.
+- **Exclusions:** Never archive a compatibility route, migration/format reader, user-data recovery path, canonical fixture, current test, license notice, or source required for reproducibility merely because it is old.
+- **Current application:** The 2026-07-22 archive set and reasons are recorded in `archive/README.md`; no material was deleted.
+
+## D-011 — Contain shared-origin workers and executable scoring
+
+- **State:** Accepted and verified locally for R0.
+- **Decision:** PMQuiz retains its existing worker only with `selfquiz-`-scoped cleanup and named-cache matching. Noodle Nudge adopts the shared app-owned PWA assurance contract with a `noodle-nudge-` prefix, content-addressed complete staging, explicit schema-compatible activation, and one last-known-good shell.
+- **Scoring:** Noodle formulas are inert data evaluated by a dependency-free, bounded tokenizer/parser/evaluator. Only the functions and operators used by canonical content are accepted; unknown syntax, identifiers, excessive complexity, division by zero, and non-finite results fail closed. Dynamic compilation and `unsafe-eval` are prohibited.
+- **Compatibility:** All ten canonical assessments and 42 rule outputs match the captured v1 fixture. Routes, IndexedDB schema, backup/import formats, stored answers/results/history, and PMQuiz behavior are unchanged.
+- **Evidence:** Static guards, manifest/hash validation, malicious-expression unit tests, quota/missing/corrupt worker faults, browser update/offline/last-known-good flows, and foreign-cache sentinels pass locally.
+- **Rollback:** Revert the R0 runtime commit. No data migration or destructive store mutation occurs; the legacy Noodle cache can be adopted by the new worker but is not required to restore browser data.
+
+## D-012 — Freeze opaque TS-Dash and establish R1 contracts
+
+- **State:** Accepted and verified locally for R1.
+- **Decision:** Readable TS-Dash source recovery was exhausted across the checkout, local Git history/objects, and workspace. Freeze the four generated runtime artifacts by hash and permit changes only through the behavior-first readable rewrite contract; never treat the bundle as source.
+- **Foundations:** `config/deliverables.json` is the canonical version source. Dependency/SBOM, curated artifact, content governance, CommonGround design, OmniCore boundary, accessibility, and candidate/deploy/postdeploy contracts are independently testable and introduce no shared app data or migration.
+- **Content:** All inventoried PMQuiz, Noodle, and Flexx content remains quarantined until accountable source/license/domain review. User-facing language cannot imply endorsement, validation, diagnosis, treatment, safety clearance, or guaranteed outcomes.
+- **Rollback:** Revert commit `620dbdd`. No store, user record, route, import/export format, or compatibility path was migrated.
+
+## D-013 — Extract OmniCore only at proven seams
+
+- **State:** Accepted and verified locally for R2.
+- **Decision:** OmniCore `1.0.0` contains only dependency-free pure error/result, canonical integrity, time, IndexedDB completion, recovery-receipt, portable-transfer, app-scoped PWA, design, and fixture contracts with at least two real consumers. CommonGround and HealthOS own adapters and all mutation scope.
+- **Exclusions:** No shared database, transaction policy, route, domain record, global bus, universal worker, background synchronization, hidden cross-app access, or framework wrapper. HealthOS records and timer logic are app-owned; their former shared URLs remain compatibility re-exports.
+- **Compatibility:** R2 changes no database version, store, record schema, route, cache prefix, worker registration, transfer/export/import format, or user-data migration. Existing formats and URLs remain tested.
+- **Evidence:** `shared/omnicore/manifest.json`, `tests/omnicore-regression.mjs`, existing browser fault/recovery suites, and the deterministic offline shell manifests. Full candidate and moderate dependency audit pass locally.
+- **Rollback:** Revert implementation commit `1db2892`. R2 performed no data mutation or schema upgrade, so rollback is code-only.
+
+## D-014 — Seed LifeOS without absorbing app runtimes
+
+- **State:** Accepted and verified locally for R3A.
+- **Decision:** CommonGround LifeOS is a product shell label over the unchanged HealthOS Focus runtime. Focus remains HealthOS-owned; Reflection remains Noodle-owned and adapter-only; Strength remains a link to canonical Flexx Files. Shell membership grants no cross-app data access.
+- **Restore safety:** HealthOS backup restore commits a durable pending-preference marker with canonical IndexedDB state before one localStorage preference write. Preference failure is visible and retryable and cannot claim complete restore.
+- **Reflection boundary:** Ten local assessment definitions and the bounded 42-rule scorer are versioned behind a Noodle-owned adapter. Structural/scoring validation is not content approval. The only LifeOS mapping is an exact preview fixture with mutation explicitly forbidden.
+- **Compatibility:** HealthOS/Noodle/Flexx routes, stores, records, formats, worker/cache scopes, scoring outputs, UI workflows, and legacy module URLs remain supported without migration.
+- **Rollback:** Revert implementation commit `17863b9`; no data downgrade or migration reversal is required.
+
+## D-015 — Extract Strength without transferring ownership
+
+- **State:** Accepted and verified locally for R3B.
+- **Decision:** Flexx Files owns versioned Strength calculation, readiness, recovery, storage-contract, and adapter seams. Its UI consumes the adapter, while CommonGround LifeOS receives only module metadata and an exact non-mutating preview contract.
+- **Compatibility:** Preserve the seven `flexx_` keys, v3 session/draft shapes, legacy/current backups, output formats, route, worker/cache scope, independent reset, and all 20 existing global UI handlers. No migration, dual-write, foreign-store read, shared runtime, or content approval occurs.
+- **Evidence:** The frozen characterization hash covers 250 deterministic histories, every public progression/lookup method, and 1,041 plate inputs. Unit/browser gates cover readiness, recovery, malformed/quota faults, draft retention, foreign storage/cache survival, complete offline staging, responsive/file/accessibility behavior, and preview no-mutation.
+- **Rollback:** Revert implementation commit `097822a`; R3B changes no persisted schema or user data, so rollback is code-only.
+
+## D-016 — Modularize Flexx orchestration behind an exact compatibility facade
+
+- **State:** Accepted and verified locally for R3C.
+- **Decision:** Flexx owns versioned state/selectors, commands, timer, modal, safe view/chart, and DOM/storage binding modules. `js/app.js` is a 209-line composition root; the existing 20 `window` names remain only as an explicit compatibility facade.
+- **Compatibility:** Route, visible workflow, calculations, timing, translations, controls, seven `flexx_` keys, v3 records/drafts, backup/import/reset, worker/cache scope, and outputs remain unchanged. Session storage events invalidate local cache without interrupting an active workout; a completed session cannot be reintroduced as a draft.
+- **Evidence:** Deterministic and browser gates cover every command, phase/render/modal/timer path, resume/draft, progression/deload, swaps, pagination/chart/protocol, malformed/quota import, reset cancel/failure, multi-tab refresh, foreign-scope survival, offline, file, responsive, and accessibility behavior.
+- **Rollback:** Revert implementation commit `93cd803`; R3C changes no persisted schema or user data, so rollback is code-only.
+
+## D-017 — Modularize Noodle orchestration without transferring Reflection ownership
+
+- **State:** Accepted and verified locally for R3D.
+- **Decision:** Noodle owns eight controller modules for state/selectors, transactional storage, content, assessment sessions, settings/recovery, safe views/chart rendering, and lifecycle/DOM bindings. `app.js` is a 119-line composition root and the HTML is a 65-line shell.
+- **Compatibility:** Preserve `NoodleNudgeDB` v1 and its store/key/record shapes, nine runtime/export fields, seven persisted fields, ten definitions, 42 outputs, five routes, both interaction types, backups, old scoring URL, worker/cache scope, and nine evidenced global bindings. No LifeOS store access or data migration occurs.
+- **Safety:** Assessment completion merges answers/results/history atomically with the latest record; lifecycle refresh preserves active forms; imports fail atomically; reset starts a complete backup before scoped deletion; foreign stores/caches survive. Dynamic HTML and inline handlers are removed, and script CSP no longer permits `unsafe-inline`.
+- **Rollback:** Revert implementation commit `0d8634c`; R3D changes no persisted schema or user data, so rollback is code-only.
+
+## D-018 — Converge LifeOS visually without creating shared state
+
+- **State:** Accepted and verified locally for R3E.
+- **Decision:** CommonGround design contract `1.1.0` supplies one semantic type,
+  spacing, shape, surface, status, focus, target, elevation, overlay, and motion
+  vocabulary to HealthOS, Noodle, and Flexx through app-owned CSS mappings and
+  integrity-bound complete shells.
+- **Identity and ownership:** Reflection retains its calm light/blue identity,
+  Focus its ambient dark/green identity, and Strength its dense dark/orange
+  identity. Shared CSS receives no DOM controller, route, store, record,
+  worker, cache, transfer, recovery, or domain capability.
+- **Theme boundary:** Selectable light/dark/system persistence is deferred.
+  There is no accepted cross-app preference owner, storage key, compatibility,
+  recovery, or rollback contract; R3E does not invent one.
+- **Evidence:** Deterministic adoption/PWA-integrity checks, per-surface
+  screenshots, semantic contrast, focus, 44 px target, forced-color,
+  reduced-motion, reflow, responsive, one-input, file, offline, update/recovery,
+  and existing full behavior gates pass locally.
+- **Rollback:** Revert implementation commit `8e8b5a1`; R3E changes no persisted
+  state, so rollback is code/style-only.
+
+## D-019 — Seed WorkOS from existing CommonGround authority
+
+- **State:** Accepted and verified locally for R4A.
+- **Decision:** WorkOS `1.0.0` is a CommonGround-owned shell, catalog, and
+  adapter over the existing facilitation and Decision Analysis runtime.
+  Collaboration and Decisions are active; Insights, Learning, and Knowledge are
+  inactive metadata with no route or mutation authority.
+- **Compatibility:** The existing matter registry remains authoritative.
+  IndexedDB v4, all thirteen stores, matter rules/routes/revisions, CommonGround
+  and LedgerSuite formats, transfer/reset behavior, worker/cache scope, and
+  focused-app independence remain unchanged.
+- **Boundary:** TS-Dash requires a readable behavior-first rewrite before
+  Insights activation. PMQuiz requires content governance before Learning.
+  Knowledge requires an accepted owner and user-controlled data/recovery
+  contract. Catalog membership never authorizes hidden aggregation or
+  cross-app access.
+- **Rollback:** Revert implementation commit `f52d957`; R4A changes no persisted
+  schema or user data, so rollback is code/style-only.
+
+## D-020 — Prove readable Insights parity before granting runtime authority
+
+- **State:** Accepted and verified locally for bounded R4B.
+- **Decision:** CommonGround owns a dependency-free readable Insights successor
+  for parsing, normalization, deterministic analytics, file transforms, pure
+  preview transactions, and an accessible test harness. It remains inactive:
+  no product route, store, import surface, worker, mutation authority, or
+  `TSDashDB` access exists.
+- **Compatibility:** `/apps/ts-dash/`, its four hash-frozen artifacts,
+  TSDashDB physical v1/v2 upgrade, mappings, normalization, units, warnings,
+  filenames, JSON/CSV semantics, clear flow, CSP, PWA, and focused-app identity
+  remain unchanged. CommonGround merely integrity-caches the inactive readable
+  source for offline verification.
+- **Evidence:** Golden fixtures and live-browser comparison prove normalized
+  output and legacy package round-trip parity; deterministic faults cover
+  malformed/oversized/stale/quota/partial/duplicate inputs; browser tests cover
+  the additive legacy upgrade, semantic chart/table, keyboard/touch sizing,
+  reflow, forced colors, reduced motion, and offline source retrieval.
+- **Boundary:** Owner acceptance, manual assistive-technology testing, real
+  quota/eviction, activation, storage, cutover, migration, retirement,
+  deployment, and publication remain `NOT_RUN` and require a later decision.
+- **Rollback:** Revert implementation commit `0f5b455`; R4B changes no persisted
+  schema or user data, so rollback is code/test-only.

@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "tier": "Tier 2",
   "title": "Authentic & Ethical Leadership Profile",
-  "description": "This assessment helps you understand your natural approach to leadership, focusing on authenticity, ethical decision-making, and your capacity to inspire and influence others effectively and responsibly. It combines modern, evidence-based leadership concepts to provide a holistic view of your potential as a leader.",
+  "description": "This self-reflection activity explores responses related to authenticity, ethical decision-making, and influence. It is not a validated measure of leadership capacity or potential.",
   "instructions": "This questionnaire contains items about different dimensions of authentic leadership and ethical behavior. There are no right or wrong responses, so please answer honestly. Use the following scale when responding to each statement by writing the number from the scale below that you feel most accurately characterizes your response to the statement.",
   "scientificBasis": {
-    "summary": "This assessment is based on the Authentic Leadership theory, which emphasizes four components: self-awareness, internalized moral perspective, balanced processing, and relational transparency. It also integrates principles of ethical leadership, which focuses on demonstrating appropriate conduct through personal actions and promoting ethical behavior to followers.",
-    "citation": "Authentic Leadership items are based on the concepts presented in Northouse, P.G. (2010). Leadership: Theory and practice, 5th ed. Thousand Oaks, CA: Sage. Ethical leadership items are based on concepts from Brown, M. E., Treviño, L. K., and Harrison, D. A. (2005). Ethical Leadership: A Social Learning Perspective for Construct Development and Testing. Organizational Behavior and Human Decision Processes, 97, 117-134. All items are adapted to be legally safe for commercial use and are based on public domain scientific models or IPIP concepts."
+    "summary": "This self-reflection activity draws on authentic- and ethical-leadership concepts. It has not been independently validated and does not establish ethical conduct or leadership ability.",
+    "citation": "Conceptual reference only; item provenance, reuse terms, and psychometric properties require review in the content ledger."
   },
   "responseScale": [
     { "text": "Strongly Disagree", "value": 1 },

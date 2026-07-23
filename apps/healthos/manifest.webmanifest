@@ -1,0 +1,18 @@
+{
+  "id": "./",
+  "name": "HealthOS Focus",
+  "short_name": "HealthOS",
+  "description": "Local-first daily-state records and trustworthy focus timing.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#081713",
+  "theme_color": "#14342b",
+  "categories": ["productivity", "health", "utilities"],
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    { "src": "./screenshot.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "HealthOS Focus timer" }
+  ]
+}
