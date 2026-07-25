@@ -15,6 +15,6 @@
     "qa": "npm run test:all"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1"
+    "@playwright/test": "^1.62.0"
   }
 }
