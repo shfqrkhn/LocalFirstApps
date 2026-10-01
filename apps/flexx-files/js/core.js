@@ -1020,9 +1020,13 @@ export const Calculator = {
             return last ? last.weight * CONST.STALL_DELOAD_PERCENTAGE : CONST.OLYMPIC_BAR_WEIGHT_LBS;
         }
 
-        // Normal progression: add weight on success
+        // Base-building phase: establish movement skill, tolerance and consistency
+        // before automatically increasing load.
         const last = this.getLastExercise(exerciseId, sessions);
         if (!last) return CONST.OLYMPIC_BAR_WEIGHT_LBS;
+        if (sessions.length < CONST.BASE_BUILDING_SESSIONS) return last.weight;
+
+        // Normal progression: add weight on success
 
         // Check if coming out of a deload week
         if (sessions.length > 0) {
