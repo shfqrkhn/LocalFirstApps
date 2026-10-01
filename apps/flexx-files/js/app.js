@@ -1,4 +1,5 @@
 import { EXERCISES, WARMUP, DECOMPRESSION, CARDIO_OPTIONS, RECOVERY_CONFIG, EXERCISE_MAP, WARMUP_MAP, DECOMPRESSION_MAP } from './config.js';
+import { buildStrengthPrescription, PRESCRIPTION_VERSION } from './prescription.js';
 import { Storage, Calculator, Validator } from './core.js';
 import { Observability, Logger, Metrics, Analytics } from './observability.js';
 import { Accessibility, ScreenReader } from './accessibility.js';
@@ -92,7 +93,7 @@ function preSanitizeConfig() {
 }
 
 // === STATE & TOOLS ===
-const State = { view: 'today', phase: null, recovery: null, activeSession: null, historyLimit: CONST.HISTORY_PAGINATION_LIMIT };
+const State = { view: 'today', phase: null, recovery: null, activeSession: null, historyLimit: CONST.HISTORY_PAGINATION_LIMIT, availableMinutes: 45 };
 let _navCache = null;
 let _lastNavView = null;
 // Optimization: Cache generated session cards to avoid repeated string generation/sanitization
@@ -252,6 +253,13 @@ function renderRecovery(c) {
                     <h3>⚠️ ${I18n.t('recovery.longGap')}</h3>
                     <p class="text-xs">${I18n.t('recovery.longGapDesc', { days: check.days })}</p>
                 </div>` : ''}
+            <div class="card">
+                <h3>Time available today</h3>
+                <p class="text-xs" style="margin-bottom:0.75rem">The session will keep the highest-value full-body work that fits.</p>
+                <div class="flex-row" style="gap:0.5rem; flex-wrap:wrap">
+                    ${[20,30,45,60].map(m => `<button type="button" class="btn ${State.availableMinutes === m ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setAvailableMinutes(${m})" aria-pressed="${State.availableMinutes === m}">${m} min</button>`).join('')}
+                </div>
+            </div>
             <button type="button" class="card" onclick="window.setRec('green')" style="cursor:pointer; width:100%; text-align:left; font-family:inherit; font-size:inherit; color:inherit">
                 <h3 style="color:var(--success)">✓ ${I18n.t('recovery.green')}</h3>
                 <p class="text-xs">${I18n.t('recovery.greenDesc')}</p>
@@ -337,18 +345,13 @@ function renderLifting(c) {
             <p class="text-xs" style="margin-bottom:1.5rem; text-align:center; opacity:0.8">${I18n.t('workout.tempo')}</p>
             ${(() => {
                 let exercisesHtml = '';
-                // Optimization: Create Map for O(1) lookup
-                const activeMap = new Map();
-                if (State.activeSession?.exercises) {
-                    for (const e of State.activeSession.exercises) {
-                        activeMap.set(e.id, e);
-                    }
-                }
+                const activeExercises = State.activeSession?.exercises || [];
 
-                for (let j = 0; j < EXERCISES.length; j++) {
-                    const ex = EXERCISES[j];
-                    // Check state first for persistence
-                    const activeEx = activeMap.get(ex.id);
+                for (let j = 0; j < activeExercises.length; j++) {
+                    const activeEx = activeExercises[j];
+                    const ex = EXERCISE_MAP.get(activeEx.id);
+                    if (!ex) continue;
+                    const prescribedSets = activeEx.prescribedSets || ex.sets;
                     const hasAlt = activeEx?.usingAlternative;
                     const name = Sanitizer.sanitizeString(hasAlt ? activeEx.altName : ex.name);
                     const vid = hasAlt && ex.altLinks?.[activeEx.altName] ? ex.altLinks[activeEx.altName] : ex.video;
@@ -361,11 +364,11 @@ function renderLifting(c) {
 
                     // Optimization: Use for loop to avoid garbage collection pressure from Array.from
                     let setButtonsHtml = '';
-                    for (let i = 0; i < ex.sets; i++) {
+                    for (let i = 0; i < prescribedSets; i++) {
                         const isSetDone = activeEx && i < activeEx.setsCompleted;
                         const completedClass = isSetDone ? ' completed' : '';
                         const ariaPressed = isSetDone ? 'true' : 'false';
-                        setButtonsHtml += `<button type="button" class="set-btn${completedClass}" id="s-${ex.id}-${i}" onclick="window.togS('${ex.id}',${i},${ex.sets})" aria-label="${I18n.t('a11y.set', { number: i+1 })}" aria-pressed="${ariaPressed}">${i+1}</button>`;
+                        setButtonsHtml += `<button type="button" class="set-btn${completedClass}" id="s-${ex.id}-${i}" onclick="window.togS('${ex.id}',${i},${prescribedSets})" aria-label="${I18n.t('a11y.set', { number: i+1 })}" aria-pressed="${ariaPressed}">${i+1}</button>`;
                     }
 
                     exercisesHtml += `
@@ -374,7 +377,7 @@ function renderLifting(c) {
                         <div>
                             <div class="text-xs" style="color:var(--accent)">${ex.category}</div>
                             <h2 id="name-${ex.id}" style="margin-bottom:0">${name}</h2>
-                            <div class="text-xs" style="opacity:0.8; margin-bottom:0.25rem">${ex.sets} sets × ${ex.reps} reps</div>
+                            <div class="text-xs" style="opacity:0.8; margin-bottom:0.25rem">${prescribedSets} sets × ${ex.reps} reps</div>
                             <div id="last-${ex.id}" class="text-xs" style="opacity:0.6; margin-bottom:0.5rem">${lastText}</div>
                         </div>
                         <a id="vid-${ex.id}" href="${vid}" target="_blank" rel="noopener noreferrer" style="font-size:1.5rem; text-decoration:none" aria-label="Watch video for ${name}">🎥</a>
@@ -661,6 +664,12 @@ function renderProtocol(c) {
 }
 
 // === HANDLERS ===
+window.setAvailableMinutes = (minutes) => {
+    const value = Number(minutes);
+    State.availableMinutes = Number.isFinite(value) ? Math.min(90, Math.max(15, Math.round(value))) : 45;
+    render();
+};
+
 window.updateWarmup = (id) => {
     try {
         const el = document.getElementById(`w-${id}`);
@@ -733,11 +742,32 @@ window.setRec = async (r) => {
     }
 
     State.recovery = r;
+    const sessions = Storage.getSessions();
+    const prescription = buildStrengthPrescription({
+        availableMinutes: State.availableMinutes,
+        recoveryStatus: r,
+        sessionIndex: sessions.length
+    });
+
     State.activeSession = {
         id: crypto.randomUUID(),
         date: new Date().toISOString(),
         recoveryStatus: r,
-        exercises: [],
+        availableMinutes: prescription.availableMinutes,
+        prescriptionVersion: PRESCRIPTION_VERSION,
+        exercises: prescription.exercises.map(item => {
+            const ex = EXERCISE_MAP.get(item.id);
+            return {
+                id: ex.id,
+                name: ex.name,
+                weight: Calculator.getRecommendedWeight(ex.id, r, sessions),
+                prescribedSets: item.sets,
+                setsCompleted: 0,
+                completed: false,
+                usingAlternative: false,
+                skipped: false
+            };
+        }),
         warmup: WARMUP.map(w => ({ id: w.id, completed: false, altUsed: '' }))
     };
     State.phase = 'warmup';
@@ -917,32 +947,38 @@ window.nextPhase = async (p) => {
                 };
             });
 
-            // Initialize exercises with recommended weights for persistence
-            const sessions = Storage.getSessions();
-            State.activeSession.exercises = EXERCISES.map(ex => ({
-                id: ex.id,
-                name: ex.name,
-                weight: Calculator.getRecommendedWeight(ex.id, State.recovery, sessions),
-                setsCompleted: 0,
-                completed: false,
-                usingAlternative: false,
-                skipped: false
-            }));
+            // Backward-compatible fallback for drafts created before adaptive prescriptions.
+            if (!State.activeSession.exercises?.length) {
+                const sessions = Storage.getSessions();
+                State.activeSession.exercises = EXERCISES.map(ex => ({
+                    id: ex.id,
+                    name: ex.name,
+                    weight: Calculator.getRecommendedWeight(ex.id, State.recovery, sessions),
+                    prescribedSets: ex.sets,
+                    setsCompleted: 0,
+                    completed: false,
+                    usingAlternative: false,
+                    skipped: false
+                }));
+            }
         }
 
         if(p === 'cardio') {
-            State.activeSession.exercises = EXERCISES.map(ex => {
+            State.activeSession.exercises = State.activeSession.exercises.map(activeEx => {
+                const ex = EXERCISE_MAP.get(activeEx.id);
+                if (!ex) return activeEx;
                 const weightElement = document.getElementById(`w-${ex.id}`);
-                const w = weightElement ? (parseFloat(weightElement.value) || 0) : 0;
+                const w = weightElement ? (parseFloat(weightElement.value) || 0) : activeEx.weight;
                 const sets = document.querySelectorAll(`#card-${ex.id} .set-btn.completed`).length;
                 const altElement = document.getElementById(`alt-${ex.id}`);
                 const alt = altElement ? altElement.value : '';
+                const targetSets = activeEx.prescribedSets || ex.sets;
                 return {
-                    id: ex.id,
+                    ...activeEx,
                     name: ex.name,
                     weight: w,
                     setsCompleted: sets,
-                    completed: sets === ex.sets,
+                    completed: sets >= targetSets,
                     usingAlternative: !!alt,
                     altName: alt
                 };
