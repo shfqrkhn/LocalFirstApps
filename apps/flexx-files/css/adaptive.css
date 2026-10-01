@@ -1,0 +1,245 @@
+:root {
+    --bg-primary: #0b0d0f;
+    --bg-secondary: #11151a;
+    --bg-card: #171c22;
+    --text-primary: #f5f7fa;
+    --text-secondary: #aab3bd;
+    --accent: #f4a62a;
+    --accent-glow: rgba(244, 166, 42, 0.18);
+    --success: #4ade80;
+    --warning: #facc15;
+    --error: #fb7185;
+    --border: #2a323b;
+    --radius-lg: 14px;
+    --radius-sm: 10px;
+    --nav-height: 68px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background:
+        radial-gradient(circle at top, rgba(244, 166, 42, 0.06), transparent 30rem),
+        var(--bg-primary);
+    line-height: 1.45;
+}
+
+.sponsor-link {
+    display: none;
+}
+
+.skip-link {
+    top: -100px;
+}
+
+.skip-link:focus {
+    top: 8px;
+    left: 8px;
+    border-radius: var(--radius-sm);
+}
+
+#main-content {
+    padding-top: 1.25rem;
+}
+
+.container {
+    max-width: 680px;
+}
+
+h1 {
+    font-size: clamp(1.6rem, 5vw, 2.1rem);
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin-bottom: 0.75rem;
+}
+
+h2 {
+    letter-spacing: -0.02em;
+}
+
+h3 {
+    letter-spacing: -0.01em;
+}
+
+.text-xs {
+    letter-spacing: 0;
+    line-height: 1.5;
+}
+
+.card {
+    box-shadow: none;
+    border-color: var(--border);
+    padding: 1.15rem;
+    margin-bottom: 0.85rem;
+}
+
+.card:active {
+    transform: none;
+}
+
+.btn-primary,
+.btn-secondary {
+    min-height: 48px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+.btn-primary {
+    color: #17120a;
+}
+
+.btn-primary:hover:not(:active) {
+    transform: none;
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.btn-secondary {
+    color: var(--text-primary);
+}
+
+.stepper-control {
+    border-color: var(--border);
+    background: #0f1317;
+}
+
+.stepper-btn {
+    border-width: 1px;
+    background: transparent;
+    min-width: 48px;
+}
+
+.stepper-value {
+    color: var(--text-primary);
+}
+
+.set-btn {
+    min-height: 48px;
+    background: #101419;
+    color: var(--text-primary);
+}
+
+.set-btn.completed {
+    color: #07120b;
+    box-shadow: none;
+}
+
+.bottom-nav {
+    border-top-color: var(--border);
+    background: rgba(11, 13, 15, 0.96);
+    justify-content: center;
+    gap: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.nav-item {
+    flex: 1;
+    max-width: 140px;
+    min-height: 48px;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8rem;
+    opacity: 1;
+}
+
+.nav-item.active {
+    color: var(--text-primary);
+    background: rgba(244, 166, 42, 0.1);
+    transform: none;
+}
+
+.nav-item .icon {
+    display: none;
+}
+
+.timer-dock {
+    border-radius: 14px;
+    border-color: var(--border);
+    background: rgba(23, 28, 34, 0.97);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+}
+
+.timer-display {
+    color: var(--text-primary);
+}
+
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.modal-box {
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+select,
+input[type="number"],
+input[type="text"] {
+    min-height: 48px;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+details > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+}
+
+.adaptive-kicker {
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.adaptive-summary {
+    display: grid;
+    gap: 0.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0.75rem 0 1rem;
+}
+
+.adaptive-metric {
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-secondary);
+}
+
+.adaptive-metric strong {
+    display: block;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+}
+
+.adaptive-metric span {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+}
+
+.choice-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.choice-row .btn {
+    width: auto;
+}
+
+@media (min-width: 700px) {
+    .adaptive-summary {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body {
+        background: var(--bg-primary);
+    }
+}
