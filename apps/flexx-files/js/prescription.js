@@ -1,6 +1,7 @@
 import { EXERCISE_MAP } from './config.js';
 
-export const PRESCRIPTION_VERSION = '1.0';
+export const PRESCRIPTION_VERSION = '1.1';
+export const BASE_BUILDING_SESSIONS = 6;
 
 const MIN_SESSION_MINUTES = 15;
 const MAX_SESSION_MINUTES = 90;
@@ -24,7 +25,8 @@ function exerciseLimit(minutes) {
     return 9;
 }
 
-function prescribedSets(minutes, rank) {
+function prescribedSets(minutes, rank, baseBuilding) {
+    if (baseBuilding) return 2;
     if (minutes >= 60 && rank < 6) return 3;
     if (minutes >= 45 && rank < 4) return 3;
     return 2;
@@ -38,45 +40,107 @@ function isPull(id) {
     return id === 'pull' || id === 'pull_vert';
 }
 
+function preferredAlternative(config, varietyMode) {
+    if (!config?.alternatives?.length || varietyMode === 'default') return null;
+    if (varietyMode === 'fresh') return config.alternatives[0];
+    if (varietyMode === 'different') return config.alternatives[1] || config.alternatives[0];
+    return null;
+}
+
+function buildConditioning({ environment, minutes, recoveryStatus, baseBuilding }) {
+    if (recoveryStatus === 'red') {
+        return { mode: 'none', durationMinutes: 0, reason: 'low readiness' };
+    }
+
+    if (environment === 'home-bike') {
+        if (!baseBuilding && recoveryStatus === 'green' && minutes >= 20) {
+            return {
+                type: 'Stationary Bike',
+                mode: 'interval',
+                durationMinutes: Math.min(24, minutes),
+                intervals: '6 x 30s hard / 60s easy; not all-out',
+                reason: 'time-efficient aerobic stimulus after base-building'
+            };
+        }
+        return {
+            type: 'Stationary Bike',
+            mode: 'steady',
+            durationMinutes: minutes,
+            reason: 'base-building or lower-readiness aerobic work'
+        };
+    }
+
+    if (minutes >= 45) {
+        return {
+            type: 'Stationary Bike',
+            mode: baseBuilding ? 'steady' : 'optional-interval',
+            durationMinutes: baseBuilding ? 5 : 6,
+            reason: 'compact cardiorespiratory complement'
+        };
+    }
+
+    return { mode: 'none', durationMinutes: 0, reason: 'strength work has higher marginal value in this time budget' };
+}
+
 export function buildStrengthPrescription({
     availableMinutes = 45,
     recoveryStatus = 'green',
-    sessionIndex = 0
+    sessionIndex = 0,
+    environment = 'gym',
+    varietyMode = 'default',
+    unavailableExerciseIds = []
 } = {}) {
     const minutes = clampMinutes(availableMinutes);
+    const baseBuilding = (Number(sessionIndex) || 0) < BASE_BUILDING_SESSIONS;
+    const conditioning = buildConditioning({ environment, minutes, recoveryStatus, baseBuilding });
+
+    if (environment === 'home-bike') {
+        return {
+            version: PRESCRIPTION_VERSION,
+            availableMinutes: minutes,
+            recoveryStatus,
+            environment,
+            baseBuilding,
+            exercises: [],
+            conditioning,
+            rationale: 'Home bike complements aerobic fitness but does not replace required resistance-training coverage.'
+        };
+    }
+
     const rotation = ROTATIONS[Math.abs(Number(sessionIndex) || 0) % ROTATIONS.length];
     let limit = exerciseLimit(minutes);
 
-    // Readiness should change the dose conservatively without replacing observed
-    // performance as the primary long-term progression signal.
     if (recoveryStatus === 'yellow' && limit > 4) limit -= 1;
+    if (recoveryStatus === 'red') limit = 0;
 
     const ids = rotation.filter(id => EXERCISE_MAP.has(id)).slice(0, limit);
 
-    // A compressed session must remain broadly full-body: hinge + knee plus at
-    // least one push and one pull whenever the configured exercise pool permits it.
     const mandatory = ['hinge', 'knee'];
     for (const id of mandatory) {
-        if (EXERCISE_MAP.has(id) && !ids.includes(id)) ids.unshift(id);
+        if (EXERCISE_MAP.has(id) && !ids.includes(id) && limit > 0) ids.unshift(id);
     }
 
-    if (!ids.some(isPush)) {
+    if (limit > 0 && !ids.some(isPush)) {
         const push = rotation.find(id => isPush(id) && EXERCISE_MAP.has(id));
         if (push) ids.push(push);
     }
-    if (!ids.some(isPull)) {
+    if (limit > 0 && !ids.some(isPull)) {
         const pull = rotation.find(id => isPull(id) && EXERCISE_MAP.has(id));
         if (pull) ids.push(pull);
     }
 
+    const unavailable = new Set(unavailableExerciseIds);
     const uniqueIds = [...new Set(ids)].slice(0, limit);
 
     const exercises = uniqueIds.map((id, rank) => {
         const config = EXERCISE_MAP.get(id);
+        const fallback = unavailable.has(id) ? (config.alternatives?.[0] || null) : preferredAlternative(config, varietyMode);
         return {
             id,
-            sets: prescribedSets(minutes, rank),
+            sets: prescribedSets(minutes, rank, baseBuilding),
             reps: config.reps,
+            preferredAlternative: fallback,
+            supersetGroup: Math.floor(rank / 2) + 1,
             reason: rank < 4 ? 'core full-body coverage' : 'added because time budget permits'
         };
     });
@@ -85,8 +149,13 @@ export function buildStrengthPrescription({
         version: PRESCRIPTION_VERSION,
         availableMinutes: minutes,
         recoveryStatus,
+        environment,
+        baseBuilding,
         exercises,
-        rationale: 'Minimum effective full-body dose first; lower-priority work is added only when the time budget permits.'
+        conditioning,
+        rationale: baseBuilding
+            ? 'Base-building phase: practice, tolerance and consistency before load/intensity progression.'
+            : 'Minimum effective full-body dose first; lower-priority work is added only when the time budget permits.'
     };
 }
 
