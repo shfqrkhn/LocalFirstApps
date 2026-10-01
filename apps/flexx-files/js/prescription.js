@@ -6,9 +6,17 @@ export const BASE_BUILDING_SESSIONS = 6;
 const MIN_SESSION_MINUTES = 15;
 const MAX_SESSION_MINUTES = 90;
 
-const ROTATIONS = [
-    ['hinge', 'knee', 'push_horz', 'pull_vert', 'push_vert', 'pull', 'carry', 'calves', 'push_incline'],
-    ['knee', 'hinge', 'push_vert', 'pull', 'push_horz', 'pull_vert', 'carry', 'calves', 'push_incline']
+const ROUTINES = [
+    {
+        id: 'A',
+        exercises: ['hinge', 'push_horz', 'pull', 'knee', 'pull_vert', 'carry'],
+        groups: [0, 1, 1, 2, 2, 3]
+    },
+    {
+        id: 'B',
+        exercises: ['knee', 'push_vert', 'pull', 'hinge', 'push_horz', 'pull_vert'],
+        groups: [0, 1, 1, 2, 2, 3]
+    }
 ];
 
 function clampMinutes(value) {
@@ -19,16 +27,13 @@ function clampMinutes(value) {
 
 function exerciseLimit(minutes) {
     if (minutes < 25) return 4;
-    if (minutes < 35) return 5;
-    if (minutes < 45) return 6;
-    if (minutes < 60) return 7;
-    return 9;
+    if (minutes < 55) return 5;
+    return 6;
 }
 
-function prescribedSets(minutes, rank, baseBuilding) {
-    if (baseBuilding) return 2;
-    if (minutes >= 60 && rank < 6) return 3;
-    if (minutes >= 45 && rank < 4) return 3;
+function prescribedSets() {
+    // Via Negativa default: two high-quality work sets. A future response-based
+    // volume engine may earn a third set for specific movements/users.
     return 2;
 }
 
@@ -70,16 +75,7 @@ function buildConditioning({ environment, minutes, recoveryStatus, baseBuilding 
         };
     }
 
-    if (minutes >= 45) {
-        return {
-            type: 'Stationary Bike',
-            mode: baseBuilding ? 'steady' : 'optional-interval',
-            durationMinutes: baseBuilding ? 5 : 6,
-            reason: 'compact cardiorespiratory complement'
-        };
-    }
-
-    return { mode: 'none', durationMinutes: 0, reason: 'strength work has higher marginal value in this time budget' };
+    return { mode: 'none', durationMinutes: 0, reason: 'home bike has lower overhead for planned aerobic work' };
 }
 
 export function buildStrengthPrescription({
@@ -107,7 +103,8 @@ export function buildStrengthPrescription({
         };
     }
 
-    const rotation = ROTATIONS[Math.abs(Number(sessionIndex) || 0) % ROTATIONS.length];
+    const routine = ROUTINES[Math.abs(Number(sessionIndex) || 0) % ROUTINES.length];
+    const rotation = routine.exercises;
     let limit = exerciseLimit(minutes);
 
     if (recoveryStatus === 'yellow' && limit > 4) limit -= 1;
@@ -137,11 +134,11 @@ export function buildStrengthPrescription({
         const fallback = unavailable.has(id) ? (config.alternatives?.[0] || null) : preferredAlternative(config, varietyMode);
         return {
             id,
-            sets: prescribedSets(minutes, rank, baseBuilding),
+            sets: prescribedSets(),
             reps: config.reps,
             preferredAlternative: fallback,
-            supersetGroup: Math.floor(rank / 2) + 1,
-            reason: rank < 4 ? 'core full-body coverage' : 'added because time budget permits'
+            supersetGroup: routine.groups[rank] ?? 3,
+            reason: rank < 5 ? 'core full-body coverage' : 'added because time budget permits'
         };
     });
 
@@ -150,6 +147,7 @@ export function buildStrengthPrescription({
         availableMinutes: minutes,
         recoveryStatus,
         environment,
+        routineId: routine.id,
         baseBuilding,
         exercises,
         conditioning,
