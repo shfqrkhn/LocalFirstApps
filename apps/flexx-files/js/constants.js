@@ -17,6 +17,7 @@ export const DELOAD_PERCENTAGE = 0.6; // 60% of max for deload week
 export const STALL_DELOAD_PERCENTAGE = 0.9; // 90% of weight on stall detection
 export const STALL_DETECTION_SESSIONS = 3; // Number of failed sessions to trigger stall
 export const YELLOW_RECOVERY_MULTIPLIER = 0.9; // 90% weight on yellow recovery
+export const BASE_BUILDING_SESSIONS = 6; // Hold loading stable while movement skill/tolerance base is established
 
 // === BARBELL CALCULATIONS ===
 export const OLYMPIC_BAR_WEIGHT_LBS = 45; // Standard Olympic barbell weight
