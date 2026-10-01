@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Flexx Files - Offline Strength Tracker</title>
-    <meta name="description" content="Privacy-first, offline-first strength training tracker with automatic progression">
+    <title>Flexx Files - Adaptive Full-Body Training</title>
+    <meta name="description" content="Local-first adaptive full-body training optimizer for strength, fitness, and time efficiency.">
     <meta name="theme-color" content="#050505">
     <link rel="canonical" href="https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/" />
-    <meta property="og:title" content="Flexx Files - Offline Strength Tracker" />
-    <meta property="og:description" content="Offline-first strength tracker with progression, plate math, rest timing, and local workout history." />
+    <meta property="og:title" content="Flexx Files - Adaptive Full-Body Training" />
+    <meta property="og:description" content="Adaptive local-first training for full-body strength, conditioning, and time efficiency." />
     <meta property="og:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/screenshot.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Flexx Files - Offline Strength Tracker" />
-    <meta name="twitter:description" content="Offline-first strength tracker with progression, plate math, rest timing, and local workout history." />
+    <meta name="twitter:title" content="Flexx Files - Adaptive Full-Body Training" />
+    <meta name="twitter:description" content="Adaptive local-first training for full-body strength, conditioning, and time efficiency." />
     <meta name="twitter:image" content="https://shfqrkhn.github.io/LocalFirstApps/apps/flexx-files/screenshot.png" />
 
     <!-- Content Security Policy -->
@@ -26,10 +26,12 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/adaptive.css">
     <link rel="stylesheet" href="../../suite-shell.css">
     <script src="../../suite-shell.js" defer></script>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <a class="lfa-suite-home" href="../../" aria-label="Back to LocalFirstApps">LocalFirstApps</a>
     <div class="lfa-file-notice" role="status">Local file mode: this app uses browser modules and works best from localhost or GitHub Pages. Use the LocalFirstApps launcher to switch apps.</div>
     <a class="sponsor-link" href="https://github.com/sponsors/shfqrkhn?o=esb" target="_blank" rel="noopener noreferrer">Sponsor</a>
@@ -51,16 +53,16 @@
         <!-- Bottom Navigation -->
         <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
             <button class="nav-item active" data-view="today" aria-label="Navigate to training" aria-current="page">
-                <span class="icon" aria-hidden="true">⚡</span><span>TRAIN</span>
+                <span class="icon" aria-hidden="true"></span><span>Today</span>
             </button>
             <button class="nav-item" data-view="history" aria-label="Navigate to workout logs">
-                <span class="icon" aria-hidden="true">📅</span><span>LOGS</span>
+                <span class="icon" aria-hidden="true"></span><span>History</span>
             </button>
             <button class="nav-item" data-view="progress" aria-label="Navigate to progress charts">
-                <span class="icon" aria-hidden="true">📈</span><span>GAINS</span>
+                <span class="icon" aria-hidden="true"></span><span>Progress</span>
             </button>
             <button class="nav-item" data-view="settings" aria-label="Navigate to system settings">
-                <span class="icon" aria-hidden="true">⚙️</span><span>SYSTEM</span>
+                <span class="icon" aria-hidden="true"></span><span>Settings</span>
             </button>
         </nav>
     </div>
