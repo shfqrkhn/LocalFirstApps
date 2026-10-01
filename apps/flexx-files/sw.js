@@ -1,7 +1,7 @@
 const CACHE_NAME = 'flexx-v3.9.73';
 const ASSETS = [
     './', './index.html', './css/styles.css', './css/adaptive.css',
-    './js/app.js', './js/core.js', './js/config.js', './js/prescription.js',
+    './js/app.js', './js/core.js', './js/config.js', './js/prescription.js', './js/logistics.js',
     './js/accessibility.js', './js/constants.js', './js/i18n.js',
     './js/observability.js', './js/security.js',
     './manifest.json',
