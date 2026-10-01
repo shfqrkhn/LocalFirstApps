@@ -377,6 +377,8 @@ function renderLifting(c) {
                     const vid = hasAlt && ex.altLinks?.[activeEx.altName] ? ex.altLinks[activeEx.altName] : ex.video;
 
                     const w = activeEx ? activeEx.weight : Calculator.getRecommendedWeight(ex.id, State.recovery, sessions);
+                    const targetRir = State.activeSession?.baseBuilding ? '3-4' : '2-3';
+                    const flowLabel = activeEx?.supersetGroup === 0 ? 'Primary' : (activeEx?.supersetGroup ? `Pair ${activeEx.supersetGroup}` : '');
                     // Name Display Fix: Pass actual name (alternative if used) for history lookup
                     const lookupName = hasAlt ? activeEx.altName : ex.id;
                     const last = Calculator.getLastCompletedExercise(lookupName, sessions);
@@ -395,9 +397,9 @@ function renderLifting(c) {
                 <div class="card" id="card-${ex.id}">
                     <div class="flex-row" style="justify-content:space-between; margin-bottom:0.25rem;">
                         <div>
-                            <div class="text-xs" style="color:var(--accent)">${ex.category}</div>
+                            <div class="text-xs" style="color:var(--accent)">${flowLabel ? `${flowLabel} - ` : ''}${ex.category}</div>
                             <h2 id="name-${ex.id}" style="margin-bottom:0">${name}</h2>
-                            <div class="text-xs" style="opacity:0.8; margin-bottom:0.25rem">${prescribedSets} sets × ${ex.reps} reps</div>
+                            <div class="text-xs" style="opacity:0.8; margin-bottom:0.25rem">${prescribedSets} sets x ${ex.reps} reps - target RIR ${targetRir}</div>
                             <div id="last-${ex.id}" class="text-xs" style="opacity:0.6; margin-bottom:0.5rem">${lastText}</div>
                         </div>
                         <a id="vid-${ex.id}" href="${vid}" target="_blank" rel="noopener noreferrer" style="font-size:1.5rem; text-decoration:none" aria-label="Watch video for ${name}">🎥</a>
@@ -411,7 +413,11 @@ function renderLifting(c) {
                     <div class="set-group" role="group" aria-label="Sets for ${name}">
                         ${setButtonsHtml}
                     </div>
-                    <details class="mt-4" style="margin-top:1rem; padding-top:0.5rem; border-top:1px solid var(--border)">
+                    <div class="choice-row" style="margin-top:0.75rem">
+                        <button type="button" class="btn btn-secondary" style="width:auto; padding:0.55rem 0.75rem" onclick="window.quickSwap('${ex.id}','busy')">Busy</button>
+                        <button type="button" class="btn btn-secondary" style="width:auto; padding:0.55rem 0.75rem" onclick="window.quickSwap('${ex.id}','bored')">Bored</button>
+                    </div>
+                    <details class="mt-4" style="margin-top:0.75rem; padding-top:0.5rem; border-top:1px solid var(--border)">
                         <summary class="text-xs">${I18n.t('exercise.alternatives')}</summary>
                         <select id="alt-${ex.id}" onchange="window.swapAlt('${ex.id}')" style="width:100%; margin-top:0.5rem; padding:0.5rem; background:var(--bg-secondary); color:white; border:none" aria-label="Select alternative for ${ex.name}">
                             <option value="">${ex.name}</option>
@@ -793,6 +799,7 @@ window.setRec = async (r) => {
         availableMinutes: prescription.availableMinutes,
         prescriptionVersion: PRESCRIPTION_VERSION,
         environment: prescription.environment,
+        routineId: prescription.routineId || null,
         baseBuilding: prescription.baseBuilding,
         exercises: prescription.exercises.map(item => {
             const ex = EXERCISE_MAP.get(item.id);
@@ -891,6 +898,27 @@ window.togS = (ex, i, max) => {
         }
     } catch (e) {
         Logger.error('Error toggling set:', e);
+    }
+};
+
+window.quickSwap = (id, reason) => {
+    try {
+        const cfg = EXERCISE_MAP.get(id);
+        const select = document.getElementById(`alt-${id}`);
+        if (!cfg || !select || !cfg.alternatives?.length) return;
+
+        const options = ['', ...cfg.alternatives];
+        const currentIndex = Math.max(0, options.indexOf(select.value));
+        select.value = options[(currentIndex + 1) % options.length];
+        window.swapAlt(id);
+
+        const activeEx = State.activeSession?.exercises?.find(e => e.id === id);
+        if (activeEx) {
+            activeEx.swapReason = reason === 'busy' ? 'busy' : 'bored';
+            Storage.saveDraft(State.activeSession);
+        }
+    } catch (e) {
+        Logger.error('Error quick-swapping exercise:', e);
     }
 };
 
