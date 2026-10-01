@@ -43,6 +43,8 @@ export const Sanitizer = {
         if (session.sessionNumber !== undefined) clean.sessionNumber = Number(session.sessionNumber);
         if (session.weekNumber !== undefined) clean.weekNumber = Number(session.weekNumber);
         if (session.totalVolume !== undefined) clean.totalVolume = Number(session.totalVolume);
+        if (session.availableMinutes !== undefined) clean.availableMinutes = Number(session.availableMinutes);
+        if (session.prescriptionVersion !== undefined) clean.prescriptionVersion = String(session.prescriptionVersion);
 
         // Deep scrub exercises
         if (Array.isArray(session.exercises)) {
@@ -58,6 +60,7 @@ export const Sanitizer = {
                 if (ex.usingAlternative !== undefined) cleanEx.usingAlternative = Boolean(ex.usingAlternative);
                 if (ex.altName !== undefined) cleanEx.altName = String(ex.altName);
                 if (ex.skipped !== undefined) cleanEx.skipped = Boolean(ex.skipped);
+                if (ex.prescribedSets !== undefined) cleanEx.prescribedSets = Number(ex.prescribedSets);
                 return cleanEx;
             });
         }
@@ -256,6 +259,12 @@ export const Validator = {
         if (session.totalVolume !== undefined && (typeof session.totalVolume !== 'number' || isNaN(session.totalVolume))) {
             return { valid: false, errors: ['totalVolume must be a number'] };
         }
+        if (session.availableMinutes !== undefined && (typeof session.availableMinutes !== 'number' || !Number.isFinite(session.availableMinutes) || session.availableMinutes < 15 || session.availableMinutes > 90)) {
+            return { valid: false, errors: ['availableMinutes must be between 15 and 90'] };
+        }
+        if (session.prescriptionVersion !== undefined && typeof session.prescriptionVersion !== 'string') {
+            return { valid: false, errors: ['prescriptionVersion must be a string'] };
+        }
 
         // Validate exercises array
         if (!Array.isArray(session.exercises)) {
@@ -360,6 +369,9 @@ export const Validator = {
         }
         if (exercise.skipped !== undefined && typeof exercise.skipped !== 'boolean') {
             return { valid: false, errors: ['skipped must be boolean'] };
+        }
+        if (exercise.prescribedSets !== undefined && (!Number.isInteger(exercise.prescribedSets) || exercise.prescribedSets < 1 || exercise.prescribedSets > 10)) {
+            return { valid: false, errors: ['prescribedSets must be an integer between 1 and 10'] };
         }
 
         return { valid: true, errors: [] };
