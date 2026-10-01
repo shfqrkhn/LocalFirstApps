@@ -93,7 +93,7 @@ function preSanitizeConfig() {
 }
 
 // === STATE & TOOLS ===
-const State = { view: 'today', phase: null, recovery: null, activeSession: null, historyLimit: CONST.HISTORY_PAGINATION_LIMIT, availableMinutes: 45 };
+const State = { view: 'today', phase: null, recovery: null, activeSession: null, historyLimit: CONST.HISTORY_PAGINATION_LIMIT, availableMinutes: 45, environment: 'gym', varietyMode: 'default' };
 let _navCache = null;
 let _lastNavView = null;
 // Optimization: Cache generated session cards to avoid repeated string generation/sanitization
@@ -260,6 +260,26 @@ function renderRecovery(c) {
                     ${[20,30,45,60].map(m => `<button type="button" class="btn ${State.availableMinutes === m ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setAvailableMinutes(${m})" aria-pressed="${State.availableMinutes === m}">${m} min</button>`).join('')}
                 </div>
             </div>
+            <div class="card">
+                <h3>Where are you training?</h3>
+                <p class="text-xs" style="margin-bottom:0.75rem">Home bike is treated as complementary cardio, not a replacement for resistance-training coverage.</p>
+                <div class="flex-row" style="gap:0.5rem; flex-wrap:wrap">
+                    <button type="button" class="btn ${State.environment === 'gym' ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setEnvironment('gym')" aria-pressed="${State.environment === 'gym'}">Gym</button>
+                    <button type="button" class="btn ${State.environment === 'home-bike' ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setEnvironment('home-bike')" aria-pressed="${State.environment === 'home-bike'}">Home bike</button>
+                </div>
+            </div>
+            ${State.environment === 'gym' ? `
+            <div class="card">
+                <h3>Variety preference</h3>
+                <p class="text-xs" style="margin-bottom:0.75rem">Equivalent substitutions preserve the movement goal while adapting to boredom or station availability.</p>
+                <div class="flex-row" style="gap:0.5rem; flex-wrap:wrap">
+                    ${[
+                        ['default','Keep defaults'],
+                        ['fresh','Mix it up'],
+                        ['different','More variety']
+                    ].map(([mode,label]) => `<button type="button" class="btn ${State.varietyMode === mode ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setVarietyMode('${mode}')" aria-pressed="${State.varietyMode === mode}">${label}</button>`).join('')}
+                </div>
+            </div>` : ''}
             <button type="button" class="card" onclick="window.setRec('green')" style="cursor:pointer; width:100%; text-align:left; font-family:inherit; font-size:inherit; color:inherit">
                 <h3 style="color:var(--success)">✓ ${I18n.t('recovery.green')}</h3>
                 <p class="text-xs">${I18n.t('recovery.greenDesc')}</p>
@@ -411,11 +431,16 @@ function renderCardio(c) {
     const selectedType = activeCardio ? activeCardio.type : CARDIO_OPTIONS[0].name;
     const isCompleted = activeCardio ? activeCardio.completed : false;
     const cfg = CARDIO_OPTIONS.find(o => o.name === selectedType) || CARDIO_OPTIONS[0];
+    const durationMinutes = activeCardio?.durationMinutes || (CONST.CARDIO_TIMER_SECONDS / 60);
+    const modeText = activeCardio?.mode === 'interval'
+        ? `Intervals: ${Sanitizer.sanitizeString(activeCardio.intervals || 'controlled hard/easy intervals')}`
+        : (activeCardio?.mode === 'steady' ? 'Steady aerobic work' : 'Cardiorespiratory work');
 
     c.innerHTML = `
         <div class="container"><h1>${I18n.t('workout.cardio')}</h1><div class="card">
             <div class="flex-row" style="justify-content:space-between; margin-bottom:0.5rem;"><h3>${I18n.t('exercise.selection')}</h3><a id="cardio-vid" href="${cfg.video}" target="_blank" rel="noopener noreferrer" style="font-size:1.5rem; text-decoration:none" aria-label="Watch video for ${cfg.name}">🎥</a></div>
-            <div class="text-xs" style="opacity:0.8; margin-bottom:1rem">${I18n.t('workout.cardioSubtitle')}</div>
+            <div class="text-xs" style="opacity:0.8; margin-bottom:0.5rem">${I18n.t('workout.cardioSubtitle')}</div>
+            <div class="text-xs" style="margin-bottom:1rem; color:var(--accent)">${modeText} - ${durationMinutes} min</div>
             <select id="cardio-type" onchange="window.swapCardioLink(); window.updateCardio()" style="width:100%; padding:1rem; background:var(--bg-secondary); color:white; border:none; margin-bottom:1rem;" aria-label="Select cardio type">${CARDIO_OPTIONS.map(o=>`<option value="${o.name}" ${o.name === selectedType ? 'selected' : ''}>${o.name}</option>`).join('')}</select>
             <button class="btn btn-secondary" onclick="window.startCardio()" aria-label="${I18n.t('exercise.startTimer')}">${I18n.t('exercise.startTimer')}</button>
             <label class="checkbox-wrapper" style="margin-top:1rem; cursor:pointer" for="cardio-done"><input type="checkbox" class="big-check" id="cardio-done" ${isCompleted ? 'checked' : ''} onchange="window.updateCardio()"><span>${I18n.t('exercise.completed')}</span></label>
@@ -670,6 +695,16 @@ window.setAvailableMinutes = (minutes) => {
     render();
 };
 
+window.setEnvironment = (environment) => {
+    State.environment = environment === 'home-bike' ? 'home-bike' : 'gym';
+    render();
+};
+
+window.setVarietyMode = (mode) => {
+    State.varietyMode = ['default', 'fresh', 'different'].includes(mode) ? mode : 'default';
+    render();
+};
+
 window.updateWarmup = (id) => {
     try {
         const el = document.getElementById(`w-${id}`);
@@ -746,7 +781,9 @@ window.setRec = async (r) => {
     const prescription = buildStrengthPrescription({
         availableMinutes: State.availableMinutes,
         recoveryStatus: r,
-        sessionIndex: sessions.length
+        sessionIndex: sessions.length,
+        environment: State.environment,
+        varietyMode: State.varietyMode
     });
 
     State.activeSession = {
@@ -755,22 +792,34 @@ window.setRec = async (r) => {
         recoveryStatus: r,
         availableMinutes: prescription.availableMinutes,
         prescriptionVersion: PRESCRIPTION_VERSION,
+        environment: prescription.environment,
+        baseBuilding: prescription.baseBuilding,
         exercises: prescription.exercises.map(item => {
             const ex = EXERCISE_MAP.get(item.id);
+            const alt = item.preferredAlternative || '';
             return {
                 id: ex.id,
                 name: ex.name,
-                weight: Calculator.getRecommendedWeight(ex.id, r, sessions),
+                weight: Calculator.getRecommendedWeight(alt || ex.id, r, sessions),
                 prescribedSets: item.sets,
+                supersetGroup: item.supersetGroup,
                 setsCompleted: 0,
                 completed: false,
-                usingAlternative: false,
+                usingAlternative: !!alt,
+                altName: alt,
                 skipped: false
             };
         }),
+        cardio: prescription.conditioning?.mode !== 'none' ? {
+            type: prescription.conditioning.type || 'Stationary Bike',
+            mode: prescription.conditioning.mode,
+            durationMinutes: prescription.conditioning.durationMinutes,
+            intervals: prescription.conditioning.intervals || '',
+            completed: false
+        } : null,
         warmup: WARMUP.map(w => ({ id: w.id, completed: false, altUsed: '' }))
     };
-    State.phase = 'warmup';
+    State.phase = prescription.exercises.length ? 'warmup' : 'cardio';
 
     Logger.info('Workout started', { recovery: r, sessionId: State.activeSession.id });
     Analytics.track('recovery_selected', { status: r });
@@ -1091,7 +1140,7 @@ window.skipRest = () => {
     State.forceRestSkip = true;
     render();
 };
-window.startCardio = () => Timer.start(CONST.CARDIO_TIMER_SECONDS);
+window.startCardio = () => Timer.start(Math.max(60, Math.round((State.activeSession?.cardio?.durationMinutes || (CONST.CARDIO_TIMER_SECONDS / 60)) * 60)));
 window.loadMoreHistory = () => {
     try {
         const currentLimit = State.historyLimit || CONST.HISTORY_PAGINATION_LIMIT;
@@ -1441,7 +1490,8 @@ if (mainContent) {
             State.activeSession = draft;
             State.recovery = draft.recoveryStatus;
             State.availableMinutes = draft.availableMinutes || 45;
-            State.phase = 'lifting'; // Resume at lifting phase
+            State.environment = draft.environment || 'gym';
+            State.phase = draft.exercises?.length ? 'lifting' : 'cardio';
             Logger.info('Draft session restored', { id: draft.id });
             ScreenReader.announce('Previous session recovered successfully');
         } else {
