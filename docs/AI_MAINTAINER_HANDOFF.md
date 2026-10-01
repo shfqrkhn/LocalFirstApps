@@ -1,7 +1,7 @@
 # AI Maintainer Handoff
 
 Last updated: 2026-07-21.
-Repo: `D:\VSCode\GH\LocalFirstApps`.
+Repo: `<repo-root>`.
 
 Treat this as a public-safe continuation map. Re-read current files before editing.
 
