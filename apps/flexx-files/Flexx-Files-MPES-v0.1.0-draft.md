@@ -1057,7 +1057,168 @@ Phase 5 - validated self-improvement:
 - evidence refresh workflow;
 - versioned algorithm updates.
 
-## 27. References
+## 27. Health screening and safety routing
+
+On first use, before vigorous conditioning or progression beyond the base phase, the app should route the user through an established pre-participation screening path appropriate to the jurisdiction.
+
+For the initial Canadian release:
+
+- point users to the current CSEP Get Active Questionnaire and companion reference guidance;
+- do not silently copy or fork the questionnaire text into the app unless licensing/permissions and update obligations are explicitly satisfied;
+- a positive response does not become an app diagnosis;
+- route the user to the CSEP reference guidance and, where indicated, a health care provider or qualified exercise professional;
+- record only the minimum state needed to know whether vigorous-intensity features are currently eligible;
+- do not store unnecessary medical details.
+
+Immediate stop/escalation signals during exercise include concerning chest discomfort, unexplained fainting or near-fainting, severe unusual shortness of breath, new neurologic symptoms, or other severe/unusual symptoms. The app stops the session and directs the user to appropriate urgent care rather than offering an exercise substitution.
+
+## 28. Source control, CI, build, and release provenance
+
+Source control:
+
+- main is protected from direct release mutation where repository controls permit;
+- material changes use reviewable branches/pull requests;
+- the exact source revision for each release is recorded;
+- tests cannot be weakened merely to make a candidate pass.
+
+CI gates should include:
+
+- deterministic unit/domain tests;
+- import/export and migration tests;
+- browser behavior tests;
+- offline/service-worker tests;
+- accessibility checks;
+- dependency/security scanning;
+- version consistency;
+- artifact identity checks.
+
+The app is a static PWA and should not gain a build system unless the lifecycle value is demonstrated.
+
+For distributed releases:
+
+- bind release identity to source revision;
+- publish cryptographic hashes/provenance when the hosting/release path supports useful verification;
+- isolate untrusted build/test steps from any deployment or signing credentials;
+- roll back only to a state that is not knowingly vulnerable or data-incompatible.
+
+## 29. Rights, licensing, and external content
+
+The application source follows the repository license.
+
+Exercise names, factual movement descriptions, and original app content should be authored or permissibly sourced.
+
+External videos are links, not bundled content.
+
+Do not scrape or redistribute copyrighted exercise libraries merely because they are publicly viewable.
+
+For third-party datasets, code, icons, fonts, images, or educational material:
+
+- verify license and provenance;
+- record required attribution;
+- avoid dependencies that create ongoing legal/maintenance burden without material product value;
+- preserve replaceability.
+
+## 30. Observability, incidents, support, and repair
+
+Default observability is local and privacy-minimized.
+
+Track only decision-relevant operational signals such as:
+
+- failed persistence;
+- failed migration;
+- invalid import;
+- service-worker update conflict;
+- recovered draft;
+- prescription-generation failure;
+- impossible state transition.
+
+Do not capture detailed health/training content in telemetry by default.
+
+If remote telemetry is ever introduced:
+
+- make it explicit and minimal;
+- document data, purpose, retention, recipients, and opt-out;
+- never make analytics required for normal operation.
+
+Incident handling:
+
+1. contain the affected feature;
+2. preserve user data and last-known-good state;
+3. identify affected versions;
+4. provide export/recovery guidance;
+5. patch the controlling cause;
+6. add a regression test;
+7. revalidate affected flows before release.
+
+## 31. Capacity, performance, and sustainability
+
+The app should remain fast on ordinary modern phones without a backend.
+
+Performance targets:
+
+- first useful screen should render without waiting for an update check;
+- prescription generation should be effectively instantaneous for normal user histories;
+- workout interactions should not depend on network availability;
+- history growth must not make normal session start or save visibly slow.
+
+Sustainability principles:
+
+- minimize network requests;
+- avoid background work without user value;
+- keep dependency count near zero;
+- prefer incremental indexed reads over reparsing the entire history;
+- keep caches bounded and recoverable;
+- do not collect or compute data merely because it is available.
+
+## 32. Deployment, update, rollback, and compatibility
+
+Deployment remains static-host compatible.
+
+Service-worker updates must:
+
+- version caches;
+- remove obsolete caches deliberately;
+- not interrupt the current workout;
+- apply new code at a safe lifecycle boundary;
+- preserve the ability to recover an in-progress session after update.
+
+Data compatibility:
+
+- every schema/protocol change declares migration behavior;
+- old exports remain importable when materially feasible;
+- if backward compatibility is intentionally dropped, provide a conversion/export path first;
+- interrupted migration remains incomplete and recoverable.
+
+Rollback:
+
+- application rollback must not silently downgrade user data to an incompatible schema;
+- prefer roll-forward repair when code rollback would reintroduce a known data/security defect.
+
+## 33. Maintenance, extension, deprecation, and retirement
+
+Maintenance is evidence- and defect-triggered, not feature-churn driven.
+
+Extension rules:
+
+- new exercise classes must map to explicit movement/outcome roles;
+- new optimization variables must demonstrate decision value;
+- new integrations must pass privacy, security, replaceability, and lifecycle-value gates;
+- no feature may bypass the prescription/safety contract through a secondary UI.
+
+Deprecation:
+
+- mark obsolete protocol/config behavior;
+- migrate saved state when necessary;
+- remove compatibility code once its supported migration window ends and removal is tested.
+
+Retirement:
+
+- preserve open export;
+- document how users recover their data;
+- remove service workers/caches cleanly where feasible;
+- close any external services, credentials, domains, billing, telemetry, or support obligations introduced later.
+
+## 34. References
 
 Primary/current guidance:
 
@@ -1079,7 +1240,7 @@ Supporting evidence:
 - HIIT cardiorespiratory-fitness umbrella review, 2024, PMID 38760916.
 - Full-body versus split routine meta-analysis, 2024, PMID 38595233.
 
-## 28. Draft acceptance
+## 35. Draft acceptance
 
 This draft is useful when a fresh competent implementation agent can:
 
