@@ -19,7 +19,7 @@ const patterns = [
   },
   {
     name: "Canadian postal code",
-    regex: /\b[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d\b/ig
+    regex: /(?<!#)\b[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z] [0-9][ABCEGHJ-NPRSTV-Z][0-9]\b/g
   },
   {
     name: "Windows user profile path",
