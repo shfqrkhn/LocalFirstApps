@@ -1440,6 +1440,7 @@ if (mainContent) {
         if (restore) {
             State.activeSession = draft;
             State.recovery = draft.recoveryStatus;
+            State.availableMinutes = draft.availableMinutes || 45;
             State.phase = 'lifting'; // Resume at lifting phase
             Logger.info('Draft session restored', { id: draft.id });
             ScreenReader.announce('Previous session recovered successfully');
