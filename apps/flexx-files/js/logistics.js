@@ -1,5 +1,5 @@
-export const DEFAULT_GYM_OVERHEAD_MINUTES = 30;
-export const DEFAULT_HOME_SETUP_MINUTES = 3;
+export const DEFAULT_GYM_OVERHEAD_MINUTES = 20;
+export const DEFAULT_HOME_SETUP_MINUTES = 5;
 
 export function getEnvironmentOverheadMinutes({
     environment = 'gym',
