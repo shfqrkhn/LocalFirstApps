@@ -16,6 +16,6 @@
     "test:pii": "node tests/pii-regression.mjs"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1"
+    "@playwright/test": "^1.63.0"
   }
 }
