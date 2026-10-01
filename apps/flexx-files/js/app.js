@@ -104,8 +104,8 @@ const State = {
     availableMinutes: 45,
     environment: 'gym',
     varietyMode: 'default',
-    gymOverheadMinutes: 30,
-    homeSetupMinutes: 3
+    gymOverheadMinutes: 20,
+    homeSetupMinutes: 5
 };
 
 function getOverheadMinutes() {
