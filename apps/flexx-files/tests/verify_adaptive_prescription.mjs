@@ -27,17 +27,19 @@ assert(base.exercises.every(ex => ex.sets === 2));
 assert.equal(base.conditioning.mode, 'steady');
 
 const trained = buildStrengthPrescription({ availableMinutes: 45, recoveryStatus: 'green', sessionIndex: BASE_BUILDING_SESSIONS });
-assert.equal(trained.exercises.length, 7);
-assert(trained.exercises.slice(0, 4).every(ex => ex.sets === 3));
-assert(trained.exercises.slice(4).every(ex => ex.sets === 2));
+assert.equal(trained.exercises.length, 5);
+assert(trained.exercises.every(ex => ex.sets === 2));
+assert.equal(trained.routineId, 'A');
 assert.equal(trained.baseBuilding, false);
 
 const yellow = buildStrengthPrescription({ availableMinutes: 45, recoveryStatus: 'yellow', sessionIndex: BASE_BUILDING_SESSIONS });
-assert.equal(yellow.exercises.length, 6);
+assert.equal(yellow.exercises.length, 4);
 
 const a = buildStrengthPrescription({ availableMinutes: 30, sessionIndex: BASE_BUILDING_SESSIONS });
 const b = buildStrengthPrescription({ availableMinutes: 30, sessionIndex: BASE_BUILDING_SESSIONS + 1 });
 assert.notDeepEqual(ids(a), ids(b));
+assert.equal(a.routineId, 'A');
+assert.equal(b.routineId, 'B');
 assert(hasPush(a) && hasPull(a) && hasPush(b) && hasPull(b));
 
 const varied = buildStrengthPrescription({
