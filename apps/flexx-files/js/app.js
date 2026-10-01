@@ -1,4 +1,6 @@
 import { EXERCISES, WARMUP, DECOMPRESSION, CARDIO_OPTIONS, RECOVERY_CONFIG, EXERCISE_MAP, WARMUP_MAP, DECOMPRESSION_MAP } from './config.js';
+import { buildStrengthPrescription, PRESCRIPTION_VERSION } from './prescription.js';
+import { estimateDoorToDoorMinutes, getEnvironmentOverheadMinutes, getTrainingBudgetMinutes as calculateTrainingBudgetMinutes } from './logistics.js';
 import { Storage, Calculator, Validator } from './core.js';
 import { Observability, Logger, Metrics, Analytics } from './observability.js';
 import { Accessibility, ScreenReader } from './accessibility.js';
@@ -92,7 +94,36 @@ function preSanitizeConfig() {
 }
 
 // === STATE & TOOLS ===
-const State = { view: 'today', phase: null, recovery: null, activeSession: null, historyLimit: CONST.HISTORY_PAGINATION_LIMIT };
+const State = {
+    view: 'today',
+    phase: null,
+    recovery: null,
+    activeSession: null,
+    historyLimit: CONST.HISTORY_PAGINATION_LIMIT,
+    totalBudgetMinutes: 75,
+    availableMinutes: 45,
+    environment: 'gym',
+    varietyMode: 'default',
+    gymOverheadMinutes: 20,
+    homeSetupMinutes: 5
+};
+
+function getOverheadMinutes() {
+    return getEnvironmentOverheadMinutes({
+        environment: State.environment,
+        gymOverheadMinutes: State.gymOverheadMinutes,
+        homeSetupMinutes: State.homeSetupMinutes
+    });
+}
+
+function getTrainingBudgetMinutes() {
+    return calculateTrainingBudgetMinutes({
+        totalBudgetMinutes: State.totalBudgetMinutes,
+        environment: State.environment,
+        gymOverheadMinutes: State.gymOverheadMinutes,
+        homeSetupMinutes: State.homeSetupMinutes
+    });
+}
 let _navCache = null;
 let _lastNavView = null;
 // Optimization: Cache generated session cards to avoid repeated string generation/sanitization
@@ -238,9 +269,22 @@ function renderRecovery(c) {
             </div>`;
         return;
     }
+    const overheadMinutes = getOverheadMinutes();
+    const trainingBudgetMinutes = getTrainingBudgetMinutes();
+    State.availableMinutes = trainingBudgetMinutes;
+    const budgetOptions = State.environment === 'gym' ? [45, 60, 75, 90] : [20, 30, 45, 60];
+
     c.innerHTML = `
         <div class="container">
-            <h1>${I18n.t('recovery.title')}</h1>
+            <div class="adaptive-kicker">Today</div>
+            <h1>Your highest-value session</h1>
+            <div class="adaptive-summary">
+                <div class="adaptive-metric"><strong>${State.totalBudgetMinutes} min</strong><span>Total budget</span></div>
+                <div class="adaptive-metric"><strong>${trainingBudgetMinutes} min</strong><span>Training</span></div>
+                <div class="adaptive-metric"><strong>${overheadMinutes} min</strong><span>Prep/travel</span></div>
+                <div class="adaptive-metric"><strong>${State.environment === 'gym' ? 'Gym' : 'Home'}</strong><span>Environment</span></div>
+            </div>
+            <p class="text-xs" style="margin-bottom:1rem; text-align:center; opacity:0.8">${I18n.t('recovery.subtitle')}</p>
             <p class="text-xs" style="margin-bottom:1rem; text-align:center; opacity:0.8">${I18n.t('recovery.subtitle')}</p>
             ${check.isFirst ? `
                 <div class="card" style="border-color:var(--accent)">
@@ -252,6 +296,33 @@ function renderRecovery(c) {
                     <h3>⚠️ ${I18n.t('recovery.longGap')}</h3>
                     <p class="text-xs">${I18n.t('recovery.longGapDesc', { days: check.days })}</p>
                 </div>` : ''}
+            <div class="card">
+                <h3>Total time budget</h3>
+                <p class="text-xs" style="margin-bottom:0.75rem">Gym prep and travel are deducted before the workout is generated.</p>
+                <div class="choice-row">
+                    ${budgetOptions.map(m => `<button type="button" class="btn ${State.totalBudgetMinutes === m ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setTotalBudget(${m})" aria-pressed="${State.totalBudgetMinutes === m}">${m} min</button>`).join('')}
+                </div>
+            </div>
+            <div class="card">
+                <h3>Where are you training?</h3>
+                <p class="text-xs" style="margin-bottom:0.75rem">Home bike is treated as complementary cardio, not a replacement for resistance-training coverage.</p>
+                <div class="flex-row" style="gap:0.5rem; flex-wrap:wrap">
+                    <button type="button" class="btn ${State.environment === 'gym' ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setEnvironment('gym')" aria-pressed="${State.environment === 'gym'}">Gym</button>
+                    <button type="button" class="btn ${State.environment === 'home-bike' ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setEnvironment('home-bike')" aria-pressed="${State.environment === 'home-bike'}">Home bike</button>
+                </div>
+            </div>
+            ${State.environment === 'gym' ? `
+            <div class="card">
+                <h3>Variety preference</h3>
+                <p class="text-xs" style="margin-bottom:0.75rem">Equivalent substitutions preserve the movement goal while adapting to boredom or station availability.</p>
+                <div class="flex-row" style="gap:0.5rem; flex-wrap:wrap">
+                    ${[
+                        ['default','Keep defaults'],
+                        ['fresh','Mix it up'],
+                        ['different','More variety']
+                    ].map(([mode,label]) => `<button type="button" class="btn ${State.varietyMode === mode ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setVarietyMode('${mode}')" aria-pressed="${State.varietyMode === mode}">${label}</button>`).join('')}
+                </div>
+            </div>` : ''}
             <button type="button" class="card" onclick="window.setRec('green')" style="cursor:pointer; width:100%; text-align:left; font-family:inherit; font-size:inherit; color:inherit">
                 <h3 style="color:var(--success)">✓ ${I18n.t('recovery.green')}</h3>
                 <p class="text-xs">${I18n.t('recovery.greenDesc')}</p>
@@ -337,23 +408,20 @@ function renderLifting(c) {
             <p class="text-xs" style="margin-bottom:1.5rem; text-align:center; opacity:0.8">${I18n.t('workout.tempo')}</p>
             ${(() => {
                 let exercisesHtml = '';
-                // Optimization: Create Map for O(1) lookup
-                const activeMap = new Map();
-                if (State.activeSession?.exercises) {
-                    for (const e of State.activeSession.exercises) {
-                        activeMap.set(e.id, e);
-                    }
-                }
+                const activeExercises = State.activeSession?.exercises || [];
 
-                for (let j = 0; j < EXERCISES.length; j++) {
-                    const ex = EXERCISES[j];
-                    // Check state first for persistence
-                    const activeEx = activeMap.get(ex.id);
+                for (let j = 0; j < activeExercises.length; j++) {
+                    const activeEx = activeExercises[j];
+                    const ex = EXERCISE_MAP.get(activeEx.id);
+                    if (!ex) continue;
+                    const prescribedSets = activeEx.prescribedSets || ex.sets;
                     const hasAlt = activeEx?.usingAlternative;
                     const name = Sanitizer.sanitizeString(hasAlt ? activeEx.altName : ex.name);
                     const vid = hasAlt && ex.altLinks?.[activeEx.altName] ? ex.altLinks[activeEx.altName] : ex.video;
 
                     const w = activeEx ? activeEx.weight : Calculator.getRecommendedWeight(ex.id, State.recovery, sessions);
+                    const targetRir = State.activeSession?.baseBuilding ? '3-4' : '2-3';
+                    const flowLabel = activeEx?.supersetGroup === 0 ? 'Primary' : (activeEx?.supersetGroup ? `Pair ${activeEx.supersetGroup}` : '');
                     // Name Display Fix: Pass actual name (alternative if used) for history lookup
                     const lookupName = hasAlt ? activeEx.altName : ex.id;
                     const last = Calculator.getLastCompletedExercise(lookupName, sessions);
@@ -361,20 +429,20 @@ function renderLifting(c) {
 
                     // Optimization: Use for loop to avoid garbage collection pressure from Array.from
                     let setButtonsHtml = '';
-                    for (let i = 0; i < ex.sets; i++) {
+                    for (let i = 0; i < prescribedSets; i++) {
                         const isSetDone = activeEx && i < activeEx.setsCompleted;
                         const completedClass = isSetDone ? ' completed' : '';
                         const ariaPressed = isSetDone ? 'true' : 'false';
-                        setButtonsHtml += `<button type="button" class="set-btn${completedClass}" id="s-${ex.id}-${i}" onclick="window.togS('${ex.id}',${i},${ex.sets})" aria-label="${I18n.t('a11y.set', { number: i+1 })}" aria-pressed="${ariaPressed}">${i+1}</button>`;
+                        setButtonsHtml += `<button type="button" class="set-btn${completedClass}" id="s-${ex.id}-${i}" onclick="window.togS('${ex.id}',${i},${prescribedSets})" aria-label="${I18n.t('a11y.set', { number: i+1 })}" aria-pressed="${ariaPressed}">${i+1}</button>`;
                     }
 
                     exercisesHtml += `
                 <div class="card" id="card-${ex.id}">
                     <div class="flex-row" style="justify-content:space-between; margin-bottom:0.25rem;">
                         <div>
-                            <div class="text-xs" style="color:var(--accent)">${ex.category}</div>
+                            <div class="text-xs" style="color:var(--accent)">${flowLabel ? `${flowLabel} - ` : ''}${ex.category}</div>
                             <h2 id="name-${ex.id}" style="margin-bottom:0">${name}</h2>
-                            <div class="text-xs" style="opacity:0.8; margin-bottom:0.25rem">${ex.sets} sets × ${ex.reps} reps</div>
+                            <div class="text-xs" style="opacity:0.8; margin-bottom:0.25rem">${prescribedSets} sets x ${ex.reps} reps - target RIR ${targetRir}</div>
                             <div id="last-${ex.id}" class="text-xs" style="opacity:0.6; margin-bottom:0.5rem">${lastText}</div>
                         </div>
                         <a id="vid-${ex.id}" href="${vid}" target="_blank" rel="noopener noreferrer" style="font-size:1.5rem; text-decoration:none" aria-label="Watch video for ${name}">🎥</a>
@@ -388,7 +456,11 @@ function renderLifting(c) {
                     <div class="set-group" role="group" aria-label="Sets for ${name}">
                         ${setButtonsHtml}
                     </div>
-                    <details class="mt-4" style="margin-top:1rem; padding-top:0.5rem; border-top:1px solid var(--border)">
+                    <div class="choice-row" style="margin-top:0.75rem">
+                        <button type="button" class="btn btn-secondary" style="width:auto; padding:0.55rem 0.75rem" onclick="window.quickSwap('${ex.id}','busy')">Busy</button>
+                        <button type="button" class="btn btn-secondary" style="width:auto; padding:0.55rem 0.75rem" onclick="window.quickSwap('${ex.id}','bored')">Bored</button>
+                    </div>
+                    <details class="mt-4" style="margin-top:0.75rem; padding-top:0.5rem; border-top:1px solid var(--border)">
                         <summary class="text-xs">${I18n.t('exercise.alternatives')}</summary>
                         <select id="alt-${ex.id}" onchange="window.swapAlt('${ex.id}')" style="width:100%; margin-top:0.5rem; padding:0.5rem; background:var(--bg-secondary); color:white; border:none" aria-label="Select alternative for ${ex.name}">
                             <option value="">${ex.name}</option>
@@ -408,11 +480,16 @@ function renderCardio(c) {
     const selectedType = activeCardio ? activeCardio.type : CARDIO_OPTIONS[0].name;
     const isCompleted = activeCardio ? activeCardio.completed : false;
     const cfg = CARDIO_OPTIONS.find(o => o.name === selectedType) || CARDIO_OPTIONS[0];
+    const durationMinutes = activeCardio?.durationMinutes || (CONST.CARDIO_TIMER_SECONDS / 60);
+    const modeText = activeCardio?.mode === 'interval'
+        ? `Intervals: ${Sanitizer.sanitizeString(activeCardio.intervals || 'controlled hard/easy intervals')}`
+        : (activeCardio?.mode === 'steady' ? 'Steady aerobic work' : 'Cardiorespiratory work');
 
     c.innerHTML = `
         <div class="container"><h1>${I18n.t('workout.cardio')}</h1><div class="card">
             <div class="flex-row" style="justify-content:space-between; margin-bottom:0.5rem;"><h3>${I18n.t('exercise.selection')}</h3><a id="cardio-vid" href="${cfg.video}" target="_blank" rel="noopener noreferrer" style="font-size:1.5rem; text-decoration:none" aria-label="Watch video for ${cfg.name}">🎥</a></div>
-            <div class="text-xs" style="opacity:0.8; margin-bottom:1rem">${I18n.t('workout.cardioSubtitle')}</div>
+            <div class="text-xs" style="opacity:0.8; margin-bottom:0.5rem">${I18n.t('workout.cardioSubtitle')}</div>
+            <div class="text-xs" style="margin-bottom:1rem; color:var(--accent)">${modeText} - ${durationMinutes} min</div>
             <select id="cardio-type" onchange="window.swapCardioLink(); window.updateCardio()" style="width:100%; padding:1rem; background:var(--bg-secondary); color:white; border:none; margin-bottom:1rem;" aria-label="Select cardio type">${CARDIO_OPTIONS.map(o=>`<option value="${o.name}" ${o.name === selectedType ? 'selected' : ''}>${o.name}</option>`).join('')}</select>
             <button class="btn btn-secondary" onclick="window.startCardio()" aria-label="${I18n.t('exercise.startTimer')}">${I18n.t('exercise.startTimer')}</button>
             <label class="checkbox-wrapper" style="margin-top:1rem; cursor:pointer" for="cardio-done"><input type="checkbox" class="big-check" id="cardio-done" ${isCompleted ? 'checked' : ''} onchange="window.updateCardio()"><span>${I18n.t('exercise.completed')}</span></label>
@@ -503,7 +580,12 @@ function _generateSessionCard(x) {
     const html = `
 <div class="card">
     <div class="flex-row" style="justify-content:space-between">
-        <div><h3>${DateFormatter.format(x.date)}</h3><span class="text-xs" style="border:1px solid var(--border); padding:0.125rem 0.375rem; border-radius:var(--radius-sm)">${Sanitizer.sanitizeString(x.recoveryStatus).toUpperCase()}</span></div>
+        <div>
+            <h3>${DateFormatter.format(x.date)}</h3>
+            <span class="text-xs" style="border:1px solid var(--border); padding:0.125rem 0.375rem; border-radius:var(--radius-sm)">${Sanitizer.sanitizeString(x.recoveryStatus).toUpperCase()}</span>
+            ${x.routineId ? `<span class="text-xs" style="margin-left:0.35rem">Routine ${Sanitizer.sanitizeString(x.routineId)}</span>` : ''}
+            ${x.estimatedDoorToDoorMinutes ? `<div class="text-xs" style="margin-top:0.35rem">${Math.round(x.estimatedDoorToDoorMinutes)} min total burden</div>` : ''}
+        </div>
         <button class="btn btn-secondary btn-delete-session" style="width:44px; height:44px; padding:0; display:flex; align-items:center; justify-content:center; flex-shrink:0" data-session-id="${x.id}" aria-label="Delete session from ${DateFormatter.format(x.date)}">✕</button>
     </div>
     <details style="margin-top:1rem; border-top:1px solid var(--border); padding-top:0.5rem;">
@@ -622,45 +704,74 @@ function renderProtocol(c) {
     c.innerHTML = `
         <div class="container">
             <div class="flex-row" style="margin-bottom:1rem">
-                <button class="btn btn-secondary" style="width:auto; padding:0.5rem 1rem" onclick="window.closeProtocol()" aria-label="${I18n.t('protocol.back')}">${I18n.t('protocol.back')}</button>
+                <button class="btn btn-secondary" style="width:auto; padding:0.5rem 1rem" onclick="window.closeProtocol()" aria-label="Back to settings">Back</button>
             </div>
-            <h1>${I18n.t('protocol.title')}</h1>
-            <div class="card">
-                <h3 style="color:var(--accent)">${I18n.t('protocol.hygiene')}</h3>
-                <p class="text-xs" style="margin-bottom:1rem">${I18n.t('protocol.hygieneDesc')}</p>
+            <div class="adaptive-kicker">Adaptive protocol</div>
+            <h1>Minimum effective full-body training</h1>
 
-                <h3 style="color:var(--accent)">${I18n.t('protocol.overview')}</h3>
-                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.6">
-                    <li><strong>Schedule:</strong> 3 days/week (e.g., Mon/Wed/Fri)</li>
-                    <li><strong>Time:</strong> 58 Minutes</li>
-                    <li><strong>Spacing:</strong> 48–72 hours rest required</li>
+            <div class="card">
+                <h3>Default week</h3>
+                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.7">
+                    <li>Two full-body gym sessions using alternating A/B routines.</li>
+                    <li>Two low-overhead home-bike sessions, adjusted for other aerobic activity.</li>
+                    <li>No fixed weekday schedule; use rolling coverage and readiness.</li>
+                    <li>Gym-trip preparation and travel count against the total time budget.</li>
                 </ul>
             </div>
 
             <div class="card">
-                <h3 style="color:var(--warning)">${I18n.t('protocol.faultTolerance')}</h3>
-                <div style="display:grid; grid-template-columns: 1fr 1.5fr; gap:0.5rem; font-size:0.8rem; margin-top:0.5rem">
-                    <div>Missed 1</div><div>Slide schedule (maintain 48h gap)</div>
-                    <div>Missed 2+</div><div>Reduce weights 10%</div>
-                    <div>Sick (Fever)</div><div>FULL REST. Resume 24h after fever. Reduce 20%.</div>
-                    <div>Injury</div><div>Skip aggravating exercise. Do others.</div>
-                </div>
+                <h3>Base-building first</h3>
+                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.7">
+                    <li>At least six completed resistance sessions before automatic load escalation.</li>
+                    <li>Two work sets per movement and target RIR 3-4.</li>
+                    <li>Stable technique, tolerance and consistency outrank heavier weights.</li>
+                    <li>Steady cycling precedes interval training.</li>
+                </ul>
             </div>
 
-            <div class="card" style="border-color:var(--error)">
-                <h3>🚨 ${I18n.t('protocol.gymClosed')}</h3>
-                <p class="text-xs" style="margin-bottom:0.5rem">${I18n.t('protocol.emergencyCircuit')}</p>
-                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.6">
-                    <li><strong>Push:</strong> Incline Push-ups (Hands on furniture)</li>
-                    <li><strong>Legs:</strong> Bodyweight Squats (Tempo: 3s down)</li>
-                    <li><strong>Pull:</strong> Inverted Rows (Table) OR Door Rows</li>
-                    <li><strong>Core:</strong> Hardstyle Plank</li>
+            <div class="card">
+                <h3>Normal training</h3>
+                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.7">
+                    <li>Five core movements per normal gym session.</li>
+                    <li>Two high-quality work sets by default; extra volume must earn its time and recovery cost.</li>
+                    <li>Target RIR 2-3 for most work; routine failure training is not required.</li>
+                    <li>Use non-competing paired sets to reduce idle time.</li>
+                    <li>Busy or boring stations can be swapped without losing the movement goal.</li>
                 </ul>
+            </div>
+
+            <div class="card">
+                <h3>Safety boundary</h3>
+                <p class="text-xs">Flexx Files is for generally healthy adults. It does not diagnose or rehabilitate injuries. Stop an aggravating movement and seek appropriate medical guidance for concerning symptoms or conditions outside the validated operating envelope.</p>
             </div>
         </div>`;
 }
 
 // === HANDLERS ===
+window.setTotalBudget = (minutes) => {
+    const value = Number(minutes);
+    State.totalBudgetMinutes = Number.isFinite(value) ? Math.min(180, Math.max(15, Math.round(value))) : 75;
+    State.availableMinutes = getTrainingBudgetMinutes();
+    render();
+};
+
+window.setAvailableMinutes = (minutes) => {
+    const value = Number(minutes);
+    State.availableMinutes = Number.isFinite(value) ? Math.min(90, Math.max(15, Math.round(value))) : 45;
+    State.totalBudgetMinutes = State.availableMinutes + getOverheadMinutes();
+    render();
+};
+
+window.setEnvironment = (environment) => {
+    State.environment = environment === 'home-bike' ? 'home-bike' : 'gym';
+    render();
+};
+
+window.setVarietyMode = (mode) => {
+    State.varietyMode = ['default', 'fresh', 'different'].includes(mode) ? mode : 'default';
+    render();
+};
+
 window.updateWarmup = (id) => {
     try {
         const el = document.getElementById(`w-${id}`);
@@ -733,14 +844,58 @@ window.setRec = async (r) => {
     }
 
     State.recovery = r;
+    State.availableMinutes = getTrainingBudgetMinutes();
+    const sessions = Storage.getSessions();
+    const prescription = buildStrengthPrescription({
+        availableMinutes: State.availableMinutes,
+        recoveryStatus: r,
+        sessionIndex: sessions.length,
+        environment: State.environment,
+        varietyMode: State.varietyMode
+    });
+
     State.activeSession = {
         id: crypto.randomUUID(),
         date: new Date().toISOString(),
         recoveryStatus: r,
-        exercises: [],
+        totalBudgetMinutes: State.totalBudgetMinutes,
+        availableMinutes: prescription.availableMinutes,
+        estimatedDoorToDoorMinutes: estimateDoorToDoorMinutes({
+            trainingMinutes: prescription.availableMinutes,
+            environment: State.environment,
+            gymOverheadMinutes: State.gymOverheadMinutes,
+            homeSetupMinutes: State.homeSetupMinutes
+        }),
+        prescriptionVersion: PRESCRIPTION_VERSION,
+        environment: prescription.environment,
+        routineId: prescription.routineId || null,
+        baseBuilding: prescription.baseBuilding,
+        exercises: prescription.exercises.map(item => {
+            const ex = EXERCISE_MAP.get(item.id);
+            const alt = item.preferredAlternative || '';
+            return {
+                id: ex.id,
+                name: ex.name,
+                weight: Calculator.getRecommendedWeight(alt || ex.id, r, sessions),
+                prescribedSets: item.sets,
+                supersetGroup: item.supersetGroup,
+                setsCompleted: 0,
+                completed: false,
+                usingAlternative: !!alt,
+                altName: alt,
+                skipped: false
+            };
+        }),
+        cardio: prescription.conditioning?.mode !== 'none' ? {
+            type: prescription.conditioning.type || 'Stationary Bike',
+            mode: prescription.conditioning.mode,
+            durationMinutes: prescription.conditioning.durationMinutes,
+            intervals: prescription.conditioning.intervals || '',
+            completed: false
+        } : null,
         warmup: WARMUP.map(w => ({ id: w.id, completed: false, altUsed: '' }))
     };
-    State.phase = 'warmup';
+    State.phase = prescription.exercises.length ? 'warmup' : 'cardio';
 
     Logger.info('Workout started', { recovery: r, sessionId: State.activeSession.id });
     Analytics.track('recovery_selected', { status: r });
@@ -812,6 +967,27 @@ window.togS = (ex, i, max) => {
         }
     } catch (e) {
         Logger.error('Error toggling set:', e);
+    }
+};
+
+window.quickSwap = (id, reason) => {
+    try {
+        const cfg = EXERCISE_MAP.get(id);
+        const select = document.getElementById(`alt-${id}`);
+        if (!cfg || !select || !cfg.alternatives?.length) return;
+
+        const options = ['', ...cfg.alternatives];
+        const currentIndex = Math.max(0, options.indexOf(select.value));
+        select.value = options[(currentIndex + 1) % options.length];
+        window.swapAlt(id);
+
+        const activeEx = State.activeSession?.exercises?.find(e => e.id === id);
+        if (activeEx) {
+            activeEx.swapReason = reason === 'busy' ? 'busy' : 'bored';
+            Storage.saveDraft(State.activeSession);
+        }
+    } catch (e) {
+        Logger.error('Error quick-swapping exercise:', e);
     }
 };
 
@@ -917,32 +1093,38 @@ window.nextPhase = async (p) => {
                 };
             });
 
-            // Initialize exercises with recommended weights for persistence
-            const sessions = Storage.getSessions();
-            State.activeSession.exercises = EXERCISES.map(ex => ({
-                id: ex.id,
-                name: ex.name,
-                weight: Calculator.getRecommendedWeight(ex.id, State.recovery, sessions),
-                setsCompleted: 0,
-                completed: false,
-                usingAlternative: false,
-                skipped: false
-            }));
+            // Backward-compatible fallback for drafts created before adaptive prescriptions.
+            if (!State.activeSession.exercises?.length) {
+                const sessions = Storage.getSessions();
+                State.activeSession.exercises = EXERCISES.map(ex => ({
+                    id: ex.id,
+                    name: ex.name,
+                    weight: Calculator.getRecommendedWeight(ex.id, State.recovery, sessions),
+                    prescribedSets: ex.sets,
+                    setsCompleted: 0,
+                    completed: false,
+                    usingAlternative: false,
+                    skipped: false
+                }));
+            }
         }
 
         if(p === 'cardio') {
-            State.activeSession.exercises = EXERCISES.map(ex => {
+            State.activeSession.exercises = State.activeSession.exercises.map(activeEx => {
+                const ex = EXERCISE_MAP.get(activeEx.id);
+                if (!ex) return activeEx;
                 const weightElement = document.getElementById(`w-${ex.id}`);
-                const w = weightElement ? (parseFloat(weightElement.value) || 0) : 0;
+                const w = weightElement ? (parseFloat(weightElement.value) || 0) : activeEx.weight;
                 const sets = document.querySelectorAll(`#card-${ex.id} .set-btn.completed`).length;
                 const altElement = document.getElementById(`alt-${ex.id}`);
                 const alt = altElement ? altElement.value : '';
+                const targetSets = activeEx.prescribedSets || ex.sets;
                 return {
-                    id: ex.id,
+                    ...activeEx,
                     name: ex.name,
                     weight: w,
                     setsCompleted: sets,
-                    completed: sets === ex.sets,
+                    completed: sets >= targetSets,
                     usingAlternative: !!alt,
                     altName: alt
                 };
@@ -956,7 +1138,8 @@ window.nextPhase = async (p) => {
             const cardioTypeElement = document.getElementById('cardio-type');
             const cardioDoneElement = document.getElementById('cardio-done');
             State.activeSession.cardio = {
-                type: cardioTypeElement ? cardioTypeElement.value : 'Unknown',
+                ...(State.activeSession.cardio || {}),
+                type: cardioTypeElement ? cardioTypeElement.value : (State.activeSession.cardio?.type || 'Unknown'),
                 completed: cardioDoneElement ? cardioDoneElement.checked : false
             };
             if (!State.activeSession.decompress) {
@@ -1055,7 +1238,7 @@ window.skipRest = () => {
     State.forceRestSkip = true;
     render();
 };
-window.startCardio = () => Timer.start(CONST.CARDIO_TIMER_SECONDS);
+window.startCardio = () => Timer.start(Math.max(60, Math.round((State.activeSession?.cardio?.durationMinutes || (CONST.CARDIO_TIMER_SECONDS / 60)) * 60)));
 window.loadMoreHistory = () => {
     try {
         const currentLimit = State.historyLimit || CONST.HISTORY_PAGINATION_LIMIT;
@@ -1404,7 +1587,10 @@ if (mainContent) {
         if (restore) {
             State.activeSession = draft;
             State.recovery = draft.recoveryStatus;
-            State.phase = 'lifting'; // Resume at lifting phase
+            State.environment = draft.environment || 'gym';
+            State.availableMinutes = draft.availableMinutes || 45;
+            State.totalBudgetMinutes = draft.totalBudgetMinutes || (State.availableMinutes + getOverheadMinutes());
+            State.phase = draft.exercises?.length ? 'lifting' : 'cardio';
             Logger.info('Draft session restored', { id: draft.id });
             ScreenReader.announce('Previous session recovered successfully');
         } else {

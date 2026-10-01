@@ -131,6 +131,7 @@ export const WARMUP = [
 ];
 
 export const CARDIO_OPTIONS = [
+    { name: 'Stationary Bike', video: 'https://www.youtube.com/results?search_query=stationary+bike+exercise+technique' },
     { name: 'Assault Bike', video: 'https://www.youtube.com/results?search_query=assault+bike+technique' },
     { name: 'Rower', video: 'https://www.youtube.com/results?search_query=concept2+rowing+technique' },
     { name: 'Treadmill Incline', video: 'https://www.youtube.com/results?search_query=treadmill+incline+walking+form' }

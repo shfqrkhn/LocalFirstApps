@@ -981,8 +981,9 @@ export const Calculator = {
         if (sessions.length === 0) return 0;
 
         const base = this.getBaseRecommendation(exerciseId, sessions);
-        const factor = recoveryStatus === CONST.RECOVERY_STATES.YELLOW ?
-            CONST.YELLOW_RECOVERY_MULTIPLIER : 1.0;
+        const factor = recoveryStatus === CONST.RECOVERY_STATES.RED ?
+            0 : (recoveryStatus === CONST.RECOVERY_STATES.YELLOW ?
+                CONST.YELLOW_RECOVERY_MULTIPLIER : 1.0);
         let w = base * factor;
         return parseFloat((Math.round(w / CONST.STEPPER_INCREMENT_LBS) * CONST.STEPPER_INCREMENT_LBS).toFixed(1));
     },
@@ -1019,9 +1020,13 @@ export const Calculator = {
             return last ? last.weight * CONST.STALL_DELOAD_PERCENTAGE : CONST.OLYMPIC_BAR_WEIGHT_LBS;
         }
 
-        // Normal progression: add weight on success
+        // Base-building phase: establish movement skill, tolerance and consistency
+        // before automatically increasing load.
         const last = this.getLastExercise(exerciseId, sessions);
         if (!last) return CONST.OLYMPIC_BAR_WEIGHT_LBS;
+        if (sessions.length < CONST.BASE_BUILDING_SESSIONS) return last.weight;
+
+        // Normal progression: add weight on success
 
         // Check if coming out of a deload week
         if (sessions.length > 0) {

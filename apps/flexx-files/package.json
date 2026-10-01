@@ -9,6 +9,8 @@
     "test:optimization": "node tests/verify_optimization_last_session.mjs",
     "test:render": "node tests/verify_app_render.mjs",
     "bench:calculator": "node tests/benchmark_calculator.mjs",
-    "bench:storage": "node tests/benchmark_storage.mjs"
+    "bench:storage": "node tests/benchmark_storage.mjs",
+    "test:adaptive": "node tests/verify_adaptive_prescription.mjs",
+    "test:logistics": "node tests/verify_logistics.mjs"
   }
 }
