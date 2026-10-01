@@ -1,5 +1,6 @@
 import { EXERCISES, WARMUP, DECOMPRESSION, CARDIO_OPTIONS, RECOVERY_CONFIG, EXERCISE_MAP, WARMUP_MAP, DECOMPRESSION_MAP } from './config.js';
 import { buildStrengthPrescription, PRESCRIPTION_VERSION } from './prescription.js';
+import { estimateDoorToDoorMinutes, getEnvironmentOverheadMinutes, getTrainingBudgetMinutes as calculateTrainingBudgetMinutes } from './logistics.js';
 import { Storage, Calculator, Validator } from './core.js';
 import { Observability, Logger, Metrics, Analytics } from './observability.js';
 import { Accessibility, ScreenReader } from './accessibility.js';
@@ -108,11 +109,20 @@ const State = {
 };
 
 function getOverheadMinutes() {
-    return State.environment === 'gym' ? State.gymOverheadMinutes : State.homeSetupMinutes;
+    return getEnvironmentOverheadMinutes({
+        environment: State.environment,
+        gymOverheadMinutes: State.gymOverheadMinutes,
+        homeSetupMinutes: State.homeSetupMinutes
+    });
 }
 
 function getTrainingBudgetMinutes() {
-    return Math.max(15, State.totalBudgetMinutes - getOverheadMinutes());
+    return calculateTrainingBudgetMinutes({
+        totalBudgetMinutes: State.totalBudgetMinutes,
+        environment: State.environment,
+        gymOverheadMinutes: State.gymOverheadMinutes,
+        homeSetupMinutes: State.homeSetupMinutes
+    });
 }
 let _navCache = null;
 let _lastNavView = null;
@@ -850,7 +860,12 @@ window.setRec = async (r) => {
         recoveryStatus: r,
         totalBudgetMinutes: State.totalBudgetMinutes,
         availableMinutes: prescription.availableMinutes,
-        estimatedDoorToDoorMinutes: prescription.availableMinutes + getOverheadMinutes(),
+        estimatedDoorToDoorMinutes: estimateDoorToDoorMinutes({
+            trainingMinutes: prescription.availableMinutes,
+            environment: State.environment,
+            gymOverheadMinutes: State.gymOverheadMinutes,
+            homeSetupMinutes: State.homeSetupMinutes
+        }),
         prescriptionVersion: PRESCRIPTION_VERSION,
         environment: prescription.environment,
         routineId: prescription.routineId || null,
