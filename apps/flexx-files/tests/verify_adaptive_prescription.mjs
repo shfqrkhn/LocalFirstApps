@@ -24,7 +24,7 @@ assert.equal(short.baseBuilding, true);
 
 const base = buildStrengthPrescription({ availableMinutes: 60, recoveryStatus: 'green', sessionIndex: BASE_BUILDING_SESSIONS - 1 });
 assert(base.exercises.every(ex => ex.sets === 2));
-assert.equal(base.conditioning.mode, 'steady');
+assert.equal(base.conditioning.mode, 'none');
 
 const trained = buildStrengthPrescription({ availableMinutes: 45, recoveryStatus: 'green', sessionIndex: BASE_BUILDING_SESSIONS });
 assert.equal(trained.exercises.length, 5);
