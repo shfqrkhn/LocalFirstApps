@@ -570,7 +570,12 @@ function _generateSessionCard(x) {
     const html = `
 <div class="card">
     <div class="flex-row" style="justify-content:space-between">
-        <div><h3>${DateFormatter.format(x.date)}</h3><span class="text-xs" style="border:1px solid var(--border); padding:0.125rem 0.375rem; border-radius:var(--radius-sm)">${Sanitizer.sanitizeString(x.recoveryStatus).toUpperCase()}</span></div>
+        <div>
+            <h3>${DateFormatter.format(x.date)}</h3>
+            <span class="text-xs" style="border:1px solid var(--border); padding:0.125rem 0.375rem; border-radius:var(--radius-sm)">${Sanitizer.sanitizeString(x.recoveryStatus).toUpperCase()}</span>
+            ${x.routineId ? `<span class="text-xs" style="margin-left:0.35rem">Routine ${Sanitizer.sanitizeString(x.routineId)}</span>` : ''}
+            ${x.estimatedDoorToDoorMinutes ? `<div class="text-xs" style="margin-top:0.35rem">${Math.round(x.estimatedDoorToDoorMinutes)} min total burden</div>` : ''}
+        </div>
         <button class="btn btn-secondary btn-delete-session" style="width:44px; height:44px; padding:0; display:flex; align-items:center; justify-content:center; flex-shrink:0" data-session-id="${x.id}" aria-label="Delete session from ${DateFormatter.format(x.date)}">✕</button>
     </div>
     <details style="margin-top:1rem; border-top:1px solid var(--border); padding-top:0.5rem;">
