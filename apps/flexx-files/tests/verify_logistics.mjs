@@ -5,18 +5,18 @@ import {
     getTrainingBudgetMinutes
 } from '../js/logistics.js';
 
-assert.equal(getEnvironmentOverheadMinutes({ environment: 'gym' }), 30);
-assert.equal(getEnvironmentOverheadMinutes({ environment: 'home-bike' }), 3);
+assert.equal(getEnvironmentOverheadMinutes({ environment: 'gym' }), 20);
+assert.equal(getEnvironmentOverheadMinutes({ environment: 'home-bike' }), 5);
 
 assert.equal(getTrainingBudgetMinutes({
     totalBudgetMinutes: 75,
     environment: 'gym'
-}), 45);
+}), 55);
 
 assert.equal(getTrainingBudgetMinutes({
     totalBudgetMinutes: 30,
     environment: 'home-bike'
-}), 27);
+}), 25);
 
 assert.equal(getTrainingBudgetMinutes({
     totalBudgetMinutes: 40,
@@ -31,6 +31,6 @@ assert.equal(getTrainingBudgetMinutes({
 assert.equal(estimateDoorToDoorMinutes({
     trainingMinutes: 40,
     environment: 'gym'
-}), 70);
+}), 60);
 
 console.log('Logistics checks passed.');
