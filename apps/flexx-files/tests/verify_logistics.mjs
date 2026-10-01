@@ -21,7 +21,7 @@ assert.equal(getTrainingBudgetMinutes({
 assert.equal(getTrainingBudgetMinutes({
     totalBudgetMinutes: 40,
     environment: 'gym'
-}), 0);
+}), 20);
 
 assert.equal(getTrainingBudgetMinutes({
     totalBudgetMinutes: 180,
