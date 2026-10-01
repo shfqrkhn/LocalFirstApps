@@ -93,7 +93,27 @@ function preSanitizeConfig() {
 }
 
 // === STATE & TOOLS ===
-const State = { view: 'today', phase: null, recovery: null, activeSession: null, historyLimit: CONST.HISTORY_PAGINATION_LIMIT, availableMinutes: 45, environment: 'gym', varietyMode: 'default' };
+const State = {
+    view: 'today',
+    phase: null,
+    recovery: null,
+    activeSession: null,
+    historyLimit: CONST.HISTORY_PAGINATION_LIMIT,
+    totalBudgetMinutes: 75,
+    availableMinutes: 45,
+    environment: 'gym',
+    varietyMode: 'default',
+    gymOverheadMinutes: 30,
+    homeSetupMinutes: 3
+};
+
+function getOverheadMinutes() {
+    return State.environment === 'gym' ? State.gymOverheadMinutes : State.homeSetupMinutes;
+}
+
+function getTrainingBudgetMinutes() {
+    return Math.max(15, State.totalBudgetMinutes - getOverheadMinutes());
+}
 let _navCache = null;
 let _lastNavView = null;
 // Optimization: Cache generated session cards to avoid repeated string generation/sanitization
@@ -239,9 +259,22 @@ function renderRecovery(c) {
             </div>`;
         return;
     }
+    const overheadMinutes = getOverheadMinutes();
+    const trainingBudgetMinutes = getTrainingBudgetMinutes();
+    State.availableMinutes = trainingBudgetMinutes;
+    const budgetOptions = State.environment === 'gym' ? [45, 60, 75, 90] : [20, 30, 45, 60];
+
     c.innerHTML = `
         <div class="container">
-            <h1>${I18n.t('recovery.title')}</h1>
+            <div class="adaptive-kicker">Today</div>
+            <h1>Your highest-value session</h1>
+            <div class="adaptive-summary">
+                <div class="adaptive-metric"><strong>${State.totalBudgetMinutes} min</strong><span>Total budget</span></div>
+                <div class="adaptive-metric"><strong>${trainingBudgetMinutes} min</strong><span>Training</span></div>
+                <div class="adaptive-metric"><strong>${overheadMinutes} min</strong><span>Prep/travel</span></div>
+                <div class="adaptive-metric"><strong>${State.environment === 'gym' ? 'Gym' : 'Home'}</strong><span>Environment</span></div>
+            </div>
+            <p class="text-xs" style="margin-bottom:1rem; text-align:center; opacity:0.8">${I18n.t('recovery.subtitle')}</p>
             <p class="text-xs" style="margin-bottom:1rem; text-align:center; opacity:0.8">${I18n.t('recovery.subtitle')}</p>
             ${check.isFirst ? `
                 <div class="card" style="border-color:var(--accent)">
@@ -254,10 +287,10 @@ function renderRecovery(c) {
                     <p class="text-xs">${I18n.t('recovery.longGapDesc', { days: check.days })}</p>
                 </div>` : ''}
             <div class="card">
-                <h3>Time available today</h3>
-                <p class="text-xs" style="margin-bottom:0.75rem">The session will keep the highest-value full-body work that fits.</p>
-                <div class="flex-row" style="gap:0.5rem; flex-wrap:wrap">
-                    ${[20,30,45,60].map(m => `<button type="button" class="btn ${State.availableMinutes === m ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setAvailableMinutes(${m})" aria-pressed="${State.availableMinutes === m}">${m} min</button>`).join('')}
+                <h3>Total time budget</h3>
+                <p class="text-xs" style="margin-bottom:0.75rem">Gym prep and travel are deducted before the workout is generated.</p>
+                <div class="choice-row">
+                    ${budgetOptions.map(m => `<button type="button" class="btn ${State.totalBudgetMinutes === m ? 'btn-primary' : 'btn-secondary'}" style="width:auto; padding:0.6rem 0.8rem" onclick="window.setTotalBudget(${m})" aria-pressed="${State.totalBudgetMinutes === m}">${m} min</button>`).join('')}
                 </div>
             </div>
             <div class="card">
@@ -695,9 +728,17 @@ function renderProtocol(c) {
 }
 
 // === HANDLERS ===
+window.setTotalBudget = (minutes) => {
+    const value = Number(minutes);
+    State.totalBudgetMinutes = Number.isFinite(value) ? Math.min(180, Math.max(15, Math.round(value))) : 75;
+    State.availableMinutes = getTrainingBudgetMinutes();
+    render();
+};
+
 window.setAvailableMinutes = (minutes) => {
     const value = Number(minutes);
     State.availableMinutes = Number.isFinite(value) ? Math.min(90, Math.max(15, Math.round(value))) : 45;
+    State.totalBudgetMinutes = State.availableMinutes + getOverheadMinutes();
     render();
 };
 
@@ -783,6 +824,7 @@ window.setRec = async (r) => {
     }
 
     State.recovery = r;
+    State.availableMinutes = getTrainingBudgetMinutes();
     const sessions = Storage.getSessions();
     const prescription = buildStrengthPrescription({
         availableMinutes: State.availableMinutes,
@@ -796,7 +838,9 @@ window.setRec = async (r) => {
         id: crypto.randomUUID(),
         date: new Date().toISOString(),
         recoveryStatus: r,
+        totalBudgetMinutes: State.totalBudgetMinutes,
         availableMinutes: prescription.availableMinutes,
+        estimatedDoorToDoorMinutes: prescription.availableMinutes + getOverheadMinutes(),
         prescriptionVersion: PRESCRIPTION_VERSION,
         environment: prescription.environment,
         routineId: prescription.routineId || null,
@@ -1518,8 +1562,9 @@ if (mainContent) {
         if (restore) {
             State.activeSession = draft;
             State.recovery = draft.recoveryStatus;
-            State.availableMinutes = draft.availableMinutes || 45;
             State.environment = draft.environment || 'gym';
+            State.availableMinutes = draft.availableMinutes || 45;
+            State.totalBudgetMinutes = draft.totalBudgetMinutes || (State.availableMinutes + getOverheadMinutes());
             State.phase = draft.exercises?.length ? 'lifting' : 'cardio';
             Logger.info('Draft session restored', { id: draft.id });
             ScreenReader.announce('Previous session recovered successfully');
