@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 
@@ -31,16 +32,21 @@ const patterns = [
   {
     name: "Linux user profile path",
     regex: /\/home\/[^/\s]+/g
-  },
-  {
-    name: "conversation-derived location",
-    regex: /\b(?:Rockcliffe Park|Ottawa)\b/ig
-  },
-  {
-    name: "removed personal name",
-    regex: /\bS\.\s*R\.\s*Khan\b/ig
   }
 ];
+
+// Fingerprints prevent sensitive values from being committed in the guard itself.
+// Each entry is [normalized character length, SHA-256 of lowercase normalized text].
+const blockedFingerprints = [
+  [6, "33c594e4e36529842cb1344043ec59e9f4d026466fd7ba0112a635fbe30baf3e"],
+  [15, "1ca96faaf08eed37e5d487f7017cd211e3e7f5e4151cf71a1e19e87efbb7c4a0"],
+  [10, "12765ba0b20e1cd856d56c5d96285114e58021f3e1b0c0226baaeebea898168a"],
+  [27, "6fe12d0430de3aab51fee440fe73dfa97455ac476d8e5ab5a1661f8c21012d9b"]
+];
+
+function sha256(value) {
+  return createHash("sha256").update(value).digest("hex");
+}
 
 function walk(dir) {
   const files = [];
@@ -75,12 +81,17 @@ for (const file of walk(root)) {
     for (const match of text.matchAll(re)) {
       const value = match[0];
       if (rule.allow?.(value)) continue;
-      findings.push({
-        file: rel,
-        kind: rule.name,
-        value,
-        index: match.index
-      });
+      findings.push({ file: rel, kind: rule.name, value });
+    }
+  }
+
+  const normalized = text.toLowerCase();
+  for (const [length, expectedHash] of blockedFingerprints) {
+    for (let i = 0; i <= normalized.length - length; i++) {
+      const candidate = normalized.slice(i, i + length);
+      if (sha256(candidate) === expectedHash) {
+        findings.push({ file: rel, kind: "blocked personal identifier", value: "[redacted]" });
+      }
     }
   }
 }
