@@ -1041,7 +1041,8 @@ window.nextPhase = async (p) => {
             const cardioTypeElement = document.getElementById('cardio-type');
             const cardioDoneElement = document.getElementById('cardio-done');
             State.activeSession.cardio = {
-                type: cardioTypeElement ? cardioTypeElement.value : 'Unknown',
+                ...(State.activeSession.cardio || {}),
+                type: cardioTypeElement ? cardioTypeElement.value : (State.activeSession.cardio?.type || 'Unknown'),
                 completed: cardioDoneElement ? cardioDoneElement.checked : false
             };
             if (!State.activeSession.decompress) {
