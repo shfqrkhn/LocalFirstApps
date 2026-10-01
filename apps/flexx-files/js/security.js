@@ -43,7 +43,9 @@ export const Sanitizer = {
         if (session.sessionNumber !== undefined) clean.sessionNumber = Number(session.sessionNumber);
         if (session.weekNumber !== undefined) clean.weekNumber = Number(session.weekNumber);
         if (session.totalVolume !== undefined) clean.totalVolume = Number(session.totalVolume);
+        if (session.totalBudgetMinutes !== undefined) clean.totalBudgetMinutes = Number(session.totalBudgetMinutes);
         if (session.availableMinutes !== undefined) clean.availableMinutes = Number(session.availableMinutes);
+        if (session.estimatedDoorToDoorMinutes !== undefined) clean.estimatedDoorToDoorMinutes = Number(session.estimatedDoorToDoorMinutes);
         if (session.prescriptionVersion !== undefined) clean.prescriptionVersion = String(session.prescriptionVersion);
         if (session.environment !== undefined) clean.environment = String(session.environment);
         if (session.routineId !== undefined && session.routineId !== null) clean.routineId = String(session.routineId);
@@ -267,8 +269,14 @@ export const Validator = {
         if (session.totalVolume !== undefined && (typeof session.totalVolume !== 'number' || isNaN(session.totalVolume))) {
             return { valid: false, errors: ['totalVolume must be a number'] };
         }
+        if (session.totalBudgetMinutes !== undefined && (typeof session.totalBudgetMinutes !== 'number' || !Number.isFinite(session.totalBudgetMinutes) || session.totalBudgetMinutes < 15 || session.totalBudgetMinutes > 180)) {
+            return { valid: false, errors: ['totalBudgetMinutes must be between 15 and 180'] };
+        }
         if (session.availableMinutes !== undefined && (typeof session.availableMinutes !== 'number' || !Number.isFinite(session.availableMinutes) || session.availableMinutes < 15 || session.availableMinutes > 90)) {
             return { valid: false, errors: ['availableMinutes must be between 15 and 90'] };
+        }
+        if (session.estimatedDoorToDoorMinutes !== undefined && (typeof session.estimatedDoorToDoorMinutes !== 'number' || !Number.isFinite(session.estimatedDoorToDoorMinutes) || session.estimatedDoorToDoorMinutes < 0 || session.estimatedDoorToDoorMinutes > 240)) {
+            return { valid: false, errors: ['estimatedDoorToDoorMinutes invalid'] };
         }
         if (session.prescriptionVersion !== undefined && typeof session.prescriptionVersion !== 'string') {
             return { valid: false, errors: ['prescriptionVersion must be a string'] };
