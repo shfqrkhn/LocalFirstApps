@@ -126,50 +126,51 @@ Default tie-break order:
 Door-to-door gym burden is:
 
 ```text
-prep + outbound travel + training + return travel
+preparation + outbound travel + training + return travel
 ```
 
-Home-bike burden is:
+Home-session burden is:
 
 ```text
 setup + training
 ```
 
-The user-provided Ottawa baseline is approximately:
+Personal logistics are runtime user data, not repository configuration.
 
-- 10 minutes preparation;
-- 10 minutes drive each way;
-- approximately 30 minutes fixed overhead per gym visit before parking/traffic variation.
+The source repository must not contain a user's:
 
-Therefore extra gym frequency carries a large time penalty.
+- home or gym location;
+- city/neighborhood;
+- commute duration;
+- preparation duration;
+- workplace or profession;
+- relationship/family details;
+- medical or health details;
+- personally identifying routine history.
 
-A design Monte Carlo with 200,000 trials was run for logistics only. It is not a clinical-effect model.
+The app stores only the minimum user-specific logistics needed for optimization in local user-controlled storage.
 
-Assumptions:
+The optimization engine must parameterize:
 
-- preparation triangular 8/10/15 minutes;
-- each drive triangular 8/10/18 minutes;
-- home setup triangular 1/3/6 minutes;
-- session times vary modestly around their targets.
+- preparation time;
+- outbound and return travel time;
+- parking/wait uncertainty;
+- home setup time;
+- session duration;
+- station-wait uncertainty.
 
-Candidate weekly plans produced approximately:
+Monte Carlo and sensitivity analysis use either:
 
-- Lean: 2 x 35-minute gym plus 2 x 20-minute bike. Mean burden 190 minutes; 95th percentile 201 minutes.
-- Balanced: 2 x 40-minute gym plus 2 x 25-minute bike. Mean burden 210 minutes; 95th percentile 221 minutes.
-- Aerobic-biased: 2 x 40-minute gym plus 3 x 20-minute bike. Mean burden 224 minutes; 95th percentile 236 minutes.
-- More-gym: 3 x 30-minute gym plus 1 x 20-minute bike. Mean burden 222 minutes; 95th percentile 235 minutes.
-- Short-dense: 2 x 30-minute gym plus 3 x 15-minute bike. Mean burden 189 minutes; 95th percentile 201 minutes.
+- synthetic non-personal test distributions committed to the repository; or
+- the user's local runtime values without committing or transmitting them.
 
-Interpretation:
+Development simulations must never embed production/user PII in fixtures, snapshots, logs, screenshots, or documentation.
 
-- two gym visits are the default Pareto-efficient resistance-training architecture for this user context;
-- a third gym trip is not default because its fixed travel/prep burden is high and twice-weekly major-muscle training is already evidence-supported;
-- home-bike sessions are low-overhead aerobic complements;
-- additional gym frequency is earned only by user response, higher hypertrophy/strength priority, inadequate progress, or materially reduced trip overhead.
+Decision rule:
 
-Sensitivity result:
-
-- under the compared 2 x 40 gym + 2 x 25 bike versus 3 x 30 gym + 1 x 20 bike structures, the third gym trip becomes time-competitive only when fixed gym-trip overhead falls to roughly the low-20-minute range or below, assuming similar session-duration variability.
+- additional gym visits must earn their fixed logistics cost;
+- low-overhead home conditioning may dominate an additional trip when resistance-training coverage is already sufficient;
+- exact thresholds are user-specific and derived locally rather than hard-coded from a particular person's schedule.
 
 ## 6. Default weekly architecture
 
