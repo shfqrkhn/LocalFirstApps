@@ -46,6 +46,7 @@ export const Sanitizer = {
         if (session.availableMinutes !== undefined) clean.availableMinutes = Number(session.availableMinutes);
         if (session.prescriptionVersion !== undefined) clean.prescriptionVersion = String(session.prescriptionVersion);
         if (session.environment !== undefined) clean.environment = String(session.environment);
+        if (session.routineId !== undefined && session.routineId !== null) clean.routineId = String(session.routineId);
         if (session.baseBuilding !== undefined) clean.baseBuilding = Boolean(session.baseBuilding);
 
         // Deep scrub exercises
@@ -64,6 +65,7 @@ export const Sanitizer = {
                 if (ex.skipped !== undefined) cleanEx.skipped = Boolean(ex.skipped);
                 if (ex.prescribedSets !== undefined) cleanEx.prescribedSets = Number(ex.prescribedSets);
                 if (ex.supersetGroup !== undefined) cleanEx.supersetGroup = Number(ex.supersetGroup);
+                if (ex.swapReason !== undefined) cleanEx.swapReason = String(ex.swapReason);
                 return cleanEx;
             });
         }
@@ -274,6 +276,9 @@ export const Validator = {
         if (session.environment !== undefined && !['gym', 'home-bike'].includes(session.environment)) {
             return { valid: false, errors: ['environment must be gym or home-bike'] };
         }
+        if (session.routineId !== undefined && session.routineId !== null && !['A', 'B'].includes(session.routineId)) {
+            return { valid: false, errors: ['routineId must be A or B'] };
+        }
         if (session.baseBuilding !== undefined && typeof session.baseBuilding !== 'boolean') {
             return { valid: false, errors: ['baseBuilding must be boolean'] };
         }
@@ -394,8 +399,11 @@ export const Validator = {
         if (exercise.prescribedSets !== undefined && (!Number.isInteger(exercise.prescribedSets) || exercise.prescribedSets < 1 || exercise.prescribedSets > 10)) {
             return { valid: false, errors: ['prescribedSets must be an integer between 1 and 10'] };
         }
-        if (exercise.supersetGroup !== undefined && (!Number.isInteger(exercise.supersetGroup) || exercise.supersetGroup < 1 || exercise.supersetGroup > 10)) {
-            return { valid: false, errors: ['supersetGroup must be an integer between 1 and 10'] };
+        if (exercise.supersetGroup !== undefined && (!Number.isInteger(exercise.supersetGroup) || exercise.supersetGroup < 0 || exercise.supersetGroup > 10)) {
+            return { valid: false, errors: ['supersetGroup must be an integer between 0 and 10'] };
+        }
+        if (exercise.swapReason !== undefined && !['busy', 'bored'].includes(exercise.swapReason)) {
+            return { valid: false, errors: ['swapReason must be busy or bored'] };
         }
 
         return { valid: true, errors: [] };
