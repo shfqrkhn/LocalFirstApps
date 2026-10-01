@@ -689,40 +689,45 @@ function renderProtocol(c) {
     c.innerHTML = `
         <div class="container">
             <div class="flex-row" style="margin-bottom:1rem">
-                <button class="btn btn-secondary" style="width:auto; padding:0.5rem 1rem" onclick="window.closeProtocol()" aria-label="${I18n.t('protocol.back')}">${I18n.t('protocol.back')}</button>
+                <button class="btn btn-secondary" style="width:auto; padding:0.5rem 1rem" onclick="window.closeProtocol()" aria-label="Back to settings">Back</button>
             </div>
-            <h1>${I18n.t('protocol.title')}</h1>
-            <div class="card">
-                <h3 style="color:var(--accent)">${I18n.t('protocol.hygiene')}</h3>
-                <p class="text-xs" style="margin-bottom:1rem">${I18n.t('protocol.hygieneDesc')}</p>
+            <div class="adaptive-kicker">Adaptive protocol</div>
+            <h1>Minimum effective full-body training</h1>
 
-                <h3 style="color:var(--accent)">${I18n.t('protocol.overview')}</h3>
-                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.6">
-                    <li><strong>Schedule:</strong> 3 days/week (e.g., Mon/Wed/Fri)</li>
-                    <li><strong>Time:</strong> 58 Minutes</li>
-                    <li><strong>Spacing:</strong> 48–72 hours rest required</li>
+            <div class="card">
+                <h3>Default week</h3>
+                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.7">
+                    <li>Two full-body gym sessions using alternating A/B routines.</li>
+                    <li>Two low-overhead home-bike sessions, adjusted for other aerobic activity.</li>
+                    <li>No fixed weekday schedule; use rolling coverage and readiness.</li>
+                    <li>Gym-trip preparation and travel count against the total time budget.</li>
                 </ul>
             </div>
 
             <div class="card">
-                <h3 style="color:var(--warning)">${I18n.t('protocol.faultTolerance')}</h3>
-                <div style="display:grid; grid-template-columns: 1fr 1.5fr; gap:0.5rem; font-size:0.8rem; margin-top:0.5rem">
-                    <div>Missed 1</div><div>Slide schedule (maintain 48h gap)</div>
-                    <div>Missed 2+</div><div>Reduce weights 10%</div>
-                    <div>Sick (Fever)</div><div>FULL REST. Resume 24h after fever. Reduce 20%.</div>
-                    <div>Injury</div><div>Skip aggravating exercise. Do others.</div>
-                </div>
+                <h3>Base-building first</h3>
+                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.7">
+                    <li>At least six completed resistance sessions before automatic load escalation.</li>
+                    <li>Two work sets per movement and target RIR 3-4.</li>
+                    <li>Stable technique, tolerance and consistency outrank heavier weights.</li>
+                    <li>Steady cycling precedes interval training.</li>
+                </ul>
             </div>
 
-            <div class="card" style="border-color:var(--error)">
-                <h3>🚨 ${I18n.t('protocol.gymClosed')}</h3>
-                <p class="text-xs" style="margin-bottom:0.5rem">${I18n.t('protocol.emergencyCircuit')}</p>
-                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.6">
-                    <li><strong>Push:</strong> Incline Push-ups (Hands on furniture)</li>
-                    <li><strong>Legs:</strong> Bodyweight Squats (Tempo: 3s down)</li>
-                    <li><strong>Pull:</strong> Inverted Rows (Table) OR Door Rows</li>
-                    <li><strong>Core:</strong> Hardstyle Plank</li>
+            <div class="card">
+                <h3>Normal training</h3>
+                <ul class="text-xs" style="padding-left:1.2rem; line-height:1.7">
+                    <li>Five core movements per normal gym session.</li>
+                    <li>Two high-quality work sets by default; extra volume must earn its time and recovery cost.</li>
+                    <li>Target RIR 2-3 for most work; routine failure training is not required.</li>
+                    <li>Use non-competing paired sets to reduce idle time.</li>
+                    <li>Busy or boring stations can be swapped without losing the movement goal.</li>
                 </ul>
+            </div>
+
+            <div class="card">
+                <h3>Safety boundary</h3>
+                <p class="text-xs">Flexx Files is for generally healthy adults. It does not diagnose or rehabilitate injuries. Stop an aggravating movement and seek appropriate medical guidance for concerning symptoms or conditions outside the validated operating envelope.</p>
             </div>
         </div>`;
 }
