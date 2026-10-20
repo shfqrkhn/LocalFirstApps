@@ -69,7 +69,8 @@ test("TS-Dash validates imports, exports normalized data, and clears with confir
   await selects.nth(3).selectOption("unit");
   await page.getByRole("button", { name: "Confirm & Import" }).click();
 
-  await expect(page.getByText("weight.csv", { exact: true })).toBeVisible();
+  const datasets = page.getByRole("heading", { name: "Datasets" }).locator("..");
+  await expect(datasets.getByText("weight", { exact: true })).toBeVisible();
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Export Normalized CSV" }).click();
   expect((await downloadPromise).suggestedFilename()).toBe("weight_normalized.csv");
